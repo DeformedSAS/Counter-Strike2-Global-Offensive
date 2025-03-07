@@ -1,6 +1,6 @@
 
-# Custom panorama that looks like CS2's panorama for CS:GO.
-This small project that i did for unknown reasons brings the CS2 ui look onto CS:GO
+# CS2 Panorama UI Backport onto CS:GO.
+This small project that i did for unknown reasons brings the CS2 Panorama UI to CS:GO
 # NOTE: Always download the updated source code from the home page of the repo instead of the one from releases tab. 
 
 # Whole ui
