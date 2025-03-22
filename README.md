@@ -31,12 +31,13 @@ This small project that i did for unknown reasons brings the CS2 Panorama UI to 
 https://github.com/user-attachments/assets/19e1afba-f4dc-4300-b37a-bd24c5db00d1
 
 # Credits
-- crazymodder and others who worked on porting CS2 weapons to CS:GO. And for giving me permission to use the kukri knife model in this addon!
+- crazymodder and others who worked on porting CS2 weapons to CS:GO. And for giving me permission to use the kukri knife and taser models in this addon!
 - d3gk for helping me resolve some issues.
 - roblogez for suggestions for hud and improving general code optimisation.
 - Valve, CS2 Developer Team for making the awesome clean ui.
 - And me DeformedSAS for basically backporting the entire UI..
 - ZooL for giving me permission to use his reworked molotov. All he said was do whatever when i asked him so.. I guess it's a yes?
+- Aluminum Lodide, PROm and ZaihnY for the scar17 model and textures.
 
 # Installation and Requirements
 - You are required to use HLAE!
