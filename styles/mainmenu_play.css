@@ -1518,6 +1518,7 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
 .play-menu__playbtn:hover
 {
     sound: "UIPanorama.mainmenu_rollover";
+
 }
 
 .play-menu__playbtn:hover .play-menu__playbtn__bar

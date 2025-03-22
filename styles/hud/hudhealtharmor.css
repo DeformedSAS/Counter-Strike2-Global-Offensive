@@ -261,6 +261,7 @@ CSGOHudHealthArmor Label
 
 .hud-HA-icon--helmet {
 	transform: translateY( -3px );
+	y: -3px;
     visibility: collapse;
 }
 .hud-HA--helmet .hud-HA-icon--helmet {
@@ -310,6 +311,10 @@ CSGOHudHealthArmor Label
                    
                                    
     text-overflow: shrink;
+}
+.hud-HA-armor-label
+{
+	font-size: 21px;
 }
 
 

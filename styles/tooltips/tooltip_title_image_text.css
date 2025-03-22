@@ -9,6 +9,7 @@
 
 #TitleLabel
 {
+	font-family: Stratum2;
     font-size: 24px;
     color: white;
     font-weight: bold;
@@ -24,7 +25,9 @@
 
 #TextLabel
 {
+	font-family: Stratum2;
     font-size: 20px;
+	font-weight: medium;
     color: white;
     horizontal-align: center;
     text-align: center;

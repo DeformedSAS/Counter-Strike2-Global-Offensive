@@ -167,16 +167,6 @@
 					</TooltipPanel>
 					<Panel class="horizontal-separator"/>
 
-					                        
-					<Panel class="SettingsMenuDropdownContainer">
-						<Label text="#SFUI_Settings_HUD_PCount_Pos" class="half-width"/>
-						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_hud_playercount_pos">
-							<Label text="#SFUI_Settings_HUD_PCount_Pos_T" value="0" id ="pcountpos0"/>
-							<Label text="#SFUI_Settings_HUD_PCount_Pos_B" value="1" id ="pcountpos1"/>
-						</CSGOSettingsEnumDropDown>
-					</Panel>
-					<Panel class="horizontal-separator"/>
-
 					                     
 					<Panel class="SettingsMenuDropdownContainer">
 						<Label text="#SFUI_Settings_HUD_PCount_Style" class="half-width"/>
@@ -766,7 +756,7 @@
 					   <TooltipPanel class="SettingsMenuDropdownContainer" tooltip="#SFUI_ToolTip_Settings_ViewmodelPos">           
 						<Label text="Viewmodel Preset Position" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="viewmodel_presetpos">
-						     <Label text="No Preset" value="0" id ="noviewmodelpreset"/>
+						     <Label text="Custom" value="0" id ="noviewmodelpreset"/>
 							<Label text="#SFUI_Settings_ViewmodelPosDesktop" value="1" id ="viewmodelpreset0"/>
 							<Label text="#SFUI_Settings_ViewmodelPosCouch" value="2" id ="viewmodelpreset1"/>
 							<Label text="#SFUI_Settings_ViewmodelPosClassic" value="3" id ="viewmodelpreset2"/>

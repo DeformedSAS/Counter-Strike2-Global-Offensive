@@ -12,8 +12,7 @@
 		<Panel>
 			<Panel class="popup_welcome_bg" />
 			<Panel class="popup_welcome_fade" />
-			<Image class="popup_welcome_title" src="file://{images}/icons/ui/cs2_logo_stacked.svg" texturewidth="550" textureheight="-1" />
-			<Image class="popup_welcome_title2" src="file://{images}/icons/ui/csgologo.svg" texturewidth="550" textureheight="-1" />
+			<Image class="popup_welcome_title" src="file://{images}/icons/ui/cs2_logo_horizontal_shooter.svg" texturewidth="550" textureheight="-1" />
 			<Label class="popup_welcome_body stratum-regular fontSize-l" text="#cs2go_welcome_message" />
 		</Panel>
 		<Panel class="PopupButtonRow">

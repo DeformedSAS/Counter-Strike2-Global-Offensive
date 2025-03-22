@@ -107,14 +107,14 @@ CSGOHudWeaponPanel Label
 .WeaponPanelTop__Icon
 {
 	visibility: collapse;	                                               
-	-s2-mix-blend-mode: SRGBadditive; 
 }
 
 .WeaponPanelTop__Icon--Defuse
 {
-	x: 20px;
-	y: -3px;
-	height: 45px;
+	x: 90px;
+	y: 50px;
+	vertical-align: bottom;
+	height: 60px;
 }
 
 .WeaponPanelTop__Icon--Show

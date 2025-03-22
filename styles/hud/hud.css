@@ -101,24 +101,24 @@ CSGOHud,
 	padding-left: 300px;
     horizontal-align: left;
     vertical-align: bottom;
-	padding-bottom: 10px;
+	padding-bottom: 20px;
                                                                                                                                          
 }
 .AspectRatio4x3 #HudLowerLeft
 {
-	padding-right: 250px;
+	padding-right: 350px;
 }
 .AspectRatio5x4 #HudLowerLeft
 {
-	padding-right: 200px;
+	padding-right: 400px;
 }
 .AspectRatio16x10 #HudLowerLeft
 {
-	padding-left: 400px;
+	padding-left: 450px;
 }
 .AspectRatio16x9 #HudLowerLeft
 {
-	padding-left: 500px;
+	padding-left: 550px;
 }
 #HudLowerLeftChatStatus
 {
@@ -175,23 +175,23 @@ CSGOHud,
     flow-children: down;
     height:100%;
     width:100%;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 .AspectRatio4x3 #HudBottomRight
 {
-	padding-right: 250px;
+	padding-right: 300px;
 }
 .AspectRatio5x4 #HudBottomRight
 {
-	padding-right: 200px;
+	padding-right: 300px;
 }
 .AspectRatio16x10 #HudBottomRight
 {
-	padding-right: 400px;
+	padding-right: 450px;
 }
 .AspectRatio16x9 #HudBottomRight
 {
-	padding-right: 500px;
+	padding-right: 550px;
 }
 #HudBottomRightSelection
 {
@@ -200,6 +200,7 @@ CSGOHud,
     flow-children: down;
     height:100%;
     width:100%;
+	padding-bottom: 10px;
 }
 
 #HudWeaponPanel

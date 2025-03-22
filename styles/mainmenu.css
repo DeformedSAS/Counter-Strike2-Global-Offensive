@@ -18,13 +18,16 @@ CSGOMainMenu,
 	height: 100%;
 }
 
-#MainMenuCore,#MainMenuBackground
+#MainMenuCore,
+#MainMenuBackground
 {
-	blur: fastgaussian( 5, 5, 5 );
+	blur: fastgaussian( 8, 8, 5 );
+	-s2-mix-blend-mode: opaque;
 }
 
 CSGOMainMenu.PopupBackgroundBlur #MainMenuCore
 {
+	blur: none;
 }
 
 #MainMenuInput
@@ -58,11 +61,10 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 .MainMenuContainer
 {
 	flow-children: down;
-	
 	opacity: 0;
 
 	transition-property: opacity;
-	transition-duration: 1.5s;
+	transition-duration: 2s;
 	transition-timing-function: ease-in-out;
 }
 
@@ -79,7 +81,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	height: 32px;
 	overflow: noclip;
 	tooltip-position: bottom;
-	tooltip-body-position: 50% 50%;
+	tooltip-body-position: 50% 100%;
 }
 
 .MainMenuNotification.hidden
@@ -133,7 +135,8 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 
 .MainMenuNotification.NotificationRed
 {
-	background-color: #BE0000;
+	 background-color: gradient( linear, 0% 0%, 100% 100%, from( #BE0000 ), color-stop( 0.25, #ca4c4c ), color-stop( 0.5, #da2121 ), color-stop( 0.75, #e56666 ), to( #6e2828 ) );
+	 color: white;
 }
 
 .MainMenuNotification.NotificationYellow
@@ -153,22 +156,14 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
                                                                         
                         
 #MainMenuBackground {
-    width: 1920px; 
-    height: 1080px;
+	horizontal-align: center;
+	vertical-align: middle;
     opacity: 1;
-    transition-property: opacity; 
+	brightness: 1;
+    transition-property: opacity, brightness; 
     transition-duration: 0.5s; 
     transition-timing-function: ease-in-out; 
 }
-#MainMenuBackgroundInspect {
-    width: 1920px; 
-    height: 1080px;
-    opacity: 1;
-    transition-property: opacity; 
-    transition-duration: 0.5s; 
-    transition-timing-function: ease-in-out; 
-}
-
 
 #MainMenuBackground.Blur,
 #MainMenuBackground.Dim
@@ -183,15 +178,6 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
     transition-duration: 0.5s; 
     transition-timing-function: ease-in-out; 
 }
-.mainmenu-movie-inspect {
-    width: 1920px;
-    height: 1080px;
-    overflow: noclip;
-    transition-property: filter; 
-    transition-duration: 0.5s; 
-    transition-timing-function: ease-in-out; 
-}
-
 
 .AspectRatio4x3 .mainmenu-movie,
 .AspectRatio5x4 .mainmenu-movie,
@@ -221,7 +207,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 {
 	horizontal-align: center;
 	                                                                                                                                                               
-	width: 1200px;
+	width: 1920px;
 	height: 1080px;
 	opacity: 1;
 	z-index: 1;
@@ -1474,7 +1460,7 @@ RadioButton.content-navbar__tabs__btn--small Label
 
 .pausemenu-navbar
 {
-    flow-children: down;
+    flow-children: right;
     background-color:blurBackgroundColor;
     background-image: url("file://{images}/backgrounds/bluedots_large.png");
     background-size: backgroundDotsSize;

@@ -39,16 +39,16 @@
 			</Panel>
 		</Panel>
 
-		<Panel id="id-eom-rank__new-reveal" class="hidden">
+		<Panel id="id-eom-rank__new-reveal">
 			<Label id="id-eom-rank__new-reveal--left" text="{s:rank_new_name}" />
 			<Image id="id-eom-rank__new-reveal__emblem" />
 			<Label id="id-eom-rank__new-reveal--right" class="fontWeight-Light" text="{s:rank_new_rank}" />
 			<ItemPreviewPanel 	id="RankParticleModel"
-					class="eom-skillgroup__particles hidden"
+					class="eom-skillgroup__particles "
 					manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
 					item=""
 					mouse_rotate="false"/>
-			<Image id="id-eom-rank__flare" class="eom-skillgroup__flare"  src="file://{images}/ui_textures/flare.png" />
+			<Image id="id-eom-rank__flare" class="eom-skillgroup__flare"  />
 		</Panel>
 		
 	</CSGOEndOfMatchXpPanel>

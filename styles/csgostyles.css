@@ -1416,8 +1416,9 @@ CSGOSettingsKeyBinder .ActiveBindFX
 	tooltip-position: bottom;
 	box-shadow: none;
 	border-radius: btnBorderRadius;
+
 	transition-property: background-color, width, brightness;
-	transition-duration: .1s;
+	transition-duration: .3s;
 	transition-timing-function: ease-in-out;
 }
 

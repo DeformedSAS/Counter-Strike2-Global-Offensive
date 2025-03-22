@@ -6,7 +6,7 @@
 
 	<CSGOHudWeaponPanel class="WeaponPanel" hittest="false">
 		<Panel class="WeaponPanelTop">
-			<Image id="DefuseIcon" class="WeaponPanelTop__Icon WeaponPanelTop__Icon--Defuse hidden" src="file://{images}/hud/weaponpanel/icon-defuser.png" scaling="stretch-to-fit-preserve-aspect" />
+			<Image id="DefuseIcon" class="WeaponPanelTop__Icon WeaponPanelTop__Icon--Defuse cl-hud-wash-color hidden" src="file://{images}/icons/equipment/defuser.svg" scaling="stretch-to-fit-preserve-aspect" />
 		</Panel>
 		<Panel id="WeaponPanelBottom">
 			                   
@@ -38,12 +38,12 @@
 					</Panel>
 				</Panel>
 				                  
-		        <CCSGOSteamInputAction actionset="GameControls" action="firingmodetoggle" separatortext="|" controllernumber = "1"/> 
+		        <CCSGOSteamInputAction actionset="GameControls" action="firingmodetoggle" separatortext="I" controllernumber = "1"/> 
          		                  
 				             
 				<Panel id="AmmoContent" class="Ammo">
 					<Label id="AmmoTextClip" class="Ammo__Clip WeaponPanel-apply-hud-color" text="10" />
-					<Label id="AmmoTextTotal" class="Ammo__Total WeaponPanel-apply-hud-color-bg" text="/ 20" />
+					<Label id="AmmoTextTotal" class="Ammo__Total WeaponPanel-apply-hud-color-bg" text="I 20" />
 					<Panel id="AmmoBurstIcons" class="Ammo__Burst Ammo__Burst--Single WeaponPanel-apply-hud-color">
 						<Panel class="Ammo__BurstIcon" />
 						<Panel class="Ammo__BurstIcon" />

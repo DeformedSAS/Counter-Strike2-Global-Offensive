@@ -43,6 +43,7 @@
 
 .estt-header__team-name
 {
+	font-family: Stratum2;
 	font-size: 26px;
 	font-weight: medium;
 	vertical-align: center;
@@ -54,7 +55,9 @@
 
 .estt-simple .estt-header__team-name
 {
-	font-size: 18px;
+	font-family: Stratum2;
+	font-weight: medium;
+	font-size: 20px;
 
 }
 
@@ -73,7 +76,8 @@
 {
 	margin: 6px 0px 0px 0px;
 	horizontal-align:center;
-	font-size: 16px;
+	font-size: 20px;
+	font-family: Stratum2;
 	font-weight: bold;
 	text-overflow: shrink;
 	max-width: 100px;

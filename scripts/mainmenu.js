@@ -1,20 +1,20 @@
 "use strict";
 var MainMenu = ( function() {
-	var _m_bPerfectWorld = ( MyPersonaAPI.GetLauncherType() === "perfectworld" );
+	var _m_bPerfectWorld = ( MyPersonaAPI.GetLauncherType() === "perfectworld" ); // china number 1!! this detects if you're launching the game in perfectworld mode.
 	var _m_activeTab;
 	var _m_sideBarElementContextMenuActive = false;
 	var _m_elContentPanel = $( '#JsMainMenuContent' );
 	var _m_playedInitalFadeUp = false;
-	var _d_IsQOutOfDate = false;
-	var _d_IsQVAC = false;
-	var _d_IsQOverwatch = false;
-	var _d_IsQOffline = false;           
+	var _debug_d3gk_IsQOutOfDate = false;
+	var _debug_d3gk_IsQVAC = false;
+	var _debug_d3gk_IsQOverwatch = false;
+	var _debug_d3gk_IsQOffline = false;           
 	var _m_elNotificationsContainer = $( '#NotificationsContainer' );
 	var _m_notificationSchedule = false;
-	var _m_bVanityAnimationAlreadyStarted = false;
-	var _m_bHasPopupNotification = false;
-	var _m_tLastSeenDisconnectedFromGC = 0;
-	var _m_NotificationBarColorClasses = [
+	var _m_bVanityAnimationAlreadyStarted = false; // checks if the vanity agent anim is already playing. this is causing the vanity to appear for a split second when disconnecting from a server. unable to fix for now.
+	var _m_bHasPopupNotification = false; // if you have a popup notification this will turn to true, if not it's going to stay at false.
+	var _m_tLastSeenDisconnectedFromGC = 0; // last time seen on gc, this is controlled by an internal script in the games code. nothing you can do about it here.
+	var _m_NotificationBarColorClasses = [ // notif color classes if you can't really read this somehow.. very simple you can add your own notification color classes. wow very cool
 		"NotificationRed", "NotificationYellow", "NotificationGreen", "NotificationLoggingOn"
 	];
 
@@ -110,7 +110,7 @@ var _SetBackgroundMovie = function() {
 
     // schedule the background movie change after fade-out duration
     $.Schedule(0.5, function() { // waits for fade-out to complete (matches transition duration)
-        var backgroundMovie = GameInterfaceAPI.GetSettingString('ui_mainmenu_bkgnd_movie');
+        var backgroundMovie = GameInterfaceAPI.GetSettingString('ui_mainmenu_bkgnd_movie_CC4ECB9');
 		
        _UnPauseMainMenuCharacter();
         // sets the new video sorse
@@ -122,14 +122,15 @@ var _SetBackgroundMovie = function() {
         var vanityPanel = $('#JsMainmenu_Vanity');
         if (vanityPanel && vanityPanel.IsValid()) {
             _SetVanityLightingBasedOnBackgroundMovie(vanityPanel);
-            _ForceRestartVanity();
-			_LobbyPlayerUpdated();
+
         }
 
-        // schedule the fade-in effect after a small delay
-        $.Schedule(0.0, function() { // small delay before starting to fade in
-            background.style.opacity = '1';	// restores opacity
+        // schedule the fade-in effect after a small delay. this is basically not needed. it just delays when the new background will start. that's why its at 0.0 schedule.
+        $.Schedule(0.0, function() { // the small delay schedule if anyone really wants to delay their background load for unknown reasons
+            background.style.opacity = '1';	// restores opacity. nothing special just applies the style to 1 back so that the background is visible after changing it.
 			_InitVanity();
+			_ForceRestartVanity();
+			_LobbyPlayerUpdated();
         });
     });
 };
@@ -138,11 +139,11 @@ var _OnShowMainMenu = function() {
   $.DispatchEvent('PlayMainMenuMusic', true, true);
         $('#MainMenuNavBarHome').checked = true;
 
-        GameInterfaceAPI.SetSettingString('panorama_play_movie_ambient_sound', '1');
-		GameInterfaceAPI.ConsoleCommand( "mirv_cvar_unhide_all" );
-		GameInterfaceAPI.ConsoleCommand( '@panorama_ECO_mode 0' );
-        GameInterfaceAPI.SetSettingString('dsp_room', '0');
-        GameInterfaceAPI.SetSettingString('snd_soundmixer', 'MainMenu_Mix');
+        GameInterfaceAPI.SetSettingString('panorama_play_movie_ambient_sound', '1'); // plays ambient sounds from backgrounds in the main menu.
+		GameInterfaceAPI.ConsoleCommand( "mirv_cvar_unhide_all" ); // unhides all hidden convars in the game.
+		GameInterfaceAPI.ConsoleCommand( '@panorama_ECO_mode 0' ); // disables eco mode in panorama when you play on low settings.
+        GameInterfaceAPI.SetSettingString('dsp_room', '0'); //Digital Signal Processing room. this gives you echo in the game ui.
+        GameInterfaceAPI.SetSettingString('snd_soundmixer', 'MainMenu_Mix'); // mixes the mainmenu to have proper echo and stuff. just execs a config file so... nothing special
 
         _m_bVanityAnimationAlreadyStarted = false;
         _OnInitFadeUp();
@@ -193,7 +194,7 @@ var _OnShowMainMenu = function() {
 			}
 			else if ( strFatalError === "UnsupportedClientLogon" )
 			{
-				UiToolkitAPI.ShowGenericPopupOneOptionBgStyle( "Invalid Steam.inf ClientVersion string", "Change your steam.inf clientversion string to this: ClientVersion=2000449 to be able to use inventory and other online features except matchmaking. The directory of this file is in Counter-Strike Global Offensive > csgo > steam.inf. Have fun!", "",
+				UiToolkitAPI.ShowGenericPopupOneOptionBgStyle( "#CS2_GO_INF_ERROR_TITLE", "#CS2_GO_INF_ERRROR_MESSAGE", "#CS2_GO_GLHF_MSG",
 					"#GameUI_Quit", function () { GameInterfaceAPI.ConsoleCommand( "quit" ); },
 					"blur" );
 			}
@@ -926,7 +927,7 @@ var _OnShowMainMenu = function() {
 		                                                                                                                 
 		vanityPanel.RestoreLightingState();
 
-		if ( backgroundMap === 'blacksite' )
+		if ( backgroundMap === 'overpass' )
 		{
 			vanityPanel.SetFlashlightAmount( 2 );
 			                                               
@@ -947,7 +948,7 @@ var _OnShowMainMenu = function() {
 			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
 			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );
 		}
-		else if ( backgroundMap === 'sirocco_night' )
+		else if ( backgroundMap === 'dust2' )
 		{
 			vanityPanel.SetFlashlightAmount( 5 );
 			                                               
@@ -970,7 +971,7 @@ var _OnShowMainMenu = function() {
 			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
 			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );
 		}
-else if (backgroundMap === 'cbble') {
+else if (backgroundMap === 'sirocco') {
 			vanityPanel.SetFlashlightAmount( 3 );
 			                                               
 			                                                            
@@ -1016,7 +1017,31 @@ else if (backgroundMap === 'cbble') {
 			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
 			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );                                               
 		}
-		else if ( backgroundMap === 'vertigo' )
+		else if ( backgroundMap === 'train' )
+		{
+			vanityPanel.SetFlashlightAmount( 1 );
+			                                               
+			                                                            
+			                                                       
+			vanityPanel.SetFlashlightFOV( 60 );
+			                                                            
+			vanityPanel.SetFlashlightColor( 1.8, 1.8, 2 );
+			vanityPanel.SetAmbientLightColor(0.15, 0.2, 0.45);
+
+			
+			vanityPanel.SetDirectionalLightModify( 0 );
+			vanityPanel.SetDirectionalLightColor(0.00, 0.19, 0.38 );
+			vanityPanel.SetDirectionalLightDirection( 0.1, 0.67, -0.71 );
+			
+			vanityPanel.SetDirectionalLightModify( 1 );
+			vanityPanel.SetDirectionalLightColor( 0.05, 0.09, 0.21) ;
+			vanityPanel.SetDirectionalLightDirection(-0.86, -0.18, -0.47 );
+
+			vanityPanel.SetDirectionalLightModify( 2 );
+			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
+			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );                                               
+		}
+		else if ( backgroundMap === 'office' )
 		{
 			vanityPanel.SetFlashlightAmount( 1 );
 			                                               
@@ -1085,6 +1110,97 @@ else if (backgroundMap === 'cbble') {
 			vanityPanel.SetDirectionalLightModify( 2 );
 			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
 			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );                                              
+		}
+		else if ( backgroundMap === 'cache' )
+		{
+			vanityPanel.SetFlashlightAmount( 3 );
+			                                               
+			                                                            
+			                                                       
+			vanityPanel.SetFlashlightFOV( 60 );
+			                                                            
+			vanityPanel.SetFlashlightColor( 1.8, 1.8, 2 );
+			vanityPanel.SetAmbientLightColor( 0.2, 0.32, 0.4 );
+			
+			vanityPanel.SetDirectionalLightModify( 0 );
+			vanityPanel.SetDirectionalLightColor(0.00, 0.19, 0.38 );
+			vanityPanel.SetDirectionalLightDirection( 0.1, 0.67, -0.71 );
+			
+			vanityPanel.SetDirectionalLightModify( 1 );
+			vanityPanel.SetDirectionalLightColor( 0.05, 0.09, 0.21) ;
+			vanityPanel.SetDirectionalLightDirection(-0.86, -0.18, -0.47 );
+
+			vanityPanel.SetDirectionalLightModify( 2 );
+			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
+			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );                                              
+		}
+		else if ( backgroundMap === 'blacksite' )
+		{
+			vanityPanel.SetFlashlightAmount( 1 );
+			                                               
+			                                                           
+			                                                            
+			vanityPanel.SetFlashlightColor( 4, 4, 4);
+			vanityPanel.SetAmbientLightColor( 0.16, 0.26, 0.30 );
+			
+			vanityPanel.SetDirectionalLightModify( 0 );
+			vanityPanel.SetDirectionalLightColor( 0.26, 0.35, 0.47 );
+			vanityPanel.SetDirectionalLightDirection( -0.50, 0.80, 0.00 );
+			
+			vanityPanel.SetDirectionalLightModify( 1 );
+			vanityPanel.SetDirectionalLightColor( 0.74, 1.01, 1.36 );
+			vanityPanel.SetDirectionalLightDirection( 0.47, -0.77, -0.42 );
+
+			vanityPanel.SetDirectionalLightModify( 2 );
+			vanityPanel.SetDirectionalLightColor( 0.75, 1.20, 1.94 );
+			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );
+		}
+	    else if ( backgroundMap === 'cbble' )
+		{
+			vanityPanel.SetFlashlightAmount( 1.0 );
+			                                               
+			                                                            
+			                                                           
+			vanityPanel.SetFlashlightColor( 0.81, 0.92, 1.00 );
+			vanityPanel.SetAmbientLightColor( 0.12, 0.21, 0.46 );
+
+			vanityPanel.SetDirectionalLightModify( 0 );
+			vanityPanel.SetDirectionalLightColor( 0.13, 0.14, 0.13 );
+			vanityPanel.SetDirectionalLightDirection( -0.81, 0.41, 0.43 );
+			
+			vanityPanel.SetDirectionalLightModify( 1 );
+			vanityPanel.SetDirectionalLightColor( 0.82, 0.19, 0.08 );
+			vanityPanel.SetDirectionalLightDirection( 0.62, 0.74, -0.25 );
+			vanityPanel.SetDirectionalLightPulseFlicker( 0.25, 0.25, 0.25, 0.25 );
+
+			vanityPanel.SetDirectionalLightModify( 2 );
+			vanityPanel.SetDirectionalLightColor( 0.72, 1.40, 1.68 );
+			vanityPanel.SetDirectionalLightDirection( 0.50, -0.69, -0.52 );
+
+			                                                   
+		}
+		else if ( backgroundMap === 'sirocco_night' )
+		{
+			vanityPanel.SetFlashlightAmount( 2 );
+			                                               
+			                                                            
+			                                                       
+			vanityPanel.SetFlashlightFOV( 45 );
+			                                                            
+			vanityPanel.SetFlashlightColor( 1.8, 1.8, 2 );
+			vanityPanel.SetAmbientLightColor( 0.13, 0.17, 0.29 );
+			
+			vanityPanel.SetDirectionalLightModify( 0 );
+			vanityPanel.SetDirectionalLightColor(0.00, 0.19, 0.38 );
+			vanityPanel.SetDirectionalLightDirection( 0.22, 0.67, -0.71 );
+			
+			vanityPanel.SetDirectionalLightModify( 1 );
+			vanityPanel.SetDirectionalLightColor( 0.05, 0.09, 0.21) ;
+			vanityPanel.SetDirectionalLightDirection(-0.86, -0.18, -0.47 );
+
+			vanityPanel.SetDirectionalLightModify( 2 );
+			vanityPanel.SetDirectionalLightColor( 0.0, 0.0, 0.0 );
+			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );
 		}
 		
 	};
@@ -1282,6 +1398,31 @@ else if (backgroundMap === 'cbble') {
 		);
 	};
 
+	var _OpenDecodeAfterInspect = function( keyId, caseId, storeId, extrapopupfullscreenstyle, aParamsForCallback )
+	{
+		                                                                                                               
+		                                                                                    
+		                              
+		var backtostoreiteminspectsettings = storeId ?
+			'&' + 'asyncworkitemwarning=no' +
+			'&' + 'asyncforcehide=true' +
+			'&' + 'storeitemid=' + storeId +
+			'&' + 'extrapopupfullscreenstyle=' + extrapopupfullscreenstyle
+			: '';
+
+		var backtodecodeparams = aParamsForCallback.length > 0 ?
+		'&' + aParamsForCallback.join( '&' ) : 
+		'';
+
+		UiToolkitAPI.ShowCustomLayoutPopupParameters(
+			'',
+			'file://{resources}/layout/popups/popup_capability_decodable.xml',
+			'key-and-case=' + keyId + ',' + caseId +
+			'&' + 'asyncworktype=decodeable' +
+			backtostoreiteminspectsettings +
+			backtodecodeparams
+		);
+	};
 	var _WeaponPreviewRequest = function( id )
 	{
 		UiToolkitAPI.CloseAllVisiblePopups();
@@ -1297,7 +1438,7 @@ else if (backgroundMap === 'cbble') {
 			'none'
 		);
 	};
-function _UpdateStoreAlert() { // this function is for testing and currently does not work. more on that soon.
+function _UpdateStoreAlert() { // this function is for testing and currently does not work..
     let hideAlert;
     let objStore;
     
@@ -1308,7 +1449,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
     const gcConnection = MyPersonaAPI.IsConnectedToGC();
     const validInventory = MyPersonaAPI.IsInventoryValid();
     
-    // checks if objstore exists but does nothing after that. more on that soon.
+    // checks if objstore exists but does nothing after that. will check to find the issue so that i could make the rankup redemption work in csgo.
     hideAlert = !gcConnection || !validInventory || !objStore || objStore.redeemable_balance === 0;
     const elNavBar = $.GetContextPanel().FindChildInLayoutFile('MainMenuNavBarTop');
     const elAlert = elNavBar.FindChildInLayoutFile('MainMenuStoreAlert');
@@ -1437,7 +1578,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 			{	                                                                          
 				_m_tLastSeenDisconnectedFromGC = + new Date();                                                          
 			}
-			else if ( Math.abs( ( + new Date() ) - _m_tLastSeenDisconnectedFromGC ) > 7000 )
+			else if ( Math.abs( ( + new Date() ) - _m_tLastSeenDisconnectedFromGC ) > 0 )
 			{	                                           
 				notification.color_class = "NotificationLoggingOn";
 				notification.title = $.Localize( "#Store_Connecting_ToGc" );
@@ -1447,7 +1588,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 		}
 
 		  
-		if ( _d_IsQOffline )
+		if ( _debug_d3gk_IsQOffline )
 		{	                                           
 			notification.color_class = "NotificationLoggingOn";
 			notification.title = $.Localize( "#Store_Connecting_ToGc" );
@@ -1455,15 +1596,15 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 			return notification;
 		}                        
 		  
-		var nIsVacBanned = MyPersonaAPI.IsVacBanned(); // basically... you are a faggot for cheating. sorry but this is the truth. also this vac ban notification is for debug. the one below is the real vac ban popup
-		if ( _d_IsQVAC )
+		var nIsVacBanned = MyPersonaAPI.IsVacBanned(); // basically... you are a dick for cheating. sorry but this is the truth. also this vac ban notification is for debug. the one below is the real vac ban notification
+		if ( _debug_d3gk_IsQVAC )
 		{
 			notification.color_class = "NotificationRed";
 
-			if ( !_d_IsQOverwatch )
+			if ( !_debug_d3gk_IsQOverwatch )
 			{
-				notification.title = $.Localize( "#SFUI_MainMenu_Vac_Title" );
-				notification.tooltip = $.Localize( "#SFUI_MainMenu_Vac_Info" );
+				notification.title = $.Localize( "VAC (Valve Anti-Cheat)" );
+				notification.tooltip = $.Localize( "This is not a real vacban notification and only displays when you enable it via the debug button on the navbar for notifications. Good luck trolling friends though." );
 			}
 			else
 			{
@@ -1474,7 +1615,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 			return notification;
 		}
 		
-		var nIsVacBanned = MyPersonaAPI.IsVacBanned();
+		var nIsVacBanned = MyPersonaAPI.IsVacBanned(); // actual vac banned notification, the one above is used for debugging purposes. 
 		if ( nIsVacBanned != 0 )
 		{
 			notification.color_class = "NotificationRed";
@@ -1498,7 +1639,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 		  
 		                                  
 		
-		if ( _d_IsQOutOfDate )
+		if ( _debug_d3gk_IsQOutOfDate )
 		{
 			notification.color_class = "NotificationYellow";
 			notification.title = $.Localize( "#SFUI_MainMenu_Outofdate_Title" );
@@ -1585,7 +1726,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 
 	var _UpdateNotifications = function()
 	{
-		_m_notificationSchedule = $.Schedule( 1.0, _UpdateNotifications );
+		_m_notificationSchedule = $.Schedule( 0, _UpdateNotifications );
 
 		_UpdatePopupnotification();
 		_UpdateNotificationBar();
@@ -1720,18 +1861,18 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 		'Remove all',
 		function() 
 		{ 
-			_d_IsQOffline = false;
-			_d_IsQOutOfDate = false;
-			_d_IsQOverwatch = false;
-			_d_IsQVAC = false;
+			_debug_d3gk_IsQOffline = false;
+			_debug_d3gk_IsQOutOfDate = false;
+			_debug_d3gk_IsQOverwatch = false;
+			_debug_d3gk_IsQVAC = false;
 		}, 
 		'Out Of Date',
 		function() 
 		{ 
-			_d_IsQOffline = false;
-			_d_IsQOutOfDate = true;
-			_d_IsQOverwatch = false;
-			_d_IsQVAC = false;
+			_debug_d3gk_IsQOffline = false;
+			_debug_d3gk_IsQOutOfDate = true;
+			_debug_d3gk_IsQOverwatch = false;
+			_debug_d3gk_IsQVAC = false;
 		}, 
 		'More...',
 		function() 
@@ -1743,26 +1884,26 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 			'Overwatch Ban',
 			function() 
 			{ 
-				_d_IsQOffline = false;
-				_d_IsQOutOfDate = false;
-				_d_IsQOverwatch = true;
-				_d_IsQVAC = true;
+				_debug_d3gk_IsQOffline = false;
+				_debug_d3gk_IsQOutOfDate = false;
+				_debug_d3gk_IsQOverwatch = true;
+				_debug_d3gk_IsQVAC = true;
 			}, 
 			'VAC Ban',
 			function() 
 			{ 
-				_d_IsQOffline = false;
-				_d_IsQOutOfDate = true;
-				_d_IsQOverwatch = false;
-				_d_IsQVAC = true;
+				_debug_d3gk_IsQOffline = false;
+				_debug_d3gk_IsQOutOfDate = true;
+				_debug_d3gk_IsQOverwatch = false;
+				_debug_d3gk_IsQVAC = true;
 			}, 
 			'Offline',
 			function() 
 			{ 
-				_d_IsQOffline = true;
-				_d_IsQOutOfDate = true;
-				_d_IsQOverwatch = false;
-				_d_IsQVAC = false;
+				_debug_d3gk_IsQOffline = true;
+				_debug_d3gk_IsQOutOfDate = true;
+				_debug_d3gk_IsQOverwatch = false;
+				_debug_d3gk_IsQVAC = false;
 			}, 
 			'dim' );
 		}, 
@@ -1811,7 +1952,7 @@ function _UpdateStoreAlert() { // this function is for testing and currently doe
 				'News',
 				function() 
 				{ 
-					UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_news.xml', '', 'none' ); 
+					UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_operation_store.xml', '', 'none' );  
 					// UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_operation_store.xml', '', 'none' ); 
 					// _NavigateToTab('JsAccept', 'popups/popup_accept_match');
 				}, 

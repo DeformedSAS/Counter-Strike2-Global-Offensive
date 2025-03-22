@@ -20,16 +20,28 @@
     </snippets>
 
     <Panel class="ContextMenuItem" onload="MainMenuVanityContextMenu.Init();">
-        <!-- New Dropdown for Background Selection at the top -->
         <TooltipPanel id="MainMenuMovieSceneSelector" class="SettingsMenuDropdownContainer" tooltip="#GameUI_MainMenuMovieScene_Tooltip">
-            <CSGOSettingsEnumDropDown class="content-navbar__tabs__dropdown_vanity" convar="ui_mainmenu_bkgnd_movie">
-                <Label text="#SFUI_Map_de_ancient" value="ancient" id="ui_mainmenu_bkgnd_movie_ancient"/>
-                <Label text="#SFUI_Map_de_anubis" value="anubis" id="ui_mainmenu_bkgnd_movie_anubis"/>
-                <Label text="#SFUI_Map_de_overpass" value="blacksite" id="ui_mainmenu_bkgnd_movie_blacksite"/>
-                <Label text="#SFUI_Map_dz_sirocco" value="cbble" id="ui_mainmenu_bkgnd_movie_cbble"/>
-                <Label text="#SFUI_Map_de_nuke" value="nuke" id="ui_mainmenu_bkgnd_movie_nuke"/>
-                <Label text="#SFUI_Map_de_dust2" value="sirocco_night" id="ui_mainmenu_bkgnd_movie_sirocco_night"/>
-                <Label text="#SFUI_Map_de_train" value="vertigo" id="ui_mainmenu_bkgnd_movie_vertigo"/>
+						<CSGOSettingsEnumDropDown class="content-navbar__tabs__dropdown_vanity" convar="ui_mainmenu_bkgnd_movie_CC4ECB9" ondropdownselectionchanged="$.DispatchEvent('CSGOMainInitBackgroundMovie');">
+								<Label text="#SFUI_Map_de_ancient" value="ancient" id="ui_mainmenu_bkgnd_movie_ancient"/>
+								<Label text="#SFUI_Map_de_anubis" value="anubis" id="ui_mainmenu_bkgnd_movie_anubis"/>
+								<Label text="#SFUI_Map_de_overpass" value="overpass" id="ui_mainmenu_bkgnd_movie_overpass"/>
+								<Label text="#SFUI_Map_dz_sirocco" value="sirocco" id="ui_mainmenu_bkgnd_movie_sirocco"/>
+								<Label text="#SFUI_Map_de_cbble" value="cbble" id="ui_mainmenu_bkgnd_movie_cbble"/>
+								<Label text="#SFUI_Map_coop_kasbah" value="sirocco_night" id="ui_mainmenu_bkgnd_movie_sirocco_night"/>
+								<Label text="#SFUI_Map_de_vertigo" value="vertigo" id="ui_mainmenu_bkgnd_movie_vertigo"/>
+								<Label text="#SFUI_Map_de_guard" value="guard" id="ui_mainmenu_bkgnd_movie_guard"/>
+								<Label text="#SFUI_Map_cs_apollo" value="apollo" id="ui_mainmenu_bkgnd_movie_apollo"/>
+								<Label text="#SFUI_Map_de_swamp" value="swamp" id="ui_mainmenu_bkgnd_movie_swamp"/>
+								<Label text="#SFUI_Map_de_mutiny" value="mutiny" id="ui_mainmenu_bkgnd_movie_mutiny"/>
+								<Label text="#SFUI_Map_de_engage" value="engage" id="ui_mainmenu_bkgnd_movie_engage"/>
+								<Label text="#SFUI_Map_de_cache" value="cache" id="ui_mainmenu_bkgnd_movie_cache"/>
+								<Label text="#SFUI_Map_cs_office" value="office" id="ui_mainmenu_bkgnd_movie_office"/>
+								                                                                                               
+								                                                                                                        
+								<Label text="#SFUI_Map_de_nuke" value="nuke" id="ui_mainmenu_bkgnd_movie_nuke"/>
+								<Label text="#SFUI_Map_de_dust2" value="dust2" id="ui_mainmenu_bkgnd_movie_dust2"/>
+								<Label text="#SFUI_Map_de_train" value="train" id="ui_mainmenu_bkgnd_movie_train"/>
+								<Label text="#SFUI_Map_dz_blacksite" value="blacksite" id="ui_mainmenu_bkgnd_movie_blacksite"/>
             </CSGOSettingsEnumDropDown>
         </TooltipPanel>
 

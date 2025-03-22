@@ -5,33 +5,6 @@
 	</styles>
 	
 	<script>
-		var onOpenServerBrowser = function ()
-		{
-			updateNeverShowAgainSetting();
-			if ( MyPersonaAPI.GetLauncherType() === "perfectworld" )
-			{
-				SteamOverlayAPI.OpenURL( 'https://csgo.wanmei.com/communityserver' );
-			}
-			else
-			{
-				GameInterfaceAPI.ConsoleCommand( "gamemenucommand openserverbrowser");
-			}
-			$.DispatchEvent( 'UIPopupButtonClicked', '' );
-		}
-
-		var closeServerBrowserPopUp = function ()
-		{
-			updateNeverShowAgainSetting();
-			$.DispatchEvent( 'UIPopupButtonClicked', '' );
-		}
-
-		var updateNeverShowAgainSetting = function ()
-		{
-			var elToggle = $.GetContextPanel().FindChildInLayoutFile( 'NeverShowToggle' );
-
-			if( elToggle.checked )
-				GameInterfaceAPI.SetSettingString( 'player_nevershow_communityservermessage', '1' );
-		}
 	</script>
 
 	<PopupCustomLayout class="PopupPanel Hidden" popupbackground="dim" onload="">

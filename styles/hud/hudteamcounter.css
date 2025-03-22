@@ -475,7 +475,7 @@ CSGOHudTeamCounter Label
 .AvatarL__HealthBar
 {
     vertical-align: bottom;
-    height: 4px;
+    height: 7px;
 }
 
 .AvatarL__Default--CT
@@ -723,7 +723,7 @@ CSGOHudTeamCounter Label
 .AvatarS__HealthBar
 {
     vertical-align: bottom;
-    height: 3px;
+    height: 7px;
 }
 
 .AvatarS__Default--CT

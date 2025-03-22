@@ -19,12 +19,7 @@
 .popup_welcome_title
 {
 	horizontal-align: center;
-	margin-top: 64px;
-}
-.popup_welcome_title2
-{
-	horizontal-align: center;
-	margin-top: 300px;
+	margin-top: 32px;
 }
 
 .popup_welcome_bg

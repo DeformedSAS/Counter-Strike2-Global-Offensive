@@ -20,8 +20,9 @@
 
 .collection-label
 {
-	font-weight: normal;
-	font-size: 14px;
+	font-family: Stratum2;
+	font-weight: bold;
+	font-size: 18px;
 	visibility:collapse;
 }
 .tooltip-inventory-item__has-set .collection-label
@@ -37,24 +38,10 @@
 
 .name-label
 {
-	             
-
-	                                                                                     
-	                                                                                        
-	                                                                                           
-	                                                                                         
-	                                                                                              
-	                                                                      
-
-	                                                                                               
-	                                                    
-	   
-	                                                                                           
-	                                                                                      
-	   
+    font-family: Stratum2;
 	max-width:368px;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 18px;
 }
 .tooltip-inventory-item__has-set .name-label
 {
@@ -84,7 +71,9 @@
 
 .rarity-header, .grade-header, .team-header
 {
-	font-size: 14px;
+	font-family: Stratum2;
+	font-size: 17px;
+	font-weight: medium;
 	height: 22px;
 
 	padding-right: 10px;
@@ -93,7 +82,9 @@
 
 .rarity-label, .grade-label, .team-label
 {
-	font-size: 14px;
+	font-family: Stratum2;
+	font-size: 18px;
+	font-weight: medium;
 	height: 22px;
     text-overflow:shrink;
 }
@@ -140,7 +131,9 @@
 
 .desc-text
 {
-	font-size: 14px;
+	font-family: Stratum2;
+	font-size: 17px;
+	font-weight: medium;
 	padding-top: 6px;
 }
 

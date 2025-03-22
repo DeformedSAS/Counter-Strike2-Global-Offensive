@@ -587,7 +587,6 @@
     flow-children: right;
     horizontal-align: center;
     vertical-align: center;
-    ignore-parent-flow: true;
     visibility: collapse;
 }
 

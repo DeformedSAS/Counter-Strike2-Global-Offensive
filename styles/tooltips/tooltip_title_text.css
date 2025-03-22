@@ -8,7 +8,8 @@
 
 #TitleLabel
 {
-    font-size: 18px;
+	font-family: Stratum2;
+    font-size: 20px;
     color: white;
     font-weight: bold;
                                 
@@ -16,13 +17,17 @@
 
 #TextLabel
 {
-    font-size: 14px;
+	font-family: Stratum2;
+    font-size: 20px;
+	font-weight: medium;
     color: #bbbbbb;
 }
 
 #TextPercentage
 {
-    font-size: 12px;
+	font-family: Stratum2;
+    font-size: 20px;
+	font-weight: medium;
     color: #bbbbbb;
     margin-right: 4px;
     vertical-align: center;

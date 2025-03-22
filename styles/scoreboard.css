@@ -25,7 +25,6 @@ Label {
 .sb-main {
 	width: fit-children;
 	height: fit-children;
-	border-radius: 6px;
 
 	min-width: 600px;
 
@@ -37,6 +36,7 @@ Label {
 
 	horizontal-align: center;
 	vertical-align: center;
+	z-index: 6;
 
 	flow-children: down;
 

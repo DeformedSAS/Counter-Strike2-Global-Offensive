@@ -205,11 +205,11 @@
                             <Label text="#play_setting_offline" />
                             <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
 						</RadioButton>
-                        <RadioButton id="PlayWorkshop" group="playtype" data-type="workshop" class="content-navbar__tabs__btn visible-if-not-limitedbeta" onactivate="PlayMenu.OnPressWorkshop();">
+                        <RadioButton id="PlayWorkshop" group="playtype" data-type="workshop" class="content-navbar__tabs__btn " onactivate="PlayMenu.OnPressWorkshop();">
                             <Label text="#play_setting_workshop" />
                             <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
                         </RadioButton>
-                        <Button id="PlayCommunity" class="mainmenu-top-navbar__radio-iconbtn visible-if-not-limitedbeta" data-type="workshop" onactivate="PlayMenu.OnPressServerBrowser();">
+                        <Button id="PlayCommunity" class="mainmenu-top-navbar__radio-iconbtn" data-type="workshop" onactivate="GameInterfaceAPI.ConsoleCommand( 'gamemenucommand openserverbrowser' ); $.DispatchEvent('PlaySoundEffect', 'UIPanorama.submenu_select', 'MOUSE');">
                             <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/community_servers.svg" />
                         </Button>
                     </Panel>
@@ -221,30 +221,27 @@
                         <Label text="#SFUI_GameModeCompetitive" />
                         <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
                     </RadioButton>
-                    <RadioButton id="scrimcomp2v2" group="gamemodes" class="content-navbar__tabs__btn visible-if-not-limitedbeta">
+                    <RadioButton id="scrimcomp2v2" group="gamemodes" class="content-navbar__tabs__btn">
                         <Label text="#SFUI_GameModeScrimComp2v2" />
                         <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
                     </RadioButton>
-                    <Panel class="mainmenu-top-navbar__play_seperator visible-if-not-limitedbeta" />
-                    <RadioButton id="casual" group="gamemodes" class="content-navbar__tabs__btn visible-if-not-limitedbeta">
+                    <Panel class="mainmenu-top-navbar__play_seperator" />
+                    <RadioButton id="casual" group="gamemodes" class="content-navbar__tabs__btn ">
                         <Label text="#SFUI_GameModeCasual" />
                     </RadioButton>
                     <RadioButton id="deathmatch" group="gamemodes" class="content-navbar__tabs__btn">
                         <Label text="#SFUI_Deathmatch" />
                     </RadioButton>
-                    <RadioButton id="skirmish" group="gamemodes" class="content-navbar__tabs__btn visible-if-not-limitedbeta">
+                    <RadioButton id="skirmish" group="gamemodes" class="content-navbar__tabs__btn ">
                         <Label text="#SFUI_GameModeSkirmish" />
-						                    </RadioButton>
-                    <RadioButton id="survival" group="gamemodes" class="content-navbar__tabs__btn visible-if-not-limitedbeta">
-                        <Label text="#SFUI_GameModeSurvival" />
                     </RadioButton>
-                    <RadioButton id="cooperative" group="gamemodes" class="content-navbar__tabs__btn visible-if-not-limitedbeta">
+                    <RadioButton id="cooperative" group="gamemodes" class="content-navbar__tabs__btn ">
                         <Label text="#SFUI_GameModeCooperative" onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;cooperative&apos;, &apos;#PlayMenu_guardian_tooltip&apos; );" onmouseout="UiToolkitAPI.HideTextTooltip();" />
                     </RadioButton>
-                    <RadioButton id="coopmission" group="gamemodes" class="content-navbar__tabs__btn visible-if-not-limitedbeta">
+                    <RadioButton id="coopmission" group="gamemodes" class="content-navbar__tabs__btn ">
                         <Label text="#SFUI_GameModeCoopMission" onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;coopmission&apos;, &apos;#PlayMenu_guardian_tooltip&apos; );" onmouseout="UiToolkitAPI.HideTextTooltip();" />
                     </RadioButton>
-                    <Panel class="mainmenu-top-navbar__play_seperator visible-if-not-limitedbeta" />
+                    <Panel class="mainmenu-top-navbar__play_seperator " />
                     <RadioButton id="JsDirectChallengeBtn" data-type="competitive" group="gamemodes" class="content-navbar__tabs__btn">
                         <Label text="#DirectChallenge" />
                     </RadioButton>
@@ -304,7 +301,7 @@
                                     <Label text="#SFUI_LEADERBOARD" />
                                 </Button>
                             </Panel>
-                            <Panel id="JsQuickSelectParent" class="top-bottom-flow map-selection-list__quick-selection-sets visible-if-not-limitedbeta">
+                            <Panel id="JsQuickSelectParent" class="top-bottom-flow map-selection-list__quick-selection-sets ">
                                 <Label text="#presets_title" class="map-selection__quick-selection-set-title" />
                                 <Panel id="jsQuickSelectionSetsContainer" class="map-selection-list__quick-selection-sets__btns">
                                     <RadioButton id="favorites" class="gamemode-setting-radiobutton preset-button" onactivate="PlayMenu.OnMapQuickSelect( &apos;favorites&apos; )" group="presets">

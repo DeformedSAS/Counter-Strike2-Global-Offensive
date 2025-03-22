@@ -21,8 +21,7 @@
 @define defaultColor: #ffffff;
 
 
-                                                                               
-   
+                                                                          
                                                                                
 
 .hud-radar
@@ -149,7 +148,7 @@ CSGOHudRadar Label
     border-radius: 50% / 50%;
     horizontal-align: center;
     vertical-align: center;
-	background-color: #000000;
+	background-color: hud-blur-bg-color;
     visibility: visible;
 }
 
@@ -160,8 +159,6 @@ CSGOHudRadar Label
 
 	horizontal-align: center;
 	vertical-align: center;	
-
-	background-color: black;
 
 	opacity: 1.0;
 }
@@ -187,7 +184,7 @@ CSGOHudRadar Label
 	horizontal-align: center;
 	vertical-align: center;	
 
-	background-color: #000000;
+	background-color: hud-blur-bg-color;
 	visibility: visible;
 }
 

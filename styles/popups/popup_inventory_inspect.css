@@ -5,12 +5,6 @@
 	horizontal-align:center;
 	vertical-align:center;
 
-	background-image: url( "file://{resources}/videos/vs_bg.webm" );
-	background-repeat: no-repeat;
-	background-size: auto 101%;
-	background-position: 50% 50%;
-	background-img-opacity: 0.8;
-
 	transition-property: opacity;
 	transition-duration: 0.25s;
 	transition-timing-function: ease-in-out;
@@ -83,11 +77,6 @@
 	horizontal-align:center;
 	vertical-align:center;
 
-	background-image: url( "file://{resources}/videos/vs_bg.webm" );
-	background-repeat: no-repeat;
-	background-size: auto 101%;
-	background-position: 50% 50%;
-	background-img-opacity: 0.8;
 
 	transition-property: opacity;
 	transition-duration: 0.25s;

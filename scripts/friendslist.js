@@ -95,7 +95,7 @@ var friendsList = (function() {
             _AddTile(elInviteContainer, null, xuid, 0, 'friendlobby', null);
             elInviteRoot.RemoveClass('hidden');
         }
-        UpdateHeightOpenSection();
+        _UpdateHeightOpenSection();
     }                                                     
 	var _OnSectionPressed = function( sectionId )
 	{

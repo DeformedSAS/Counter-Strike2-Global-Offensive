@@ -15,8 +15,7 @@ function ShowIntroMovie() {
 
 function PlayIntroMovie() {
     $("#IntroMoviePlayer").Play();
-
-    $.DispatchEvent('PlaySoundEffect', 'UIPanorama.cs2_logo', 'MOUSE');
+    $.DispatchEvent('PlaySoundEffect', 'UIPanorama.submenu_slidein', 'MOUSE');
 }
 
 function SkipIntroMovie() {

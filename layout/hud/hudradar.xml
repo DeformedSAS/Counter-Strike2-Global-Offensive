@@ -59,54 +59,60 @@
             <Image class="RadarTextMapImg" textureheight="10" texturewidth="10" antialias="true" scaling="stretch-to-fit-preserve-aspect" />
         </snippet>
     </snippets>
-    <CSGOHudRadar class="hud-radar" hittest="false">
-        <Panel id="Radar" clampfractionalpixelpositions="false">
-            <Panel id="Radar__Round">
-                <Panel id="Radar__Round--Inner">
-                    <Panel id="Radar__Round--InnerTransform" force-no-composition-layer="true" class="additive" />
-                </Panel>
-                	<Panel id="Radar__Round--Border" class="Radar__Round--BorderClass cl-hud-wash-color"/>
-					<Panel id="Radar__Round--Overlay"/>
+<CSGOHudRadar class="hud-radar" hittest="false">
+    <Panel id="Radar" clampfractionalpixelpositions="false">
+        <Panel id="Radar__Round">
+            <Panel id="Radar__Round--Inner">
+                <Panel id="Radar__Round--InnerTransform" force-no-composition-layer="false" class="additive" />
             </Panel>
-            <Panel id="Radar__Square">
-                <Panel id="Radar__Square--Inner">
-                    <Panel id="Radar__Square--InnerTransform" force-no-composition-layer="true" class="additive" />
-                </Panel>
-                <Panel id="Radar__Square--Border" class="Radar__Square--BorderClass" />
-			<Panel id="Radar__Square--Overlay"/>
+            <Panel id="Radar__Round--Border" class="Radar__Round--BorderClass cl-hud-wash-color"/>
+            <Panel id="Radar__Round--Overlay"/>
+        </Panel>
+
+        <Panel id="Radar__Square">
+            <Panel id="Radar__Square--Inner">
+                <Panel id="Radar__Square--InnerTransform" force-no-composition-layer="false" class="additive" />
             </Panel>
-			<Image id="DirectionArrow" force-no-composition-layer="true" src="file://{images}/hud/direction.vtf" class="cl-hud-color" />
-
-			<Panel id="RI_BombDefuserPackage">
-				<Image id="BombPlantedIcon" src="file://{images}/icons/ui/bomb_c4.svg"/>	
-				<Image id="BombPlantedIconMedium" src="file://{images}/icons/ui/bomb_c4.svg"/>
-				<Image id="BombPlantedIconFast" src="file://{images}/icons/ui/bomb_c4.svg"/>
-				
-				<Panel id="PlantedBomb"/>
-				<Panel id="DroppedBomb"/>
-
-				<Image id="BombAbove" class="PI_Above" textureheight="19" texturewidth="16" src="file://{images}/icons/ui/map_bomb_above.svg"/>
-				<Image id="BombBelow" class="PI_Below" textureheight="19" texturewidth="16" src="file://{images}/icons/ui/map_bomb_below.svg"/>
-				<Image id="CreateBombPack" textureheight="12" texturewidth="16" src="file://{images}/hud/radar/C4_sml.png"/>
-
-				<Image id="DefuserIconDropped" src="file://{images}/hud/radar/icon-defuse-dropped.png"/>
-				<Image id="DefuserIconPackage" src="file://{images}/hud/radar/icon-radar-defuse.png"/>
-			</Panel>
-
-			<Image id="BombZoneA" class="BombZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/hud/radar/icon-bomb-zone-a.png"/>
-			<Image id="BombZoneB" class="BombZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/hud/radar/icon-bomb-zone-b.png"/>
-
-			<Image id="HZone0" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
-			<Image id="HZone1" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
-			<Image id="HZone2" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
-			<Image id="HZone3" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
-            <Panel id="RI_PlayerSoundContainer" />
+            <Panel id="Radar__Square--Border" class="Radar__Square--BorderClass" />
+            <Panel id="Radar__Square--Overlay"/>
         </Panel>
-        <Panel id="Radar__Invisible" class="Invisible" />
-        <Panel>
-            <Panel class="hrBotrad additive" />
-            <Label id="DashboardLabel" class="stratum-medium" />
+
+        <Image id="DirectionArrow" force-no-composition-layer="true" src="file://{images}/hud/direction.vtf" class="cl-hud-color" />
+
+        <Panel id="RI_BombDefuserPackage">
+            <Image id="BombPlantedIcon" src="file://{images}/icons/ui/bomb_c4.svg"/>	
+            <Image id="BombPlantedIconMedium" src="file://{images}/icons/ui/bomb_c4.svg"/>
+            <Image id="BombPlantedIconFast" src="file://{images}/icons/ui/bomb_c4.svg"/>
+            
+            <Panel id="PlantedBomb"/>
+            <Panel id="DroppedBomb"/>
+
+            <Image id="BombAbove" class="PI_Above" textureheight="19" texturewidth="16" src="file://{images}/icons/ui/map_bomb_above.svg"/>
+            <Image id="BombBelow" class="PI_Below" textureheight="19" texturewidth="16" src="file://{images}/icons/ui/map_bomb_below.svg"/>
+            <Image id="CreateBombPack" textureheight="12" texturewidth="16" src="file://{images}/hud/radar/C4_sml.png"/>
+
+            <Image id="DefuserIconDropped" src="file://{images}/hud/radar/icon-defuse-dropped.png"/>
+            <Image id="DefuserIconPackage" src="file://{images}/hud/radar/icon-radar-defuse.png"/>
         </Panel>
-    </CSGOHudRadar>
+
+        <Image id="BombZoneA" class="BombZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/hud/radar/icon-bomb-zone-a.png"/>
+        <Image id="BombZoneB" class="BombZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/hud/radar/icon-bomb-zone-b.png"/>
+
+        <Image id="HZone0" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
+        <Image id="HZone1" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
+        <Image id="HZone2" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
+        <Image id="HZone3" class="HZone" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/map_hostage_indicator_zone.svg"/>
+
+        <Panel id="RI_PlayerSoundContainer" />
+    </Panel>
+
+    <Panel id="Radar__Invisible" class="Invisible" />
+
+    <Panel>
+        <Panel class="hrBotrad additive" />
+        <Label id="DashboardLabel" class="stratum-medium" />
+    </Panel>
+</CSGOHudRadar>
+
 </root>
 

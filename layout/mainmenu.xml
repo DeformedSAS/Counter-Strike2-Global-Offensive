@@ -52,9 +52,10 @@
             </Button>
         </Panel>
         <Panel id="MainMenuInput">                                              
-            <CSGOBlurTarget id="MainMenuCore" blurrects="ChatLinesContainerBg mainmenu-sidebar__blur-target CSGOLoadingScreen JsMainMenuNavBar eom-winner">
-                <CSGOBlurTarget id="MainMenuBackground" blurrects="id-mainmenu-mission-card-bg id-op-mainmenu-top mainmenu-content__blur-target id-mainmenu-mini-store-panel JsMainMenuNavBarPauseMenu id-mainmenu-stream-panel id-tournament-pass-status JsStorePanel JsStreamPanel JsWatchNoticePanel id-op-mainmenu-rewards id-op-mainmenu-missions JsLastMatch JsActiveMissionPanel id-activemission-tooltip id-active-mission">
+            <CSGOBlurTarget id="MainMenuCore" blurrects="ChatLinesContainerBg mainmenu-sidebar__blur-target JsMainMenuNavBar eom-winner">
+                <CSGOBlurTarget id="MainMenuBackground" blurrects="mainmenu-content__blur-target id-mainmenu-mini-store-panel JsMainMenuNavBarPauseMenu JsWatchNoticePanel">
                     <Panel class="mainmenu-vanity__vignette" hittest="false"/>
+					<Panel class="MainMenuBackground2"/>
                     <CSGOBackbufferImagePanel class="full-width full-height PauseMenuModeOnly" />
                     <Panel id="MainMenuMovieParent"></Panel>          
                     <Panel id="MainMenuVanityParent"></Panel>
@@ -179,7 +180,7 @@
 			onactivate="MainMenu.NavigateToTab('JsInventory', 'mainmenu_inventory');">
 			<Label class="mainmenu-top-navbar__radio-btn__label stratum-medium" style="font-size: 22; width: 150px; letter-spacing: -1px;" text="#CSGO_MainMenu_Inventory" />
 			<Panel id="MainMenuInvAlert" class="navbar-btn__notification hidden">
-			<Label id="MainMenuInvAlertText" class="navbar-btn__notification-text" text=""/>
+			<Label id="MainMenuInvAlertText" class="navbar-btn__notification-text stratum-medium" style="font-size: 16px;" text=""/>
 		</Panel>
 		</RadioButton>
 			<Panel class="mainmenu-top-navbar__play_seperator mainmenu-top-navbar__play_seperator--small visible-if-not-limitedbeta MainMenuModeOnly" />

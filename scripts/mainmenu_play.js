@@ -1701,127 +1701,186 @@ function _ShowCancelSearchButton(isSearching, isHost) {
             return false;
         return aMapList.filter(map => map.checked).length > 0;
     }
-    function _ValidateSessionSettings() {
-        if (m_isWorkshop) {
-            m_serverSetting = "official";
-        }
-        if (!_IsGameModeAvailable(m_serverSetting, m_gameModeSetting)) {
-            m_gameModeSetting = GameInterfaceAPI.GetSettingString("ui_playsettings_mode_" + m_serverSetting);
-            m_singleSkirmishMapGroup = null;
-            if (_IsSingleSkirmishString(_RealGameMode())) {
-                m_singleSkirmishMapGroup = _GetSingleSkirmishMapGroupFromSingleSkirmishString(_RealGameMode());
-                m_gameModeSetting = 'skirmish';
-            }
-            if (!_IsGameModeAvailable(m_serverSetting, m_gameModeSetting)) {
-                const modes = [
-                    "premier",
-                    "competitive",
-                    "scrimcomp2v2",
-                    "casual",
-                    "deathmatch",
-                ];
-                for (let i = 0; i < modes.length; i++) {
-                    if (_IsGameModeAvailable(m_serverSetting, modes[i])) {
-                        m_gameModeSetting = modes[i];
-                        m_singleSkirmishMapGroup = null;
-                        break;
-                    }
-                }
-            }
-        }
-        if (!m_gameModeFlags[m_serverSetting + _RealGameMode()])
-            _LoadGameModeFlagsFromSettings();
-        if (GameModeFlags.DoesModeUseFlags(_RealGameMode())) {
-            if (!GameModeFlags.AreFlagsValid(_RealGameMode(), m_gameModeFlags[m_serverSetting + _RealGameMode()])) {
-                _setAndSaveGameModeFlags(0);
-            }
-        }
-    }
-    function _LoadGameModeFlagsFromSettings() {
-        m_gameModeFlags[m_serverSetting + _RealGameMode()] = parseInt(GameInterfaceAPI.GetSettingString('ui_playsettings_flags_' + m_serverSetting + '_' + _RealGameMode()));
-    }
-    function _ApplySessionSettings() {
-        if (m_serverSetting === 'official' && !m_isWorkshop && !inDirectChallenge()) {
-            if (m_gameModeSetting === 'scrimcomp2v2') {
-                MyPersonaAPI.HintLoadPipRanks('wingman');
-            }
-            else if (m_gameModeSetting === 'competitive') {
-                MyPersonaAPI.HintLoadPipRanks('competitive');
-            }
-        }
-        if (!LobbyAPI.BIsHost()) {
-            return;
-        }
-        _ValidateSessionSettings();
-        const serverType = m_serverSetting;
-        let gameMode = _RealGameMode();
-        let gameModeFlags = m_gameModeFlags[m_serverSetting + gameMode] ? m_gameModeFlags[m_serverSetting + gameMode] : 0;
-        var primePreference = m_serverPrimeSetting;
-        let selectedMaps;
-        if (m_isWorkshop)
-            selectedMaps = _GetSelectedWorkshopMap();
-        else if (inDirectChallenge()) {
-            selectedMaps = 'mg_lobby_mapveto';
-            gameModeFlags = 16;
-            primePreference = 0;
-        }
-        else if (m_gameModeSetting === 'premier') {
-            selectedMaps = 'mg_lobby_mapveto';
-            primePreference = 1;
-            m_challengeKey = '';
-        }
-        else if (m_singleSkirmishMapGroup) {
-            selectedMaps = m_singleSkirmishMapGroup;
-        }
-        else {
-            selectedMaps = _GetSelectedMapsForServerTypeAndGameMode(serverType, gameMode);
-        }
-        const settings = {
-            update: {
-                Options: {
-                    action: "custommatch",
-                    server: serverType,
-                    challengekey: _GetDirectChallengeKey(),
-                },
-                Game: {
-                    mode: gameMode,
-                    mode_ui: m_gameModeSetting,
-                    type: GetGameType(gameMode),
-                    mapgroupname: selectedMaps,
-                    gamemodeflags: gameModeFlags,
-                    prime: primePreference,
-                    map: ''
-                }
-            },
-            delete: {}
-        };
-        if (!inDirectChallenge()) {
-            settings.delete = {
-                Options: {
-                    challengekey: 1
-                }
-            };
-        }
-        if (selectedMaps.startsWith("random_")) {
-            const arrMapGroups = _GetAvailableMapGroups(gameMode, false);
-            const idx = 1 + Math.floor((Math.random() * (arrMapGroups.length - 1)));
-            settings.update.Game.map = arrMapGroups[idx].substring(3);
-        }
-        if (m_isWorkshop) {
-            GameInterfaceAPI.SetSettingString('ui_playsettings_maps_workshop', selectedMaps);
-        }
-        else {
-            let singleSkirmishSuffix = '';
-            if (m_singleSkirmishMapGroup) {
-                singleSkirmishSuffix = '_' + _GetSingleSkirmishIdFromMapGroup(m_singleSkirmishMapGroup);
-            }
-            GameInterfaceAPI.SetSettingString('ui_playsettings_mode_' + serverType, m_gameModeSetting + singleSkirmishSuffix);
-            if (!inDirectChallenge() && m_gameModeSetting !== 'premier') {
-                GameInterfaceAPI.SetSettingString('ui_playsettings_maps_' + serverType + '_' + m_gameModeSetting + singleSkirmishSuffix, selectedMaps);
-            }
-        }
-        LobbyAPI.UpdateSessionSettings(settings);
-    }
+ 	function _ValidateSessionSettings()
+	{
+		if ( m_isWorkshop )
+		{
+			                                     
+			m_serverSetting = "listen";
+		}
+
+		if ( !_IsGameModeAvailable( m_serverSetting, m_gameModeSetting ) )
+		{
+			                                                                
+			m_gameModeSetting = GameInterfaceAPI.GetSettingString( "ui_playsettings_mode_" + m_serverSetting );
+			m_singleSkirmishMapGroup = null;
+
+			if ( _IsSingleSkirmishString( m_gameModeSetting ) )
+			{
+				m_singleSkirmishMapGroup = _GetSingleSkirmishMapGroupFromSingleSkirmishString( m_gameModeSetting );
+				m_gameModeSetting = 'skirmish';
+			}
+		
+			if ( !_IsGameModeAvailable( m_serverSetting, m_gameModeSetting ) )
+			{
+				                                                                                                                                            
+				  
+				                                                          
+				                                                                             
+				  
+				                                   
+				  
+				                                                                      
+				var modes = [
+					"deathmatch", "casual",
+					"survival", "skirmish",
+					"scrimcomp2v2", "competitive",
+					];
+				
+				for ( var i = 0; i < modes.length; i++ )
+				{
+					if ( _IsGameModeAvailable( m_serverSetting, modes[ i ] ) )
+					{
+						m_gameModeSetting = modes[ i ];
+						m_singleSkirmishMapGroup = null;
+						break;
+					}
+				}
+			}
+		}
+
+		                                                      
+		if ( !m_gameModeFlags[ m_serverSetting + m_gameModeSetting ] )
+			_LoadGameModeFlagsFromSettings();
+		
+		                                                     
+		if ( GameModeFlags.DoesModeUseFlags( m_gameModeSetting ) )
+		{
+			if ( !GameModeFlags.AreFlagsValid( m_gameModeSetting, m_gameModeFlags[ m_serverSetting + m_gameModeSetting ] ) )
+			{
+				_setAndSaveGameModeFlags( 0 );
+				                                                                                                                     
+
+			}
+		}
+	};
+ 	function _LoadGameModeFlagsFromSettings ()
+	{
+		m_gameModeFlags[ m_serverSetting + m_gameModeSetting ] = parseInt( GameInterfaceAPI.GetSettingString( 'ui_playsettings_flags_' + m_serverSetting + '_' + m_gameModeSetting ) );
+	}
+
+	                                                                                                    
+	                                   
+	                                                                                                    
+	function _ApplySessionSettings()
+	{
+		if ( m_gameModeSetting === 'scrimcomp2v2' )
+		{	                                                                                     
+			MyPersonaAPI.HintLoadPipRanks( 'wingman' );
+		}
+		else if ( m_gameModeSetting === 'survival' )
+		{	                                                                                     
+			MyPersonaAPI.HintLoadPipRanks( 'dangerzone' );
+		}
+
+		if ( !LobbyAPI.BIsHost() )
+		{
+			return;
+		}
+
+		                                                     
+		_ValidateSessionSettings();
+
+		                                                                                 
+		var serverType = m_serverSetting;
+		var gameMode = m_gameModeSetting;
+
+		var gameModeFlags = m_gameModeFlags[ m_serverSetting + m_gameModeSetting ] ? m_gameModeFlags[ m_serverSetting + m_gameModeSetting ] : 0;
+		var primePreference = m_serverPrimeSetting;
+
+		var selectedMaps;
+
+		if ( m_isWorkshop )
+			selectedMaps = _GetSelectedWorkshopMap();
+		else if ( inDirectChallenge() )
+		{
+			selectedMaps = 'mg_lobby_mapveto';	                         
+			gameModeFlags = 16;					                   
+			primePreference = 0;				                                           
+		}
+		else if ( m_singleSkirmishMapGroup )
+		{
+			selectedMaps = m_singleSkirmishMapGroup;
+		}
+		else
+		{
+			selectedMaps = _GetSelectedMapsForServerTypeAndGameMode( serverType, gameMode );
+		}	
+
+		var settings = {
+			update: {
+				Options: {
+					action: "custommatch",
+					server: serverType,
+					challengekey: _GetDirectChallengeKey(),
+				},
+				Game: {
+					                                                                  
+					mode: gameMode,
+					type: GetGameType( gameMode ),
+					mapgroupname: selectedMaps,
+					gamemodeflags: gameModeFlags,
+					prime: primePreference,
+				}
+			}
+		};
+
+		if ( !inDirectChallenge() )
+		{                                                                     
+			settings.delete = {
+				Options: {
+					challengekey: 1
+				}
+			}
+		}
+
+		                                                                                                                                      
+		                                                                                                                                      
+		                                                                                                                                
+		                                                                                                                                      
+		                                                                                       
+		if ( selectedMaps.startsWith( "random_" ) )
+		{
+			var arrMapGroups = _GetAvailableMapGroups( gameMode, false );
+			var idx = 1 + Math.floor( ( Math.random() * ( arrMapGroups.length - 1 ) ) );
+			settings.update.Game.map = arrMapGroups[ idx ].substring( 3 );
+		}
+
+		                       
+		                                                  
+		if ( m_isWorkshop )
+		{
+			GameInterfaceAPI.SetSettingString( 'ui_playsettings_maps_workshop', selectedMaps );
+		}
+		else
+		{
+			var singleSkirmishSuffix = '';
+			if ( m_singleSkirmishMapGroup )
+			{
+				singleSkirmishSuffix = '_' + _GetSingleSkirmishIdFromMapGroup( m_singleSkirmishMapGroup );
+			}
+			GameInterfaceAPI.SetSettingString('ui_playsettings_mode_' + serverType, m_gameModeSetting + singleSkirmishSuffix );
+
+			if ( !inDirectChallenge() )
+			{	                                                                                                                  
+				GameInterfaceAPI.SetSettingString('ui_playsettings_maps_' + serverType + '_' + m_gameModeSetting + singleSkirmishSuffix, selectedMaps);
+			}
+		}
+
+		                                                                  
+		                                                                                          
+		LobbyAPI.UpdateSessionSettings( settings );
+	};
 	function ApplyPrimeSetting ()
     {
                                                
@@ -1887,43 +1946,63 @@ function _ShowCancelSearchButton(isSearching, isHost) {
             entry.SetAutoScrollEnabled(true);
         }
     }
-    function _InitializeWorkshopTags(panel, mapInfo) {
-        const mapTags = mapInfo.tags ? mapInfo.tags.split(",") : [];
-        const rawModes = [];
-        const modes = [];
-        const tags = [];
-        for (let i = 0; i < mapTags.length; ++i) {
-            const modeTag = mapTags[i].toLowerCase().split(' ').join('').split('-').join('');
-            if (modeTag in k_workshopModes) {
-                const gameTypes = k_workshopModes[modeTag].split(',');
-                for (let iType = 0; iType < gameTypes.length; ++iType) {
-                    if (!rawModes.includes(gameTypes[iType]))
-                        rawModes.push(gameTypes[iType]);
-                }
-                modes.push($.Localize('#CSGO_Workshop_Mode_' + modeTag));
-            }
-            else {
-                tags.push($.HTMLEscape(mapTags[i]));
-            }
-        }
-        let tooltip = mapInfo.desc ? $.HTMLEscape(mapInfo.desc) : '';
-        if (modes.length > 0) {
-            if (tooltip)
-                tooltip += '<br><br>';
-            tooltip += $.Localize("#CSGO_Workshop_Modes");
-            tooltip += ' ';
-            tooltip += modes.join(', ');
-        }
-        if (tags.length > 0) {
-            if (tooltip)
-                tooltip += '<br><br>';
-            tooltip += $.Localize("#CSGO_Workshop_Tags");
-            tooltip += ' ';
-            tooltip += tags.join(', ');
-        }
-        panel.SetAttributeString('data-tooltip', tooltip);
-        panel.SetAttributeString('data-workshop-modes', rawModes.join(','));
-    }
+ 	function _InitializeWorkshopTags ( panel, mapInfo )
+	{
+		var mapTags = mapInfo.tags ? mapInfo.tags.split( "," ) : [];
+
+		                          
+		var rawModes = [];
+		var modes = [];
+		var tags = [];
+
+		for ( var i = 0; i < mapTags.length; ++i )
+		{
+			                               
+			                                                  
+			var modeTag = mapTags[i].toLowerCase().split( ' ' ).join( '' ).split( '-' ).join( '' );
+			if ( modeTag in k_workshopModes )
+			{
+				var gameTypes = k_workshopModes[modeTag].split(',');
+				for( var iType = 0; iType < gameTypes.length; ++iType )
+				{
+					if( !rawModes.includes( gameTypes[iType] ) )
+						rawModes.push( gameTypes[iType] );
+				}
+
+				modes.push( $.Localize( '#CSGO_Workshop_Mode_' + modeTag ) );
+			}
+			else
+			{
+				tags.push( $.HTMLEscape( mapTags[i] ) );
+			}
+		}
+
+		                   
+		var tooltip = mapInfo.desc ? $.HTMLEscape( mapInfo.desc, true ) : '';
+
+		if ( modes.length > 0 )
+		{
+			if ( tooltip )
+				tooltip += '<br><br>';
+
+			tooltip += $.Localize( "#CSGO_Workshop_Modes" );
+			tooltip += ' ';
+			tooltip += modes.join(', ');
+		}
+
+		if ( tags.length > 0 )
+		{
+			if ( tooltip )
+				tooltip += '<br><br>';
+
+			tooltip += $.Localize( "#CSGO_Workshop_Tags" );
+			tooltip += ' ';
+			tooltip += tags.join( ', ' );
+		}
+
+		panel.SetAttributeString( 'data-tooltip', tooltip );                               
+		panel.SetAttributeString( 'data-workshop-modes', rawModes.join( ',' ) );
+	}
     function _ShowWorkshopMapInfoTooltip(panel) {
         const text = panel.GetAttributeString('data-tooltip', '');
         if (text)
@@ -2101,25 +2180,26 @@ function BotDifficultyChanged() {
     }
 }
     PlayMenu.BotDifficultyChanged = BotDifficultyChanged;
-    function _DisplayWorkshopModePopup() {
-        const elSelectedMaps = _GetSelectedWorkshopMapButtons();
-        let modes = [];
-        if (elSelectedMaps.length === 0) {
-            UiToolkitAPI.ShowGenericPopupTwoOptions($.Localize('#SFUI_Maps_Workshop_Title'), $.Localize('#SFUI_No_Subscribed_Maps_Desc'), '', '#CSGO_Workshop_Visit', () => $.DispatchEvent('CSGOOpenSteamWorkshop'), "OK", () => { });
-            $('#StartMatchBtn').RemoveClass('pressed');
-            return;
-        }
-        for (let iMap = 0; iMap < elSelectedMaps.length; ++iMap) {
-            const mapModes = elSelectedMaps[iMap].GetAttributeString('data-workshop-modes', '').split(',');
-            if (iMap == 0)
-                modes = mapModes;
-            else
-                modes = modes.filter(mode => mapModes.includes(mode));
-        }
-        const strModes = modes.join(',');
-        UiToolkitAPI.ShowCustomLayoutPopupParameters('workshop_map_mode', 'file://{resources}/layout/popups/popup_workshop_mode_select.xml', 'workshop-modes=' + $.HTMLEscape(strModes));
-        $('#StartMatchBtn').RemoveClass('pressed');
-    }
+	function _DisplayWorkshopModePopup()
+	{
+		                         
+		var elSelectedMaps = _GetSelectedWorkshopMapButtons();
+		var modes = [];
+
+		for ( var iMap = 0; iMap < elSelectedMaps.length; ++iMap )
+		{
+			var mapModes = elSelectedMaps[ iMap ].GetAttributeString( 'data-workshop-modes', '' ).split( ',' );
+
+			                                                          
+			if ( iMap == 0 )
+				modes = mapModes;
+			else
+				modes = modes.filter( function( mode ) { return mapModes.includes( mode ); } );
+		}
+
+		var strModes = modes.join( ',' );
+		UiToolkitAPI.ShowCustomLayoutPopupParameters( 'workshop_map_mode', 'file://{resources}/layout/popups/popup_workshop_mode_select.xml', 'workshop-modes=' + $.UrlEncode( strModes ) );
+	};
    function _UpdateWorkshopMapFilter() {
         const elTextLabel = $('#WorkshopSearchTextEntry');
         const filter = $.HTMLEscape(elTextLabel.text).toLowerCase();
@@ -2178,25 +2258,48 @@ function BotDifficultyChanged() {
         $.GetContextPanel().SwitchClass("gamemode", 'workshop');
         $.GetContextPanel().SwitchClass("serversetting", m_serverSetting);
     }
-    function _WorkshopSubscriptionsChanged() {
-        const panel = m_mapSelectionButtonContainers[k_workshopPanelId];
-        if (panel) {
-            panel.DeleteAsync(0.0);
-            delete m_mapSelectionButtonContainers[k_workshopPanelId];
-        }
-        if (m_activeMapGroupSelectionPanelID != k_workshopPanelId) {
-            return;
-        }
-        if (!LobbyAPI.IsSessionActive()) {
-            m_activeMapGroupSelectionPanelID = null;
-            return;
-        }
-        _SyncDialogsFromSessionSettings(LobbyAPI.GetSessionSettings());
-        if (LobbyAPI.BIsHost()) {
-            _ApplySessionSettings();
-            _SetPlayDropdownToWorkshop();
-        }
-    }
+	function _WorkshopSubscriptionsChanged()
+	{
+		var currentMap = '';
+		var panel = m_mapSelectionButtonContainers[k_workshopPanelId];
+		if ( panel )
+		{
+			currentMap = _GetSelectedWorkshopMap();
+			panel.DeleteAsync( 0.0 );
+
+			                  
+			delete m_mapSelectionButtonContainers[k_workshopPanelId];
+		}
+
+		if ( m_activeMapGroupSelectionPanelID != k_workshopPanelId )
+		{
+			                                                                       
+			return;
+		}
+
+		if ( !LobbyAPI.IsSessionActive() )
+		{
+			                                                                                                                    
+			                                           
+
+			                                                                                                            
+			                                                              
+			m_activeMapGroupSelectionPanelID = null;
+			return;
+		}
+
+		                                                
+		_SyncDialogsFromSessionSettings( LobbyAPI.GetSessionSettings() );
+
+		                                                                                                                                      
+		if ( LobbyAPI.BIsHost() )
+		{
+			_ApplySessionSettings();
+
+			                                                                                                                          
+			_SetPlayDropdownToWorkshop();
+		}
+	}
     function _InventoryUpdated() {
         _UpdatePrimeBtn( _IsSearching(), LobbyAPI.BIsHost() );
         _UpdatePracticeSettingsBtns(_IsSearching(), LobbyAPI.BIsHost());

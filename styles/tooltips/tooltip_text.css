@@ -10,14 +10,18 @@
 .tooltip-txt-default,
 #TextLabel
 {
-	font-size: 14px;
+	font-family: Stratum2;
+	font-size: 20px;
+	font-weight: medium;
 	color: #c8c8c8;
 	vertical-align: middle;
 }
 
 .GameModeTooltip #TextLabel
 {
-	font-size: 14px;
+	font-family: Stratum2;
+	font-size: 20px;
+	font-weight: medium;
 color: #c8c8c8;
 	horizontal-align: left;
 	vertical-align: middle;
@@ -25,15 +29,18 @@ color: #c8c8c8;
 
 .BindingsTooltip #TextLabel
 {
-	font-weight: thin;
 	color: #c8c8c8;
-	font-size: 17px;
+	font-size: 20px;
+	font-family: Stratum2;
+	font-weight: medium;
 	background-color: #1e2d3d;
 }
 
 .ShortTextTooltip #TextLabel
 {
-	font-size: 14px;
+	font-family: Stratum2;
+	font-size: 20px;
+	font-weight: medium;
 	color: #c8c8c8;
 	horizontal-align: left;
 	vertical-align: middle;

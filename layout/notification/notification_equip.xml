@@ -8,6 +8,6 @@
 	</scripts>
 
     <Panel class="inv-notification" hittext="false" useglobalcontext="true">
-        <Label  id="InvNotificationLabel" class="inv-notification-text" html="true" text="XXXXXXXXXXXXXXX"/>
+        <Label  id="InvNotificationLabel" class="inv-notification-text stratum-medium" html="true" text="XXXXXXXXXXXXXXX"/>
     </Panel>
 </root>

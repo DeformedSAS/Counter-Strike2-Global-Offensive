@@ -14,7 +14,7 @@ var LoadingScreen = ( function() {
 		                                                                  
 
 		$('#LoadingScreenMapName').text = "";
-		$( '#LoadingScreenGameMode' ).SetLocalizationString( "#SFUI_LOADING" );
+		$( '#LoadingScreenGameMode' ).SetLocalizationString( "Loading..." );
 		$('#LoadingScreenModeDesc').text = "";
 		$('#LoadingScreenGameModeIcon').SetImage("");
 

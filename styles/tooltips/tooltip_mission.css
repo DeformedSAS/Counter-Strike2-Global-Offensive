@@ -83,8 +83,8 @@
 .tooltip-mission-title
 {
     color: white;
-    font-family: notosans, 'Arial Unicode MS';
-    font-size: 16px;
+    font-family: Stratum2, notosans, 'Arial Unicode MS';
+    font-size: 18px;
     width: 380px;
    
                                
@@ -93,7 +93,9 @@
 .tooltip-mission-desc,
 .tooltip-mission-title
 {
-    font-size: 14px;
+    font-size: 18px;
+	font-family: Stratum2;
+	font-weight: medium;
 }
 
 .tooltip-mission-title
