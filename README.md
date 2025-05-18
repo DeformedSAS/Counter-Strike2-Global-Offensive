@@ -20,6 +20,8 @@
 
 ![image](https://github.com/user-attachments/assets/7e7071d0-69b0-4b34-9042-f22cd43082c5)
 
+![image](https://github.com/user-attachments/assets/091ee25e-17fd-4e1b-b33a-db5a0b0cf874)
+
 # Credits
 - crazymodder and others who worked on porting CS2 weapons to CS:GO. And for giving me permission to use the kukri knife and taser models in this addon!
 - d3gk for helping me resolve some issues.
