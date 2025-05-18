@@ -148,48 +148,51 @@
                                                                                
 .player-card-commendations-container
 {
-	opacity: 1;
-	visibility: visible;
-	width: 100%;
-	flow-children: right;
-	horizontal-align: left;
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+    flow-children: right;
+    horizontal-align: left;
 }
 
 .player-card-commendations
 {
-	visibility: visible;
-	height: fit-children;
-	max-height: 132px;
-	width: fit-children;
-	vertical-align: middle;
-	horizontal-align: left;
-	flow-children: right;
-	margin-left: 24px;
+    visibility: visible;
+    height: fit-children;
+    max-height: 48px;
+    width: fit-children;
+    vertical-align: middle;
+    horizontal-align: left;
+    flow-children: right;
+    margin-left: 24px;
+    margin-bottom: 16px;
 }
 
 .player-card-commendations-icon
 {
-	opacity: 1;
-	visibility: visible;
-	flow-children: right;
-	width: fit-children;
-	margin: 16px;
-	wash-color: baseText;
+    opacity: 1;
+    visibility: visible;
+    flow-children: right;
+    vertical-align: center;
+    width: fit-children;
+    margin: 12px;
 }
 
 .player-card-commendations Image
 {
 	width: height-percentage( 100% );
-	height: 18px;
+	height: 24px;
+	wash-color: rgb(143, 143, 143);
 }
 
 .player-card-commendations Label
 {
-	font-size: 14px;
+    font-size: 14px;
+    vertical-align: center;
 	font-family: Stratum2;
-	vertical-align: top;
-	margin-left: 4px;
-	color: white;
+	font-weight: medium;
+    margin-left: 4px;
+    color: white;
 }
 
                                                                                

@@ -20,35 +20,21 @@ Label
 	color: white;
 }	
 
-
-
-            
 .charlineup__player{
-
-  	                                                           
-
+                                  
+    width: 1920px;
 	height: 100%;
-
 	opacity: 0.00001;
-
 	transition-property: opacity;
 	transition-duration: 1s;
-
 	horizontal-align: left;
-
-  	                        
-
 }
 
 
-.charlineup__player.charlineup__player--localplayer{
-
-                         
+.charlineup__player.charlineup__player--localplayer{                    
 }
-
-
 .charlineup-root{
-	width: 1300px;
+	width: 1920px;
 	height: 100%;
 
 	horizontal-align: center;
@@ -56,13 +42,10 @@ Label
 
 .charlineup__characters{
 
-	width: 100%;
-	height: 100%;
-
+	width: 1920px;
+	height: 1080px;
 	horizontal-align: center;
-
 }
-
 
 @keyframes 'char-highlight'
 {
@@ -83,7 +66,6 @@ Label
 	brightness: 0.3;
 }
 
-
 .brightmodel
 {
 	brightness: 1.3;
@@ -94,33 +76,18 @@ Label
 	animation-iteration-count: 1;
 }
 
-  
-                           
-
-	           
-	            
-	                        
-	                         
-	                       
- 
-  
-
 .charlineup__model-preview-panel{
 
-	width:100%;
-	height:100%;
-
+	width: 1400px;
+	height: 1080px;
 	horizontal-align: center;
 	vertical-align: bottom;
-
 }
 
-#id-charlineup__character-1 .charlineup__model-preview-panel{
-  	                       
+#id-charlineup__character-1 .charlineup__model-preview-panel{                      
 }
 
-#id-charlineup__character-1.charlineup__player{
-  	                        
+#id-charlineup__character-1.charlineup__player{                        
 }
 
 .reveal{
@@ -132,14 +99,8 @@ Label
 
 	vertical-align: bottom;
 	horizontal-align: center;
-
 	flow-children: down;
-
-  	                         
-
 	max-width: 60%;
-
-
 }
 
 .dead{
@@ -154,47 +115,27 @@ Label
 
 	vertical-align: bottom;
 	horizontal-align: center;
-
 	flow-children:right;
-
 }
-
-                        
+           
 .charlineup__player__name{
 
-	
-  	             
-  	                       
-  	                        
-  	                
-
-  	                   
-
-  	                 
-
-  	                        
-
-  	                     
-
-	font-size: 16px;
+	font-size: 17px;
     font-family: Stratum2, 'Arial Unicode MS';
     font-weight: medium;
-	vertical-align: bottom;
+	vertical-align: center;
 	horizontal-align: center;
 	margin-top: 6px;
-
     text-shadow: 1px 1px 1px 1.5 #000000AA;
     text-overflow: ellipsis;
     color: gray;
 	white-space: nowrap;
-	
 	margin-left:5px;
-
 }
 
 .charlineup__player__avatar{
 
-	height: 24px;
+	height: 32px;
 	width: height-percentage( 100% );
 	horizontal-align: center;
 }
@@ -203,21 +144,16 @@ Label
 
 	vertical-align: bottom;
 	horizontal-align: center;
-
 	width: 30px;
 	height: 30px;
-
 	position: 40px 0px 0px;
-
 	brightness: 0.2;
-
 	z-index:10;
 }
 
 .charlineup__player__commend:hover{
-
+	
 	brightness: 1;
-
 	transition-property: brightness;
 	transition-duration: 0.3s;
 }
@@ -231,13 +167,8 @@ Label
 
 	background-color:backgroundGradient;
 	blur:fastgaussian( 3, 3, 2 );
-	                                         
-	                               
-
-
 	width: 100%;
 	height: 100%;
-
 	opacity: 0.5;
 }
 

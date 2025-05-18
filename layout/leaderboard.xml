@@ -1,16 +1,16 @@
 <!-- xml reconstructed by Source 2 Viewer 10.0.0.0 - https://valveresourceformat.github.io -->
 <root>
 	<styles>
-		<include src="s2r://panorama/styles/csgostyles.vcss_c" />
-		<include src="s2r://panorama/styles/mainmenu.vcss_c" />
-		<include src="s2r://panorama/styles/leaderboard.vcss_c" />
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/mainmenu.css" />
+		<include src="file://{resources}/styles/leaderboard.css" />
 	</styles>
 	<scripts>
-		<include src="s2r://panorama/scripts/common/sessionutil.vts_c" />
-		<include src="s2r://panorama/scripts/leaderboard.vts_c" />
-		<include src="s2r://panorama/scripts/rating_emblem.vts_c" />
-		<include src="s2r://panorama/scripts/common/teamcolor.vts_c" />
-		<include src="s2r://panorama/scripts/honor_icon.vts_c" />
+		<include src="file://{resources}/scripts/common/sessionutil.js" />
+		<include src="file://{resources}/scripts/leaderboard.js" />
+		<include src="file://{resources}/scripts/rating_emblem.js" />
+		<include src="file://{resources}/scripts/common/teamcolor.js" />
+		<include src="file://{resources}/scripts/honor_icon.js" />
 	</scripts>
 	<snippets>
 		<snippet name="leaderboard-entry">
@@ -19,11 +19,11 @@
 					<Label id="jsPlayerRank" text="" class="stratum-regular leaderboard_cell rank" />
 				</Panel>
 				<Panel class="leaderboard__list__column rating">
-					<Frame id="jsRatingEmblem" src="s2r://panorama/layout/rating_emblem.vxml_c" />
+					<Frame id="jsRatingEmblem" src="file://{resources}/layout/rating_emblem.xml" />
 				</Panel>
 				<Panel class="leaderboard__list__column name">
 					<CSGOAvatarImage id="leaderboard-entry-avatar" class="leaderboard__name-entry__avatar" />
-					<Frame id="jsHonorIcon" class="" src="s2r://panorama/layout/honor_icon.vxml_c" />
+					<Frame id="jsHonorIcon" class="" src="file://{resources}/layout/honor_icon.xml" />
 					<Label text="{s:player-name}" class="stratum-regular leaderboard_cell" />
 				</Panel>
 				<Panel class="leaderboard__list__column wins">
@@ -71,7 +71,7 @@
 			</Panel>
 			<Panel id="id-leaderboard-nodata" class="leaderboard__status hidden">
 				<Panel class="horizontal-center vertical-center top-bottom-flow">
-					<Image texturewidth="48" textureheight="48" src="s2r://panorama/images/icons/ui/info.vsvg" class="horizontal-center vertical-center" />
+					<Image texturewidth="48" textureheight="48" src="file://{images}/icons/ui/info.vsvg" class="horizontal-center vertical-center" />
 					<Label class="PopupMessage" text="#CSGO_Operation_Leaderboard_NoPicksLoaded" html="false" />
 				</Panel>
 			</Panel>
@@ -99,7 +99,6 @@
 						<Label text="#leaderboard_column_region" class="leaderboard_cell faded" />
 					</Panel>
 				</Button>
-				<JSDelayLoadList id="id-leaderboard-entries" class="leaderboard__entries-container" itemwidth="716px" itemheight="30px" />
 			</Panel>
 		</Panel>
 	</Panel>

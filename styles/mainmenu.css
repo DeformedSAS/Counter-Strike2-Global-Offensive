@@ -39,7 +39,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuCore
 
 CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 {
-	blur: fastgaussian( 5, 5, 5 );
+	blur: fastgaussian( 4, 4, 5);
 }
 
 #MainMenuForeground
@@ -79,9 +79,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 {
 	width: 100%;
 	height: 32px;
-	overflow: noclip;
 	tooltip-position: bottom;
-	tooltip-body-position: 50% 100%;
 }
 
 .MainMenuNotification.hidden
@@ -136,9 +134,11 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 .MainMenuNotification.NotificationRed
 {
 	 background-color: gradient( linear, 0% 0%, 100% 100%, from( #BE0000 ), color-stop( 0.25, #ca4c4c ), color-stop( 0.5, #da2121 ), color-stop( 0.75, #e56666 ), to( #6e2828 ) );
-	 color: white;
 }
-
+.MainMenuNotification.NotificationRed Label
+{
+    color: white;
+}
 .MainMenuNotification.NotificationYellow
 {
 	background-color:#E1C111;
@@ -153,7 +153,9 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
                                                                                
                                                                                
                                                                                
-                                                                        
+   #MainMenuBackground.fade-hidden {
+	opacity: 0;
+}                                                                     
                         
 #MainMenuBackground {
 	horizontal-align: center;
@@ -212,9 +214,6 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	opacity: 1;
 	z-index: 1;
 	overflow: noclip;
-	transition-property:  opacity;
-	transition-duration: 0.25s;
-	transition-timing-function: ease-in-out;
 }
 
 #VanityControls
@@ -288,42 +287,12 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	brightness: 2;
 	opacity:1;
 }
-
-
-.AspectRatio16x10 .mainmenu-vanity
-{
-	transform: translateX(0%) translateY(0);
-}
-
-.AspectRatio16x9 .mainmenu-vanity
-{
-	transform: translateX(0%) translateY(0);
-}
-
-.AspectRatio21x9 .mainmenu-vanity
-{
-	transform: translateX(0%) translateY(0);
-}
-
  .mainmenu-vanity
 {
-	transform: translateX(22%) translateY(0);
-	width: 1100px;
-	
-}
-
-.AspectRatio4x3 .mainmenu-vanity
-{
 	transform: translateX(0%) translateY(0);
-	width: 1080px;
+	width: 1200px;
+	z-index: 1;
 }
-
-.AspectRatio5x4 .mainmenu-vanity
-{
-	transform: translateX(0%) translateY(0);
-	width: 1080px;
-}
-
 #JsMainmenu_Vanity.hidden
 {
 	opacity: 0;
@@ -372,32 +341,6 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	transition-timing-function: ease-in-out;
 }
 
-                                                                               
-                                                                               
-                                                                               
- .mainmenu-navbar-container
-{
-	flow-children: right;
-	height: 64px;
-	width: 100%;
-	background-image: url("file://{images}/backgrounds/linemap.png");
-    background-size: auto auto;
-    background-img-opacity: .08;
-
-}
-
-.mainmenu-navbar
-{
-	flow-children: right;
-	horizontal-align: center;
-	height: 64px;
-	width: 100%;
-	padding-right: 250px;
-	background-color:blurBackgroundColor;
-	
-	z-index: 2;
-	
-}
 .mainmenu-top-navbar__radio-btn__bg
 {
     height: 100%;
@@ -408,23 +351,32 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 }
 .mainmenu-top-navbar
 {
-	height: 64px;
+	height: 100%;
 	width: 100%;
-	background-color:blurBackgroundColor;
+	background-color: blurBackgroundColor;
 	background-image: url("file://{images}/backgrounds/linemap.png");
 	background-size: auto auto;
 	background-img-opacity: .05;
 }
-
+.mainmenu-top-navbar__right-container
+{
+    horizontal-align:right;
+    vertical-align: center;
+    height: 100%;
+}
+.mainmenu-top-navbar__left-container
+{
+    flow-children: right;
+    vertical-align: center;
+}
 .mainmenu-top-navbar__center-container
 {
-	
-    horizontal-align:center;
-    vertical-align: center;
-    flow-children: right;
-    overflow: noclip;
-    height: 100%;
-    transform-origin: 100% 100%;
+	horizontal-align:center;
+	vertical-align: center;
+	flow-children: right;
+	overflow: noclip;
+	height: 100%;
+	transform-origin: 100% 100%;
 }
 
 .mainmenu-top-navbar__play_seperator
@@ -441,64 +393,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	height: 30%;
 	margin-right: 10px;
 }
-.mainmenu-navbar .RadioBox
-{
-	visibility: collapse;
-}
 
-
-.mainmenu-navbar--title-only
-{
-	margin-left:64px;
-	width:100%;
-}
-
-.mainmenu-navbar__btn-small
-{
-	width: 78px;
-	height: 64px;
-	font-size: 24;
-	padding: 0px;
-	horizontal-align: center;
-	wash-color: white;
-	tooltip-position: bottom;
-	flow-children:none;
-
-	transition-property:  wash-color;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-}
-.mainmenu-navbar__btn-small-label
-{
-	width: 68px;
-	height: 64px;
-	padding-top: 10px;
-	font-size: 24px;
-	horizontal-align: center;
-	wash-color: white;
-	tooltip-position: bottom;
-	tooltip-body-position: 50% 50%;
-	flow-children:none;
-
-	transition-property:  wash-color;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-}
-.mainmenu-navbar__btn-small_inv
-{
-	width: 64px;
-	height: 64px;
-	padding: 0px;
-	horizontal-align: center;
-	wash-color: white;
-	tooltip-position: bottom;
-	tooltip-body-position: 50% 50%;
-	flow-children:none;
-
-	transition-property:  wash-color;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-}
 .mainmenu-top-navbar__radio-btn__label
 {
     margin: 0px;
@@ -511,26 +406,6 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	transition-property: background-color;
 	transition-duration: .25s;
 	transition-timing-function: ease-in-out;
-}
-
-.mainmenu-navbar__btn-play
-{
-	width: 98px;
-	height: 98px;
-	vertical-align: center;
-	horizontal-align: center;
-
-
-	transition-property:  wash-color, border;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-}
-
-.mainmenu-navbar__btn-play Image
-{
-	                                        
-	horizontal-align: center;
-	vertical-align: middle;
 }
 .mainmenu-top-navbar__radio-iconbtn:hover
 {
@@ -551,168 +426,81 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 	background-color: #82d7ff1a;
 }
 
-.mainmenu-navbar__btn-small--hidden,
-.MainMenuRootPanel--PauseMenuMode .PauseMenuModeOnly.mainmenu-navbar__btn-small--hidden,
-.MainMenuModeOnly.mainmenu-navbar__btn-small--hidden
+.MainMenuRootPanel--PauseMenuMode .PauseMenuModeOnly,
+.MainMenuModeOnly
 {
 	visibility: collapse;
 }
 
-.mainmenu-navbar__btn-small Image
-{
-	margin: 0px 0px 0px 0px;
-	horizontal-align: center;
-	vertical-align:middle;
-}
-
-.mainmenu-navbar__btn-small:selected Image,
-.mainmenu-navbar__btn-small:enabled:hover Image,
-.mainmenu-navbar__btn-small:enabled:hover Image,
-.chat-panel:selected .chat-panel-icon Image,
-.mainmenu-navbar__btn-play:selected Image
-{
-	wash-color: #82D8FF;
-	color: #82D8FF;
-	box-shadow: none;
-
-	transition-property:  wash-color, background-color, brightness;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-
-	sound: "UIPanorama.mainmenu_rollover";
-}
-
-.mainmenu-navbar__btn-small.colored-icon:selected Image,
-.mainmenu-navbar__btn-small.colored-icon:enabled:hover Image,
-.mainmenu-navbar__btn-small.colored-icon:enabled:hover Image
-{
-	brightness: .3;
-	wash-color: none;
-}
-
- .mainmenu-top-navbar__center-container__btn-small:selected Image,
-.mainmenu-top-navbar__center-container__btn-small:enabled:hover Image,
-.mainmenu-top-navbar__center-container__btn-small:enabled:hover Image,
-.chat-panel:selected .chat-panel-icon Image,
-.mainmenu-top-navbar__center-container__btn-play:selected Image
-{
-	wash-color: #82D8FF;
-	background-color: none;
-	box-shadow: none;
-
-	transition-property:  wash-color, background-color, brightness;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-
-	sound: "UIPanorama.mainmenu_rollover";
-}
-
-.mainmenu-top-navbar__center-container__btn-small.colored-icon:selected Image,
-.mainmenu-top-navbar__center-container__btn-small.colored-icon:enabled:hover Image,
-.mainmenu-top-navbar__center-container__btn-small.colored-icon:enabled:hover Image
-{
-	brightness: .3;
-	wash-color: none;
-}
-                                    
-                                
- 
-	                                         
-
-	                            
-	                          
-	                                        
- 
-  
-
-.mainmenu-top-navbar__center-container__btn-play:selected
-{
-	background-color: none;
-	box-shadow: none;
-
-	transition-property:  wash-color, background-color, brightness;                                                                  
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-}
-
-.mainmenu-navbar__btn-small:disabled
-{
-	wash-color: disabledColor;
-}
-.mainmenu-top-navbar__center-container__btn-small:disabled
-{
-	wash-color: disabledColor;
-}
 
                                                                                
                                                                                
                                                                                
 .mainmenu-sidebar
 {
-	flow-children: left;
-	horizontal-align: right;
-	width: fit-children;
-	height: 100%;
-	position: 0px 0px 0px;
-	z-index: 3;
-	transition-property: position;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    flow-children: left;
+    horizontal-align: right;
+    width: fit-children;
+    height: 100%;
+    position: 0px 0px 0px;
+    z-index: 3;
+    transition-property: position;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .mainmenu-sidebar:hover
 {
-	height: 100%;
+    height: 100%;
 }
 
 .mainmenu-sidebar--minimized
 {
-	position: 256px 0px 0px;
-	transition-property: position;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    position: 256px 0px 0px;
+    transition-property: position;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .mainmenu-sidebar--hidden
 {
-	position: 400px 0px 0px;
-	transition-property: position;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    position: 400px 0px 0px;
+    transition-property: position;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 #mainmenu-sidebar__blur-target
 {
-	width: friendstilewidth;
-	height: 100%;
-	opacity: .99;
-	background-color: blurBackgroundColor;
+    width: friendstilewidth;
+    height: 100%;
+    opacity: .99;
+    background-color: blurBackgroundColor;
 }
 
 .mainmenu-sidebar__seperator
 {
-	horizontal-align: left;
-	width: 8px;
-	height: 100%;
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000066 ), to( #00000000 ));
+    horizontal-align: left;
+    width: 8px;
+    height: 100%;
+    background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000066 ), to( #00000000 ));
 }
 
 .mainmenu-sidebar__seperator--nav
 {
-	horizontal-align: right;
+    horizontal-align: right;
 }
 
 .mainmenu-sidebar__container
 {
-	flow-children:down;
-	background-color:blurBackgroundColor;
+    flow-children:down;
 }
 
 .mainmenu-sidebar-fullscreen
 {
-	width: 100%;
-	height: 100%;
-	z-index: 1;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
                                                                                
@@ -1000,13 +788,12 @@ CSGOEndOfMatch.mainmenu-content__container {
 
 .content-navbar__title
 {
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 32px;
-	color: grey;
-	vertical-align: center;
-	font-family: Stratum2, "Arial Unicode MS";
-	height: 0px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 32px;
+    color: grey;
+    vertical-align: center;
+    font-family: Stratum2, "Arial Unicode MS";
 }
 
 .content-navbar__tabs
@@ -1019,6 +806,7 @@ CSGOEndOfMatch.mainmenu-content__container {
 	transition-duration: .25s;
 	transition-timing-function: ease-in-out;
 }
+
 
 .content-navbar__tabs--dark
 {
@@ -1250,12 +1038,12 @@ RadioButton.content-navbar__tabs__btn--small Label
 
 .popup-blur
 {
-	blur: fastgaussian( 5, 5, 5 );
+	blur: fastgaussian( 6, 6, 4);
 }
 
 .blur-background
 {
-	blur: fastgaussian( 5, 5, 5 );
+	blur: fastgaussian( 4, 4, 5 );
 	opacity: 0;
 }
 
@@ -1412,7 +1200,7 @@ RadioButton.content-navbar__tabs__btn--small Label
 	visibility: visible;
 }
 
-.MainMenuRootPanel--PauseMenuMode .MainMenuModeOnly,
+.MainMenuRootPanel--PauseMenuMode .MainMenuModeOnly
 {
 	visibility: collapse;
 }
@@ -1426,7 +1214,7 @@ RadioButton.content-navbar__tabs__btn--small Label
 	visibility: collapse;
 }
 
-.MainMenuRootPanel--PauseMenuMode .PauseMenuModeOnly,
+.MainMenuRootPanel--PauseMenuMode .PauseMenuModeOnly
 {
 	visibility: visible;
 }
@@ -1464,7 +1252,7 @@ RadioButton.content-navbar__tabs__btn--small Label
     background-color:blurBackgroundColor;
     background-image: url("file://{images}/backgrounds/bluedots_large.png");
     background-size: backgroundDotsSize;
-    background-img-opacity: .04;
+    background-img-opacity: .01;
 }
 
 
@@ -1542,7 +1330,6 @@ RadioButton.content-navbar__tabs__btn--small Label
 {
 	height: 64px;
 	width: 100%;
-	z-index: 2;
 }
 
 .mainmenu-top-navbar
@@ -1555,11 +1342,10 @@ RadioButton.content-navbar__tabs__btn--small Label
 	background-img-opacity: .05;
 }
 
-
-
 .mainmenu-top-navbar__radio-btn
 {
 	width: 90px;
+	height: 100%;
 	flow-children: none;
 	overflow: noclip;
 	tooltip-position: bottom;

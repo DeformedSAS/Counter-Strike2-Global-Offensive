@@ -12,8 +12,8 @@
 
 
   <Panel class="mainmenu-content__container" useglobalcontext="true">
-        <Panel id="id-navbar-tabs" class="content-navbar__tabs content-navbar__tabs--noflow">
-            <Panel class="content-navbar__tabs__center-container">
+        <Panel id="id-navbar-tabs" class="content-navbar content-navbar__tabs--noflow content-navbar__tabs">
+            <Panel class="content-navbar__tabs__center-container   content-navbar__tabs--small">
 				<RadioButton onactivate="SettingsMenuShared.ScrollToId('SettingsController')" class="content-navbar__tabs__btn" group="SettingsController">
 					<Label text="#settings_controller_section"/>
 				</RadioButton>

@@ -7,7 +7,6 @@
 @define ct-color-alpha75: rgba( 1, 29, 54, 0.75 );
 @define t-color-alpha75: rgba( 51, 41, 1, 0.75 );
 @define steamOnlineColor: #80a438;
-@define hudWorldBlur: gaussian(4,4,4);
 @define blueColor: #3281AC;
 @define blueColorDark: #0D354A;
 @define disabledColor: rgba(130, 130, 130, 1);
@@ -24,7 +23,7 @@
 @define contextMenuBackground: rgba(38, 38, 38, 1);
 @define backgroundDotsSize: 360px 360px;
 @define btnBorderRadius: 3px;
-@define hud-blur-bg-color: #000000a0;
+@define hud-blur-bg-color: rgba(0, 0, 0, 0.8);
 @define backgroundGradient: gradient( linear, 75% 100%, 0% 0%, from( #14202b ), to( #1e2d3d ) );
 @define textBlueGradient: gradient( linear, 0% 100%, 0% 0%, from( blueColor ), to( blueColorDark ) );
 @define baseText: #ccccccff;
@@ -67,8 +66,8 @@
 @define color-rarity-6: color-rarity-ancient;
 @define color-rarity-7: color-rarity-immortal;
 @define color-rarity-99: color-rarity-unusual;
-@define color-hud-0: #B5D4EE;                                                          
-@define color-hud-1: #eabe54;                   
+@define color-hud-0: #e8e8e8;                                                          
+@define color-hud-1: #ffffff;                   
 @define color-hud-2: #96c8ff;                 
 @define color-hud-3: #356eff;           
 @define color-hud-4: #c864ff;             
@@ -78,7 +77,7 @@
 @define color-hud-8: #3eff24;            
 @define color-hud-9: #24ff90;           
 @define color-hud-10: #ff7999;           
-@define color-hud-11: #ffffff; 
+@define color-hud-11: #d5e286;  
 @define color-player-yellow: rgb(248, 246, 45);
 @define color-player-purple: rgb(192, 54, 153);
 @define color-player-green: rgb(29, 162, 132);
@@ -966,7 +965,9 @@ ContextMenuCustomLayout #ContextMenuBody
 
 CSGOTooltipManager TooltipText #TextLabel,CSGOTooltipManager .ShortTextTooltip #TextLabel
 {
-	font-size: 14px;
+	font-size: 15px;
+	tooltip-position: bottom;
+	tooltip-body-position: 50% 100%;
 }
 
 CSGOTooltipManager TooltipText #TextLabel
@@ -1841,8 +1842,9 @@ DropDownMenu Label Image
 	width: fit-children;
 	height: fit-children;
 	tooltip-position: bottom;
+
 	transition-property: background-color;
-	transition-duration: .1s;
+	transition-duration: .4s;
 	transition-timing-function: ease-in-out;
 }
 

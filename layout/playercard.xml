@@ -41,7 +41,7 @@
 							class=""
 							text="#SFUI_Redeem_Service_Medal"/>
 			</Panel>
-			<Panel class="full-width">
+			<Panel class="full-width left-right-flow">
 				<Panel id="JsPlayerCardTop" class="player-card-row">
 
 					                           
@@ -129,7 +129,7 @@
 							class="player-card-commendations-icon"
 							onmouseover="UiToolkitAPI.ShowTextTooltip( 'JsPlayerPrimeImg', '#tooltip_prime' );"
 							onmouseout="UiToolkitAPI.HideTextTooltip();" > 
-						<Image id="JsPlayerPrimeImg" style="tooltip-position: bottom;" src="file://{images}/icons/ui/prime.svg"/>
+						<Image id="JsPlayerPrimeImg" style="tooltip-position: bottom;" src="file://{images}/icons/ui/prime.svg" textureheight="40"/>
 						<Label id="JsCommendLabel" text=" "/>
 					</Panel>
 					<Panel	id="JsPlayerfriendly"

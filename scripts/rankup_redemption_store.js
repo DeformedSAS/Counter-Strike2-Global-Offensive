@@ -4,7 +4,7 @@
 /// <reference path="common/iteminfo.ts" />
 /// <reference path="itemtile_store.ts" />
 
-var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace is defined
+var RankUpRedemptionStore = RankUpRedemptionStore || {}; // 
 
 (function (RankUpRedemptionStore) {
     let m_redeemableBalance = 0;
@@ -16,7 +16,6 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     let m_schTimer;
 
     function _msg(text) {
-        // No console logging as per your request
     }
 
     function RegisterForInventoryUpdate() {
@@ -54,22 +53,21 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     };
 
     function StoreAPI_GetPersonalStore() {
-        // Mock function to simulate fetching store data
         return {
-            generation_time: Date.now(), // Simulating a generation timestamp
+            generation_time: Date.now(),
             items: {
                 'item1': { name: 'Item One', price: 100 },
                 'item2': { name: 'Item Two', price: 200 },
                 'item3': { name: 'Item Three', price: 300 },
                 'item4': { name: 'Item Four', price: 400 },
             },
-            redeemable_balance: 50 // Example balance
+            redeemable_balance: 50 
         };
     }
 
     function CheckForPopulateItems(bFirstTime = false, claimedItemId = '') {
-        const objStore = StoreAPI_GetPersonalStore(); // Fetching actual store data
-        const genTime = objStore ? objStore.generation_time : 0; // Get generation time from fetched data
+        const objStore = StoreAPI_GetPersonalStore(); 
+        const genTime = objStore ? objStore.generation_time : 0; 
 
         if (genTime != m_timeStamp || claimedItemId) {
             if (genTime != m_timeStamp) {
@@ -81,7 +79,7 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     }
 
     function _CreateItemPanel(itemId, index, bFirstTime, claimedItemId = '') {
-        const objStore = StoreAPI_GetPersonalStore(); // Fetching actual store data
+        const objStore = StoreAPI_GetPersonalStore();
         const itemData = objStore.items[itemId];
 
         if (!itemData) {
@@ -109,7 +107,7 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     }
 
     function PopulateItems(bFirstTime = false, claimedItemId = '') {
-        const objStore = StoreAPI_GetPersonalStore(); // Fetching actual store data
+        const objStore = StoreAPI_GetPersonalStore();
 
         $.GetContextPanel().RemoveClass('waiting');
         if (bFirstTime) {
@@ -128,11 +126,10 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     }
 
     function _UpdateAllItemStyles() {
-        // Add any styling or updates that need to be applied to items here
     }
 
     function _UpdateStoreState() {
-        const objStore = StoreAPI_GetPersonalStore(); // Set to actual store data
+        const objStore = StoreAPI_GetPersonalStore();
         m_redeemableBalance = objStore ? objStore.redeemable_balance : 0;
         const elClaimButton = $.GetContextPanel().FindChildTraverse('jsRrsClaimButton');
         elClaimButton.enabled = m_redeemableBalance !== 0;
@@ -162,9 +159,7 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     }
 
     function OnRedeem() {
-        // Logic for redeeming an item goes here
         if (m_redeemableBalance > 0) {
-            // Redeem logic
             _msg('Redeemed successfully!');
         } else {
             _msg('No redeemable balance available.');
@@ -177,6 +172,6 @@ var RankUpRedemptionStore = RankUpRedemptionStore || {}; // Ensure the namespace
     }
 
     RankUpRedemptionStore.Init = Init;
-    RankUpRedemptionStore.OnRedeem = OnRedeem; // Make sure OnRedeem is assigned to the namespace
+    RankUpRedemptionStore.OnRedeem = OnRedeem;
 
 })(RankUpRedemptionStore);

@@ -17,7 +17,7 @@
 			            
 			<CSGOSurvivalZoneMoneyProgress id="SurvivalZoneMoneyProgress" class="hidden"/>
 			            
-			<Image class="money-text-buy-icon cl-hud-wash-color" src="file://{images}/icons/ui/buyzone.svg"/>
+			<Image class="money-text-buy-icon" src="file://{images}/icons/ui/buyzone.svg"/>
 	        <CCSGOSteamInputAction class="money-text-buy-icon" actionset="BuyZoneLayer" action="buymenu" separatortext="/" controllernumber = "1"/> 
 	    </Panel>
 

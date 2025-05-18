@@ -11,8 +11,8 @@
 	</scripts>
 
     <Panel useglobalcontext="true" class="SettingsMenuTab">
-        <Panel id="id-navbar-tabs" class="content-navbar__tabs content-navbar__tabs--dark content-navbar__tabs--noflow">
-            <Panel id="SettingsMenuJumpButtons" class="content-navbar__tabs__center-container content-navbar__tabs--small">
+        <Panel id="id-navbar-tabs" class="content-navbar content-navbar__tabs--noflow content-navbar__tabs">
+            <Panel id="SettingsMenuJumpButtons" class="content-navbar__tabs__center-container   content-navbar__tabs--small">
                 <RadioButton class="content-navbar__tabs__btn" onactivate="SettingsMenuShared.ScrollToId(&apos;SettingsGameSettings&apos;)" group="SettingsGame">
                     <Label text="#settings_game_settings_section" />
                 </RadioButton>
@@ -38,7 +38,7 @@
                     <Label text="#settings_crosshair" />
 				</RadioButton>
                 <RadioButton class="content-navbar__tabs__btn" onactivate="SettingsMenuShared.ScrollToId(&apos;SettingsViewmodel&apos;)" group="SettingsGame">
-                    <Label text="VIEWMODEl" />
+                    <Label text="VIEWMODEL" />
 				</RadioButton>
 				    
 				                                                                                                            
@@ -142,8 +142,8 @@
 					<TooltipPanel class="SettingsMenuDropdownContainer" tooltip="#SFUI_Settings_HUD_Color_Info">
 						<Label text="#SFUI_Settings_HUD_Color" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_hud_color">
-							<Label text="CT Color" value="0" id ="hudcolor0"/>
-							<Label text="T Color" value="1" id ="hudcolor1"/>
+							<Label text="#SFUI_Settings_HUD_Color_0" value="0" id ="hudcolor0"/>
+							<Label text="#SFUI_Settings_HUD_Color_1" value="1" id ="hudcolor1"/>
 							<Label text="#SFUI_Settings_HUD_Color_2" value="2" id ="hudcolor2"/>
 							<Label text="#SFUI_Settings_HUD_Color_3" value="3" id ="hudcolor3"/>
 							<Label text="#SFUI_Settings_HUD_Color_4" value="4" id ="hudcolor4"/>
@@ -153,7 +153,7 @@
 							<Label text="#SFUI_Settings_HUD_Color_7" value="7" id ="hudcolor8"/>
 							<Label text="#SFUI_Settings_HUD_Color_8" value="8" id ="hudcolor9"/>
 							<Label text="#SFUI_Settings_HUD_Color_9" value="9" id ="hudcolor10"/>
-							<Label text="#SFUI_Settings_HUD_Color_11" value="11" id ="hudcolor11"/>
+							<Label text="Classic" value="11" id ="hudcolor11"/>
 						</CSGOSettingsEnumDropDown>
 					</TooltipPanel>
 					<Panel class="horizontal-separator"/>
@@ -703,7 +703,7 @@
 					<TooltipPanel class="SettingsMenuDropdownContainer" tooltip="#GameUI_ShowObserverCrosshair_Tooltip">
 					<Panel id="XhairShowObserverCrosshair" class="SettingsMenuDropdownContainer">
 						<Label text="#GameUI_ShowObserverCrosshair" class="half-width"/>
-						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_show_observer_crosshair" ondropdownselectionchanged="SettingsMenuGameSettings.OnCrosshairStyleChange()">
+						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_crosshair_recoil" ondropdownselectionchanged="SettingsMenuGameSettings.OnCrosshairStyleChange()">
 								<Label text="#GameUI_No" value="0" id="showobs0"/>
 								<Label text="#GameUI_ShowObserverCrosshair_Friends" value="1" id="showobs1"/>
 								<Label text="#GameUI_Everyone" value="2" id="showobs2"/>

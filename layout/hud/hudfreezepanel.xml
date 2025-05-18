@@ -10,7 +10,7 @@
 
 	<CSGOHudFreezePanel class="FreezePanelRoot" hittest="false" hittestchildren="false">
 		                                     
-		<Panel id="FreezePanel" class="FreezePanel overflow-noclip">
+		<Panel id="FreezePanel" class="FreezePanel DeathPanel__BG-Blur overflow-noclip">
 			<Panel class="left-right-flow overflow-noclip">
 				<Panel class="FreezePanel__Content overflow-noclip">
 					<Panel class="FreezePanel__BG" />

@@ -605,7 +605,7 @@ RadioButton.toggle-active Image
 	flow-children: down;
 	width: 100%;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-	transition-property: y, height;
+	transition-property: height;
 	transition-duration: .25s;
 	transition-timing-function: ease-in-out;
 }

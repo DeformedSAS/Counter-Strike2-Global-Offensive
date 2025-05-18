@@ -43,7 +43,7 @@
 							<Image class="inv-arrow-btn__image inv-arrow-btn__image--left" src="file://{images}/icons/ui/expand.svg" textureheight="64" texturewidth="-1"/>
 							<Panel class="left-right-flow">
 								<Panel id="id-lootlist-rarity" class="inv-arrow-btn__rarity"/>
-								<Label id="id-lootlist-label" class="inv-arrow-btn__text text-align-left" text="Item name and color"/>
+								<Label id="id-lootlist-label" class="inv-arrow-btn__text text-align-left stratum-medium" text="Item name and color"/>
 							</Panel>
 						</Button>
 					</Panel>

@@ -1,9 +1,9 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/csgostyles.css" />
-		<include src="file://{resources}/styles/mainmenu.css" />
 		<include src="file://{resources}/styles/mainmenu_play.css"/>
 		<include src="file://{resources}/styles/stats/playerstats.css" />
+		<include src="file://{resources}/styles/stats/menu_stats.css" />
 		
 	</styles>
 	<scripts>

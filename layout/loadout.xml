@@ -142,7 +142,7 @@
 							                                                                                                                                                
 							<Image id="loadout-single-item__bg"
 									class="loadout-single-item-bg" 
-									textureheight="768"
+									textureheight="900"
 									texturewidth="-1"
 									src="file://{images}/backgrounds/inspect.svg"
 									scaling="stretch-to-fit-y-preserve-aspect" />
@@ -150,7 +150,7 @@
 							<Panel class="full-width full-height">
 								<ItemPreviewPanel id="LoadoutSingleItemModel"
 										class="loadout-single-item"
-										manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
+										manifest="resource/ui/econ/ItemModelPanelCharloadout.res"
 										item="img://inventory_4295015926"
 										enable_floorshadow="true"
 										mouse_rotate="true">

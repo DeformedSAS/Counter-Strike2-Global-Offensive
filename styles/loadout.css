@@ -227,15 +227,20 @@ ItemImage Label
 {
 	vertical-align: center;
 	horizontal-align: center;
+	background-image: url("file://{resources}/videos/dust2.webm");
+	background-size: auto auto;
+	background-position: center;
+	brightness: 1.3;
+	background-img-opacity: 1;
 	width: 100%;
-	opacity: 0.25;
+	opacity: 1;
 }
 
 .loadout-single-item-bg--localagent--CT
 {
 	wash-color: color-CT;
 	opacity: 0.1;
-	width: 80%;
+	width: 100%;
 	height: 50%;
 }
 
@@ -243,7 +248,7 @@ ItemImage Label
 {
 	wash-color: color-T;
 	opacity: 0.1;
-	width: 80%;
+	width: 100%;
 	height: 50%;
 }
 
@@ -373,7 +378,7 @@ ItemImage Label
 
 .loadout-info
 {
-	margin-right: 16px;
+	margin-right: 64px;
 	vertical-align: center;
 	wash-color: baseText;
 }

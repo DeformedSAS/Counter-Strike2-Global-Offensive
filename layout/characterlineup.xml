@@ -27,11 +27,7 @@
 								>
 									<Panel class="charlineup__player__guide"/>
 				</ItemPreviewPanel>
-
-				                                                   
-
 				<Panel id="id-charlineup__player__info" class="charlineup__player__info">
-
 						<Button id="id-charlineup__player__commend" class="hidden charlineup__player__commend">
 							<Image src="file://{images}/icons/ui/VoteReadyForMatch.svg" />
 						</Button>
@@ -41,23 +37,10 @@
 					</Panel>
 				</Panel>
 			</Panel>
-
-
 		</snippet>
-
 	</snippets>
-
 	<Panel class="" useglobalcontext="false">
-    
-		                                    
-			                                        
-		        
-   
 		<Panel id="id-charlineup__characters" class="charlineup__characters">
-
-				                                                                          
-				                                                              
-
 		</Panel>
 	</Panel>
 	

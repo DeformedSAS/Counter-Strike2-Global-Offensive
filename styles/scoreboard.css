@@ -31,6 +31,7 @@ Label {
 	padding-top: 20px;
 
 	padding-left:20px;
+	border-radius: 4px;
 	padding-right:20px;
 
 
@@ -43,8 +44,7 @@ Label {
 	transition-property: width, height;
 	transition-duration: 1s;
 	transition-timing-function: ease-in-out;
-
-	background-color: rgba(0, 0, 0, 0.88);
+    background-color: rgba(0, 0, 0, 0.88);
 	                                                                                                                        
 }
 

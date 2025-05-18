@@ -5,18 +5,15 @@ var EOM_Characters = ( function()
 {
 	var _m_cP = $.GetContextPanel();
 
-	var _m_freeze_time = 7;
-
 	var _m_arrAllPlayersMatchDataJSO = [];
 
 	var _m_localPlayer;
 	var _m_teamToShow;
 
-	const ACCOLADE_START_TIME = 2.2;
+	const ACCOLADE_START_TIME = 1.0;
 
 	                                 
-	const DELAY_PER_PLAYER = 1.0;
-	const UNFREEZE_TIME = 1.6;
+	const DELAY_PER_PLAYER = 0.5;
 
 	var m_bNoGimmeAccolades = false;                                              
 
@@ -405,8 +402,6 @@ var EOM_Characters = ( function()
 		var arrPlayerList = _CollectPlayersForMode( mode );
 		arrPlayerList = _SortPlayers( mode, arrPlayerList );
 
-		_m_freeze_time = arrPlayerList.length + 2;
-
 		var elCLU = elRoot.FindChildTraverse( "id-eom-characters__player-container" );
 
 		var oSettings =
@@ -583,7 +578,7 @@ var EOM_Characters = ( function()
 				{
 					if ( charPanel && charPanel.IsValid() )
 					{
-						charPanel.FindChildTraverse( "id-charlineup__model-preview-panel" ).TriggerSlowmo( _m_freeze_time - 1.5 * ( index * DELAY_PER_PLAYER ), UNFREEZE_TIME );
+						charPanel.FindChildTraverse( "id-charlineup__model-preview-panel" );
 					}
 				} );
 

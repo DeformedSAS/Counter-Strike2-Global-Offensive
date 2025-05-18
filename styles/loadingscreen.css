@@ -79,18 +79,16 @@
   transition-timing-function: ease-in-out;
 }
 
- .loading-screen-hint-contents
+.loading-screen-hint-contents
 {
-    height: 150px;
+    height: 80px;
     width: 100%;
 	horizontal-align: center;
 	vertical-align: center;
-    flow-children: down;
-
-    
+    flow-children: right;
 	box-shadow: shadowOffset;
 
-    margin-top: 5px;
+    margin-top: 20px;
 }
 
 .loading-screen-hint__icon
@@ -101,19 +99,21 @@
 	vertical-align: center;
 	                   
 	wash-color: #eece60;
-    margin: 10px 2px 2px 2px;
+    margin: 10px 10px 10px 20px;
 
     brightness: 1.1;
 }
 
 .loading-screen-hint__text
 {
-	font-size: 15px;
+	font-size: 18px;
 	font-family: Stratum2;
+	font-weight: medium;
 	                       
 	color: #eece60;
+	text-overflow: shrink;
     text-align: left;
-    margin: 0px 2px 0px 5px;
+    margin: 10px 10px 10px 4px;
 
     brightness: 1.1;
 }

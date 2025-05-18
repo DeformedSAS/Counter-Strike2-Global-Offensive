@@ -49,6 +49,14 @@ CSGOHudWeaponSelection Label,CSGOWeaponSelectionView Label
     opacity: 0;
 }
 
+.weapon-selection--fade .weapon-selection-item--fade-ok.weapon-selection-item,
+.weapon-selection--fade .weapon-row-number
+{
+    opacity: 0;
+}
+
+
+
 .weapon-selection-item--fade-ok.weapon-row
 {
     transition-property: opacity;
@@ -429,6 +437,7 @@ CSGOHudWeaponSelection Label,CSGOWeaponSelectionView Label
     transition-duration: .2s;
     transform: scale3d(0.9,0.9,1);
 }
+
 
 .gear-slot--3 .weapon-selection-item--selected .weapon-selection-item-icon-main,.gear-slot--4 .weapon-selection-item--selected .weapon-selection-item-icon-main
 {
@@ -815,25 +824,34 @@ CSGOHudWeaponSelection Label,CSGOWeaponSelectionView Label
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
+.weapon-selection-item--bomb .weapon-selection-item-icon-main
+{
+    wash-color: #f3e78b;
+	animation-name: bomb-pulse;
+    animation-delay: 0s;
+    animation-duration:2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
 
 @keyframes 'bomb-pulse'
 {
     0%
     {
         opacity:1;
-        brightness: 0.5;
+        brightness: 0.0;
     }
     
     10%
     {
         opacity:1;
-        brightness: 5;
+        brightness: 2;
     }
     
     100%
     {
         opacity:1;
-        brightness: 0.5;
+        brightness: 0.0;
     }
     
 }

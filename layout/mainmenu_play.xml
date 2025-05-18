@@ -88,13 +88,31 @@
                 </Panel>
                 <Panel class="play-menu-svl-auto-squad-toggle-container">
                     <Panel id="PlayMenuMapRotationTimer" class="play-menu-map-rotation-timer hidden">
-                        <Image class="right-padding" texturewidth="-1" textureheight="20" src="file://{images}/icons/ui/clock.svg" />
+                        <Image class="right-padding" texturewidth="-1" textureheight="20" src="file://{resources}/images/icons/ui/clock.svg" />
                         <Label class="play-menu-map-rotation-timer-label" html="true" text="#rotating_map_timer" />
                     </Panel>
                     <ToggleButton id="SurvivalAutoSquadToggle" class="PopupButton">
-                        <Image class="" texturewidth="-1" textureheight="28" src="file://{images}/icons/ui/lobby.svg" />
+                        <Image class="" texturewidth="-1" textureheight="28" src="file://{resources}/images/icons/ui/lobby.svg" />
                         <Label id="SurvivalAutoSquadToggleLabel" text="#SFUI_DANGERZONE_AUTO_FILL" html="true" />
                     </ToggleButton>
+                </Panel>
+            </Panel>
+        </snippet>
+        <snippet name="MapSelectionContainer_premier">
+            <Panel class="map-selection-list-premier hidden">
+                <Panel class="left-right-flow no-lock" style="height: fill-parent-flow( 1.0 ); width: 100%;">
+                    <Panel class="premier-side left">
+                        <Panel class="premier-inner left">
+                            <Frame id="jsParty" lbtype="party" class="playmenu--premier__party" registerforreadyevents="true" src="file://{resources}/layout/leaderboard.xml" />
+                            <Frame id="jsPremierMapWinRecord" class="premier-play-menu-mapwinrecord" registerforreadyevents="true" src="file://{resources}/layout/premier_mapwinrecord.xml" />
+                        </Panel>
+                    </Panel>
+                    <Panel class="premier-side right">
+                        <Panel class="premier-inner right top-bottom-flow">
+                            <Frame id="jsSeasonProgress" class="premier-season-progress" registerforreadyevents="true" src="file://{resources}/layout/premier_season_progress.xml" />
+                            <Frame id="jsLeaderboard" lbtype="general" class="playmenu--premier__leaderboard" registerforreadyevents="true" src="file://{resources}/layout/leaderboard.xml" />
+                        </Panel>
+                    </Panel>
                 </Panel>
             </Panel>
         </snippet>
@@ -205,11 +223,11 @@
                             <Label text="#play_setting_offline" />
                             <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
 						</RadioButton>
-                        <RadioButton id="PlayWorkshop" group="playtype" data-type="workshop" class="content-navbar__tabs__btn " onactivate="PlayMenu.OnPressWorkshop();">
+                        <RadioButton id="PlayWorkshop" group="playtype" data-type="workshop" class="content-navbar__tabs__btn DEVModeONLY" onactivate="PlayMenu.OnPressWorkshop();">
                             <Label text="#play_setting_workshop" />
                             <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
                         </RadioButton>
-                        <Button id="PlayCommunity" class="mainmenu-top-navbar__radio-iconbtn" data-type="workshop" onactivate="GameInterfaceAPI.ConsoleCommand( 'gamemenucommand openserverbrowser' ); $.DispatchEvent('PlaySoundEffect', 'UIPanorama.submenu_select', 'MOUSE');">
+                        <Button id="PlayCommunity" class="mainmenu-top-navbar__radio-iconbtn" data-type="workshop" onactivate="PlayMenu.OnPressServerBrowser(); $.DispatchEvent('PlaySoundEffect', 'UIPanorama.submenu_select', 'MOUSE');">
                             <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/community_servers.svg" />
                         </Button>
                     </Panel>
@@ -217,6 +235,10 @@
             </Panel>
             <Panel id="id-navbar-tabs" class="content-navbar__tabs content-navbar__tabs--dark content-navbar__tabs--noflow">
                 <Panel id="GameModeSelectionRadios" class="left-right-flow vertical-center horizontal-center full-height">
+				     <RadioButton id="premier" group="gamemodes" class="content-navbar__tabs__btn DEVModeONLY">
+                        <Label text="PREMIER (W.I.P)" />
+                        <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
+                    </RadioButton>
                     <RadioButton id="competitive" group="gamemodes" class="content-navbar__tabs__btn">
                         <Label text="#SFUI_GameModeCompetitive" />
                         <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
@@ -296,10 +318,16 @@
                                 <TooltipPanel id="id-play-menu-toggle-ranked-tooltip" tooltip="#tooltip_prime_only_3" class="vertical-center">
                                     <Frame id="id-play-menu-toggle-ranked" class="btn-toggle-slider--playmenu" src="file://{resources}/layout/slider_toggle.xml" />
                                 </TooltipPanel>
+								<TooltipPanel id="id-tt_gamemodeflags" tooltip="Game Mode type, Competitive or Deathmatch or Whatever... This allows you to change the type of matches you want to play on." class="play-settings-gamemodeflags gm-flag-shit-cunt vertical-center" style="tooltip-position: right;">
+								<Button id="GameModeFlagsBtn" class="gamemode-setting-radiobutton preset-button" onactivate="$.OnGameModeFlagsBtnClicked()">
+								<Image id="FlagSettingImg" texturewidth="-1" textureheight="24" src="file://{images}/icons/ui/settings.svg" />
+									<Label text="{s:gamemodeflag_setting}"/>
+								</Button>
                                 <Button id="PlayMenulLeaderboards" class="play-menu-option-btn" style="horizontal-align:left;">
                                     <Image texturewidth="-1" textureheight="28" src="file://{images}/icons/ui/graph.svg" />
                                     <Label text="#SFUI_LEADERBOARD" />
                                 </Button>
+								</TooltipPanel>
                             </Panel>
                             <Panel id="JsQuickSelectParent" class="top-bottom-flow map-selection-list__quick-selection-sets ">
                                 <Label text="#presets_title" class="map-selection__quick-selection-set-title" />
@@ -332,7 +360,7 @@
                                     </TooltipPanel>
                                 </Panel>
                             </Panel>
-                            <Panel id="jsLimitedTestWarning" class="gamemode-setting-limited-test-warning-container">
+                            <Panel id="jsLimitedTestWarning" class="gamemode-setting-limited-test-warning-container DEVModeONLY">
                                 <Image texturewidth="20" textureheight="20" class="vertical-center" src="file://{images}/icons/ui/info.svg" />
                                 <Label id="jsLimitedTestWarning" class="fontSize-sm stratum-medium gamemode-setting-limited-test-warning" text="#match_ready_match_unranked_warning_2" />
                             </Panel>

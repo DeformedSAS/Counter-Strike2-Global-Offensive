@@ -239,7 +239,7 @@ var EOM_Voting = (function () {
 						if ( !elCheckmark.BHasClass( 'appear' ) )
 						{
 							elCheckmark.AddClass( "appear" );
-							$.DispatchEvent( 'PlaySoundEffect', 'mainmenu_press_GO', 'MOUSE' );
+							$.DispatchEvent( 'PlaySoundEffect', 'DeathMatch.EndTimer', 'MOUSE' );
 						}
 					}
 				}

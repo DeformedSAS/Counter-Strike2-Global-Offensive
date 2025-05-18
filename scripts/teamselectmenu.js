@@ -411,7 +411,7 @@ function _ShowPanel()
 
 			function OnMouseOver( team, charItemId, weaponItemId )
 			{
-				TeamSelectMenu._SetPlayerModel( team, charItemId, weaponItemId  );
+				_SetPlayerModel( team, charItemId, weaponItemId  );
 			};
 
 			function OnMouseOut( team )
@@ -476,11 +476,11 @@ function _ShowPanel()
 		var bUnassigned = $.GetContextPanel().GetTeamNumber() == 0;
 		$('#TeamSelectCancel').visible = !bUnassigned;
 	}
-	var HidePanel = function()
+	var _HidePanel = function()
 	{
 		$.DispatchEvent( 'CSGOShowTeamSelectMenu', false );
 	}
-	TeamSelectMenu.HidePanel = HidePanel;
+	TeamSelectMenu.HidePanel = _HidePanel;
     {
         _Init();
         $.RegisterForUnhandledEvent("CSGOShowTeamSelectMenu", _ShowPanel);

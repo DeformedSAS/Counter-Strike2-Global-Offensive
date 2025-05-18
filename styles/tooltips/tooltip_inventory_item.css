@@ -20,9 +20,10 @@
 
 .collection-label
 {
+	font-weight: medium;
+	font-size: 16px;
 	font-family: Stratum2;
-	font-weight: bold;
-	font-size: 18px;
+	
 	visibility:collapse;
 }
 .tooltip-inventory-item__has-set .collection-label
@@ -38,10 +39,12 @@
 
 .name-label
 {
-    font-family: Stratum2;
+
+	   
 	max-width:368px;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 17px;
+	font-family: Stratum2;
 }
 .tooltip-inventory-item__has-set .name-label
 {
@@ -69,28 +72,28 @@
 	margin-bottom: 10px;
 }
 
-.rarity-header, .grade-header, .team-header
+.rarity-header, .grade-header, .team-header, .wear-header
 {
-	font-family: Stratum2;
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: medium;
+	font-family: Stratum2;
 	height: 22px;
 
 	padding-right: 10px;
 	color: #7c7c7c;
 }
 
-.rarity-label, .grade-label, .team-label
+.rarity-label, .grade-label, .team-label, .wear-label
 {
-	font-family: Stratum2;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: medium;
+	font-family: Stratum2;
 	height: 22px;
     text-overflow:shrink;
 }
 
-.rarity-header, .grade-header, .team-header,
-.rarity-label, .grade-label, .team-container,
+.rarity-header, .grade-header, .team-header, .wear-header,
+.rarity-label, .grade-label, .team-container, .wear-label, 
 .team-logo__ct, .team-logo__t
 {
 	visibility:collapse;
@@ -102,8 +105,8 @@
 	visibility:visible;
 }
 
-.tooltip-inventory-item__has-grade .grade-header,
-.tooltip-inventory-item__has-grade .grade-label
+.tooltip-inventory-item__has-grade .grade-header, .wear-header, 
+.tooltip-inventory-item__has-grade .grade-label, .wear-label
 {
 	visibility:visible;
 }
@@ -124,6 +127,12 @@
 	visibility:visible;
 }
 
+.tooltip-inventory-item__has-wear .wear-header,
+.tooltip-inventory-item__has-wear .wear-container
+{
+	visibility:visible;
+}
+
 .team-logo
 {
 	padding-right: 5px;
@@ -131,8 +140,8 @@
 
 .desc-text
 {
+	font-size: 15px;
 	font-family: Stratum2;
-	font-size: 17px;
 	font-weight: medium;
 	padding-top: 6px;
 }

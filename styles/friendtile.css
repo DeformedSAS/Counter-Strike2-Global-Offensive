@@ -30,11 +30,16 @@
     sound: "UIPanorama.sidemenu_select";
 }
 
+#JsInviteAdvertisingPlayer.IconButton
+{
+    margin-right: 16px;
+}
+
 .friendtile,.player-card-row--button
 {
     opacity: 1;
-    transition-property: height, opacity, transform, position, background-color;
-    transition-duration: .5s, .5s, .5s, .3s, .25s ;
+    transition-property: height, opacity, transform, background-color;
+    transition-duration: .5s, .5s, .5s, .25s ;
     transition-timing-function: ease-in-out;
 }
 
@@ -146,6 +151,12 @@
     flow-children: down;
 }
 
+.friendtile__status .name-container
+{
+    flow-children: right;
+}
+
+
 .friendtile__text__title
 {
     width: 256px;
@@ -157,7 +168,6 @@
     text-shadow:1px 1px 1px #00000091;
     font-family: stratum2Font;
     color: white;
-    letter-spacing: 1px;
     transition-property: color;
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
@@ -232,10 +242,11 @@
 
 .validation-results-container .friendtile,.popup-addfriend-entry .friendtile
 {
-    width: 400px;
+    width: 450px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.445);
     border: 1px solid rgba(0, 0, 0, 0.452);
+    flow-children: right;
 }
 
 .validation-results-container .friendtile:hover,.popup-addfriend-entry .friendtile:hover
@@ -247,4 +258,3 @@
 {
     margin-left: 0px;
 }
-

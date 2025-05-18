@@ -74,7 +74,7 @@
 							<Panel class="full-width full-height left-right-flow">
 								<Panel class="store-home-prime-top">
 									<Image class="store-home-prime__logo" src="file://{images}/icons/ui/prime_active.png" texturewidth="32" textureheight="-1" />
-									<Label class="store-home-prime__title" text="#popup_elevated_status_title" />
+									<Label class="store-home-prime__title stratum-medium" text="#popup_elevated_status_title" />
 									<TextButton id="id-store-buy-prime" class="PopupButton Positive" text="#elevated_status_btn" />
 								</Panel>
 								<Panel class="store-home-prime-section-container">

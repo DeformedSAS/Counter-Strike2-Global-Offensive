@@ -43,14 +43,14 @@ var CharacterLineUp = ( function()
 		{
 			if ( elCLU.Data().m_arrPlayerMasterList.length == 0 )
 			{
-				elPlayer.style.width = '15%';
+				elPlayer.style.width = '25%';
 			}
 			else
 			{
 				var nChars = elCLU.Data().m_arrPlayerMasterList.length;
 
 				var desiredWidth = ( 100 / nChars ) + 100;
-				var width = Math.min( desiredWidth, 50 );
+				var width = Math.min( desiredWidth, 60 );
 
 				var margin = ( 100 - ( nChars * width ) ) / nChars / 2;
 

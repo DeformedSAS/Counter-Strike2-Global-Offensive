@@ -200,7 +200,7 @@ var Loadout = ( function() {
 		InventoryAPI.PrecacheCustomMaterials( idForDisplay );
 
 		                                                  
-		elModel.SetScene( "resource/ui/econ/ItemModelPanelCharWeaponInspect.res",
+		elModel.SetScene( "resource/ui/econ/ItemModelPanelCharLoadout.res",
 			modelPath,
 			false
 		);
@@ -208,7 +208,6 @@ var Loadout = ( function() {
 		
 
 	
-		elBackground.SetImage( "file://{images}/backgrounds/inspect.svg" );
 		
 		_InitCharacterItemPanel( itemId );
 

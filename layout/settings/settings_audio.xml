@@ -11,7 +11,7 @@
 	</scripts>
 
     <Panel useglobalcontext="true" class="SettingsMenuTab">
-        <Panel id="id-navbar-tabs" class="content-navbar__tabs content-navbar__tabs--dark content-navbar__tabs--noflow">
+        <Panel id="id-navbar-tabs" class="content-navbar content-navbar__tabs--noflow content-navbar__tabs">
             <Panel id="SettingsMenuJumpButtons" class="content-navbar__tabs__center-container   content-navbar__tabs--small">
                 <RadioButton class="content-navbar__tabs__btn" onactivate="SettingsMenuShared.ScrollToId(&apos;SettingsAudioSettings&apos;)" group="SettingsAudio">
                     <Label text="#settings_audio_section" />
@@ -130,7 +130,7 @@
 				<Panel class ="top-bottom-flow full-width">
 
 					                         
-				<CSGOSettingsSlider text="#SFUI_Settings_Menu_Music_Volume" max="0.6" min="0" percentage="true" convar="snd_menumusic_volume" constrainrange="true" />
+				<CSGOSettingsSlider text="#SFUI_Settings_Menu_Music_Volume" max="0.3" min="0" percentage="true" convar="snd_menumusic_volume" constrainrange="true" />
 					<Panel class="horizontal-separator"/>
 
 					                           

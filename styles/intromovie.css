@@ -6,14 +6,17 @@ CSGOIntroMovie
 	sound: "UIPanorama.IntroLogo";
 }
 
-#IntroMoviePlayer
-{
-	width: 1920px;
-	height: 1080px;
-	overflow: noclip;
-	horizontal-align: center;
-	
+#IntroMoviePlayer {
+    width: 1920px;
+    height: 1080px;
+    overflow: noclip;
+    opacity: 0; 
+    horizontal-align: center;
+    transition-property: opacity;
+    transition-duration: 2s;
+    transition-timing-function: ease-in-out;
 }
+
 
 .AspectRatio21x9 #IntroMoviePlayer
 {

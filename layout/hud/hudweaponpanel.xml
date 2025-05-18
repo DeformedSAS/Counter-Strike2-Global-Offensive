@@ -43,7 +43,7 @@
 				             
 				<Panel id="AmmoContent" class="Ammo">
 					<Label id="AmmoTextClip" class="Ammo__Clip WeaponPanel-apply-hud-color" text="10" />
-					<Label id="AmmoTextTotal" class="Ammo__Total WeaponPanel-apply-hud-color-bg" text="I 20" />
+					<Label id="AmmoTextTotal" class="Ammo__Total WeaponPanel-apply-hud-color-bg" text=" 20" />
 					<Panel id="AmmoBurstIcons" class="Ammo__Burst Ammo__Burst--Single WeaponPanel-apply-hud-color">
 						<Panel class="Ammo__BurstIcon" />
 						<Panel class="Ammo__BurstIcon" />
@@ -57,8 +57,6 @@
 						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos1" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
 						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos2" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
 						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos3" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
-						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos4" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
-						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos5" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
 					</Panel>
 					<Panel id="AmmoAnimShells" class="AmmoAnim__Shells">
 						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />

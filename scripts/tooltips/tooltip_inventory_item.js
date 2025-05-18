@@ -13,7 +13,6 @@ function setupTooltip()
     var strDesc = InventoryAPI.GetItemDescription(id);
     if (strDesc.endsWith('<br>'))
     {
-                               
         strDesc = strDesc.slice(0, -4);
     }
     ctx.SetDialogVariable('description', strDesc);
@@ -40,6 +39,7 @@ function setupTooltip()
                              
 	var rarity = InventoryAPI.GetItemRarity(id);
 	var rarityName = InventoryAPI.GetItemType(id);
+	var itemWear = InventoryAPI.GetWear(id)
 
 	if (rarityName)
 	{
@@ -95,35 +95,18 @@ function setupTooltip()
 	    ctx.RemoveClass('tooltip-inventory-item__team-t');
     }
 
-	                                             
-	if ( GameInterfaceAPI.GetSettingString( "cl_inventory_debug_tooltip") == "1" )
+	var certData = InventoryAPI.GetItemCertificateInfo( id );
+	var aCertData = certData.split("\n"); 
+	
+	if (aCertData[7])
 	{
-		var debugOutput = "<br />";
-		var Print = function( string )
-		{
-			debugOutput += string + "<br />";
-		}
-
-		          
-		Print( "--------------------------------------" );
-		Print( "itemID: " + id );
-		Print("--------------------------------------");
-
-		       
-		var oTags = InventoryAPI.BuildItemTagsObject( id );
-
-		Object.keys( oTags ).forEach( function( key, index )
-		{
-			var tag = oTags[ key ];
-
-			var cat = Object.keys( tag )[0];
-			var val = tag[ Object.keys( tag )[0]];
-
-			Print( cat + ": " + val );
-		});
-
-	                                                           
-		ctx.SetDialogVariable('description', debugOutput);
+	    ctx.AddClass('tooltip-inventory-item__has-wear');
+	    ctx.SetDialogVariable('wear', aCertData[7]);
+	}
+	else
+	{
+	    ctx.RemoveClass('tooltip-inventory-item__has-wear');
+	    ctx.SetDialogVariable('wear', 'None');
 	}
 
 }

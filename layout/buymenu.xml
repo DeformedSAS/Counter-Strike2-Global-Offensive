@@ -1,6 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/csgostyles_buymenu.css" />
 		<include src="file://{resources}/styles/buymenu.css" />
 	</styles>
 	<scripts>

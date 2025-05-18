@@ -2,7 +2,7 @@
 	<styles>
 		<include src="file://{resources}/styles/csgostyles.css" />
 		<include src="file://{resources}/styles/mainmenu_watch.css" />
-		<include src="file://{resources}/styles/mainmenu.css" />
+		<include src="file://{resources}/styles/stats/menu_stats.css" />
 		<include src="file://{resources}/styles/tournaments/pickem_common.css" />
 	</styles>	
 	<scripts>		

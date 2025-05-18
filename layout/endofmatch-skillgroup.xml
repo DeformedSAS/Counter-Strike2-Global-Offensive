@@ -68,7 +68,7 @@
 										item=""
 										mouse_rotate="false"/>
 
-						<Label id="id-eom-skillgroup__newrank" class="eom-skillgroup-new-label" text="#eom-skillgroup-higher"/>
+						<Label id="id-eom-skillgroup__newrank" class="eom-skillgroup-new-label stratum-medium" text="#eom-skillgroup-higher"/>
 					</Panel>
 	
 					<Panel id="id-eom-skillgroup__info" class="top-bottom-flow vertical-center">

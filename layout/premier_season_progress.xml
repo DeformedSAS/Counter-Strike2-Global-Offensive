@@ -1,0 +1,51 @@
+
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/mainmenu.css" />
+		<include src="file://{resources}/styles/mainmenu_play.css" />
+		<include src="file://{resources}/styles/leaderboard.css" />
+		<include src="file://{resources}/styles/premier_season_progress.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/sessionutil.js" />
+		<include src="file://{resources}/scripts/rating_emblem.js" />
+		<include src="file://{resources}/scripts/common/formattext.js" />
+		<include src="file://{resources}/scripts/premier_season_progress.js" />
+		<include src="file://{resources}/scripts/common/teamcolor.js" />
+	</scripts>
+	<snippets>
+		<snippet name="one-bar">
+			<Panel class="premier-season-progress-bar-segment">
+				<Panel class="premier-season-progress-bar-matches">
+					<Panel id="id-inner-bar" class="premier-season-progress-bar-matches-inner" />
+				</Panel>
+				<Panel id="id-inner-medal" class="premier-season-progress-medal" />
+			</Panel>
+		</snippet>
+	</snippets>
+	<Panel class="premier-season-progress">
+		<Label html="true" class="leaderboard-title-bar__label" text="#season_progress_title">
+			<Image id="id-season-progress-tooltip" src="file://{images}/icons/ui/info.svg" class="horizontal-align-right vertical-center right-margin-medium" texturewidth="18" textureheight="18" />
+		</Label>
+		<Panel class="premier-season-progress-block">
+			<Panel class="left-right-flow horizontal-center top-margin-16">
+				<Frame id="js-highest-rating" src="file://{resources}/layout/rating_emblem.xml" />
+				<Label class="premier-season-progress-rank-label stratum-medium" text="#season_progress_high_rank" />
+			</Panel>
+			<Panel id="id-premier-bar-container" class="premier-season-progress-bar-container">
+				<Panel class="premier-season-pips-label-container">
+					<Panel class="premier-season-pips-labels">
+						<Label class="premier-season-pips-label stratum-regular" text="#season_progress_bar_title" />
+						<Label html="true" class="premier-season-pips-label stratum-regular horizontal-align-right text-align-right" text="#season_wins" />
+					</Panel>
+					<Panel id="id-premier-season-bars" class="premier-season-progress-bar" clampfractionalpixelpositions="false" />
+				</Panel>
+				<Panel id="id-premier-bar-icons">
+					<ItemImage id="id-medal-end" class="premier-season-progress-rank-icon" onmouseover="" />
+					<Image id="id-medal-warning" class="premier-season-progress-warning-icon" texturewidth="28" textureheight="-1" src="file://{images}/icons/ui/warning.svg" />
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

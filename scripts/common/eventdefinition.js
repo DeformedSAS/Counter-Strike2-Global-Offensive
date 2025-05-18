@@ -26,6 +26,7 @@
     $.DefineEvent( 'ForceRestartVanity', 0, '' );
     $.DefineEvent( 'OpenPlayMenu', 0, 'no args', 'opens the play menu from anywhere. EXAMPLE from party menu settings button from client' );
     $.DefineEvent( 'OpenInventory', 0, 'no args', 'opens the inventory menu from anywhere.' );
+	$.DefineEvent( 'OpenFullscreenStore', 0, 'no args', 'opens the store menu from anywhere.' );
     $.DefineEvent( 'OpenWatchMenu', 0, 'no args', 'opens the watch menu from anywhere.' );
     $.DefineEvent( 'OpenStatsMenu', 0, 'no args', 'opens the stats page from anywhere.' );
     $.DefineEvent( 'OpenSubscriptionUpsell', 0, 'no args', 'Open the upsell popup' );

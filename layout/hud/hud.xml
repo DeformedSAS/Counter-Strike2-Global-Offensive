@@ -7,7 +7,7 @@
 	<CSGOHud hittest="false">
 		                                                                           
 		
-		<CSGOHudBlurTarget blurrects="HudVote HudHintText HudProgressBar HudAlerts RoundImpactScoreMain MapDraft" class="HudBlur" hittest="false" hittestchildren="false">
+		<CSGOHudBlurTarget blurrects="HudVote HudHintText HudProgressBar HudAlerts RoundImpactScoreMain" class="HudBlur" hittest="false" hittestchildren="false">
 			<CSGOBackbufferImagePanel class="full-width full-height" />
 		</CSGOHudBlurTarget>
 
@@ -33,8 +33,6 @@
 			<CSGOHudDemolitionProgression id="HudDemolitionProgression" />
 		</Panel>
 
-		                                                                   
-		<CSGOHudSpecPlayer id="HudSpecPlayer" hittest="false" hittestchildren="false" />
 
 		                                                    
 		<CSGOHudWinPanel id="HudWinPanel" hittest="false" hittestchildren="false" />
@@ -75,8 +73,9 @@
 			<CSGOOutOfAmmo id="OutOfAmmo"/>
 			<CSGOHudProgressBar id="HudProgressBar"/>
 			<CSGOHudAlerts id="HudAlerts" />
-                <CSGOHudHintText id="HudHintText" priority="high" class="high-priority" />
+            <CSGOHudHintText id="HudHintText" priority="high" class="high-priority" />
 			<CSGOShieldDamageAlert id="ShieldDamageAlert"/>
+			<CSGOHudSpecPlayer id="HudSpecPlayer" hittest="false" hittestchildren="false" />
 			                                                               
 			            
 			<Frame id="HudTabletHints" src="file://{resources}/layout/hud/hudtablethints.xml" />

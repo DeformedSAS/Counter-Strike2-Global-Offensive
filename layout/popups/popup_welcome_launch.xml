@@ -16,7 +16,6 @@
 			<Label class="popup_welcome_body stratum-regular fontSize-l" text="#cs2go_welcome_message" />
 		</Panel>
 		<Panel class="PopupButtonRow">
-		    <TextButton class="PopupButton" text="DISCORD" onactivate="WelcomeLaunch.OnDiscordButtonPressed()" />
 		    <TextButton class="PopupButton" text="GITHUB" onactivate="WelcomeLaunch.OnGithubButtonPressed()" />
 			<TextButton class="PopupButton" text="#SFUI_Radio_Go" onactivate="WelcomeLaunch.OnOKPressed()" />
 		</Panel>

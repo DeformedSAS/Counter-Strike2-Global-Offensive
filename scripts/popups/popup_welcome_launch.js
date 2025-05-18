@@ -1,8 +1,10 @@
 var WelcomeLaunch = (function () {
+	
     function _OnOKPressed() {
         var strGoalVersion = $.GetContextPanel().GetAttributeString("uisettingversion", '');
         GameInterfaceAPI.SetSettingString('ui_popup_weaponupdate_version', strGoalVersion);
         $.DispatchEvent('UIPopupButtonClicked', '');
+		$.DispatchEvent('PlayMainMenuMusic', true, true );
     }
 
     function _OnCancelPressed() {
@@ -13,14 +15,12 @@ var WelcomeLaunch = (function () {
         SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser("https://github.com/DeformedSAS/CS-GO-Custom-Panorama-CS2-");
     }
 
-    function _OnDiscordButtonPressed() {
-        SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser("https://discord.gg/dtDxKNNAXZ");
-    }
-
     return {
         OnOKPressed: _OnOKPressed,
         OnCancelPressed: _OnCancelPressed,
         OnGithubButtonPressed: _OnGithubButtonPressed,
-        OnDiscordButtonPressed: _OnDiscordButtonPressed
     };
 })();
+
+$.DispatchEvent('PlayMainMenuMusic', false, true);
+$.DispatchEvent('PlaySoundEffect', 'UIPanorama.welcome_popup', 'MOUSE');

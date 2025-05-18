@@ -3,9 +3,6 @@
         <include src="file://{resources}/styles/csgostyles.css" />
         <include src="file://{resources}/styles/hud/hudhealtharmor.css" />
     </styles>
-	<scripts>
-	<include src="file://{resources}/scripts/hud/hudhealtharmor.js" />
-	</scripts>
 
     <CSGOHudHealthArmor class="hud-HA" hittest="false">
 

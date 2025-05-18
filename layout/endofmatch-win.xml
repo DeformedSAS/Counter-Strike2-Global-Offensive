@@ -27,6 +27,11 @@
 	<Panel class="eom-win" useglobalcontext="true">
 		<Panel id='WinTeam' class="full-width full-height">
 			<Label id="WinTeamBackgroundText" class="eom-win__text-background stratum-font" text="{s:win-result}"/>
+						<ItemPreviewPanel 	id="WinCoinModel"
+								class="eom-win__model hidden" 
+								manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
+								item="models/inventory_items/scoreboard_logos/logo_ct.mdl"
+								mouse_rotate="true"/>
 
 			<Label id="WinTeamName" class="eom-win__text" text="{s:teamname}"/>
 		</Panel>

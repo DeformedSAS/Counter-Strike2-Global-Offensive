@@ -14,7 +14,7 @@
 
 .leaderboard-navbar Label
 {
-	font-family: Stratum2 Condensed, 'Arial Unicode MS';
+	font-family: Stratum2 'Arial Unicode MS';
 	margin: 0px;
 	color: white;
 	padding: 8px 8px;
@@ -23,7 +23,8 @@
 
 DropDownMenu Label,.leaderboard-header .DropDownChild
 {
-	font-family: Stratum2 Medium Condensed, 'Arial Unicode MS';
+	font-family: Stratum2, 'Arial Unicode MS';
+	font-weight: medium;
 	font-size: 18px;
 	text-overflow: shrink;
 }
@@ -86,14 +87,15 @@ DropDownMenu Label.of-interest,.leaderboard-header .DropDownChild.of-interest
 	height: 32px;
 	vertical-align: top;
 	font-size: 22px;
-	font-family: Stratum2 Medium Italic, 'Arial Unicode MS';
+	font-family: Stratum2, 'Arial Unicode MS';
+	font-weight: medium;
 	text-transform: uppercase;
 	margin-left: 0px;
 	horizontal-align: left;
 	color: white;
 	padding-top: 4px;
 	padding-left: 26px;
-	background-image: url("s2r://panorama/images/icons/ui/premier_title_bg.vsvg");
+	background-image: url("file://{images}/icons/ui/premier_title_bg.svg");
 	background-size: 100% 100%;
 }
 
@@ -258,7 +260,8 @@ DropDownMenu Label.of-interest,.leaderboard-header .DropDownChild.of-interest
 .leaderboard__list__row:not(.header) .leaderboard__list__column.region Label
 {
 	text-align:left;
-	font-family: Stratum2 Medium Condensed, 'Arial Unicode MS';
+	font-family: Stratum2, 'Arial Unicode MS';
+	font-weight: medium;
 	horizontal-align: center;
 	font-size: 16px;
 }
@@ -273,7 +276,7 @@ DropDownMenu Label.of-interest,.leaderboard-header .DropDownChild.of-interest
 	font-size: 14px;
 	padding-right: 4px;
 	padding-left: 4px;
-	font-family: Stratum2 Regular Monodigit, 'Arial Unicode MS';
+	font-family: Stratum2, 'Arial Unicode MS';
 	text-align:right;
 	max-height: 14px;
 	text-overflow: ellipsis;
@@ -285,7 +288,7 @@ DropDownMenu Label.of-interest,.leaderboard-header .DropDownChild.of-interest
 	font-size: 18px;
 	padding-left: 0px;
 	horizontal-align: center;
-	font-family: Stratum2 Condensed, 'Arial Unicode MS';
+	font-family: Stratum2, 'Arial Unicode MS';
 	text-overflow: shrink;
 }
 
@@ -330,7 +333,6 @@ DropDownMenu Label.of-interest,.leaderboard-header .DropDownChild.of-interest
 
 #lbNameButton
 {
-	ignore-parent-flow: true;
 	margin: 0px;
 	margin-top: -36px;
 	visibility: collapse;

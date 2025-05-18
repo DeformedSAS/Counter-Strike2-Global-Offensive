@@ -281,6 +281,7 @@
 	transition-duration: 0.2s;
 
 	position: 0px 280px 0px;
+	background-color: rgba(0, 0, 0, 0.88);
 }
 
 .scoreboard-visible #id-eom-scoreboard-container{

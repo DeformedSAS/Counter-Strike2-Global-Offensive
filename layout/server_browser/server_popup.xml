@@ -1,0 +1,63 @@
+<root>
+    <styles>
+		<include src="file://{resources}/styles/gamestyles.css" />
+		<include src="file://{resources}/styles/popups/popups_shared.css" />
+		<include src="file://{resources}/styles/popups/popup_play_gamemodeflags.css" />
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/settings/settings.css" />
+		<include src="file://{resources}/styles/settings/settings_slider.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/formattext.js" />
+        <include src="file://{resources}/scripts/server_browser/server_popup.js" />
+	</scripts>
+
+	<snippets>
+		<snippet name="serverbrowser_player">
+			<Panel class="left-right-flow full-width">
+				<Label id="Name" text="?" style="width:235px;"/>
+				<Label id="Score" text="?" style="width:70px;"/>
+				<Label id="Time" text="?" style="width:200px;"/>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<PopupCustomLayout class="PopupPanel" popupbackground="dim" onload="ServerPopup.SetupPopup()" oncancel="ServerPopup.CancelPopup()">
+		<Label class="PopupTitle" text="{s:name}" />
+
+		<Panel class="left-right-flow" style="margin: 16px;width: 100%;">
+			<Panel class="top-bottom-flow" style="width:35%;">
+				<Label class="fontWeight-Bold text-align-right" text="Game" />
+				<Label class="fontWeight-Bold text-align-right" text="Map" />
+				<Label class="fontWeight-Bold text-align-right" text="Players" />
+				<Label class="fontWeight-Bold text-align-right" text="Valve Anti-Cheat" />
+				<Label class="fontWeight-Bold text-align-right" text="Latency" />
+			</Panel>
+			<Panel class="top-bottom-flow" style="horizontal-align: left;width:65%;">
+				<Label text="{s:game}" />
+				<Label text="{s:map}" />
+				<Label text="{s:players}" />
+				<Label text="{s:vac}" />
+				<Label text="{s:ping}" />
+			</Panel>
+		</Panel>
+		
+		<Panel class="radio-options-container" style="margin-right: 16px;">
+			<Panel class="left-right-flow full-width">
+				<Label id="head-name" class="fontWeight-Bold" text="Player name" style="width:235px;"/>
+				<Label id="head-score" class="fontWeight-Bold" text="Score" style="width:70px;"/>
+				<Label id="head-time" class="fontWeight-Bold" text="Time" style="width:200px;"/>
+			</Panel>
+			<Panel id="PlayerList" class="top-bottom-flow full-width vscroll" style="max-height: 400px;">
+
+			</Panel>
+			
+		</Panel>
+
+		<Panel class="PopupButtonRow">
+			<TextButton class="PopupButton" text="#GameUI_Close" onactivate="ServerPopup.CancelPopup()" />
+			<TextButton id="CopyButton" class="PopupButton" text="Copy IP" onactivate="ServerPopup.OnCopyPressed()" onmouseout="UiToolkitAPI.HideTextTooltip()" />
+			<TextButton class="PopupButton positiveColor" text="Connect" onactivate="ServerPopup.OnConnectPressed()" style="border: 1px solid rgba(191, 191, 191, 0.3);" />
+		</Panel>
+	</PopupCustomLayout>
+</root>

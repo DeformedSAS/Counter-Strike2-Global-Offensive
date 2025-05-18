@@ -63,7 +63,7 @@
     <Panel id="Radar" clampfractionalpixelpositions="false">
         <Panel id="Radar__Round">
             <Panel id="Radar__Round--Inner">
-                <Panel id="Radar__Round--InnerTransform" force-no-composition-layer="false" class="additive" />
+                <Panel id="Radar__Round--InnerTransform" force-no-composition-layer="true" class="additive" />
             </Panel>
             <Panel id="Radar__Round--Border" class="Radar__Round--BorderClass cl-hud-wash-color"/>
             <Panel id="Radar__Round--Overlay"/>
@@ -71,7 +71,7 @@
 
         <Panel id="Radar__Square">
             <Panel id="Radar__Square--Inner">
-                <Panel id="Radar__Square--InnerTransform" force-no-composition-layer="false" class="additive" />
+                <Panel id="Radar__Square--InnerTransform" force-no-composition-layer="true" class="additive" />
             </Panel>
             <Panel id="Radar__Square--Border" class="Radar__Square--BorderClass" />
             <Panel id="Radar__Square--Overlay"/>

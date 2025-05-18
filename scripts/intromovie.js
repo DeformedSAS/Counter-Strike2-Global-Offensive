@@ -9,18 +9,28 @@ function ShowIntroMovie() {
 
     $("#IntroMoviePlayer").SetMovie(movieName);
     $("#IntroMoviePlayer").SetFocus();
-	$.RegisterKeyBind($("#IntroMoviePlayer"), "key_enter,key_space,key_escape", SkipIntroMovie);
+    //$.RegisterKeyBind($("#IntroMoviePlayer"), "key_enter,key_space,key_escape", SkipIntroMovie);
     PlayIntroMovie();
 }
 
 function PlayIntroMovie() {
-    $("#IntroMoviePlayer").Play();
-    $.DispatchEvent('PlaySoundEffect', 'UIPanorama.submenu_slidein', 'MOUSE');
+    $("#IntroMoviePlayer").style.opacity = '1'; 
+    $.Schedule(0.1, function() { 
+        $("#IntroMoviePlayer").Play();
+        $.DispatchEvent('PlaySoundEffect', 'UIPanorama.submenu_slidein', 'MOUSE');
+        
+        $.Schedule(7.0, FadeOutAndSkip);
+    });
+}
+
+function FadeOutAndSkip() {
+    $("#IntroMoviePlayer").style.opacity = '0';
+    $.Schedule(2.0, SkipIntroMovie); 
 }
 
 function SkipIntroMovie() {
     $("#IntroMoviePlayer").Stop();
-    HideIntroMovie(); 
+    HideIntroMovie();
 }
 
 function DestroyMoviePlayer() {

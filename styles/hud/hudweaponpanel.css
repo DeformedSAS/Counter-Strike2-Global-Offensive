@@ -37,29 +37,17 @@ CSGOHudWeaponPanel Label
 .WeaponPanel
 {
 	opacity: 1.0;
-    animation-name: weapon--change;
-    animation-duration: 0.1s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
-}
-@keyframes 'weapon--change'
-{
-    0%
-    {
-        transform: scale3d( 0.75, 0.75, 0.75 );
-    }
-    
-    100%
-    {
-        transform: scale3d( 1, 1, 1.0 );
-    }
-    
-}
+	transform: translatey( 0px );
 
+	transition-property:  opacity, transform;
+	transition-duration: .25s;
+	transition-timing-function: ease-in-out;
+}
 
 .WeaponPanel--Hidden
 {
 	opacity: 0;
+	transform: translatey( 10px );
 }
 
                                                                                
@@ -112,11 +100,10 @@ CSGOHudWeaponPanel Label
 .WeaponPanelTop__Icon--Defuse
 {
 	x: 90px;
-	y: 50px;
+	y: 55px;
 	vertical-align: bottom;
 	height: 60px;
 }
-
 .WeaponPanelTop__Icon--Show
 {
 	visibility: visible;
@@ -133,7 +120,7 @@ CSGOHudWeaponPanel Label
 	width: 100%;
 	opacity: 1.0;
 	flow-children: right;
-	horizontal-align: right;                                                                                                                                                                                  
+	horizontal-align: right;                                                                                                                                                                                    
 }
 
 #WeaponPanelBottomBGGradient {
@@ -216,8 +203,8 @@ CSGOHudWeaponPanel Label
 {
 	animation-name: KillIconShowAnim; 
 	animation-duration: .33s;
-	sound: "UIPanorama.kill_doof";
 	animation-delay: 0s;
+	sound: "UIPanorama.kill_doof";
 	animation-timing-function: linear;
 	animation-iteration-count: 1;
 }
@@ -256,6 +243,7 @@ CSGOHudWeaponPanel Label
 	flow-children: right;
 	vertical-align: bottom;
 	horizontal-align: right;
+	visibility: collapse;
 }
 
 .Kills__KillEater--Hidden
@@ -276,38 +264,6 @@ CSGOHudWeaponPanel Label
 .Ammo
 {
 	width: 125px;
-	transform-origin: 50% -50%;
-    animation-name: jitter-number;
-    animation-duration: .15s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-}
-@keyframes 'jitter-number'
-{
-    0%
-    {
-        transform: scale3D( 1.15, 1.15, 1 ) translate3d( -3px, -4px, 0px);
-        brightness: 3;
-    }
-    
-    25%
-    {
-        transform: scale3D( 1, 1, 1 ) translate3d( 0px, -2px, 0px);
-        brightness: 5;
-    }
-    
-    50%
-    {
-        transform: scale3D( 1, 1, 1 ) translate3d( 3px, 5px, 0px);
-        brightness: 3;
-    }
-    
-    100%
-    {
-        transform: scale3D( 1, 1, 1 ) translate3d( 0px, 0px, 0px);
-        brightness: 1;
-    }
-    
 }
 
 .Ammo--Hidden
@@ -328,22 +284,18 @@ CSGOHudWeaponPanel Label
 {
 	x: 4px;
 	y: 0px;
+	padding-right: 5px;
 	width: 72px;
-	font-size: 42px;
+	font-size: 44px;
 	                               
 	                                      
     text-shadow: 0px 0px 3px 0.0 #000000DD;
-	transform-origin: 50% -50%;
-    animation-name: jitter-number;
-    animation-duration: .15s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
 }
 
 .Ammo__Total
 {
 	x: 60px;
-	y: 6px;
+	y: 0px;
 	width: 60px;
 	font-size: 22px;
 	                                      
@@ -354,9 +306,12 @@ CSGOHudWeaponPanel Label
 {
 	flow-children: right;
 	x: 74px;
-	y: 8px;
+	y: 5px;
 	visibility: collapse;
-	margin-left: 4px;                                
+	margin-left: 4px;
+	                        
+                                        
+	
 }
 
 .Ammo__Burst--Burst,
@@ -394,6 +349,7 @@ CSGOHudWeaponPanel Label
 {
 	width: 95px;
 	height: 100%;
+	margin-right: -70px;
 }
 
 .WeaponPanel--Simple .AmmoAnim
@@ -406,6 +362,7 @@ CSGOHudWeaponPanel Label
 {
 	width: 100%;
 	height: 100%;
+	visibility: collapse;
 }
 
 .AmmoAnim__Bullets--Hidden
@@ -553,6 +510,7 @@ CSGOHudWeaponPanel Label
 	horizontal-align: center;
 	vertical-align: center;
 	padding: 5px;
+	visibility: collapse;
 }
 
 .AmmoAnim__Grenades--Hidden

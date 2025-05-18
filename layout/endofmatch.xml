@@ -38,7 +38,7 @@
 			<Panel>
 				<CSGOEndOfMatchCharactersPanel	id="id-eom-characters-root" class="" />
 				<Panel id="id-eom-scoreboard-container" class="horizontal-center eom-scoreboard"/>	
-				<Panel id="id-eom-chat-container" class="HudLowerLeftChatStatus" />
+				<Panel id="id-eom-chat-container" />
 				<Label class="eom-scoreboard-toggle-instructions stratum-medium" html="true" text="#Scoreboard_Toggle_Instruction" />
 			</Panel>
 		</snippet>
@@ -46,7 +46,7 @@
 		<snippet name="snippet-eom-lower--survival">
 			<Panel >
 				<Panel id="id-eom-scoreboard-container" class="horizontal-center eom-scoreboard"/>	
-				<Panel id="id-eom-chat-container" class="HudLowerLeftChatStatus" />
+				<Panel id="id-eom-chat-container" />
 			</Panel>
 		</snippet>
 
@@ -59,7 +59,7 @@
 				                                         
 			</Panel>
 			<Panel class="time_container">
-				<CSGOGameTimeLabel id="id-gametime__desc" class="timer" text="{s:s_gametime_desc}" />
+				<CSGOGameTimeLabel id="id-gametime__desc" class="timer" text="{s:s_gametime_desc}" audible-seconds="3" soundevent-on-finish="UIPanorama.DeathMatch.EndTimer" />
 				<CSGOGameTimeLabel id="id-gametime__time" class="timer" text="#Time_Clean" />
 			</Panel>
 		</Panel>

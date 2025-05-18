@@ -72,25 +72,25 @@ CSGOHudFreezePanel Label
 
 .FreezePanel--FadeIn
 {
-	opacity: 1.0;
-
-	animation-name: FreezePanelFadeInAnim;
-	animation-duration: 0.3s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
+    opacity: 1.0;
+    animation-name: DeathPanelFadeInAnim;
+    animation-duration: 0.3s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
 }
 
-@keyframes 'FreezePanelFadeInAnim'
+@keyframes 'DeathPanelFadeInAnim'
 {
-	0%
-	{
-		opacity: 0.0; 
-	}
-
-	100%
-	{
-		opacity: 1.0; 
-	}
+    0%
+    {
+        opacity: 0.0;
+    }
+    
+    100%
+    {
+        opacity: 1.0;
+    }
+    
 }
 
 .FreezePanel__Content
@@ -102,7 +102,6 @@ CSGOHudFreezePanel Label
 {
 	width: 100%;
 	height: 100%;
-	background-color: gradient( linear, 0% 0%, 100% 0%, from( #00000000 ), to( #000000cc ) );
 }
 
 .FreezePanel__MedalText
@@ -139,6 +138,11 @@ CSGOHudFreezePanel Label
 	height: 80px;
 	vertical-align: center;
 	horizontal-align: center;
+}
+
+.DeathPanel__BG-Blur
+{
+    background-color: rgba(0, 0, 0, 0.50);
 }
 
 .FreezePanel__Avatar--Hidden

@@ -33,7 +33,7 @@
 .money-anim
 {
     font-family: Stratum2, 'Arial Unicode MS';
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
 }
 
@@ -77,7 +77,7 @@ CSGOHudMoney CCSGOSteamInputAction
 
 .money-text-buy-icon
 {
-    margin-top: 5px;
+    margin-top: 6px;
     margin-left: 6px;
     margin-right: 6px;
 

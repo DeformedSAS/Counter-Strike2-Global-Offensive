@@ -9,22 +9,22 @@
 	</scripts>
 
 	<Panel class="mainmenu-content__container" hittest="false">
-		<Panel class="content-navbar">
-			<Panel class="content-navbar__tabs">
+		<Panel class="content-navbar__tabs content-navbar__tabs--noflow">
+			<Panel class="content-navbar__tabs__center-container">
 
-				<RadioButton selected="false" group="tests" onactivate="PanelTypeTab('CSGOWeaponSelectionView', 'square')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="PanelTypeTab('CSGOWeaponSelectionView', 'square')" >
 					<Label allowrawtext="true" text="WeaponSelection"/>
 				</RadioButton>
 
-				<RadioButton selected="false" group="tests" onactivate="PanelTypeTab('CSGODemolitionProgressionView', 'wide')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="PanelTypeTab('CSGODemolitionProgressionView', 'wide')" >
 						<Label text="DemolitionProgress"/>
 				</RadioButton>
 
-				<RadioButton selected="false" group="tests" onactivate="PanelTypeTab('CSGOTeamSelectMenu', 'max')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="PanelTypeTab('CSGOTeamSelectMenu', 'max')" >
 					<Label allowrawtext="true" text="TeamSelect"/>
 				</RadioButton>
 
-				<RadioButton selected="false" group="tests" onactivate="PanelTypeTab('CSGOHudVote')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="PanelTypeTab('CSGOHudVote')" >
 					<Label allowrawtext="true" text="Vote"/>
 				</RadioButton>
             
@@ -32,31 +32,31 @@
 					                       
 				              
            
-				<RadioButton selected="false" group="tests" onactivate="LayoutTab('anim')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('anim')" >
 					<Label allowrawtext="true" text="Anim"/>
 				</RadioButton>
 
-				<RadioButton selected="false" group="tests" onactivate="PanelTypeTab('CSGOEndOfMatch', 'max'); $.DispatchEvent( 'DbgTestEndOfMatch' )" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="PanelTypeTab('CSGOEndOfMatch', 'max'); $.DispatchEvent( 'DbgTestEndOfMatch' )" >
 					<Label text="EndOfMatch"/>
 				</RadioButton>
 
-				<RadioButton selected="false" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/tests/endofmatch_test.xml')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs5t' )" >
 					<Label allowrawtext="true" text="Vs 5T"/>
 				</RadioButton>
 				
-				<RadioButton selected="false" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs5ct' )" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs5ct' )" >
 					<Label allowrawtext="true" text="Vs 5CT"/>
 				</RadioButton>
 
-				<RadioButton selected="false" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs2t' )" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs2t' )" >
 					<Label allowrawtext="true" text="Vs 2T"/>
 				</RadioButton>
 				
-				<RadioButton selected="false" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs2ct' )" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOVersus', 'file://{resources}/layout/versus.xml'); $.DispatchEvent( 'ShowVersusScreen', 'vs2ct' )" >
 					<Label allowrawtext="true" text="Vs 2CT"/>
 				</RadioButton>				
 
-				<RadioButton selected="false" group="tests" onactivate="LayoutTab('Chatwheel', 'file://{resources}/layout/tests/chatwheel.xml')" >
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('Chatwheel', 'file://{resources}/layout/tests/chatwheel.xml')" >
 					<Label allowrawtext="true" text="Chatwheel"/>
 				</RadioButton>
 

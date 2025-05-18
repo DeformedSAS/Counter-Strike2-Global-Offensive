@@ -91,7 +91,7 @@
         <Panel id="InventoryMainContainer" class="full-width full-height top-bottom-flow" hittest="false">
             <Panel id="id-navbar-tabs" class="content-navbar__tabs content-navbar__tabs--noflow">
                 <Panel class="horizontal-center vertical-center left-right-flow">
-                    <RadioButton id="MainMenuNavBarHome" group="inv-top-nav" class="mainmenu-top-navbar__radio-iconbtn" onactivate="InventoryPanel.NavigateToTab( &apos;search&apos; );">
+                    <RadioButton id="MainMenuNavBarHomeInventory" group="inv-top-nav" class="mainmenu-top-navbar__radio-iconbtn" onactivate="InventoryPanel.NavigateToTab( &apos;search&apos; );">
                         <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/search.svg" />
                     </RadioButton>
                     <Panel class="content-navbar__tabs__center-container">

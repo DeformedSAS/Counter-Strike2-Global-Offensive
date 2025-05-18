@@ -6,10 +6,11 @@
 	width: fit-children;
 	visibility: visible;
 	flow-children: right;
-	margin-right: 96px;
+	margin-right: 64px;
+	margin-top: 64px;
 	horizontal-align: right;
 	height: 96px;
-	z-index: 5;
+	z-index: 0;
 
 	transition-property: opacity, transform;
 	transition-duration: 0.50s;
@@ -41,8 +42,9 @@
 	vertical-align: center;
 	height: 100%;
 	width: fit-children;
+	background-color: rgba(0,0,0,0.5);
 	brightness: 1;
-	padding: 8px 8px 8px 8px;
+	padding: 8px 0px 8px 8px;
 	margin-right: 20px;
 	flow-children: down;
 	                                            

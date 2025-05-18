@@ -171,7 +171,7 @@ function MakeTabsBtnsFromStoreData() {
 
         if (elParent) {
             for (let [key, value] of Object.entries(oItemsByCategory)) {
-                if (key === 'tournament') {
+                if (key === 'tournament') { // to remove this code that skips the tournament store button, just type // at if (key, continue: and the }. this will enable the tournament store button but however its broken.
                     continue; // this shit basically does the job of not showing the tournament items tab.
                 }
 

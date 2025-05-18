@@ -5,6 +5,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/tooltips/tooltip_inventory_item.js" />
+		<include src="file://{resources}/scripts/common/iteminfo.js" />
 	</scripts>
 	
 	<Panel class="TooltipContents tooltip-inventory-item" ontooltiploaded="setupTooltip()">
@@ -21,6 +22,7 @@
 				<Label class="rarity-header" text="#inv_header_rarity" />
 				<Label class="grade-header" text="#inv_header_grade" />
 				<Label class="team-header" text="#inv_header_team" />
+				<Label class="wear-header" text="Wear:" />
 			</Panel>
 			<Panel class="top-bottom-flow">
 				<Label class="rarity-label" text="{s:rarity}" />
@@ -30,6 +32,7 @@
           <Image class="team-logo team-logo__t" src="file://{images}/icons/t_logo.svg" texturewidth="20" textureheight="-1" />
           <Label class="team-label" id="Team" text="{s:team}"/>
 				</Panel>
+				<Label class="wear-label" id="Wear" text="{s:wear}"/>
 			</Panel>
 		</Panel>
     <Panel class="separator-bottom" />
