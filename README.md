@@ -41,3 +41,24 @@
 - In HLAE go to Tools > Developer > Custom Loader and find your CS:GO install. Then paste these launch options: -language cs2panorama -game cs2go/csgo -afxdetourpanorama
 - If done correctly you should hear the CS2 startup logo and the custom UI should work.
 - That's it! Have fun playing with this UI!
+
+# QNA
+
+
+  -  Does this cause VAC bans? - No this does not cause any VAC bans as it does not change CS:GO's binary code, however you should be aware that this requires HLAE and using any modified version of HLAE to play the game in secure mode will also most likely not give you a ban as long as you don't use any demo features.
+
+-  When will a new update come? - When it's ready
+  
+-  Will you add this or that - Depends if it's directly from CS2 such as items or some UI Panel elements.
+
+-  I still have the normal CS:GO panorama ui when i start the game with HLAE - Make sure that you followed the tutorial on the bottom of the github page properly
+
+-  Will this be a seperate game and not a mod for migi? - Well currently the mod is being worked on as a non migi addon as migi has it's own issues that somewhat limits this, what exactly you might ask? Music kit sound scripts will not work so if you win a round with a CS2 music kit that you have, you won't hear anything as it can't find the sound event. With the non migi addon version of the mod, you will have all CS2 music kit sound events and they will play properly.
+
+-  Will you make a matchmaking service - That is planned to be done at some point. No ETA
+
+-  When did this project start? - Around october 2023 after CS2's release and has gotten under 2 full rewrites since.
+
+-  Will you add this bug fix that i made? - Yes, any help is very appreciated, just make a pull request with the modified code that you provide and I'll check it out.
+
+### If you have any questions, ask me and i'll provide information for them.
