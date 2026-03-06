@@ -1,0 +1,33 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/gamestyles.css" />
+        <include src="file://{resources}/styles/popups/popups_shared.css" />
+        <include src="file://{resources}/styles/popups/popup_container_open_confirm.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/common/formattext.js" />
+        <include src="file://{resources}/scripts/popups/popup_container_open_confirm.js" />
+    </scripts>
+    <PopupCustomLayout class="PopupPanel popup-container-confirm Hidden" popupbackground="dim" onload="PopupContainerOpenConfirm.Init()">
+        <Panel class="full-width">
+            <Panel class="popup-container-confirm-bg" />
+            <Panel class="confirm-image-container">
+                <Image id="id-confirm-item-image-ref" class="confirm-item-image confirm-item-image__reflection" />
+                <ItemImage id="id-confirm-item-image" class="confirm-item-image" scaling="stretch-to-fit-preserve-aspect" />
+            </Panel>
+            <Panel class="left-right-flow full-width top-bottom-flow">
+                <Panel class="confirm-body-text-container">
+                    <Label class="stratum-regular-condensed confirm-body-text__title" text="{s:title}" />
+                    <Label id="id-warning-label" class="stratum-bold-italic confirm-body-text__warning" text="{s:warning}" />
+                    <Label class="stratum-regular confirm-body-text__body" html="true" text="{s:body}" />
+                </Panel>
+                <Panel class="confirm-button-row">
+                    <Panel class="confirm-button-row__btns">
+                        <TextButton id="id-open-confirm-btn" class="PopupButton" />
+                        <TextButton id="id-close-confirm-btn" class="PopupButton" />
+                    </Panel>
+                </Panel>
+            </Panel>
+        </Panel>
+    </PopupCustomLayout>
+</root>

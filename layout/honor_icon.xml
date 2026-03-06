@@ -1,0 +1,17 @@
+<!-- xml reconstructed by Source 2 Viewer 11.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/honor_icon.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/honor_icon.js" />
+	</scripts>
+	<Panel class="honor-icon-root" useglobalcontext="true">
+		<TooltipPanel tooltip="#honor_icon_tooltip" class="honor-icon">
+			<Panel class="honor-icon-background" />
+			<Image id="JsHonorIconImage" class="honor-icon-image" texturewidth="32" textureheight="-1" src="file://{images}/icons/honor.svg" />
+		</TooltipPanel>
+		<Image id="JsPrimeIcon" class="prime-icon-image" texturewidth="32" textureheight="-1" src="file://{images}/icons/ui/prime.svg" />
+	</Panel>
+</root>

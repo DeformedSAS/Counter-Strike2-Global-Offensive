@@ -1,0 +1,213 @@
+/* Prettified by Source 2 Viewer 11.1.0.0 - https://valveresourceformat.github.io */
+
+@define prime-panel-right-left-margin: 64px;
+.premier-season-progress
+{
+	width: 570px;
+	padding: 12px 12px 0px 12px;
+	margin-left: prime-panel-right-left-margin;
+	flow-children: down;
+}
+
+.premier-season-progress .premier-season-progress-rank-label
+{
+	font-size: 14px;
+}
+
+.premier-season-progress #id-medal-start
+{
+	opacity: .4;
+}
+
+.premier-season-progress #id-medal-end
+{
+	img-shadow: 2px 2px 6px #000000;
+}
+
+.premier-season-progress .premier-season-progress-bar-container
+{
+	margin: 8px 0px 8px 8px;
+	flow-children: right;
+	horizontal-align: center;
+}
+
+.premier-season-progress .premier-season-progress-bar-container.show-warning .premier-season-progress-rank-icon
+{
+	opacity: .5;
+	brightness: .5;
+	img-shadow: none;
+}
+
+.premier-season-progress .premier-season-progress-bar-container.show-warning .premier-season-progress-warning-icon
+{
+	visibility: visible;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-progress-rank-icon
+{
+	height: width-percentage( 78% );
+	width: 46px;
+	margin: 0px 4px;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-progress-warning-icon
+{
+	vertical-align: center;
+	horizontal-align: center;
+	img-shadow: 2px 2px 6px #000000;
+	wash-color: warningColor;
+	visibility: collapse;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container
+{
+	width: 440px;
+	flow-children: down;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-pips-labels
+{
+	width: 100%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-pips-labels .premier-season-pips-label
+{
+	font-size: 14px;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar
+{
+	flow-children: right;
+	vertical-align: center;
+	width: 440px;
+	height: 18px;
+	transform-origin: 0px 50%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment
+{
+	flow-children: right;
+	width: 100%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment.2-bars
+{
+	width: 50%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment.3-bars
+{
+	width: 33%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment.4-bars
+{
+	width: 25%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment.5-bars
+{
+	width: 20%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment .premier-season-progress-bar-matches,.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment .premier-season-progress-medal
+{
+	width: fill-parent-flow(1);
+	margin: 2px;
+	flow-children: right;
+	height: 4px;
+	vertical-align: center;
+	box-shadow: shadowOffset;
+	transform-origin: 50% 50%;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment .premier-season-progress-bar-matches
+{
+	background-color: rgb(25, 25, 25);
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment .premier-season-progress-medal
+{
+	height: 8px;
+	width: 8px;
+	margin: 4px;
+	transform: rotateZ( 45deg );
+	box-shadow: shadowOffset;
+	vertical-align: center;
+}
+
+.premier-season-progress .premier-season-progress-bar-container .premier-season-pips-label-container .premier-season-progress-bar .premier-season-progress-bar-segment .premier-season-progress-bar-matches-inner
+{
+	width: 0px;
+	margin-right: 1px;
+	height: 4px;
+}
+
+.premier-season-progress .premier-season-title-bar
+{
+	width: 1000px;
+	height: 32px;
+	vertical-align: top;
+	padding-top: 4px;
+	padding-left: 4px;
+	background-image: url("file://{images}/icons/ui/premier_title_bg_blank.svg");
+	background-size: 100% 100%;
+}
+
+.premier-season-progress #js-highest-rating
+{
+	margin-right: 4px;
+	ui-scale: 80%;
+	box-shadow: shadowOffset;
+}
+
+.premier-season-progress-block
+{
+	flow-children: down;
+	margin-top: 8px;
+	width: 100%;
+	horizontal-align: center;
+	background-color: rgba(0, 0, 0, 0.219);
+	border-radius: 3px;
+}
+
+.rank-tier-0
+{
+	background-color: color-csrating-tier-0;
+}
+
+.rank-tier-1
+{
+	background-color: color-csrating-tier-1;
+}
+
+.rank-tier-2
+{
+	background-color: color-csrating-tier-2;
+}
+
+.rank-tier-3
+{
+	background-color: color-csrating-tier-3;
+}
+
+.rank-tier-4
+{
+	background-color: color-csrating-tier-4;
+}
+
+.rank-tier-5
+{
+	background-color: color-csrating-tier-5;
+}
+
+.rank-tier-6
+{
+	background-color: color-csrating-tier-6;
+}
+
+.rank-tier-none
+{
+	background-color: rgb(25, 25, 25);
+}
+

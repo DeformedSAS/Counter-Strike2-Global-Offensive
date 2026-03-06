@@ -1,0 +1,27 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/gamestyles.css" />
+        <include src="file://{resources}/styles/mainmenu.css" />
+        <include src="file://{resources}/styles/context_menus/context_menu_navbar_notification.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/context_menus/context_menu_navbar_notification.js" />
+    </scripts>
+    <snippets>
+        <snippet name="notification">
+            <Panel class="context-menu-notification">
+                <Panel id="id-notification-gc-icon" class="mainmenu-top-navbar__alerts__gc">
+                    <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/gc_connecting_inner.svg" scaling="stretch-to-fit-preserve-aspect" />
+                    <Image class="mainmenu-top-navbar__radio-btn__icon gc-connect-anim" src="file://{images}/icons/ui/gc_connecting_outer.svg" scaling="stretch-to-fit-preserve-aspect" />
+                </Panel>
+                <Image id="id-notification-icon" class="mainmenu-top-navbar__alerts-icon" />
+                <Panel id="id-notification-text-block" class="context-menu-notification__text-block">
+                    <Label class="context-menu-notification__label stratum-medium title" html="true" text="{s:title}" />
+                    <Label class="context-menu-notification__label stratum-regular tooltip" html="true" text="{s:tooltip}" />
+                    <TextButton id="id-notification-link" class="context-menu-notification__text-btn" text="{s:link}" />
+                </Panel>
+            </Panel>
+        </snippet>
+    </snippets>
+    <Panel class="" onload="ContextMenuNavBarNotification.SetupContextMenu();" useglobalcontext="true" acceptsfocus="true" />
+</root>

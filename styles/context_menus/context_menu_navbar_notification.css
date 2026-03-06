@@ -1,0 +1,96 @@
+.ContextMenuBodyRow #Contents
+.ContextMenuBodyRow #Contents
+{
+    padding: 0px;
+    border-radius: 3px;
+}
+
+.context-menu-notification
+{
+    flow-children: right;
+    padding: 16px;
+    background-image: url("file://{images}/backgrounds/linemap.png");
+    background-size: auto auto;
+    background-img-opacity: .02;
+}
+
+.context-menu-notification .context-menu-notification__text-block
+{
+    flow-children: down;
+    margin-left: 8px;
+    width: 300px;
+    border-left: 1px solid lightblue;
+    padding-left: 8px;
+}
+
+.context-menu-notification .context-menu-notification__text-block.red-alert
+{
+    border-left: 1px solid negativeColor;
+}
+
+.context-menu-notification .context-menu-notification__text-block.green-alert
+{
+    border-left: 1px solid #91AF49;
+}
+
+.context-menu-notification .context-menu-notification__text-block.yellow-alert
+{
+    border-left: 1px solid #E1C111;
+}
+
+.context-menu-notification .context-menu-notification__text-block.beta-alert
+{
+    border-left: 1px solid #4AA8FF;
+}
+
+.context-menu-notification .context-menu-notification__text-block .context-menu-notification__label.title
+{
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 4px;
+    color: white;
+    visibility: collapse;
+}
+
+.show-title .context-menu-notification .context-menu-notification__text-block .context-menu-notification__label.title
+{
+    visibility: visible;
+}
+
+.context-menu-notification .context-menu-notification__text-block .context-menu-notification__label.tooltip
+{
+    visibility: collapse;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.show-title .context-menu-notification .context-menu-notification__text-block .context-menu-notification__label.tooltip
+{
+    visibility: visible;
+}
+
+.context-menu-notification .context-menu-notification__text-block .context-menu-notification__text-btn
+{
+    visibility: collapse;
+}
+
+.context-menu-notification .context-menu-notification__text-block .context-menu-notification__text-btn Label
+{
+    font-size: 14px;
+    font-family: Stratum2, "Arial Unicode MS";
+    font-weight: normal;
+    text-decoration: underline;
+    color: blueColor;
+}
+
+.show-link .context-menu-notification .context-menu-notification__text-block .context-menu-notification__text-btn
+{
+    visibility: visible;
+}
+
+.mainmenu-top-navbar__alerts__gc Image
+{
+    width: 30px;
+    height: 30px;
+}
+

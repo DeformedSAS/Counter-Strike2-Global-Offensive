@@ -1,0 +1,139 @@
+
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/buymenu.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/buymenu.js" />
+		<include src="file://{resources}/scripts/common/characteranims.js" />
+		<include src="file://{resources}/scripts/common/iteminfo.js" />
+		<include src="file://{resources}/scripts/mock_adapter.js" />
+	</scripts>
+	<snippets>
+		<snippet name="ItemCategory">
+			<Panel class="buymenu__category__column">
+				<Panel class="buymenu__category__column__header">
+					<Label class="buymenu__category__column__keylabel keybind" text="{s:buymenu-category-key}" />
+					<Label class="buymenu__category__column__label" text="{s:buymenu-category}" />
+				</Panel>
+				<Panel id="ItemButtons" class="buymenu__category__itembuttons" />
+			</Panel>
+		</snippet>
+		<snippet name="ItemPanel">
+			<Panel class="button-container">
+				<Label id="" text="#BuyMenu_NewUserExperience_Recommended" class="nux Hidden" />
+				<Label id="" text="#BuyMenu_Promoted" class="promoted-label Hidden" />
+				<Button id="BuyButton" class="buywheel-wedge">
+					<Label class="buywheel-button__key keybind" id="WedgeKeybinding" text="" />
+					<Label id="ItemName" class="buywheel-item__name hud-colorize-wash" />
+					<Image id="ItemIcon" class="buywheel-item__icon hud-colorize-wash" />
+					<Label id="ItemPrice" class="buywheel-item__price hud-colorize-wash" />
+					<Label id="ItemCurValue" text="{d:current-value}" class="buywheel-item__cur-value hud-colorize-wash" />
+				</Button>
+				<Button id="SellbackButton" class="sellback-button">
+					<TooltipPanel tooltip="#BuyMenu_Sellback">
+						<Image src="file://{images}/icons/ui/undo.svg" />
+					</TooltipPanel>
+				</Button>
+				<Panel id="TeammateInventory" class="teammate-inventory-container" />
+			</Panel>
+		</snippet>
+		<snippet name="snippet-player-pip">
+			<Panel class="player-pip" />
+		</snippet>
+		<snippet name="snippet-ground-weapon-entry">
+			<Button class="ground-weapon-entry">
+				<Image id="JsWeaponImage" class="ground-weapon-entry__image hud-colorize-wash" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/equipment/ak47.svg" />
+				<Panel class="horizontal-align-right vertical-center left-right-flow">
+					<Label class="ground-weapon-entry__count hud-colorize-wash" text="{d:count}x " />
+					<Label class="ground-weapon-entry__name hud-colorize-wash" text="{s:weapon-name}" />
+				</Panel>
+			</Button>
+		</snippet>
+	</snippets>
+	<CSGOBuyMenu class="buymenu">
+		<Panel class="buymenu__fullscreen">
+			<ItemPreviewPanel id="id-buymenu-agent"
+									class="buymenu-agent"
+									mouse_rotate="false"
+									hittest="true"
+									manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
+									item="models/player/custom_player/legacy/ctm_sas.mdl"
+									enable_floorshadow="false"
+									force-no-composition-layer="true">                                                                                   
+					</ItemPreviewPanel>
+			<Panel class="full-width full-height debug" hittest="false" hittestchildren="false">
+				<CSGOHudWeaponSelection id="EmbeddedHudWeaponSelection" neverfade="true" neverselected="false" class="embedded-weapons-overview" />
+			</Panel>
+			<Panel class="buymenu-money">
+				<CSGOMoneyPanel id="BuyMenuMoney" class="" />
+			</Panel>
+			<Panel class="buymenu__contents">
+				<Panel class="buymenu-left">
+					<Panel class="buymenu-info">
+						<CSGOMoneyPanel id="buymenu-info-money" class="" hittest="false" />
+						<Panel class="buymenu-timeleft">
+							<Label class="buymenu-timeleft-title" text="#BuyMenu_TimerText" />
+							<CountdownTimer id="Countdown" output_milliseconds="false" class="buymenu-timeleft-timer">
+								<Label text="{t:d:duration}" />
+							</CountdownTimer>
+						</Panel>
+						<Label id="buymenu-min-money-next-round" class="buymenu-minmoney" text="#BuyMenu_MinMoneyNextRound" hittest="false" />
+					</Panel>
+					<Panel class="buymenu-body">
+						<Image class="buy-wheel-background" />
+						<Panel class="buymenu__categories__container">
+							<Panel id="CategoryContainer1" class="buymenu-category ccequip" />
+							<Panel id="CategoryContainer2" class="buymenu-category ccpistols" />
+							<Panel id="CategoryContainer3" class="buymenu-category ccmidtier" />
+							<Panel id="CategoryContainer4" class="buymenu-category ccrifles" />
+							<Panel id="CategoryContainer5" class="buymenu-category ccgrenades" />
+						</Panel>
+						<Image id="TeamLogo" class="team-logo" src="file://{images}/icons/ct_logo.svg"/>
+						<Panel id="CategoryContainerPromo" class="buymenu-category buymenu__category__column ccpromo">
+							<Frame snippet="ItemPanel" id="promo-item" />
+						</Panel>
+					</Panel>
+					<Panel class="buymenu__ground-weapons">
+						<Label class="buymenu__ground-weapons__title" text="#buymenu_groundweapons" />
+						<Panel id="jsGroundWeaponsListContainer" class="buymenu__ground-weapons__list-container" hittest="true" hittestchildren="true">
+							<Panel id="jsGroundWeaponsLister--Cat1" class="buymenu__ground-weapons__lister ccequip" />
+							<Panel id="jsGroundWeaponsLister--Cat2" class="buymenu__ground-weapons__lister ccpistols" />
+							<Panel id="jsGroundWeaponsLister--Cat3" class="buymenu__ground-weapons__lister ccmidtier" />
+							<Panel id="jsGroundWeaponsLister--Cat4" class="buymenu__ground-weapons__lister ccrifles" />
+							<Panel id="jsGroundWeaponsLister--Cat5" class="buymenu__ground-weapons__lister ccgrenades" />
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel class="buymenu-right">
+					<Panel class="buymenu__purchase-failure-container">
+						<Label id="PurchaseFailureLabel" class="buymenu__purchase-failure" />
+					</Panel>
+					<Panel id="ItemDesc" class="buymenu-item-info Hidden">
+						<Label id="WeaponNameAndRarity" class="buymenu-item-info__name" text="{s:item-name}" />
+						<Label class="buymenu-item-info__desc" text="{s:item-desc}" html="true" />
+					</Panel>
+					<Panel class="vline" />
+				</Panel>
+			</Panel>
+			<Panel id="BuyMenuNavBar" class="buymenu-navbar hud-colorize-wash">
+				<Panel class="vertical-center left-right-flow horizontal-align-right">
+					<Label id="BuyForTeammateLabel" class="buymenu__for-teammate" text="#BuyMenu_BuyForTeammate" />
+					<Button class="PopupButton" onactivate="GameInterfaceAPI.ConsoleCommand( &apos;rebuy&apos; )">
+						<Label text="#BuyMenu_Buyprev" />
+					</Button>
+					<Button class="PopupButton" onactivate="GameInterfaceAPI.ConsoleCommand( &apos;autobuy&apos; )">
+						<Label text="#BuyMenu_Autobuy" />
+					</Button>
+					<Button class="PopupButton" onactivate="GameInterfaceAPI.ConsoleCommand( &apos;sellbackall&apos; )">
+						<Label text="#BuyMenu_Sellbackall" />
+					</Button>
+					<Button class="PopupButton" onactivate="$.DispatchEvent( &apos;BuyMenu_Back&apos; );">
+						<Label text="#BuyMenu_Back" />
+					</Button>
+				</Panel>
+			</Panel>
+		</Panel>
+	</CSGOBuyMenu>
+</root>

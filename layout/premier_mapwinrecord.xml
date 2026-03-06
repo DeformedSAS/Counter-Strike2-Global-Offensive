@@ -1,0 +1,26 @@
+<!-- xml reconstructed by Source 2 Viewer 11.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/mainmenu.css" />
+		<include src="file://{resources}/styles/premier_mapwinrecord.css" />
+		<include src="file://{resources}/styles/leaderboard.css" />
+		<include src="file://{resources}/styles/mapdraft.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/teamcolor.js" />
+		<include src="file://{resources}/scripts/common/formattext.js" />
+		<include src="file://{resources}/scripts/premier_mapwinrecord.js" />
+	</scripts>
+	<snippets>
+		<snippet name="snippet-mwr-map">
+			<Panel class="mwr-map">
+				<Image id="mwr-map__image" src="" texturewidth="60" textureheight="-1" scaling="stretch-to-fit-x-preserve-aspect" />
+			</Panel>
+		</snippet>
+	</snippets>
+	<Panel class="mapwinrecord-root">
+		<Label id="jsMapWinsLabel" html="true" class="leaderboard-title-bar__label" text="#mapwinrecord_graph_title_no_wins" onactivate="PremierMapWinRecord.Draw()" />
+		<SpiderGraph id="jsMapWinsSpiderGraph" class="mapwinrecord__graph" />
+	</Panel>
+</root>

@@ -1,0 +1,14 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+	</styles>
+	
+	<scripts>
+		<include src="file://{resources}/scripts/endofmatch.js" />
+		<include src="file://{resources}/scripts/tests/endofmatch_test.js" />
+	</scripts>
+
+
+	<Panel class="full-width full-height" onload="Init()">
+	</Panel>
+</root>

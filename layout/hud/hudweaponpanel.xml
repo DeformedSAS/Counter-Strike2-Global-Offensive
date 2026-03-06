@@ -1,0 +1,119 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/hud/hudweaponpanel.css" />
+	</styles>
+	
+	<scripts>
+		<include src="file://{resources}/scripts/mock_adapter.js" />
+    	<include src="file://{resources}/scripts/hud/hudcolor.js" />
+  	</scripts>
+
+	<CSGOHudWeaponPanel>
+			<Panel class="center_indicator">
+				<Panel class="Kills cl-hud-wash-color">
+					<Panel>
+						<Panel id="KillCountIcons" class="Kills__Count Kills__Count--RightLeftFlow">
+							<Panel class="Kills__Icon">
+
+							</Panel>
+							
+							<Panel class="Kills__Icon2">
+								
+							</Panel>
+							
+							<Panel class="Kills__Icon3">
+								
+							</Panel>
+							
+							<Panel class="Kills__Icon4">
+								
+							</Panel>
+							
+							<Panel class="Kills__Icon5">
+								
+							</Panel>
+						</Panel>
+						<Panel id="KillCountText" class="Kills__Count">
+							<Panel id="KillCountTextIcon" class="Kills__Icon" />
+							<Label id="KillCount" class="Kills__Text" />
+						</Panel>
+					</Panel>
+					<Panel id="KillEaterContent" class="Kills__KillEater cl-hud-wash-color">
+						<Label class="Kills__KillEaterText" text="#csgo_killeater_hud" />
+						<Label id="KillEaterCount" class="Kills__KillEaterText cl-hud-wash-color" text="0" />
+					</Panel>
+				</Panel>
+				
+				<Panel class="team_indicator cl-hud-wash-color">
+						<Image id="TeamLogoHud" />
+				</Panel>
+				
+				<Panel id="AmmoContent" class="Ammo">
+					<Label id="AmmoTextClip" class="Ammo__Clip cl-hud-wash-color" text="10" />
+					<Label id="AmmoTextTotal" class="Ammo__Total cl-hud-wash-color" text="20" />
+					<Panel id="AmmoBurstIcons" class="Ammo__Burst Ammo__Burst--Single cl-hud-wash-color">
+						<Panel class="Ammo__BurstIcon" />
+						<Panel class="Ammo__BurstIcon" />
+						<Panel class="Ammo__BurstIcon" />
+					</Panel>
+				</Panel>
+			</Panel>
+			
+				
+	<Panel  class="WeaponPanel" hittest="false">
+	
+		<Panel class="WeaponPanelTop">
+			<Image id="DefuseIcon" class="WeaponPanelTop__Icon WeaponPanelTop__Icon--Defuse cl-hud-wash-color hidden" src="file://{images}/icons/equipment/defuser.svg" scaling="stretch-to-fit-preserve-aspect" />
+		</Panel>
+		<Panel id="WeaponPanelBottom">
+			                   
+			<Panel id="WeaponPanelBottomBG">
+				<Panel id="WeaponPanelBottomBGGradient" />
+				<Panel id="WeaponPanelBottomBGSolid" />
+			</Panel>
+
+			                
+			<Panel id="WeaponPanelBottomContent">
+				                  
+		        <CCSGOSteamInputAction actionset="GameControls" action="firingmodetoggle" separatortext="I" controllernumber = "1"/> 
+         		                  
+				<Panel class="table_ammo">             
+				
+				</Panel>
+				                       
+				<Panel id="AmmoAnim" class="AmmoAnim WeaponPanel-apply-hud-color-bg">
+					<Panel id="AmmoAnimBullets" class="AmmoAnim__Bullets">
+						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos1" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos2" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__BulletIcon AmmoAnim__BulletIcon--Pos3" src="file://{images}/icons/ui/bullet.svg" scaling="stretch-to-fit-preserve-aspect" />
+					</Panel>
+					<Panel id="AmmoAnimShells" class="AmmoAnim__Shells">
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim__ShellIcon" src="file://{images}/icons/ui/bullet_shell.svg" scaling="stretch-to-fit-preserve-aspect" />
+					</Panel>
+					<Panel id="AmmoAnimGrenades" class="AmmoAnim__Grenades WeaponPanel-apply-hud-color">
+						<Image class="AmmoAnim_GrenadeIcon" src="file://{images}/icons/equipment/hegrenade.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim_GrenadeIcon" src="file://{images}/icons/equipment/hegrenade.svg" scaling="stretch-to-fit-preserve-aspect" />
+						<Image class="AmmoAnim_GrenadeIcon" src="file://{images}/icons/equipment/hegrenade.svg" scaling="stretch-to-fit-preserve-aspect" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+	</CSGOHudWeaponPanel>
+</root>

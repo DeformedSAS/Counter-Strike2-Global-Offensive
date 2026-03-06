@@ -1,0 +1,65 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/settings/settings.css" />
+		<include src="file://{resources}/styles/mainmenu.css"/>
+		<include src="file://{resources}/styles/avatar.css" />
+		<include src="file://{resources}/styles/radialradio.css"/>
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/settingsmenu_shared.js" />
+		<include src="file://{resources}/scripts/settingsmenu_credits.js" />
+	</scripts>
+
+
+	<snippets>
+		<snippet name="CreditsTitle">
+			<Panel class="CreditsHeaderTitleContainer">
+				<Label id="JsTitle" class="CreditsHeaderTitle" />
+			</Panel>
+		</snippet>
+
+		<snippet name="CreditsCategory">
+			<Panel class="top-bottom-flow full-width">
+			</Panel>
+		</snippet>
+
+		<snippet name="CreditsDeveloper">
+			<Panel									class="CreditContainer">
+				<CSGOAvatarImage					class="Credit-Avatar"/>
+				<Label id="JsName" text="UNKNOWN"	class="Credit-Name"/>
+				<Label id="JsDesc" text="UNKNOWN"	class="Credit-Desc"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="CreditsDeveloperNoSteam">
+			<Panel									class="CreditContainer">
+				<Image								class="Credit-Avatar"/>
+				<Label id="JsName" text="UNKNOWN"	class="Credit-Name"/>
+				<Label id="JsDesc" text="UNKNOWN"	class="Credit-Desc"/>
+			</Panel>
+		</snippet>
+		
+		<snippet name="CreditsSeparator">
+			<Panel class="Credit-Separator"/>
+		</snippet>
+	</snippets>
+
+	<Panel useglobalcontext="true" class="SettingsMenuTab" >
+
+		<Panel class="SettingsMenuTabContent vscroll" id="CreditsPeople">
+
+			<Panel id="CreditsInside" class="SettingsBackground">
+				<Panel class="CreditsHeaderTitleContainer">
+					<Label class="CreditsTitle" text="#GameUI_Credits_Gamename" />
+				</Panel>
+
+				                
+
+			</Panel>
+		</Panel>
+
+	</Panel>
+</root>
+

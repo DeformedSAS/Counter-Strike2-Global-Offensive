@@ -1,0 +1,18 @@
+
+<root>
+    <styles>
+        <include src="file://{resources}/styles/gamestyles.css" />
+        <include src="file://{resources}/styles/tooltips/tooltip_inventory_item.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/common/iteminfo.js" />
+        <include src="file://{resources}/scripts/tooltips/tooltip_loadout_item.js" />
+    </scripts>
+
+    <Panel class="TooltipContents tooltip-inventory-item" 
+           ontooltiploaded='$.Schedule(0, function(){ $.TooltipLoadoutItem.SetupTooltip(); })'>
+        <Label id="id-tooltip-layout-name" class="name-label" text="{s:name}" />
+        <Panel id="id-tooltip-layout-seperator" class="separator-top" />
+        <Label id="id-tooltip-layout-desc" class="desc-text" text="{s:desc}" html="true" />
+    </Panel>
+</root>

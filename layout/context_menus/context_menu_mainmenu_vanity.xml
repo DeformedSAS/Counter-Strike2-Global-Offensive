@@ -1,0 +1,46 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/gamestyles.css" />
+        <include src="file://{resources}/styles/context_menus/context_menu_mainmenu_vanity.css" />
+    </styles>
+
+    <scripts>
+        <include src="file://{resources}/scripts/context_menus/context_menu_mainmenu_vanity.js" />
+        <include src="file://{resources}/scripts/common/iteminfo.js" />
+        <include src="file://{resources}/scripts/common/characteranims.js" />
+    </scripts>
+
+    <snippets>
+        <snippet name="snippet-vanity-item">
+            <Button class="vanity-item">
+                <Label id="id-vanity-item__rarity" class="vanity-item__rarity" html='true' text="" />
+                <Label id="id-vanity-item__label" class="vanity-item__label" text="" />
+            </Button>
+        </snippet>
+    </snippets>
+
+    <Panel class="ContextMenuItem" onload="MainMenuVanityContextMenu.Init();">
+        <TooltipPanel id="MainMenuMovieSceneSelector" class="SettingsMenuDropdownContainer" tooltip="#GameUI_MainMenuMovieScene_Tooltip">
+				<CSGOSettingsEnumDropDown class="content-navbar__tabs__dropdown_vanity" convar="ui_mainmenu_bkgnd_movie_CC4ECB9" ondropdownselectionchanged="$.DispatchEvent('CSGOMainInitBackgroundMovie');">
+					<Label text="#SFUI_Map_de_ancient" value="ancient" id="ui_mainmenu_bkgnd_movie_ancient"/>
+					<Label text="#SFUI_Map_de_anubis" value="anubis" id="ui_mainmenu_bkgnd_movie_anubis"/>
+					<Label text="#SFUI_Map_de_overpass" value="overpass" id="ui_mainmenu_bkgnd_movie_overpass"/>
+					<Label text="#SFUI_Map_dz_sirocco" value="sirocco" id="ui_mainmenu_bkgnd_movie_sirocco"/>
+					<Label text="#SFUI_Map_de_cbble" value="cbble" id="ui_mainmenu_bkgnd_movie_cbble"/>
+					<Label text="#SFUI_Map_coop_kasbah" value="sirocco_night" id="ui_mainmenu_bkgnd_movie_sirocco_night"/>
+					<Label text="#SFUI_Map_de_vertigo" value="vertigo" id="ui_mainmenu_bkgnd_movie_vertigo"/>
+					<Label text="#SFUI_Map_cs_office" value="office" id="ui_mainmenu_bkgnd_movie_office"/>
+					<Label text="#SFUI_Map_de_nuke" value="nuke" id="ui_mainmenu_bkgnd_movie_nuke"/>
+					<Label text="#SFUI_Map_de_dust2" value="dust2" id="ui_mainmenu_bkgnd_movie_dust2"/>
+					<Label text="#SFUI_Map_de_train" value="train" id="ui_mainmenu_bkgnd_movie_train"/>
+					<Label text="#SFUI_Map_de_mirage" value="mirage" id="ui_mainmenu_bkgnd_movie_mirage"/>
+					<Label text="#SFUI_Map_de_inferno" value="inferno" id="ui_mainmenu_bkgnd_movie_inferno"/>
+					<Label text="#SFUI_Map_dz_blacksite" value="blacksite" id="ui_mainmenu_bkgnd_movie_blacksite"/>
+					<Label text="Warehouse" value="warehouse" id="ui_mainmenu_bkgnd_movie_warehouse"/>
+            </CSGOSettingsEnumDropDown>
+        </TooltipPanel>
+
+        <Panel id="ContextMenuBodyNoScroll" class="top-bottom-flow"/>
+        <Panel id="ContextMenuBodyWeapons" class="top-bottom-flow"/>
+    </Panel>
+</root>

@@ -1,0 +1,148 @@
+
+<root>
+	<styles>
+		<include src="file://{resources}/styles/gamestyles.css" />
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/mainmenu.css" />
+		<include src="file://{resources}/styles/loadout_grid.css" />
+		<include src="file://{resources}/styles/itemtile.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/formattext.js" />
+		<include src="file://{resources}/scripts/common/iteminfo.js" />
+		<include src="file://{resources}/scripts/common/characteranims_loadout_grid.js" />
+		<include src="file://{resources}/scripts/common/tint_spray_icon.js" />
+		<include src="file://{resources}/scripts/loadout_grid.js" />
+	</scripts>
+	<snippets>
+		<snippet name="grid-slots">
+			<Panel class="loadout-grid__slots__container">
+				<Panel id="id-loadout-column0" data-slot="equipment" class="loadout-column" hittest="false" hittestchildren="false">
+					<TextButton class="stratum-medium loadout-column__title" disabled="true" text="#LoadoutSlot_Equipment" />
+					<Panel data-slot="equipment0" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="equipment1" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="equipment2" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="equipment3" class="loadout-slot loadout-slot--skinny" />
+				</Panel>
+				<Panel id="id-loadout-column1" data-slot="secondary" class="loadout-column">
+					<RadioButton id="id-loadout-btn-secondary0" class="loadout-column__title" text="Default Secondary" onactivate="LoadoutGrid.ToggleGroupDropdown( 'secondary0' );" group="loudout-text-btn" />
+					<Button data-slot="secondary0" class="loadout-slot loadout-slot--margin-bottom" />
+					<RadioButton id="id-loadout-btn-secondary" class="loadout-column__title" text="Other Secondary" onactivate="LoadoutGrid.ToggleGroupDropdown( 'secondary' );" group="loudout-text-btn" />
+					<Button data-slot="secondary1" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="secondary2" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="secondary3" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="secondary4" class="loadout-slot" />
+				</Panel>
+				<Panel id="id-loadout-column2" data-slot="smg" class="loadout-column">
+					<RadioButton id="id-loadout-btn-smg" class="loadout-column__title" text="SMG" onactivate="LoadoutGrid.ToggleGroupDropdown( 'smg' );" group="loudout-text-btn" />
+					<Button data-slot="smg0" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="smg1" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="smg2" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="smg3" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="smg4" class="loadout-slot" />
+				</Panel>
+				<Panel id="id-loadout-column3" data-slot="heavy" class="loadout-column">
+					<RadioButton id="id-loadout-btn-heavy" class="loadout-column__title" text="Heavy" onactivate="LoadoutGrid.ToggleGroupDropdown( 'heavy' );" group="loudout-text-btn" />
+					<Button data-slot="heavy0" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="heavy1" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="heavy2" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="heavy3" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="heavy4" class="loadout-slot" />
+				</Panel>
+				<Panel id="id-loadout-column4" data-slot="rifle" class="loadout-column">
+					<RadioButton id="id-loadout-btn-rifle" class="loadout-column__title" text="Rifles" onactivate="LoadoutGrid.ToggleGroupDropdown( 'rifle' );" group="loudout-text-btn" />
+					<Button data-slot="rifle0" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="rifle1" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="rifle2" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="rifle3" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="rifle4" class="loadout-slot loadout-slot--margin-bottom" />
+					<Button data-slot="rifle5" class="loadout-slot" />
+				</Panel>
+				<Panel id="id-loadout-column5" data-slot="grenade" class="loadout-column" hittest="false" hittestchildren="false">
+					<TextButton class="stratum-medium loadout-column__title" disabled="true" text="#LoadoutSlot_Grenade" />
+					<Panel data-slot="grenade0" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="grenade1" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="grenade2" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="grenade3" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
+					<Panel data-slot="grenade4" class="loadout-slot loadout-slot--skinny" />
+				</Panel>
+			</Panel>
+		</snippet>
+		<snippet name="row-slots">
+			<Panel class="loadout-grid__row-slots" />
+		</snippet>
+	</snippets>
+	<Panel class="loadout-grid-container loadout_t_selected mainmenu-content__container mainmenu-content--hidden">
+		<Panel class="loadout-grid__slots">
+			<Panel class="full-width full-height">
+				<Panel id="id-loadout-grid-section-ct" class="loadout-grid__slots__ct">
+					<ToggleButton id="id-loadout-select-team-btn-ct" data-slot="side_slots" data-team="ct" class="loadout-team-select-btn" group="loudout-team-btns">
+						<ItemPreviewPanel id="id-loadout-agent-ct"
+                        	class="loadout-grid__agent"
+                        	mouse_rotate="false"
+                        	hittest="false"
+							style="x: 190px;"
+                        	manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
+                        	item="models/player/custom_player/legacy/ctm_sas.mdl"
+                        	enable_floorshadow="true"
+                        	force-no-composition-layer="true">
+            			</ItemPreviewPanel>
+						<Label style="x: 190px;" class="loadout-grid-team_title stratum-bold" text="#loadout_equip_ct" />
+						<Frame id="id-loadout-row-slots-ct" snippet="row-slots" class="" />
+					</ToggleButton>
+					<Frame id="id-loadout-grid-slots-ct" snippet="grid-slots" />
+				</Panel>
+				<Panel class="loudout-grid-clip-line" />
+				<Panel id="id-loadout-grid-section-t" class="loadout-grid__slots__t">
+					<Frame id="id-loadout-grid-slots-t" snippet="grid-slots" class="" />
+					<ToggleButton id="id-loadout-select-team-btn-t" data-slot="side_slots" data-team="t" class="loadout-team-select-btn" group="loudout-team-btns">
+					    <ItemPreviewPanel id="id-loadout-agent-t"
+                        	class="loadout-grid__agent"
+                        	mouse_rotate="false"
+                        	hittest="false"
+							style="x: -190px;"
+                        	manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
+                        	item="models/player/custom_player/legacy/tm_phoenix.mdl"
+                        	enable_floorshadow="true"
+                        	force-no-composition-layer="true">                                                                                   
+            			</ItemPreviewPanel>
+						<Label style="x: -190px;" class="loadout-grid-team_title stratum-bold" text="#loadout_equip_t" />
+						<Frame id="id-loadout-row-slots-t" snippet="row-slots" class="horizontal-align-right" />
+					</ToggleButton>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel class="loadout-grid__inv">
+			<Panel class="loadout-grid__inv__navbar">
+				<Image class="left-right-padding vertical-center" src="file://{images}/icons/ui/filter.vsvg" texturewidth="16" textureheight="16" />
+				<DropDown class="content-navbar__tabs__dropdown horizontal-align-left" id="id-loadout-filter-group" menuclass="DropDownMenu Width-150" oninputsubmit="LoadoutGrid.UpdateFilters()">
+					<Label class="DropDownMenu" id="all" text="#LoadoutSlot_All" />
+					<Label class="DropDownMenu" id="secondary0" text="#LoadoutSlot_Default_Secondary" />
+					<Label class="DropDownMenu" id="secondary" text="#LoadoutSlot_Other_Secondary" />
+					<Label class="DropDownMenu" id="smg" text="#LoadoutSlot_SMG" />
+					<Label class="DropDownMenu" id="rifle" text="#LoadoutSlot_Rifle" />
+					<Label class="DropDownMenu" id="customplayer" text="#LoadoutSlot_customplayer" />
+					<Label class="DropDownMenu" id="clothing_hands" text="#LoadoutSlot_clothing" />
+					<Label class="DropDownMenu" id="melee" text="#LoadoutSlot_Melee" />
+					<Label class="DropDownMenu" id="equipment2" text="#LoadoutSlot_Taser" />
+					<Label class="DropDownMenu" id="c4" text="#LoadoutSlot_C4" />
+					<Label class="DropDownMenu" id="musickit" text="#LoadoutSlot_MusicKit" />
+					<Label class="DropDownMenu" id="flair0" text="#LoadoutSlot_Flair" />
+					<Label class="DropDownMenu" id="spray0" text="#LoadoutSlot_Spray" />
+				</DropDown>
+				<DropDown class="content-navbar__tabs__dropdown horizontal-align-left DropDownMenuFixedWidth-128px" id="id-loadout-filter-itemdef" menuclass="DropDownMenu Width-150" oninputsubmit="LoadoutGrid.UpdateItemList();" />
+				<TooltipPanel id="id-loadout-clear-filters" tooltip="#loadout_clear_filters">
+					<Button id="" class="IconButton left-right-padding vertical-center left-right-flow" onactivate="LoadoutGrid.ClearFilters()">
+						<Label id="id-loadout-clear-filters-label" class="stratum-medium loadout-grid-cancel-text" text="{s:item_name}" />
+						<Image texturewidth="-1" textureheight="28" src="file://{images}/icons/ui/cancel.vsvg" />
+					</Button>
+				</TooltipPanel>
+				<Panel class="horizontal-align-right left-right-flow">
+					<Image class="left-right-padding vertical-center" src="file://{images}/icons/ui/sort.vsvg" texturewidth="16" textureheight="16" />
+					<DropDown class="content-navbar__tabs__dropdown" id="id-loadout-sort" menuclass="DropDownMenu Width-150" oninputsubmit="LoadoutGrid.UpdateItemList();" />
+				</Panel>
+			</Panel>
+			<InventoryItemList id="id-loadout-item-list" hittest="true" itemheight="190px" itemwidth="192px" spacersize="0px" spacerperiod="1" item_context_menu_filter="loadout" class="loadout-item-list" sendchildscrolledintoviewevents="true" />
+		</Panel>
+	</Panel>
+</root>

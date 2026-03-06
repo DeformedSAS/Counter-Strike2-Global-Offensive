@@ -1,0 +1,28 @@
+<!-- xml reconstructed by Source 2 Viewer 11.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/rating_emblem.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/sessionutil.js" />
+		<include src="file://{resources}/scripts/digitpanel.js" />
+		<include src="file://{resources}/scripts/rating_emblem.js" />
+	</scripts>
+	<Panel class="rating-root" useglobalcontext="true">
+		<Panel id="jsPremierRating" class="premier-rating">
+			<Image id="jsPremierRatingBg" class="rating__bg" src="" textureheight="300" texturewidth="300" />
+			<Panel id="JsSimpleNumbers" class="rating__label-container">
+				<Label class="rating__value" html="true" text="&lt;span class=&apos;major&apos;&gt;{s:rating-major}&lt;/span&gt;&lt;span class=&apos;minor&apos;&gt;{s:rating-minor}&lt;/span&gt;" />
+			</Panel>
+			<Panel id="JsDigitPanels" class="rating__label-container rating__label-container--eom">
+				<Panel id="jsPremierRatingMajor" style="" class="digitpanel-container" />
+				<Panel id="jsPremierRatingMinor" style="" class="digitpanel-container" />
+			</Panel>
+		</Panel>
+		<Image id="jsRating-Competitive" class="image-rating" src="" textureheight="100" texturewidth="250">
+			<Label id="jsRating-CompetitiveWinsNeeded" class="comp-rating-label" text="#cs_rating_need_wins" />
+		</Image>
+		<Image id="jsRating-Wingman" class="image-rating" src="" textureheight="100" texturewidth="250" />
+	</Panel>
+</root>
