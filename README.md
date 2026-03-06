@@ -1,6 +1,5 @@
 
 # CS2:GO, A mod that adds some CS2 features and content to CS:GO.
-### NOTE: CS2:GO is currently discontinued. No further updates will get released unless something interesting comes up, maybe then I'll change my mind. I've been doing the Panorama UI stuff for fun for over 2 years and it was a waste of my time.
 
 [![Discord](https://img.shields.io/discord/000000000000000000?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/4AeURZa2p2)
 # MainMenu
