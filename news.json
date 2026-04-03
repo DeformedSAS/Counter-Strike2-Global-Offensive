@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "title": "Test2",
+      "date": "2026-04-03",
+      "description": "test2 for news panel.",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPiWNihL8xXJAryIo2jdwvVQDsN8YouX6MTA&s",
+      "link": "https://github.com/DeformedSAS/Counter-Strike2-Global-Offensive/releases/tag/v1.9.1",
+      "categories": ["Major", "Maps"]
+    },
+    {
+      "title": "Test1",
+      "date": "2026-03-28",
+      "description": "this is a test.",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPiWNihL8xXJAryIo2jdwvVQDsN8YouX6MTA&s",
+      "link": "https://github.com/DeformedSAS/Counter-Strike2-Global-Offensive/releases/tag/v1.9.1",
+      "categories": ["Minor"]
+    }
+  ]
+}
