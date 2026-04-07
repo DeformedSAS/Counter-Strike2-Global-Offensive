@@ -3,8 +3,8 @@
     {
       "title": "Test2",
       "date": "2026-04-03",
-      "description": "test2 for news panel.",
-      "imageUrl": "https://imgur.com/a/CYWsvr5",
+      "description": "test2 for news panel. this will be the file that gets read by cs2go for each updates to the mod.",
+      "imageUrl": "https://raw.githubusercontent.com/DeformedSAS/Counter-Strike2-Global-Offensive/main/news_images/test1.png",
       "link": "https://github.com/DeformedSAS/Counter-Strike2-Global-Offensive/releases/tag/v1.9.1",
       "categories": ["Major", "Maps"]
     },
