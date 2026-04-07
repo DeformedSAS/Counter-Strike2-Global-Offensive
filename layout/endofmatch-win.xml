@@ -9,35 +9,55 @@
 		<include src="file://{resources}/scripts/endofmatch-win.js" />
 		<include src="file://{resources}/scripts/common/gamerules_constants.js" />
 	</scripts>
-
-                                                                                   
-                                                                                  
-	<snippets>
-		<snippet name="PlayerWinner">
-			<Panel class="left-right-flow horizontal-center">
-				<Frame id="WinPlayersAvatar" class='' src="file://{resources}/layout/avatar.xml" />
-				<Panel class="top-bottom-flow vertical-center left-right-padding">
-					<Label id="WinPlacement" class="eom-win__player_title stratum-font" text="#SFUI_WinPanel_arsenal_first"/>
-					<Label id="WinPlayerName" class="eom-win__player_name" html="true" text="{s:winner_name}"/>
-				</Panel>
-			</Panel>
-		</snippet>
-	</snippets>
-
-	<Panel class="eom-win" useglobalcontext="true">
-		<Panel id='WinTeam' class="full-width full-height">
-			<Label id="WinTeamBackgroundText" class="eom-win__text-background stratum-font" text="{s:win-result}"/>
-						<ItemPreviewPanel 	id="WinCoinModel"
-								class="eom-win__model hidden" 
-								manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
-								item="models/inventory_items/scoreboard_logos/logo_ct.mdl"
-								mouse_rotate="false"/>
-
-			<Label id="WinTeamName" class="eom-win__text" text="{s:teamname}"/>
-		</Panel>
-
-		<Panel id='WinPlayers' class="full-width full-height top-padding-medium top-bottom-flow hidden">
-			                                   
-		</Panel>
-	</Panel>
+    <snippets>
+        <snippet name="PlayerWinner">
+            <Panel class="left-right-flow horizontal-center">
+                <Frame id="WinPlayersAvatar" class="" src="file://{resources}/layout/avatar.xml" />
+                <Panel class="top-bottom-flow vertical-center left-right-padding">
+                    <Label id="WinPlacement" class="eom-win__player_title stratum-font" text="#SFUI_WinPanel_arsenal_first" />
+                    <Label id="WinPlayerName" class="eom-win__player_name" html="true" text="{g:player_name:html:player_slot}" />
+                </Panel>
+            </Panel>
+        </snippet>
+    </snippets>
+    <Panel class="eom-win eom-win__main" useglobalcontext="true">
+        <Panel id="WinTeam" class="eom-win__main">
+            <Panel class="eom-win__main__data">
+                <Panel id="eom-win-panel-score" class="eom-win__main__score">
+                    <Panel class="eom-win__main__dots eom-win__main__dots--slim" />
+                    <Panel class="eom-win__main__line" />
+                    <Panel class="eom-win__main__line vertical-align-bottom" />
+                    <Panel class="eom-win__main__score__container">
+                        <Label class="stratum-regular fontSize-xl eom-win__main__score__text local-player-score" text="{d:score_local_player}" />
+                        <Label class="stratum-regular fontSize-xl eom-win__main__score__text" text="-" />
+                        <Label class="stratum-regular fontSize-xl eom-win__main__score__text" text="{d:score_other}" />
+                    </Panel>
+                </Panel>
+                <Panel id="eom-win-panel-result" class="eom-win__main__result">
+                    <Panel class="eom-win__main__line" />
+                    <Panel class="eom-win__main__line vertical-align-bottom" />
+                    <Panel class="eom-win__main__dots" />
+                    <Panel class="vertical-center horizontal-center left-right-flow">
+                        <Image texturewidth="-1" textureheight="16" class="eom-win__main__double-arrows" src="file://{images}/hud/double_arrows.svg" />
+                        <Panel class="">
+                            <Label class="stratum-bold eom-win__main__result__text" text="{s:win-result}">
+                                <Image texturewidth="-1" textureheight="8" class="eom-win__main__bracket eom-win__main__bracket--top-right" src="file://{images}/hud/bracket.svg" />
+                                <Image texturewidth="-1" textureheight="8" class="eom-win__main__bracket eom-win__main__bracket--bottom-right" src="file://{images}/hud/bracket.svg" />
+                                <Image texturewidth="-1" textureheight="8" class="eom-win__main__bracket eom-win__main__bracket--top-left" src="file://{images}/hud/bracket.svg" />
+                                <Image texturewidth="-1" textureheight="8" class="eom-win__main__bracket eom-win__main__bracket--bottom-left" src="file://{images}/hud/bracket.svg" />
+                            </Label>
+                        </Panel>
+                        <Image texturewidth="-1" textureheight="16" class="eom-win__main__double-arrows--right" src="file://{images}/hud/double_arrows.svg" />
+                    </Panel>
+                    <Panel class="eom-win__main_result__white" />
+                    <Panel class="eom-win__main__glitch" />
+                </Panel>
+            </Panel>
+        </Panel>
+        <Panel id="WinPlayers" class="full-width full-height top-padding-medium top-bottom-flow hidden" />
+        <Panel id="VacLive" class="eom-win__vaclive">
+            <Label id="vacLiveTitle" class="stratum-bold-italic" text="#SFUI_match_vac_live_title" />
+            <Label id="vacLiveDesc" class="stratum-bold" text="#SFUI_match_abort_match_vac_live_eomwin" />
+        </Panel>
+    </Panel>
 </root>

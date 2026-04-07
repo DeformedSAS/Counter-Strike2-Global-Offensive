@@ -308,17 +308,17 @@
                             <Label class="Orange" text="Title Text Tooltip Styled" />
                         </TooltipPanel>
                         <Label text="" />
-                        <TooltipPanel tooltip-title="title tooltip" image-src="file://{images}/control_icons/home_icon.png" tooltip="text tooltip">
+                        <TooltipPanel tooltip-title="title tooltip" image-src="file://{images}/control_icons/home_icon.svg" tooltip="text tooltip">
                             <Label class="Orange" text="Title Image Text Tooltip" />
                         </TooltipPanel>
-                        <TooltipPanel tooltip-title="title tooltip" image-src="file://{images}/control_icons/home_icon.png" tooltip="text tooltip" tooltip-class="ShortTextTooltip">
+                        <TooltipPanel tooltip-title="title tooltip" image-src="file://{images}/control_icons/home_icon.svg" tooltip="text tooltip" tooltip-class="ShortTextTooltip">
                             <Label class="Orange" text="Title Image Text Tooltip Styled" />
                         </TooltipPanel>
                         <Label text="" />
-                        <TooltipPanel src="file://{images}/layout/tooltips/tooltip_custom_test.vxml_c" src-id="CustomTooltipUniqueId">
+                        <TooltipPanel src="file://{images}/layout/tooltips/tooltip_custom_test.xml" src-id="CustomTooltipUniqueId">
                             <Label class="Orange" text="Custom Layout Tooltip" />
                         </TooltipPanel>
-                        <TooltipPanel src="file://{images}/layout/tooltips/tooltip_custom_test.vxml_c" src-id="CustomTooltipUniqueId2" src-parameters="test=blah">
+                        <TooltipPanel src="file://{images}/layout/tooltips/tooltip_custom_test.xml" src-id="CustomTooltipUniqueId2" src-parameters="test=blah">
                             <Label class="Orange" text="Custom Layout Tooltip with parameters" />
                         </TooltipPanel>
                     </Panel>
@@ -627,10 +627,10 @@
                         <Panel id="VideoBackground" />
                         <Label class="fontSize-m fontWeight-light" text="gif:" />
                         <Image src="file://{resources}/videos/test/giftest.gif" class="giftest" />
-                        <Label class="fontSize-m fontWeight-light" text="\napng:" />
-                        <Image src="file://{resources}/videos/test/apngtest.apng" class="apngtest" />
-                        <Label class="fontSize-m fontWeight-light" text="\napng format derived from file contents (no .apng extension):" />
-                        <Image id="ImageApngtest" class="apngtest" />
+                        <Label class="fontSize-m fontWeight-light" text="\nasvg:" />
+                        <Image src="file://{resources}/videos/test/asvgtest.asvg" class="asvgtest" />
+                        <Label class="fontSize-m fontWeight-light" text="\nasvg format derived from file contents (no .asvg extension):" />
+                        <Image id="ImageAsvgtest" class="asvgtest" />
                     </Panel>
                     <Panel class="top-bottom-flow FillParentFlow">
                         <Label class="fontSize-m fontWeight-light" text="Video Player, Controls" />
@@ -669,7 +669,7 @@
                     <Panel class="" acceptsinput="true">
 					<ItemPreviewPanel id="JsMainmenu_Vanity_0"
                                       class="ItemPreviewPanelForBuildingInventoryImages"
-                                      manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
+                                      manifest="resource/ui/ItemModelPanelCharWeaponInspect.res"
                                       item="models/player/custom_player/legacy/tm_phoenix.mdl"
                                       mouse_rotate="false"
                                       enable_floorshadow="true"
@@ -800,12 +800,12 @@
                     <Panel class="top-bottom-flow" style="padding-left: 50px;">
                         <Panel class="left-right-flow">
                             <Label text="By dispatching panorama event &apos;" />
-                            <Label class="Positive fontSize-m fontWeight-Bold" text="CSGOPlaySoundEffect" />
+                            <Label class="Positive fontSize-m fontWeight-Bold" text="PlaySoundEffect" />
                             <Label text="&apos;" />
                         </Panel>
                         <Panel class="left-right-flow">
                             <Label class="fontSize-m fontWeight-Bold" text="Examples : " />
-                            <Button class="SoundBtn" id="SoundTest" onactivate="$.DispatchEvent( &apos;CSGOPlaySoundEffect&apos;, &apos;UIPanorama.ui_button_large&apos;, $(&apos;#SoundTest&apos;) )">
+                            <Button class="SoundBtn" id="SoundTest" onactivate="$.DispatchEvent( &apos;PlaySoundEffect&apos;, &apos;UIPanorama.popup_accept_match_found&apos;, $(&apos;#SoundTest&apos;) )">
                                 <Label text="Test" />
                             </Button>
                         </Panel>
@@ -824,91 +824,91 @@
                 <Panel class="top-bottom-flow vscroll">
                     <Panel class="top-bottom-flow" style="padding: 20px;">
                         <Panel id="jsxpshoptracks" class="left-right-flow">
-                            <Frame class="1" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;1&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:00})})" />
-                            <Frame class="2" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;2&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:3300})})" />
-                            <Frame class="3" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;3&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:4999})})" />
-                            <Frame class="4" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;4&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:11999})})" />
-                            <Frame class="5" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;5&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:12000})})" />
-                            <Frame class="6" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;6&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:501})})" onactivate="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;6&apos;).forEach( el =&gt; XpShopTrack.XpShopUpdate( {xpshop_track_frame_panel:el, xpshop_track_value:$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;6&apos;)[0].Data().prev_xpshop_track_value + Math.random()*300}))" />
-                            <Frame class="7" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;7&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:501})})" onactivate="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;7&apos;).forEach( el =&gt; XpShopTrack.XpShopUpdate( {xpshop_track_frame_panel:el, xpshop_track_value:$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;7&apos;)[0].Data().prev_xpshop_track_value + 500 + Math.random()*1000 }))" />
-                            <Frame class="8" src="file://{images}/layout/xpshop_track.vxml_c" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;8&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:250})})" onactivate="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;8&apos;).forEach( el =&gt; XpShopTrack.XpShopUpdate( {xpshop_track_frame_panel:el, xpshop_track_value:$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;8&apos;)[0].Data().prev_xpshop_track_value + 1500 + Math.random()*3000 }))" />
+                            <Frame class="1" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;1&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:00})})" />
+                            <Frame class="2" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;2&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:3300})})" />
+                            <Frame class="3" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;3&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:4999})})" />
+                            <Frame class="4" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;4&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:11999})})" />
+                            <Frame class="5" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;5&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:12000})})" />
+                            <Frame class="6" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;6&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:501})})" onactivate="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;6&apos;).forEach( el =&gt; XpShopTrack.XpShopUpdate( {xpshop_track_frame_panel:el, xpshop_track_value:$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;6&apos;)[0].Data().prev_xpshop_track_value + Math.random()*300}))" />
+                            <Frame class="7" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;7&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:501})})" onactivate="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;7&apos;).forEach( el =&gt; XpShopTrack.XpShopUpdate( {xpshop_track_frame_panel:el, xpshop_track_value:$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;7&apos;)[0].Data().prev_xpshop_track_value + 500 + Math.random()*1000 }))" />
+                            <Frame class="8" src="file://{images}/layout/xpshop_track.xml" onload="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;8&apos;).forEach( el =&gt;{ el.SetDialogVariableInt(&apos;max-stars&apos;,50); XpShopTrack.XpShopInit( {xpshop_track_frame_panel:el, xpshop_track_value:250})})" onactivate="$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;8&apos;).forEach( el =&gt; XpShopTrack.XpShopUpdate( {xpshop_track_frame_panel:el, xpshop_track_value:$(&apos;#jsxpshoptracks&apos;).FindChildrenWithClassTraverse(&apos;8&apos;)[0].Data().prev_xpshop_track_value + 1500 + Math.random()*3000 }))" />
                         </Panel>
                     </Panel>
                     <Panel class="top-bottom-flow" style="padding: 20px;">
                         <Panel id="jshonoricons" class="left-right-flow">
-                            <Frame class="lib-honor-icon lvl1 " src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl1&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:1, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl1 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl1 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl1 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl1 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl2&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:2, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl2 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl3&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:3, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl3 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl4&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:4, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl4 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl5&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:5, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl5 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl6&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:6, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl6 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl7&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:7, do_fx:true}))" />
-                            <Frame class="lib-honor-icon lvl7 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
+                            <Frame class="lib-honor-icon lvl1 " src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl1&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:1, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl1 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl1 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl1 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl1 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl2&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:2, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl2 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl3&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:3, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl3 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl4&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:4, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl4 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl5&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:5, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl5 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl6&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:6, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl6 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons&apos;).FindChildrenWithClassTraverse(&apos;lvl7&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:7, do_fx:true}))" />
+                            <Frame class="lib-honor-icon lvl7 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
                         </Panel>
                         <Label class="fontSize-m fontWeight-Bold" text="NoFx Versions:" />
                         <Panel id="jshonoricons_noFx" class="left-right-flow">
-                            <Frame class="lib-honor-icon lvl1 " src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl1&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:1, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl1 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl1 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl1 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl1 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl2&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:2, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl2 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl3&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:3, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl3 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl3 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl4&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:4, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl4 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl4 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl5&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:5, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl5 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl5 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl6&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:6, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl6 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl6 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7" src="file://{images}/layout/honor_icon.vxml_c" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl7&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:7, do_fx:false}))" />
-                            <Frame class="lib-honor-icon lvl7 scoreboard-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7 scoreboard-ct" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7 deathnotice-t" src="file://{images}/layout/honor_icon.vxml_c" />
-                            <Frame class="lib-honor-icon lvl7 deathnotice-ct" src="file://{images}/layout/honor_icon.vxml_c" />
+                            <Frame class="lib-honor-icon lvl1 " src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl1&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:1, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl1 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl1 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl1 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl1 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl2&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:2, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl2 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl2 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl3&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:3, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl3 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl3 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl4&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:4, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl4 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl4 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl5&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:5, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl5 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl5 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl6&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:6, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl6 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl6 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7" src="file://{images}/layout/honor_icon.xml" onload="$(&apos;#jshonoricons_noFx&apos;).FindChildrenWithClassTraverse(&apos;lvl7&apos;).forEach( el =&gt; HonorIcon.SetOptions( {honor_icon_frame_panel:el, force_icon:&apos;xptrail&apos;, xptrail_value:7, do_fx:false}))" />
+                            <Frame class="lib-honor-icon lvl7 scoreboard-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7 scoreboard-ct" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7 deathnotice-t" src="file://{images}/layout/honor_icon.xml" />
+                            <Frame class="lib-honor-icon lvl7 deathnotice-ct" src="file://{images}/layout/honor_icon.xml" />
                         </Panel>
                     </Panel>
                     <Label class="fontSize-m fontWeight-Bold" text="Panels created dynamically:" />
@@ -919,9 +919,9 @@
                         <ControlLibTestPanel MyCustomProp="Set from xml" />
                     </Panel>
                     <Label class="fontSize-m fontWeight-Bold" text="CS Rating" />
-                    <Frame id="jsRatingEmblem1" src="file://{images}/layout/rating_emblem.vxml_c" onactivate="RatingEmblem.SetXuid( {root_panel:$(&apos;#jsRatingEmblem1&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Premier&apos;})" onload="RatingEmblem.SetXuid( {elPanel:$(&apos;#jsRatingEmblem1&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Premier&apos;})" />
-                    <Frame id="jsRatingEmblem2" src="file://{images}/layout/rating_emblem.vxml_c" onactivate="RatingEmblem.SetXuid( {root_panel:$(&apos;#jsRatingEmblem2&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Competitive&apos;})" onload="RatingEmblem.SetXuid( {elPanel:$(&apos;#jsRatingEmblem2&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Competitive&apos;})" />
-                    <Frame id="jsRatingEmblem3" vfx="true" src="file://{images}/layout/rating_emblem.vxml_c" onactivate="RatingEmblem.SetXuid( {root_panel:$(&apos;#jsRatingEmblem3&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Wingman&apos;})" onload="RatingEmblem.SetXuid( {elPanel:$(&apos;#jsRatingEmblem3&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Wingman&apos;})" />
+                    <Frame id="jsRatingEmblem1" src="file://{images}/layout/rating_emblem.xml" onactivate="RatingEmblem.SetXuid( {root_panel:$(&apos;#jsRatingEmblem1&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Premier&apos;})" onload="RatingEmblem.SetXuid( {elPanel:$(&apos;#jsRatingEmblem1&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Premier&apos;})" />
+                    <Frame id="jsRatingEmblem2" src="file://{images}/layout/rating_emblem.xml" onactivate="RatingEmblem.SetXuid( {root_panel:$(&apos;#jsRatingEmblem2&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Competitive&apos;})" onload="RatingEmblem.SetXuid( {elPanel:$(&apos;#jsRatingEmblem2&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Competitive&apos;})" />
+                    <Frame id="jsRatingEmblem3" vfx="true" src="file://{images}/layout/rating_emblem.xml" onactivate="RatingEmblem.SetXuid( {root_panel:$(&apos;#jsRatingEmblem3&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Wingman&apos;})" onload="RatingEmblem.SetXuid( {elPanel:$(&apos;#jsRatingEmblem3&apos;), xuid:-1, api:&apos;fakeData&apos;, rating_type:&apos;Wingman&apos;})" />
                     <Label class="fontSize-m fontWeight-Bold" text="Carousel test" />
                     <Panel class="top-bottom-flow" style="padding: 30px;">
                         <CarouselNav carouselid="TestCarousel" />
@@ -957,7 +957,7 @@
                         </Panel>
                     </Panel>
                     <Label class="fontSize-m fontWeight-Bold" text="Frames:" />
-                    <Frame src="file://{images}/layout/controlslibrary_frameexample.vxml_c" />
+                    <Frame src="file://{images}/layout/controlslibrary_frameexample.xml" />
                     <Frame snippet="frame-snippet-example" />
                     <Label class="fontSize-m fontWeight-Bold" text="Persepective:" />
                     <Panel class="top-bottom-flow" style="padding: 30px;">
@@ -1235,64 +1235,64 @@
                     <Panel class="top-bottom-flow FillParentFlow">
                         <Panel class="left-right-flow FillParentFlow">
                            
-                            <Image src="file://{images}/econ/status_icons/level1.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 1, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level2.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 2, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level3.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 3, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level4.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 4, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level5.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 5, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level1.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 1, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level2.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 2, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level3.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 3, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level4.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 4, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level5.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl1&apos;, 5, 1, 1);" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
-                            <Image src="file://{images}/econ/status_icons/level6.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 6, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level7.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 7, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level8.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 8, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level9.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 9, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level10.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 10, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level6.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 6, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level7.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 7, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level8.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 8, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level9.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 9, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level10.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl2&apos;, 10, 1, 1);" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
-                            <Image src="file://{images}/econ/status_icons/level11.png" />
-                            <Image src="file://{images}/econ/status_icons/level12.png" />
-                            <Image src="file://{images}/econ/status_icons/level13.png" />
-                            <Image src="file://{images}/econ/status_icons/level14.png" />
-                            <Image src="file://{images}/econ/status_icons/level15.png" />
+                            <Image src="file://{images_econ}/status_icons/level11.png" />
+                            <Image src="file://{images_econ}/status_icons/level12.png" />
+                            <Image src="file://{images_econ}/status_icons/level13.png" />
+                            <Image src="file://{images_econ}/status_icons/level14.png" />
+                            <Image src="file://{images_econ}/status_icons/level15.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
-                            <Image src="file://{images}/econ/status_icons/level16.png" />
-                            <Image src="file://{images}/econ/status_icons/level17.png" />
-                            <Image src="file://{images}/econ/status_icons/level18.png" />
-                            <Image src="file://{images}/econ/status_icons/level19.png" />
-                            <Image src="file://{images}/econ/status_icons/level20.png" />
+                            <Image src="file://{images_econ}/status_icons/level16.png" />
+                            <Image src="file://{images_econ}/status_icons/level17.png" />
+                            <Image src="file://{images_econ}/status_icons/level18.png" />
+                            <Image src="file://{images_econ}/status_icons/level19.png" />
+                            <Image src="file://{images_econ}/status_icons/level20.png" />
                         </Panel>
                     </Panel>
                     <Panel class="top-bottom-flow FillParentFlow">
                         <Panel class="left-right-flow FillParentFlow">
-                            <Image src="file://{images}/econ/status_icons/level21.png" />
-                            <Image src="file://{images}/econ/status_icons/level22.png" />
-                            <Image src="file://{images}/econ/status_icons/level23.png" />
-                            <Image src="file://{images}/econ/status_icons/level24.png" />
-                            <Image src="file://{images}/econ/status_icons/level25.png" />
+                            <Image src="file://{images_econ}/status_icons/level21.png" />
+                            <Image src="file://{images_econ}/status_icons/level22.png" />
+                            <Image src="file://{images_econ}/status_icons/level23.png" />
+                            <Image src="file://{images_econ}/status_icons/level24.png" />
+                            <Image src="file://{images_econ}/status_icons/level25.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/level26.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 1, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level27.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 2, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level28.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 3, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level29.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 4, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level30.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 5, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level26.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 1, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level27.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 2, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level28.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 3, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level29.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 4, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level30.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl6&apos;, 5, 1, 1);" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/level31.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 1, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level32.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 2, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level33.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 3, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level34.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 4, 1, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level35.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 5, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level31.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 1, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level32.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 2, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level33.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 3, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level34.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 4, 1, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level35.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl7&apos;, 5, 1, 1);" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
-                            <Image src="file://{images}/econ/status_icons/level36.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 1, 35, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level37.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 2, 36, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level38.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 3, 37, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level39.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 4, 38, 1);" />
-                            <Image src="file://{images}/econ/status_icons/level40.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 5, 39, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level36.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 1, 35, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level37.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 2, 36, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level38.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 3, 37, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level39.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 4, 38, 1);" />
+                            <Image src="file://{images_econ}/status_icons/level40.png" onmouseover="ParticleControls.RestartStatusRank(&apos;#statusrank_lvl8&apos;, 5, 39, 1);" />
                         </Panel>
                     </Panel>
                 </Panel>
@@ -1310,47 +1310,46 @@
                     <Panel class="top-bottom-flow FillParentFlow">
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup0.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup1.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup2.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup3.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup4.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup5.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup6.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup0.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup1.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup2.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup3.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup4.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup5.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup6.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup7.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup8.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup9.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup10.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup7.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup8.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup9.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup10.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup11.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup12.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup13.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup11.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup12.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup13.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup14.png" />
-                            <Image src="file://{images}/econ/status_icons/skillgroup15.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup14.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup15.png" />
                         </Panel>
                     </Panel>
                     <Panel class="top-bottom-flow FillParentFlow">
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup16.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup16.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup17.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup17.png" />
                         </Panel>
                         <Panel class="left-right-flow FillParentFlow">
 
-                            <Image src="file://{images}/econ/status_icons/skillgroup18.png" />
+                            <Image src="file://{images_econ}/status_icons/skillgroup18.png" />
                         </Panel>
-                        <Panel class="left-right-flow FillParentFlow">
 
                         </Panel>
                     </Panel>
@@ -1402,5 +1401,4 @@
                 </Panel>
             </Panel>
         </Panel>
-    </Panel>
 </root>

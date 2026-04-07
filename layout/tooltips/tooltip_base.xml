@@ -4,7 +4,7 @@
     <include src="file://{resources}/styles/tooltips/tooltip_base.css" />
 	</styles>
 
-  <TooltipBase class="TooltipContainer" hittest="false" hittestchildren="false" >
+  <TooltipBase class="TooltipContainer" popupbackground="blur" hittest="false" hittestchildren="false" >
     <Panel id="TopArrow" arroworigin="50% 0%" hittest="false" />
 
     <Panel class="TooltipRow" hittest="false">

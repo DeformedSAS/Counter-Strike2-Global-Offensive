@@ -1,35 +1,46 @@
 "use strict";
-/// <reference path="../csgo.d.ts" />
+
 var ContextMenuNavBarNotification;
 (function (ContextMenuNavBarNotification) {
+
     function SetupContextMenu() {
-        const icon = $.GetContextPanel().GetAttributeString('icon', '');
-        const title = $.GetContextPanel().GetAttributeString('title', '');
-        const color = $.GetContextPanel().GetAttributeString('color', '');
-        const tooltip = $.GetContextPanel().GetAttributeString('tooltip', '');
-        const link = $.GetContextPanel().GetAttributeString('link', '');
-        const gcConnecting = $.GetContextPanel().GetAttributeString('gcconnecting', '');
-        const elPanel = $.CreatePanel('Panel', $.GetContextPanel(), '');
-        elPanel.BLoadLayoutSnippet('notification');
-        $.GetContextPanel().FindChildInLayoutFile('id-notification-gc-icon').SetHasClass('show', gcConnecting === 'true');
-        let elIcon = $.GetContextPanel().FindChildInLayoutFile('id-notification-icon');
-        elIcon.SetHasClass('show', gcConnecting !== 'true');
-        if (gcConnecting !== 'true') {
-            elIcon.SetImage('file://{images}/icons/ui/' + icon + '.svg');
-            elIcon.SetHasClass(color, color !== '');
+        const panel = $.GetContextPanel();
+        const icon        = panel.GetAttributeString("icon", "");
+        const title       = panel.GetAttributeString("title", "");
+        const color       = panel.GetAttributeString("color", "");
+        const tooltip     = panel.GetAttributeString("tooltip", "");
+        const gcConnecting = panel.GetAttributeString("gcconnecting", "");
+        let link = panel.GetAttributeString("link", "");
+        if (!link || link === "undefined") link = "";
+        const root = $.CreatePanel("Panel", panel, "");
+        root.BLoadLayoutSnippet("notification");
+        panel.FindChildInLayoutFile("id-notification-gc-icon")
+            .SetHasClass("show", gcConnecting === "true");
+        const elIcon = panel.FindChildInLayoutFile("id-notification-icon");
+        elIcon.SetHasClass("show", gcConnecting !== "true");
+
+        if (gcConnecting !== "true") {
+            elIcon.SetImage(`file://{images}/icons/ui/${icon}.svg`);
+            if (color) elIcon.SetHasClass(color, true);
         }
-        if (link !== '') {
-            $.GetContextPanel().FindChildInLayoutFile('id-notification-link').SetPanelEvent('onactivate', () => SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser(link));
+        const elLink = panel.FindChildInLayoutFile("id-notification-link");
+        if (link) {
+            elLink.SetPanelEvent("onactivate", 
+                () => SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser(link)
+            );
+        } else {
+            elLink.SetPanelEvent("onactivate", () => {});
         }
-        $.GetContextPanel().SetHasClass('show-title', title !== '');
-        $.GetContextPanel().SetHasClass('show-tooltip', tooltip !== '');
-        $.GetContextPanel().SetHasClass('show-link', link !== '');
-        $.GetContextPanel().SetDialogVariable('title', title);
-        $.GetContextPanel().SetDialogVariable('tooltip', $.Localize(tooltip));
-        $.GetContextPanel().SetDialogVariable('link', link);
-        $.GetContextPanel().FindChildInLayoutFile('id-notification-text-block').SetHasClass(color, true);
+        panel.SetHasClass("show-title", title !== "");
+        panel.SetHasClass("show-tooltip", tooltip !== "");
+        panel.SetHasClass("show-link", link !== "");
+        panel.SetDialogVariable("title", title);
+        panel.SetDialogVariable("tooltip", $.Localize(tooltip));
+        panel.SetDialogVariable("link", link);
+
+        panel.FindChildInLayoutFile("id-notification-text-block")
+            .SetHasClass(color, true);
     }
     ContextMenuNavBarNotification.SetupContextMenu = SetupContextMenu;
-    {
-    }
+
 })(ContextMenuNavBarNotification || (ContextMenuNavBarNotification = {}));

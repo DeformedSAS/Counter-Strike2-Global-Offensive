@@ -29,47 +29,99 @@
 
 .overwatch-button-container
 {
-	flow-children:down;
-	width:100%;
-	margin: 0px 64px 28px 64px; 
+    flow-children:right;
+    width:100%;
+    margin: 0px;
 }
 
-.overwatch-button
+.PopupButton.overwatch-button
 {
-	horizontal-align:left;
+    horizontal-align:left;
+    width: fill-parent-flow(1);
+    height: 200px;
+    padding-left: 32px;
+}
+
+.PopupButton.overwatch-button Label
+{
+    text-align: left;
+	font-family: ST2MDCOND;
+    horizontal-align: left;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.PopupButton.overwatch-button .RadioBox
+{
+    opacity: .4;
+}
+
+.PopupButton:hover Label,.PopupButton:selected Label
+{
+    color: white;
+	font-family: ST2MDCOND;
+    text-shadow: 0px 0px 10px 2.0 #ffffff18;
+}
+
+.PopupButton:hover .RadioBox,.PopupButton:selected .RadioBox
+{
+    opacity: 1;
+}
+
+#verdict_btn_not_guilty
+{
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#verdict_btn_not_guilty:hover,#verdict_btn_not_guilty:selected
+{
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: inset rgba(255, 255, 255, 0.3) 0px 0px 12px 1x;
+}
+
+#verdict_btn_guilty
+{
+    background-color: rgba(255, 0, 0, 0.05);
+    horizontal-align: right;
+}
+
+#verdict_btn_guilty:hover,#verdict_btn_guilty:selected
+{
+    background-color: rgba(220, 0, 0, 0.25);
+    box-shadow: inset rgba(255, 0, 0, 0.4) 0px 0px 12px 1x;
 }
 
 .overwatch-separator
 {
-	margin: 0px 64px 0px 64px;
+    margin: 0px 64px 0px 64px;
 }
 
 .overwatch-verdict-container
 {
-	flow-children:down;
-	overflow:squish scroll;
+    flow-children:down;
+    overflow:squish scroll;
 }
 
 .overwatch-verdict-background
 {
-	margin: 16px 64px;
-	background-color: #00000040;
+    margin: 16px 64px;
+    width: fill-parent-flow(1);
+    background-color: #00000040;
 }
 
 .overwatch-verdict-popup
 {
-	width:900px;
-	margin-top:64px;
-	margin-bottom:64px;
+    width:900px;
+    margin-top:64px;
+    margin-bottom:64px;
 }
 
 .content-navbar__seperator--partial
 {
-	margin-left:32px;
-	margin-right:32px;
+    margin-left:32px;
+    margin-right:32px;
 }
 
 .overwatch-verdict-popup Label
 {
-	font-family:Stratum2;
+    font-family:Stratum2;
 }

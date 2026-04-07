@@ -1,5 +1,3 @@
-
-
 @define chatBgGrey: rgba(94, 94, 94, 0.5);
 .chat-panel-outer
 {
@@ -25,8 +23,8 @@
 
 .MainMenuRootPanel--PauseMenuMode .chat-panel-outer
 {
-    opacity: 1;
-    visibility: visible;
+    opacity: 0;
+    visibility: collapse;
 }
 
 .chat-panel
@@ -175,8 +173,7 @@
 .chat-entry Label
 {
     color: white;
-    font-size: 16px;
-	font-family: Stratum2;
+    font-size: 12px;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
     padding: 0px 8px;
     border-radius: 2px;
@@ -245,9 +242,9 @@
 .chat-entry CSGOAvatarImage
 {
     vertical-align: center;
-    width: 32px;
-    height: 32px;
-    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
 }
 
 @keyframes 'chat-new-entry'
@@ -274,7 +271,6 @@
 .chat-open-text
 {
     font-weight: bold;
-	font-family: STratum2;
     text-decoration: underline;
 }
 
@@ -293,7 +289,7 @@
 {
     visibility: collapse;
     font-size: 16px;
-    font-family: Stratum2, "Arial Unicode MS";
+    font-family: Stratum2 TF, "Arial Unicode MS";
     width: 100%;
     color: White;
     padding-left: 8px;
@@ -310,7 +306,7 @@ TextEntry.chat-container__input #PlaceholderText
     transition-property: opacity;
     transition-duration: 0.2s;
     color: rgb(184, 181, 181);
-    font-family: Stratum2, "Arial Unicode MS";
+    font-family: Stratum2 TF, "Arial Unicode MS";
     font-size: 16px;
 }
 
@@ -375,7 +371,7 @@ TextEntry.chat-container__input.HasInput #PlaceholderText
 
 CSGOAvatarImage
 {
-    visibility: collapse;
+    visibility: visible;
 }
 
 TextEntry
@@ -387,4 +383,3 @@ TextEntry.
 {
     height: 32px;
 }
-

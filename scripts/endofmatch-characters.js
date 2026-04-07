@@ -353,11 +353,6 @@ var EOM_Characters = ( function()
 		{
 			_m_arrAllPlayersMatchDataJSO = data.allplayerdata;
 		}
-		else
-		{
-			EndOfMatch.ToggleBetweenScoreboardAndCharacters();                      
-			return false;
-		}
 
 		EndOfMatch.EnableToggleBetweenScoreboardAndCharacters();
 
@@ -568,10 +563,8 @@ var EOM_Characters = ( function()
 					panel.AddClass( 'reveal' );
 
 				                                          
-				if ( !$.GetContextPanel().BAscendantHasClass( 'scoreboard-visible' ) )
-				{
-					$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.stats_reveal', 'MOUSE' );
-				}
+			    $.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.stats_reveal', 'MOUSE' );
+
 				charPanel.AddClass( 'brightmodel' );
 
 				$.Schedule( 0.1, _ =>

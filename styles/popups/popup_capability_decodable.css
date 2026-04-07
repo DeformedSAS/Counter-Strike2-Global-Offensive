@@ -1,3 +1,5 @@
+
+
 .popup-decodable-blur-anim
 {
     transition-property: blur, opacity;
@@ -80,8 +82,8 @@
 {
     horizontal-align: center;
     font-size: 20px;
-	font-family:Stratum2;
 	font-weight: medium;
+	font-family: Stratum2;
     color: #4ab0e7;
     vertical-align: center;
     transform: translateY(-1px);
@@ -145,38 +147,41 @@
 
 .popup-decodable-opening
 {
-	transform: translateY( 0% );
-	height: 100%;
-	width: height-percentage( 133% );
-	horizontal-align: center;
-	brightness: 1;
-	background-color: gradient(radial, 50% 50%, 0px 0px, 50% 50%, from( rgba(255, 255, 255, 0.0)), to( rgba(255, 255, 255, 0.0)) );
+    transform: translateY( 0% );
+    height: 100%;
+    width: height-percentage( 133% );
+    horizontal-align: center;
+    brightness: 1;
+    background-color: gradient(radial, 50% 50%, 0px 0px, 50% 50%, from( rgba(255, 255, 255, 0.0)), to( rgba(255, 255, 255, 0.0)) );
 }
 
 .popup-decodable-opening.hidden
 {
-	opacity: 0;
-	transform: scaleY( 0 );
-	visibility: visible;
-	background-color: gradient(radial, 50% 50%, 0px 0px, 50% 50%, from( white ), to( rgba(255, 255, 255, 0.0)) );
-
-	transition-property: background-color, transform, opacity;
-	transition-duration: .25s, .25s, 0.1s;
-	transition-timing-function: ease-in;
+    opacity: 0;
+    transform: scaleY( 0 );
+    visibility: visible;
+    background-color: gradient(radial, 50% 50%, 0px 0px, 50% 50%, from( white ), to( rgba(255, 255, 255, 0.0)) );
+    transition-property: background-color, transform, opacity;
+    transition-duration: .25s, .25s, 0.1s;
+    transition-timing-function: ease-in;
 }
 
 .popup-decodable-opening__list
 {
-	height: 100%;
-	width: 100%;
-	horizontal-align: center;
-	vertical-align: center;
-	opacity-mask: url( "file://{images}/masks/case-opening-outer.png" );
+    height: 100%;
+    width: 100%;
+    horizontal-align: center;
+    vertical-align: center;
+    opacity-mask: url("file://{images}/masks/case-opening-outer.svg");
+    background-image: url("file://{images}/backgrounds/bluedots_large.png");
+    background-size: backgroundDotsSize;
+    background-img-opacity: .02;
 }
 
 .popup-decodable-opening__list--magnified
 {
-	opacity-mask: url( "file://{images}/masks/case-opening.png" );
+    opacity-mask: url("file://{images}/masks/case-opening.svg");
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup-decodable-opening-items-container
@@ -265,8 +270,6 @@
     horizontal-align: center;
     vertical-align: center;
     font-size: 200px;
-	font-family: Stratum2;
-	font-weight: bold;
     color: gradient( linear, 0% 100%, 0% 0%, from( rgb(145, 145, 145), to(rgba(255, 255, 255, 1) ) );
     text-shadow:2px 2px 2px #000000;
 }
@@ -527,3 +530,4 @@
     transform: rotateZ(-90deg);
     x: 260px;
 }
+

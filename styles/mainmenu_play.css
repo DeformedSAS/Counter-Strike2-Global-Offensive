@@ -75,13 +75,15 @@
 .map-selection-list--official-skirmish,
 .map-selection-list--official-gungameprogressive,
 .map-selection-list--official-retakes,
+.map-selection-list--official-survival,
 .map-selection-list--listen-competitive,
 .map-selection-list--listen-scrimcomp2v2,
 .map-selection-list--listen-skirmish,
 .map-selection-list--listen-casual,
 .map-selection-list--listen-deathmatch,
 .map-selection-list--listen-gungameprogressive,
-.map-selection-list--listen-retakes
+.map-selection-list--listen-retakes,
+.map-selection-list--listen-survival
 {
     padding: 0px 0px;
     width: 100%;
@@ -97,13 +99,15 @@
 .map-selection-list--official-skirmish .map-selection-btn__groupmap-icons,
 .map-selection-list--official-gungameprogressive .map-selection-btn__groupmap-icons,
 .map-selection-list--official-retakes .map-selection-btn__groupmap-icons,
+.map-selection-list--official-survival .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-competitive .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-skirmish .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-casual .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-deathmatch .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-gungameprogressive .map-selection-btn__groupmap-icons,
-.map-selection-list--listen-retakes .map-selection-btn__groupmap-icons
+.map-selection-list--listen-retakes .map-selection-btn__groupmap-icons,
+.map-selection-list--listen-survival .map-selection-btn__groupmap-icons
 {
     width: fit-children;
     height: fit-children;
@@ -118,13 +122,15 @@
 .map-selection-list--official-skirmish .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--official-gungameprogressive .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--official-retakes .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
+.map-selection-list--official-survival .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-competitive .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-skirmish .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-casual .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-deathmatch .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-gungameprogressive .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
-.map-selection-list--listen-retakes .map-selection-btn__groupmap-icons .map-selection-btn__map-icon
+.map-selection-list--listen-retakes .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
+.map-selection-list--listen-survival .map-selection-btn__groupmap-icons .map-selection-btn__map-icon
 {
     vertical-align: top;
 }
@@ -136,13 +142,15 @@
 .map-selection-list--official-skirmish .map-selection-btn__ratingemblem,
 .map-selection-list--official-gungameprogressive .map-selection-btn__ratingemblem,
 .map-selection-list--official-retakes .map-selection-btn__ratingemblem,
+.map-selection-list--official-survival .map-selection-btn__ratingemblem,
 .map-selection-list--listen-competitive .map-selection-btn__ratingemblem,
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__ratingemblem,
 .map-selection-list--listen-skirmish .map-selection-btn__ratingemblem,
 .map-selection-list--listen-casual .map-selection-btn__ratingemblem,
 .map-selection-list--listen-deathmatch .map-selection-btn__ratingemblem,
 .map-selection-list--listen-gungameprogressive .map-selection-btn__ratingemblem,
-.map-selection-list--listen-retakes .map-selection-btn__ratingemblem
+.map-selection-list--listen-retakes .map-selection-btn__ratingemblem,
+.map-selection-list--listen-survival .map-selection-btn__ratingemblem
 {
     horizontal-align: center;
     vertical-align: center;
@@ -162,7 +170,8 @@
 .map-selection-list--listen-casual .map-selection-btn,
 .map-selection-list--listen-deathmatch .map-selection-btn,
 .map-selection-list--listen-gungameprogressive .map-selection-btn,
-.map-selection-list--listen-retakes .map-selection-btn
+.map-selection-list--listen-retakes .map-selection-btn,
+.map-selection-list--listen-survival .map-selection-btn
 {
     width: fill-parent-flow(1);
     height: 90%;
@@ -174,7 +183,8 @@
 .map-selection-list--official-casual,
 .map-selection-list--official-gungameprogressive,
 .map-selection-list--official-retakes,
-.map-selection-list--listen-scrimcomp2v2
+.map-selection-list--official-skirmish,
+.map-selection-list--listen-gungameprogressive
 {
     width: 90%;
 }
@@ -182,8 +192,7 @@
 .map-selection-list--official-deathmatch .map-selection-btn__groupmap-icons,
 .map-selection-list--official-casual .map-selection-btn__groupmap-icons,
 .map-selection-list--official-gungameprogressive .map-selection-btn__groupmap-icons,
-.map-selection-list--official-retakes .map-selection-btn__groupmap-icons,
-.map-selection-list--listen-scrimcomp2v2 .map-selection-btn__groupmap-icons
+.map-selection-list--official-retakes .map-selection-btn__groupmap-icons
 {
     width: 340px;
     vertical-align: center;
@@ -193,8 +202,7 @@
 .map-selection-list--official-deathmatch .map-selection-btn__map-icon,
 .map-selection-list--official-casual .map-selection-btn__map-icon,
 .map-selection-list--official-gungameprogressive .map-selection-btn__map-icon,
-.map-selection-list--official-retakes .map-selection-btn__map-icon,
-.map-selection-list--listen-scrimcomp2v2 .map-selection-btn__map-icon
+.map-selection-list--official-retakes .map-selection-btn__map-icon
 {
     width: 125px;
     height: 125px;
@@ -209,26 +217,45 @@
 .map-selection-list--official-gungameprogressive #gameModeButtonContainer_deathmatch_officialmg_casualsigma .map-selection-btn__map-icon,
 .map-selection-list--official-gungameprogressive #gameModeButtonContainer_casual_officialmg_casualsigma .map-selection-btn__map-icon,
 .map-selection-list--official-retakes #gameModeButtonContainer_deathmatch_officialmg_casualsigma .map-selection-btn__map-icon,
-.map-selection-list--official-retakes #gameModeButtonContainer_casual_officialmg_casualsigma .map-selection-btn__map-icon,
-.map-selection-list--listen-scrimcomp2v2 #gameModeButtonContainer_deathmatch_officialmg_casualsigma .map-selection-btn__map-icon,
-.map-selection-list--listen-scrimcomp2v2 #gameModeButtonContainer_casual_officialmg_casualsigma .map-selection-btn__map-icon
+.map-selection-list--official-retakes #gameModeButtonContainer_casual_officialmg_casualsigma .map-selection-btn__map-icon
 {
     width: 120px;
     height: 120px;
     horizontal-align: center;
 }
 
-.map-selection-list--official-skirmish,
-.map-selection-list--listen-gungameprogressive
+.map-selection-list--official-survival
 {
-    width: 90%;
+    width: 100%;
+	height: 100%;
+	overflow: noclip;
+    margin-left: 7%;
+}
+
+.map-selection-list--official-survival .map-selection-btn
+{
+    width: 320px;
+    height: 80%;
+    margin: 0px 8px;
+    vertical-align: center;
+}
+
+.map-selection-list--official-survival .map-selection-btn__map-icon
+{
+    width: 180px;
+    height: 180px;
+    margin: 0px;
+    horizontal-align: center;
 }
 
 .map-selection-list--listen-deathmatch,
 .map-selection-list--listen-competitive,
 .map-selection-list--listen-casual,
 .map-selection-list--listen-retakes,
-.map-selection-list--official-competitive
+.map-selection-list--official-competitive,
+.map-selection-list--official-scrimcomp2v2,
+.map-selection-list--listen-scrimcomp2v2,
+.map-selection-list--listen-survival
 {
     flow-children: right-wrap;
     width: 100%;
@@ -241,7 +268,10 @@
 .map-selection-list--listen-competitive .map-selection-btn,
 .map-selection-list--listen-casual .map-selection-btn,
 .map-selection-list--listen-retakes .map-selection-btn,
-.map-selection-list--official-competitive .map-selection-btn
+.map-selection-list--official-competitive .map-selection-btn,
+.map-selection-list--official-scrimcomp2v2 .map-selection-btn,
+.map-selection-list--listen-scrimcomp2v2 .map-selection-btn,
+.map-selection-list--listen-survival .map-selection-btn
 {
     margin: 8px 8px;
     width: 12%;
@@ -253,35 +283,10 @@
 .map-selection-list--listen-competitive .map-selection-btn__map-icon,
 .map-selection-list--listen-casual .map-selection-btn__map-icon,
 .map-selection-list--listen-retakes .map-selection-btn__map-icon,
-.map-selection-list--official-competitive .map-selection-btn__map-icon
-{
-    width: 110px;
-    height: 110px;
-    margin: 0px;
-    horizontal-align: center;
-}
-
-.map-selection-list--official-scrimcomp2v2,
-.map-selection-list--listen-scrimcomp2v2
-{
-    flow-children: right-wrap;
-    width: 100%;
-    margin-left: 7%;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-.map-selection-list--official-scrimcomp2v2 .map-selection-btn,
-.map-selection-list--listen-scrimcomp2v2 .map-selection-btn
-{
-    margin: 8px 8px;
-    width: 12%;
-    height: 48%;
-    vertical-align: top;
-}
-
+.map-selection-list--official-competitive .map-selection-btn__map-icon,
 .map-selection-list--official-scrimcomp2v2 .map-selection-btn__map-icon,
-.map-selection-list--listen-scrimcomp2v2 .map-selection-btn__map-icon
+.map-selection-list--listen-scrimcomp2v2 .map-selection-btn__map-icon,
+.map-selection-list--listen-survival .map-selection-btn__map-icon
 {
     width: 110px;
     height: 110px;
@@ -1603,11 +1608,11 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
     vertical-align: center;
     min-width: 300px;
     margin: 12px 0px;
-    box-shadow: 0px 0px 16px 0px #00000041;
+
+    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.35);
     border: 1px solid rgba(9, 219, 9, 0.336);
     background-color: rgba(9, 49, 9, 0.651);
-    perspective: 200px;
-    perspective-origin: 0% 0%;
+
     transition-property: opacity, box-shadow, wash-color, transform;
     transition-duration: .25s;
     transition-timing-function: ease-in-out;

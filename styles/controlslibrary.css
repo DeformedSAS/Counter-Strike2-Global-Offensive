@@ -401,12 +401,12 @@ Label.Orange
 
 .SoundOnEnterHover:hover
 {
-    sound: "UIPanorama.ui_button_rollover";
+    sound: "UIPanorama.buymenu_mouseover";
 }
 
 .SoundOnLeaveHover:hover
 {
-    sound-out: "UIPanorama.ui_button_rollover";
+    sound-out: "UIPanorama.buymenu_mouseover";
 }
 
 #DialogVarParentPanel
@@ -630,7 +630,7 @@ Label.Orange
 
 #bgimage-bg
 {
-    background-image: url("file://{images}/donotship/icon_knife_tactical_medium.vsvg");
+    background-image: url("file://{images}/donotship/icon_knife_tactical_medium.svg");
     background-size: 650px 200px;
     background-texture-size: 650px 200px;
 }

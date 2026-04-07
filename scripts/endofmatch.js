@@ -5,7 +5,6 @@ var EndOfMatch = (function () {
     if (!_m_cP) _m_cP = $("#PanelToTest");
 
     if (!_m_cP || !_m_cP.IsValid()) {
-        $.Msg("[PanoramaScript] script file endofmatch.js failed to load. Stopping dev panel load.");
         return {};
     }
 
@@ -61,6 +60,7 @@ var EndOfMatch = (function () {
         _m_cP.Data()._m_currentPanelIndex = -1;
         _m_cP.Data()._m_elActiveTab = null;
 
+
         if (_m_cP.Data()._m_jobStart !== null) {
             $.CancelScheduled(_m_cP.Data()._m_jobStart);
             _m_cP.Data()._m_jobStart = null;
@@ -109,32 +109,64 @@ var EndOfMatch = (function () {
         _m_cP.SetFocus();
     }
 
-    function _ShowPanelStart() {
-        if (!_m_cP || !_m_cP.IsValid()) return;
+    function EndOfMatch_Music(type) {
+        var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
+        var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
+        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId).replace(/^#musickit_/, '');
 
-        var elBlur = _m_cP.GetParent().FindChildTraverse("HudBlur");
-        if (elBlur) elBlur.AddClass("eom-blur-fade-in");
-
-        _m_cP.AddClass("eom--reveal");
-
-        if (_m_cP.FindChildTraverse('id-eom-characters-root'))
-            EOM_Characters.Start();
-
-        _m_cP.SetMouseCapture(true);
+        if (type === 'loading' && GameStateAPI.GetCSGOGameUIStateName() === 'CSGO_GAME_UI_STATE_INGAME') {
+            InventoryAPI.PlayItemPreviewMusic(itemId, 'endofmatch.mp3');
+            InventoryAPI.StopItemPreviewMusic();
+            $.DispatchEvent('PlaySoundEffect', 'Music.EndOfMatch.' + musicName, 'MOUSE');
+        }
     }
 
-    function _Start(bHardCut) {
-        _Initialize();
-
-        _m_cP.Data()._m_jobStart = $.Schedule(bHardCut ? 0.0 : 1.5, () => {
-            _m_cP.Data()._m_jobStart = null;
-            if (bHardCut) _m_cP.RemoveClass("eom--fade-in-enabled");
-            _ShowPanelStart();
-            if (bHardCut) _m_cP.AddClass("eom--fade-in-enabled");
-            $.Schedule(bHardCut ? 0.0 : 1.25, _ShowNextPanel);
+    function _ShowPanelStart() {
+        if (!_m_cP || !_m_cP.IsValid())
+            return;
+        _m_cP.AddClass("eom--reveal");
+        const elFade = $("#id-eom-fade");
+        elFade.AddClass("active");
+        let elFallbackBackground = $("#id-eom-fallback-background");
+        elFallbackBackground.AddClass("hidden");
+        var elBackgroundImage = _m_cP.FindChildInLayoutFile('BackgroundMapImage');
+        elBackgroundImage.SetImage('file://{images}/map_icons/screenshots/1080p/' + GameStateAPI.GetMapBSPName() + '_eom.png');
+        $.Schedule(0.5, () => {
+            if (_m_cP.FindChildTraverse('id-eom-characters-root')) {
+                EOM_Characters.Start();
+            }
+            elFade.RemoveClass("active");
+            elFallbackBackground.RemoveClass("hidden");
+			_m_cP.SetMouseCapture( true );
         });
     }
-	
+
+	function _Start ( bHardCut ) 
+	{
+	    _Initialize();
+		EndOfMatch_Music('loading');
+		if ( bHardCut )
+		{     
+			_m_cP.Data()._m_jobStart = $.Schedule( 0.0, _ => 
+			{
+		        _m_cP.Data()._m_jobStart = null;
+		        _m_cP.RemoveClass( "eom--fade-in-enabled" );
+		        _ShowPanelStart();
+		        _m_cP.AddClass( "eom--fade-in-enabled" );
+				_ShowNextPanel();
+		    } );
+		}
+        else
+		{
+			_m_cP.Data()._m_jobStart = $.Schedule( 2.0, _ => 
+			{
+		        _m_cP.Data()._m_jobStart = null;
+		        _ShowPanelStart();
+		        $.Schedule( 1.25, _ShowNextPanel );
+		    } );
+		}
+	}
+
 	function _StartDisplayTimer( time )
 	{
 		var elProgBar = _m_cP.FindChildTraverse( "id-display-timer-progress-bar" );
@@ -193,9 +225,6 @@ var EndOfMatch = (function () {
             var elPanel = $.GetContextPanel().FindChildTraverse('EomCancelReason' + j);
             if (elPanel) elPanel.RemoveClass('show');
         }
-
-        var elBlur = _m_cP.GetParent().FindChildTraverse("HudBlur");
-        if (elBlur) elBlur.RemoveClass("eom-blur-fade-in");
 
         _m_cP.RemoveClass("eom--reveal");
     }

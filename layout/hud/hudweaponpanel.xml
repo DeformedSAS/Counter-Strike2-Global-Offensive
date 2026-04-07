@@ -10,30 +10,17 @@
   	</scripts>
 
 	<CSGOHudWeaponPanel>
-			<Panel class="center_indicator">
-				<Panel class="Kills cl-hud-wash-color">
-					<Panel>
-						<Panel id="KillCountIcons" class="Kills__Count Kills__Count--RightLeftFlow">
-							<Panel class="Kills__Icon">
+    <Panel class="center_indicator" scaling="stretch-to-fit-preserve-aspect">
+        <Panel class="Kills cl-hud-wash-color">
+            <Panel>
+                <Panel id="KillCountIcons" class="Kills__Count Kills__Count--RightLeftFlow">
+                    <Panel class="Kills__Icon Kills__Slot1" />
+                    <Panel class="Kills__Icon Kills__Slot2" />
+                    <Panel class="Kills__Icon Kills__Slot3" />
+                    <Panel class="Kills__Icon Kills__Slot4" />
+                    <Panel class="Kills__Icon Kills__Slot5" />
+                </Panel>
 
-							</Panel>
-							
-							<Panel class="Kills__Icon2">
-								
-							</Panel>
-							
-							<Panel class="Kills__Icon3">
-								
-							</Panel>
-							
-							<Panel class="Kills__Icon4">
-								
-							</Panel>
-							
-							<Panel class="Kills__Icon5">
-								
-							</Panel>
-						</Panel>
 						<Panel id="KillCountText" class="Kills__Count">
 							<Panel id="KillCountTextIcon" class="Kills__Icon" />
 							<Label id="KillCount" class="Kills__Text" />

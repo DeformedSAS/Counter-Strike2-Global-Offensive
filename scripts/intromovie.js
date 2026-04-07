@@ -1,11 +1,11 @@
 'use strict';
 
 function ShowIntroMovie() {
-    $.Schedule(0.3, function() {
-        var movieName = "file://{resources}/videos/intro.webm";
+    $.Schedule(0.0, function() {
+        var movieName = "";
         var launcherType = MyPersonaAPI.GetLauncherType();
         if (launcherType == "perfectworld") {
-            movieName = "file://{resources}/videos/intro-perfectworld.webm";
+            movieName = "";
         }
 
         var panel = $("#IntroMoviePlayer");
@@ -18,7 +18,7 @@ function ShowIntroMovie() {
             panel.style.opacity = '1'; 
         });
 
-        PlayIntroMovie();
+        SkipIntroMovie();
     });
 }
 

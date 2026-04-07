@@ -150,12 +150,11 @@ var playerCard = ( function (){
 		var elBgImage = $.GetContextPanel().FindChildInLayoutFile( 'JsPlayerCardBg' );
 		
 		elBgImage.style.backgroundImage =  ( imagePath ) ? 'url("file://{images_econ}' + imagePath + '_large.png")' : 'none';
-		elBgImage.style.backgroundPosition = '50% 50%';
-		elBgImage.style.backgroundSize = '115% auto';
-		elBgImage.style.backgroundRepeat = 'no-repeat';
-		elBgImage.style.backgroundImgOpacity = '0.2';
-
-		elBgImage.AddClass( 'player-card-bg-anim' );
+        elBgImage.style.backgroundPosition = '50% 50%';
+        elBgImage.style.backgroundSize = 'auto 165%';
+        elBgImage.style.backgroundRepeat = 'no-repeat';
+        elBgImage.style.blur = 'gaussian(2,2,1)';
+        elBgImage.AddClass('player-card-bg-anim');
 	};
 
 	var _SetRank = function()

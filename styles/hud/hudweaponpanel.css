@@ -174,38 +174,32 @@ CSGOHudWeaponPanel Label
 	margin-bottom: 16px;
 }
 
-.Kills__Count
-{
-
-}
-
-.Kills__Count--RightLeftFlow
-{
-
-}
+.Kills__Count {}
+.Kills__Count--RightLeftFlow {}
 
 .Kills__Count--Hidden
 {
 	visibility: collapse;
 }
 
+
 .Kills__Icon
 {
-	background-image: url( "file://{images}/hud/kill_1_def.png" );
+	background-image: url("file://{images}/hud/kill_1_def.png");
 	background-size: 100% 100%;
 	width: 94px;
 	height: 99px;
-
 }
 
 .Kills__Icon--Headshot
 {
-	background-image: url( "file://{images}/hud/kill_1_head.png" );
+	background-image: url("file://{images}/hud/kill_1_head.png");
 }
 
 .Kills__Icon--Outline
 {
-	background-image: url( "file://{images}/hud/weaponpanel/kill_icon_outline.png" );
+	background-image: url("file://{images}/hud/weaponpanel/kill_icon_outline.png");
+	visibility: collapse;
 }
 
 .Kills__Icon--Hidden
@@ -215,7 +209,7 @@ CSGOHudWeaponPanel Label
 
 .Kills__Icon--Animate
 {
-	animation-name: KillIconShowAnim; 
+	animation-name: KillIconShowAnim1;
 	animation-duration: .33s;
 	animation-delay: 0s;
 	sound: "UIPanorama.kill_doof";
@@ -223,23 +217,23 @@ CSGOHudWeaponPanel Label
 	animation-iteration-count: 1;
 }
 
+
 .Kills__Icon2
 {
-	background-image: url( "file://{images}/hud/kill_2_def.png" );
+	background-image: url("file://{images}/hud/kill_2_def.png");
 	background-size: 100% 100%;
 	width: 94px;
 	height: 99px;
-
 }
 
 .Kills__Icon2--Headshot
 {
-	background-image: url( "file://{images}/hud/kill_2_head.png" );
+	background-image: url("file://{images}/hud/kill_2_head.png");
 }
 
 .Kills__Icon2--Outline
 {
-	background-image: url( "file://{images}/hud/weaponpanel/kill_icon_outline.png" );
+	background-image: url("file://{images}/hud/weaponpanel/kill_icon_outline.png");
 }
 
 .Kills__Icon2--Hidden
@@ -249,7 +243,7 @@ CSGOHudWeaponPanel Label
 
 .Kills__Icon2--Animate
 {
-	animation-name: KillIconShowAnim; 
+	animation-name: KillIconShowAnim2;
 	animation-duration: .33s;
 	animation-delay: 0s;
 	sound: "UIPanorama.kill_doof";
@@ -257,23 +251,23 @@ CSGOHudWeaponPanel Label
 	animation-iteration-count: 1;
 }
 
+
 .Kills__Icon3
 {
-	background-image: url( "file://{images}/hud/kill_3_def.png" );
+	background-image: url("file://{images}/hud/kill_3_def.png");
 	background-size: 100% 100%;
 	width: 94px;
 	height: 99px;
-
 }
 
 .Kills__Icon3--Headshot
 {
-	background-image: url( "file://{images}/hud/kill_3_head.png" );
+	background-image: url("file://{images}/hud/kill_3_head.png");
 }
 
 .Kills__Icon3--Outline
 {
-	background-image: url( "file://{images}/hud/weaponpanel/kill_icon_outline.png" );
+	background-image: url("file://{images}/hud/weaponpanel/kill_icon_outline.png");
 }
 
 .Kills__Icon3--Hidden
@@ -283,7 +277,7 @@ CSGOHudWeaponPanel Label
 
 .Kills__Icon3--Animate
 {
-	animation-name: KillIconShowAnim; 
+	animation-name: KillIconShowAnim3;
 	animation-duration: .33s;
 	animation-delay: 0s;
 	sound: "UIPanorama.kill_doof";
@@ -291,9 +285,10 @@ CSGOHudWeaponPanel Label
 	animation-iteration-count: 1;
 }
 
+
 .Kills__Icon4
 {
-	background-image: url( "file://{images}/hud/kill_4_def.png" );
+	background-image: url("file://{images}/hud/kill_4_def.png");
 	background-size: 100% 100%;
 	width: 94px;
 	height: 99px;
@@ -301,12 +296,12 @@ CSGOHudWeaponPanel Label
 
 .Kills__Icon4--Headshot
 {
-	background-image: url( "file://{images}/hud/kill_4_head.png" );
+	background-image: url("file://{images}/hud/kill_4_head.png");
 }
 
 .Kills__Icon4--Outline
 {
-	background-image: url( "file://{images}/hud/weaponpanel/kill_icon_outline.png" );
+	background-image: url("file://{images}/hud/weaponpanel/kill_icon_outline.png");
 }
 
 .Kills__Icon4--Hidden
@@ -316,7 +311,7 @@ CSGOHudWeaponPanel Label
 
 .Kills__Icon4--Animate
 {
-	animation-name: KillIconShowAnim; 
+	animation-name: KillIconShowAnim4;
 	animation-duration: .33s;
 	animation-delay: 0s;
 	sound: "UIPanorama.kill_doof";
@@ -324,22 +319,25 @@ CSGOHudWeaponPanel Label
 	animation-iteration-count: 1;
 }
 
+
 .Kills__Icon5
 {
-	background-image: url( "file://{images}/hud/kill_5_def.png" );
+	background-image: url("file://{images}/hud/kill_5_def.png");
 	background-size: 100% 100%;
+	sound: "UIPanorama.DeathMatchBonusKill";
 	width: 94px;
 	height: 99px;
 }
 
 .Kills__Icon5--Headshot
 {
-	background-image: url( "file://{images}/hud/kill_5_head.png" );
+	background-image: url("file://{images}/hud/kill_5_head.png");
+	sound: "UIPanorama.DeathMatchBonusKill";
 }
 
 .Kills__Icon5--Outline
 {
-	background-image: url( "file://{images}/hud/weaponpanel/kill_icon_outline.png" );
+	background-image: url("file://{images}/hud/weaponpanel/kill_icon_outline.png");
 }
 
 .Kills__Icon5--Hidden
@@ -349,34 +347,55 @@ CSGOHudWeaponPanel Label
 
 .Kills__Icon5--Animate
 {
-	animation-name: KillIconShowAnim; 
+	animation-name: KillIconShowAnim5;
 	animation-duration: .33s;
 	animation-delay: 0s;
-	sound: "UIPanorama.kill_doof";
+	sound: "UIPanorama.DeathMatchBonusKill";
 	animation-timing-function: linear;
 	animation-iteration-count: 1;
 }
 
-@keyframes 'KillIconShowAnim'
+@keyframes 'KillIconShowAnim1'
 {
-	0%
-	{
-		 opacity: 0;
-		 pre-transform-scale2d: 0.4;
-	}
-
-	40%
-	{
-		 opacity: 1;
-		 pre-transform-scale2d: 1.25;
-	}
-
-	100%
-	{
-		opacity: 1;		
-		pre-transform-scale2d: 1;
-	}
+	0%   { opacity: 0; pre-transform-scale2d: 0.4; brightness: 0.6; }
+	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; } /* flash */
+	60%  { opacity: 1; pre-transform-scale2d: 1.05; brightness: 1.2; }
+	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; } /* normal */
 }
+
+@keyframes 'KillIconShowAnim2'
+{
+	0%   { opacity: 0; pre-transform-scale2d: 0.4; brightness: 0.6; }
+	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; }
+	60%  { opacity: 1; pre-transform-scale2d: 1.05; brightness: 1.2; }
+	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; }
+}
+
+@keyframes 'KillIconShowAnim3'
+{
+	0%   { opacity: 0; pre-transform-scale2d: 0.4; brightness: 0.6; }
+	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; }
+	60%  { opacity: 1; pre-transform-scale2d: 1.05; brightness: 1.2; }
+	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; }
+}
+
+@keyframes 'KillIconShowAnim4'
+{
+	0%   { opacity: 0; pre-transform-scale2d: 0.4; brightness: 0.6; }
+	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; }
+	60%  { opacity: 1; pre-transform-scale2d: 1.05; brightness: 1.2; }
+	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; }
+}
+
+@keyframes 'KillIconShowAnim5'
+{
+	0%   { opacity: 0; pre-transform-scale2d: 0.4; brightness: 0.6; }
+	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; }
+	60%  { opacity: 1; pre-transform-scale2d: 1.05; brightness: 1.2; }
+	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; }
+}
+
+
 
 .Kills__Text
 {
@@ -384,6 +403,7 @@ CSGOHudWeaponPanel Label
 	font-size: 24px;
     color: white;
     letter-spacing: 0px;
+	visibility: collapse;
 }
 
 .Kills__KillEater
@@ -739,3 +759,16 @@ CSGOHudWeaponPanel .steam-button-glyph
     width: 24px;
     height: 24px;
 }
+
+.Kills__Slot1 { background-image: url("file://{images}/hud/kill_1_def.png"); }
+.Kills__Slot2 { background-image: url("file://{images}/hud/kill_2_def.png"); }
+.Kills__Slot3 { background-image: url("file://{images}/hud/kill_3_def.png"); }
+.Kills__Slot4 { background-image: url("file://{images}/hud/kill_4_def.png"); }
+.Kills__Slot5 { background-image: url("file://{images}/hud/kill_5_def.png"); }
+
+.Kills__Slot1.Kills__Icon--Headshot { background-image: url("file://{images}/hud/kill_1_head.png"); }
+.Kills__Slot2.Kills__Icon--Headshot { background-image: url("file://{images}/hud/kill_2_head.png"); }
+.Kills__Slot3.Kills__Icon--Headshot { background-image: url("file://{images}/hud/kill_3_head.png"); }
+.Kills__Slot4.Kills__Icon--Headshot { background-image: url("file://{images}/hud/kill_4_head.png"); }
+.Kills__Slot5.Kills__Icon--Headshot { background-image: url("file://{images}/hud/kill_5_head.png"); }
+

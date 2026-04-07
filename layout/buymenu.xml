@@ -69,7 +69,7 @@
 			<Panel class="buywheel-button">
 				<Panel class="buywheel-category__contents">
 					<Label class="buywheel-category__title" id="CategoryName" text="XXXXX"/>
-					<Label class="buywheel-button__key" id="WedgeKeybinding" text="X"/>
+					<Label class="buywheel-button__key" style="font-family: Stratum2; font-weight: medium;" id="WedgeKeybinding" text="X"/>
 				</Panel>
 			</Panel>
 		</snippet>
@@ -77,7 +77,7 @@
 		                             
 		<snippet name="ItemWedge">
 			<Panel class="buywheel-button">
-				<Label class="buywheel-button__key" id="WedgeKeybinding" text="X"/>
+				<Label class="buywheel-button__key" style="font-family: Stratum2; font-weight: medium;" id="WedgeKeybinding" text="X"/>
 				<Panel class="buywheel-item__textbox">
 					                                                                     
 					<Label id="ItemName" class="buywheel-item__name"/>
@@ -103,7 +103,7 @@
 									                                      
 								   
 							</Panel>
-							<Image id="Defuser" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/defuser.svg" class="team-equip__item-icon"/>
+							<Image id="Defuser" scaling="stretch-to-fit-preserve-aspect" src="file://{images}/icons/ui/defuser.svg" class="cl-hud-wash-color team-equip__item-icon"/>
 							<Panel class="no-flow vertical-center">
 							                                                                           
 								<Image id="Vest" scaling="stretch-to-fit-preserve-aspect"  src="file://{images}/icons/ui/shield.svg" class="team-equip__item-icon team-equip__item-vest" texturewidth="-1" textureheight="24"/>
@@ -171,8 +171,8 @@
 									hittest="true"
 									manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
 									item="models/player/custom_player/legacy/ctm_sas.mdl"
-									enable_floorshadow="false"
-									force-no-composition-layer="true">                                                                                   
+									enable_floorshadow="true"
+									force-no-composition-layer="false">                                                                                   
 					</ItemPreviewPanel>
 
 					<Panel class="vline" />
@@ -240,9 +240,9 @@
 
 				</Panel>
 			</Panel>
-			<Panel id="BuyMenuNavBar" class="buymenu-navbar pccontrols">
+			<Panel id="BuyMenuNavBar" class="cl-hud-wash-color buymenu-navbar pccontrols">
 				<Panel class="vertical-center left-right-flow horizontal-align-right">
-					<Label id="BuyForTeammateLabel" class="buymenu__for-teammate stratum-medium" text="#BuyMenu_BuyForTeammate" html="true"/>
+					<Label id="BuyForTeammateLabel" class="buymenu__for-teammate" style="font-family: Stratum2; font-weight: bold;" text="#BuyMenu_BuyForTeammate" html="true"/>
 					<Button class="PopupButton" onactivate="GameInterfaceAPI.ConsoleCommand( 'rebuy' )">
 						<Label text="#BuyMenu_Buyprev" html="true" />
 					</Button>
@@ -273,7 +273,7 @@
 			</Panel>
 
 			<Panel class="buymenu-money">
-				<CSGOMoneyPanel id="BuyMenuMoney" class="money__buymenu"/>
+				<CSGOMoneyPanel id="BuyMenuMoney" class="cl-hud-wash-color money__buymenu"/>
 			</Panel>
 			<Panel id="HudBottomRight" hittest="false" hittestchildren="false">
 				<CSGOHudWeaponSelection id="HudWeaponSelection"

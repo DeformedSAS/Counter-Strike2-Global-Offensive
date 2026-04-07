@@ -9,7 +9,6 @@
 	<scripts>
 		<include src="file://{resources}/scripts/popups/popup_mainmenu_overwatch_verdict.js" />
 	</scripts>
-
     <snippets>
 		<snippet name="verdict_type">
 			<Panel class="top-bottom-flow overwatch-verdict-background">

@@ -16,9 +16,9 @@
                 </Panel>
                 <Image id="id-notification-icon" class="mainmenu-top-navbar__alerts-icon" />
                 <Panel id="id-notification-text-block" class="context-menu-notification__text-block">
-                    <Label class="context-menu-notification__label stratum-medium title" html="true" text="{s:title}" />
+                    <Label class="context-menu-notification__label stratum-medium-condensed title" html="true" text="{s:title}" />
                     <Label class="context-menu-notification__label stratum-regular tooltip" html="true" text="{s:tooltip}" />
-                    <TextButton id="id-notification-link" class="context-menu-notification__text-btn" text="{s:link}" />
+                    <Label id="id-notification-link" class="context-menu-notification__text-btn link-shit" text="{s:link}" />
                 </Panel>
             </Panel>
         </snippet>

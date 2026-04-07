@@ -202,7 +202,7 @@
 
 .buymenu-info Label
 {
-	font-family: Stratum2 Bold Monodigit, 'Arial Unicode MS';
+	font-family: Stratum2 Bold, 'Arial Unicode MS';
 	font-size: 22px;
 	padding: 6px 0px;
 	color: white;
@@ -218,7 +218,7 @@
 
 .buy-wheel-background
 {
-	height: 100%;
+	height: 10%;
 	width:100%;
 	background-color:rgba(26, 26, 26, 0.75);
 	opacity: 1;
@@ -324,11 +324,10 @@
 
 .buymenu-agent
 {
-	width: 1400px;
-	height: 100%;
-	horizontal-align:left;
-	margin-left: -400px;
-	margin-right: -400px;
+    width: 1400px;
+    height: 100%;
+    horizontal-align:left;
+	vertical-align: bottom;
 }
 
 @keyframes 'ping'
@@ -467,6 +466,7 @@
 .buymenu__categories__container .buymenu-category
 {
 	width: 10px;
+	flow-children: down;
 }
 
 .buymenu__categories__container .buymenu-category.ccequip
@@ -508,7 +508,8 @@
 .buymenu__categories__container .buymenu-category .buymenu__category__column .keybind
 {
 	font-size: 18px;
-	font-family: Stratum2 Mono;
+	font-family: Stratum2;
+	font-weight: medium;
 	transition-property: position, brightness, opacity;
 	transition-duration: 0.1s;
 	transition-timing-function: ease-in-out;
@@ -689,7 +690,7 @@
 	horizontal-align: right;
 	vertical-align: bottom;
 	text-align: right;
-	font-family: Stratum2 Mono;
+	font-family: Stratum2;
 	font-weight: bold;
 	text-shadow: 1px 1px #00000088;
 	transition-property: wash-color;
@@ -791,7 +792,7 @@
 
 .sellback-button.Visible
 {
-	visibility: visible;
+	visibility: collapse;
 }
 
 @keyframes 'purchased'

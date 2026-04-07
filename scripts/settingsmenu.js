@@ -122,6 +122,7 @@ var SettingsMenu = ( function () {
 	{
 	                                   
 	GameInterfaceAPI.ConsoleCommand( "host_writeconfig" );
+	InventoryAPI.StopItemPreviewMusic();
 	}
 
 	var _NavigateToSetting = function ( tab, id )

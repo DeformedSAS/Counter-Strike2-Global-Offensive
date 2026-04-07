@@ -192,22 +192,6 @@ function MakeTabsBtnsFromStoreData() {
                     });
                 }
             }
-
-            //custom
-            let elButton = elParent.FindChildInLayoutFile('id-store-nav-cases');
-
-            if (!elButton) {
-                elButton = $.CreatePanel('RadioButton', elParent, 'id-store-nav-cases', {
-                    group: 'store-top-nav',
-                    class: 'content-navbar__tabs__btn'
-                });
-
-                $.CreatePanel('Label', elButton, '', { text: '#store_nav_cases' });
-
-                elButton.SetPanelEvent('onactivate', () => {
-                    NavigateToTab(_m_pagePrefix + 'cases', 'cases');
-                });
-            }
         }
     } catch (e) {
     }
@@ -235,45 +219,24 @@ function MakePageFromStoreData(typeKey) {
 
 function UpdateDynamicLister(elList, typeKey) {
     let oItemsByCategory = StoreItems.GetStoreItems();
-    var isCasesMenu = false;
-    if(typeKey == 'cases') {
-        typeKey = 'coupon';
-        isCasesMenu = true;
-    }
     let aItemsList = oItemsByCategory[typeKey];
 
-    // Ensure the number of panels matches the number of items
     let numItems = aItemsList.length;
 
-    // Make sure the panel is visible
     elList.visible = true;
 
-    // Loop through the items and either create or update panels
     for (let i = 0; i < numItems; i++) {
         let item = aItemsList[i];
-
-        let itemName = InventoryAPI.GetItemDefinitionName(item.id);
-        var cratesName = ['crate_community', 'crate_esports', 'crate_valve', 'crate_operation', 'gamma'];
-        var isCase = cratesName.some(pattern => itemName.includes(pattern));
-        
-        if(isCasesMenu && !isCase) {
-            continue;
-        } else if (!isCasesMenu && isCase) {
-            continue;
-        }
         let itemPanel = elList.FindChildInLayoutFile(item.id);
 
-        // If the panel doesn't exist, create a new one
         if (!itemPanel) {
             itemPanel = $.CreatePanel("Button", elList, item.id);
             itemPanel.BLoadLayout('file://{resources}/layout/itemtile_store.xml', false, false);
         }
 
-        // Update the item in the panel
         UpdateItem(itemPanel, typeKey, i);
     }
 
-    // Remove extra panels if there are more than necessary
     for (let i = numItems; i < elList.Children().length; i++) {
         let extraPanel = elList.Children()[i];
         if (extraPanel) {
@@ -281,27 +244,21 @@ function UpdateDynamicLister(elList, typeKey) {
         }
     }
 
-    // Refresh the list to immediately show the updated items
     elList.SetHasClass('Active', true);
 }
 function activateHomeButton() {
-    // Directly navigate to the home tab and reload the content
     MainMenuStore.NavigateToTab('id-store-page-home');
     
-    // Get the parent container of the store pages
     const storePanel = $.GetContextPanel().FindChildInLayoutFile('id-store-pages');
     
-    // Temporarily hide the entire store panel to reset it
     storePanel.SetHasClass('hidden', true);
     
-    // Use $.Schedule to delay re-showing the panel to ensure content is cleared and reloaded
     $.Schedule(0.1, function() {
-        storePanel.SetHasClass('hidden', false);  // Show again to trigger reload
-        MainMenuStore.NavigateToTab('id-store-page-home');  // Navigate to home again to ensure fresh load
+        storePanel.SetHasClass('hidden', false);
+        MainMenuStore.NavigateToTab('id-store-page-home');  
     });
 }
 
-// Trigger the home button press and reload action
 $.Schedule(0.1, function() {
     activateHomeButton();
 });

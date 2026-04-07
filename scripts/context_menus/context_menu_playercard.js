@@ -259,6 +259,44 @@ var ContextmenuPlayerCard;
                 $.DispatchEvent('ContextMenuEvent', '');
             },
         },
+		{
+			name: 'borrowmusickit',
+			icon: 'music_kit',
+			AvailableForItem: function ( id )
+			{
+				var borrowedPlayerIndex = parseInt( GameInterfaceAPI.GetSettingString( "cl_borrow_music_from_player_index" ) );
+				return GameStateAPI.IsLocalPlayerPlayingMatch() &&
+					!_IsSelf( id ) &&
+					borrowedPlayerIndex !== GameStateAPI.GetPlayerIndex( id ) &&
+					_HasMusicKit( id ) &&
+					GameStateAPI.IsPlayerConnected( id );
+			},
+			OnSelected: function( id )
+			{
+				GameInterfaceAPI.SetSettingString( "cl_borrow_music_from_player_index", "" + GameStateAPI.GetPlayerIndex( id ) );
+				$.DispatchEvent( 'ContextMenuEvent', '' );
+			}
+		},
+		{
+			name: 'stopborrowmusickit',
+			icon: 'no_musickit',
+			AvailableForItem: function ( id )
+			{
+				var borrowedPlayerIndex = parseInt( GameInterfaceAPI.GetSettingString( "cl_borrow_music_from_player_index" ) );
+				if ( borrowedPlayerIndex === 0 )
+					return false;
+
+				return GameStateAPI.IsLocalPlayerPlayingMatch() &&
+					(	( _IsSelf( id ) && borrowedPlayerIndex !== 0 ) ||
+						( borrowedPlayerIndex === GameStateAPI.GetPlayerIndex( id ) ) ) &&
+					GameStateAPI.IsPlayerConnected( id );
+			},
+			OnSelected: function( id )
+			{
+				$.DispatchEvent('Scoreboard_UnborrowMusicKit');
+				$.DispatchEvent( 'ContextMenuEvent', '' );
+			}
+		},	
         {
             name: 'copycrosshair',
             icon: 'crosshair',
@@ -272,6 +310,25 @@ var ContextmenuPlayerCard;
                 $.DispatchEvent('ContextMenuEvent', '');
             },
         },
+        {
+            name: 'kick_player',
+            icon: 'ban_global',
+            AvailableForItem: (id) => {
+              if (LobbyAPI.IsSessionActive() && LobbyAPI.BIsHost()) {
+              let party = LobbyAPI.GetSessionSettings().members;
+              for (let i = 0; i < party.numPlayers; i++) {
+                  if (id === party['machine' + i].player0.xuid && !_IsSelf(id)) {
+                      return true;
+                  }
+              }
+          }
+           return false;
+        },
+        OnSelected: (id) => {
+        LobbyAPI.KickPlayer(id);
+        $.DispatchEvent('ContextMenuEvent', '');
+    },
+}
     ];
     function _HasMusicKit(id) {
         return (InventoryAPI.GetMusicIDForPlayer(id) > 1);

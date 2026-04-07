@@ -1,0 +1,400 @@
+/* Prettified by Source 2 Viewer 17.0.0.0 - https://valveresourceformat.github.io */
+
+@keyframes 'subtle-motion'
+{
+	0%
+	{
+		position: -6px 0px 0px;
+	}
+	
+	100%
+	{
+		position: 6px 0px 0px;
+	}
+	
+}
+
+.mission-root
+{
+	transition-property: opacity, height, transform, brightness, saturation;
+	transition-duration: .15s;
+	transition-timing-function: ease-in-out;
+}
+
+.mission-root.hidden
+{
+	visibility: collapse;
+	height: 0px;
+	margin-top: 0px;
+	transition-property: opacity, height;
+	transition-duration: .25s;
+	transition-timing-function: ease-in-out;
+}
+
+.mission-root #missionButton:not(.DISABLED):hover .background-contents
+{
+	transform: scale3d( 1.05, 1.05, 1);
+}
+
+.mission-root #missionButton:not(.DISABLED):hover .background-contents .mission-bg
+{
+	brightness: 1.2;
+}
+
+.background-contents
+{
+	background-color: black;
+	width: 100%;
+	height: 100%;
+	transition-property: transform;
+	transition-duration: .1s;
+	transition-timing-function: ease-in-out;
+}
+
+.background-contents .mission-bg
+{
+	background-image: url("file://{images}/backgrounds/mission_background.png");
+	background-position: 50% 50%;
+	background-size: 200%;
+	background-img-opacity: 1;
+
+	height: 100%;
+	width: 100%;
+	opacity: 1;
+}
+
+.background-contents .mission-art-bg
+{
+	width: 100%;
+	height: 100%;
+	vertical-align:center;
+	horizontal-align: center;
+
+	opacity:0.5;
+	transform: scale3d( 1.05, 1.05, 1);
+	transition-property: transform, brightness;
+	transition-duration: .2s, 0.1s;
+	transition-timing-function: ease-in-out;
+	position: -4px 0px 0px;
+	animation-name: subtle-motion;
+	animation-duration: 8s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse;
+}
+
+.background-contents .mission-bg-searching
+{
+	width: 100%;
+	height: 100%;
+	background-color: green;
+	background-image: url("file://{resources}/videos/linemap.webm");
+	background-repeat: no-repeat;
+	wash-color: rgb(20, 160, 20);
+	background-size: 310% auto;
+	background-position: 0% 50%;
+	transition-property: transform, opacity;
+	transition-duration: .2s, 0.1s;
+	transition-timing-function: ease-in-out;
+	opacity: 0;
+	transform: scaleY(0.0);
+}
+
+.mission-main-content
+{
+	padding: 4px;
+	flow-children: down;
+	overflow: clip noclip;
+}
+
+.mission-header
+{
+	margin: 4px;
+	flow-children:right;
+	border-bottom: 1px solid #ffffff40;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.mission-title
+{
+	font-size: 18px;
+	font-family: ST2MDCOND;
+	font-weight: lighter;
+	color: white;
+	vertical-align:center;
+}
+
+.mission-time-remaining
+{
+	font-size: 12px;
+	font-family: Stratum2;
+	font-weight: lighter;
+	color: white;
+	vertical-align:center;
+	max-height: 26px;
+	text-overflow: shrink;
+}
+
+.hide-time .mission-time-remaining
+{
+	visibility: collapse;
+}
+
+.mission-location
+{
+	flow-children: right;
+	width: 100%;
+}
+
+.mission-mode-mapgroup
+{
+	font-size: 22px;
+	font-family: Stratum2;
+	font-stretch: condensed;
+	color: white;
+	vertical-align:center;
+	text-overflow: shrink;
+	text-align: center;
+	horizontal-align: center;
+	max-height: 24px;
+}
+
+#missionMapicon,#missionModeicon
+{
+	vertical-align: top;
+	horizontal-align: center;
+
+	width: 28px;
+	height: width-percentage(100%);
+	visibility: collapse;
+	y: 70px;
+	opacity: 0.5;
+}
+
+#missionMapicon
+{
+	x: 38%;
+}
+
+#missionModeicon
+{
+	x: -38%;
+}
+
+.mission-main
+{
+	flow-children: right;
+	width: 100%;
+}
+
+.mission-main .mission-directive
+{
+	font-size: 32px;
+	font-family: ST2MDCOND;
+	font-weight: light;
+	color: white;
+	vertical-align:center;
+	max-height: 50px;
+	text-overflow: shrink;
+	horizontal-align: center;
+	margin-top: 5px;
+}
+
+.mission-progress-container
+{
+	flow-children: right;
+	margin: 0px 6px;
+	horizontal-align: center;
+}
+
+.mission-progress-container .mission-num
+{
+	height: 25px;
+	min-width: 30px;
+	font-size: 20px;
+	color: white;
+	font-family: ST2MDCOND;
+	wash-color: white;
+	horizontal-align: center;
+	vertical-align: center;
+	text-align: center;
+	margin-top: 1px;
+	margin-right: 10px;
+}
+
+.mission-progress-container .mission-xp-reward-container
+{
+	vertical-align: center;
+	margin-left: 5px;
+}
+
+.mission-progress-container .mission-xp-reward-container .mission-xp-reward-img
+{
+	wash-color: rgb(19, 135, 168);
+	horizontal-align: center;
+	vertical-align: center;
+	height: 25px;
+	width: 50px;
+	opacity: 1;
+	img-shadow: 0px 0px 0px 3 3 black;
+	padding: 1px 0px;
+}
+
+.mission-progress-container .mission-xp-reward-container .mission-xp-reward
+{
+	font-size: 18px;
+	color: white;
+	font-family: ST2MDCOND;
+	wash-color: white;
+	horizontal-align: center;
+	vertical-align: center;
+	text-align: center;
+	text-overflow: shrink;
+	width: 40px;
+	y:1.5px;
+}
+
+.mission-additional-container,.mission-description-container
+{
+	width: 100%;
+	height: 50px;
+}
+
+.mission-additional-container .mission-additional,.mission-additional-container .mission-description,.mission-description-container .mission-additional,.mission-description-container .mission-description
+{
+	font-size: 22px;
+	font-family: ST2MDCOND;
+	color: white;
+	text-overflow: shrink min(18px);
+	max-height: 46px;
+	horizontal-align: center;
+	vertical-align: center;
+	text-align: center;
+}
+
+#id-mainmenu-mission-panel
+{
+	width: 256px;
+	height: 180px;
+	box-shadow: shadowOffset;
+}
+
+#id-mainmenu-mission-panel.COMPLETE #missionButton
+{
+	visibility: collapse;
+}
+
+#id-mainmenu-mission-panel .mission-complete
+{
+	visibility: collapse;
+}
+
+#id-mainmenu-mission-panel.COMPLETE .mission-complete
+{
+	visibility: visible;
+}
+
+#id-mainmenu-mission-panel.COMPLETE
+{
+	box-shadow: none;
+}
+
+#id-mainmenu-mission-panel .mission-complete
+{
+	width: 100%;
+	height: 46px;
+	vertical-align: bottom;
+}
+
+#id-mainmenu-mission-panel .mission-complete .mission-header--complete
+{
+	flow-children: down;
+	vertical-align:center;
+	horizontal-align: center;
+	margin: 4px;
+}
+
+#id-mainmenu-mission-panel .mission-complete .mission-header--complete Label
+{
+	text-align: center;
+	horizontal-align: center;
+}
+
+#id-mainmenu-mission-panel.SEARCHING_FOR_MISSION .mission-bg-searching
+{
+	opacity: 1;
+	transform: scaleY(1.0);
+}
+
+#id-mainmenu-mission-panel .mission-main-content
+{
+	transition-property: transform, opacity, wash-color;
+	transition-duration: .2s;
+	transition-timing-function: ease-in-out;
+}
+
+#id-mainmenu-mission-panel.SEARCHING_FOR_MISSION .mission-main-content
+{
+	opacity: 1;
+	transform: translateY(-36px);
+	wash-color: rgb(194, 255, 194);
+	transform-origin: 50% 0%;
+}
+
+#id-mainmenu-mission-panel .searching
+{
+	visibility: collapse;
+	vertical-align: bottom;
+	horizontal-align: center;
+}
+
+#id-mainmenu-mission-panel .searching Label
+{
+	font-size: 18px;
+	font-family: ST2MDCOND;
+	color: white;
+}
+
+#id-mainmenu-mission-panel.SEARCHING_FOR_MISSION .searching
+{
+	visibility: visible;
+	animation-name: slow-pulse;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+.DISABLED
+{
+	saturation: 0.5;
+	brightness: 0.3;
+	opacity: 0.9;
+}
+
+.DISABLED.SEARCHING_FOR_MISSION
+{
+	saturation: 1;
+	brightness: 1;
+	opacity: 1;
+}
+
+@keyframes 'slow-pulse'
+{
+	0%
+	{
+		opacity: 0.2;
+	}
+	
+	50%
+	{
+		opacity: 1;
+	}
+	
+	100%
+	{
+		opacity: 0.2;
+	}
+	
+}
+

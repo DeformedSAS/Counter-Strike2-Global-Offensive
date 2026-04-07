@@ -30,17 +30,17 @@
 					<Panel class="full-width bottom-divider meta-row">
 						<Image id="id-sb-meta__mode__image" textureheight="36" texturewidth="-1" src="file://{images}/icons/ui/casual.svg"/>
 						                 
-						<Label id="id-sb-meta__labels__mode-map" text="" />
+						<Label id="id-sb-meta__labels__mode-map" class="stratum-regular-condensed" text="" />
 						              
 						<Panel class="time_container">
-							<CSGOGameTimeLabel id="id-gametime__time" text="{s:s_gametime_time}" />
+							<CSGOGameTimeLabel class="time_container__time" time-type="map-elapsed" text="{s:s_gametime_time}" />
 						</Panel>
 					</Panel>
 					<Panel class="full-width meta-row">
 						                  
 						<Panel id="id-sb-meta__musickit" class="hidden">
 							<Image id="id-sb-meta__musickit-image" />
-							<Label id="id-sb-meta__musickit-name" />
+							<Label id="id-sb-meta__musickit-name" class="stratum-regular-condensed" />
 							<Button id="id-sb-meta__musickit-unborrow" class="hidden vertical-center" onactivate="$.DispatchEvent('Scoreboard_UnborrowMusicKit');" >
 								<TooltipPanel tooltip="#tooltip_stopborrowmusickit" style='tooltip-position: bottom;'>
 									<Image src="file://{images}/icons/ui/no_musickit.svg"/>
@@ -140,40 +140,40 @@
 						<Label html="true" text="#Quest_Guardian_Desc_op09" />
 					</Panel>
 					<Panel class="coop-mission-stats">
-						<Label class="stats-header-previous" text="#SFUI_CoopSB_Rating_Prev"/>
-						<Label class="stats-header-endgame" text="#SFUI_CoopSB_Rating"/>
+						<Label class="stats-header-previous stratum-regular-condensed" text="#SFUI_CoopSB_Rating_Prev"/>
+						<Label class="stats-header-endgame stratum-regular-condensed" text="#SFUI_CoopSB_Rating"/>
 						<Panel class="sb-coop-stats__row oddrow">
 							<Label class="sb-coop-stat-name" text="#SFUI_Scoreboard_Coop_MissionCompletion"/>
 							<Label class="sb-coop-stat-value" text=""/>
 							<Label class="sb-coop-stat-score" text="10,000"/>
 						</Panel>
 						<Panel class="sb-coop-stats__row evenrow">
-							<Label class="sb-coop-stat-name" text="{s:statname1}"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname1}"/>
 							<Label class="sb-coop-stat-value" text="{d:statval1}%"/>
 							<Label class="sb-coop-stat-score" text="{d:statscore1}"/>
 						</Panel>
 						<Panel class="sb-coop-stats__row oddrow">
-							<Label class="sb-coop-stat-name" text="{s:statname2}"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname2}"/>
 							<Label class="sb-coop-stat-value" text="{d:statval2}%"/>
 							<Label class="sb-coop-stat-score" text="{d:statscore2}"/>
 						</Panel>
 						<Panel class="sb-coop-stats__row evenrow">
-							<Label class="sb-coop-stat-name" text="{s:statname0}"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname0}"/>
 							<Label class="sb-coop-stat-value" text="{s:statval0}%"/>
 							<Label class="sb-coop-stat-score" text="-{d:statscore0}"/>
 						</Panel>
 						<Panel class="sb-coop-stats__row oddrow">
-							<Label class="sb-coop-stat-name" text="{s:statname3}"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname3}"/>
 							<Label class="sb-coop-stat-value" text="{d:statval3}"/>
 							<Label class="sb-coop-stat-score" text="{d:statscore3}"/>
 						</Panel>
 						<Panel class="sb-coop-stats__row evenrow">
-							<Label class="sb-coop-stat-name" text="{s:bonusname0}"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:bonusname0}"/>
 							<Label class="sb-coop-stat-value" text=""/>
 							<Label class="sb-coop-stat-score" text="{d:bonusscore0}"/>
 						</Panel>
 						<Panel class="sb-coop-stats__row sb-coop-stats__total">
-							<Label class="sb-coop-stat-name" text="#SFUI_CoopSB_Total"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="#SFUI_CoopSB_Total"/>
 							<Label class="sb-coop-stat-value" text=""/>                                
 							<Label class="sb-coop-stat-score" text="{d:total_score}"/>
 						</Panel>
@@ -213,71 +213,71 @@
 						<Panel class="left-right-flow full-width">
 							<Panel class="coop-mission-stats-left">
 								<Panel class="sb-coop-stats__row oddrow">
-									<Label class="sb-coop-stat-name" text="{s:statname0}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname0}"/>
 									<Label class="sb-coop-stat-value" text="{t:d:statval0}"/>
 									<Label class="sb-coop-stat-score" text="{d:statscore0}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row evenrow">
-									<Label class="sb-coop-stat-name" text="{s:statname1}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname1}"/>
 									<Label class="sb-coop-stat-value" text="{d:statval1}%"/>
 									<Label class="sb-coop-stat-score" text="{d:statscore1}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row oddrow">
-									<Label class="sb-coop-stat-name" text="{s:statname2}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname2}"/>
 									<Label class="sb-coop-stat-value" text="{d:statval2}%"/>
 									<Label class="sb-coop-stat-score" text="{d:statscore2}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row evenrow">
-									<Label class="sb-coop-stat-name" text="{s:statname3}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:statname3}"/>
 									<Label class="sb-coop-stat-value" text="{d:statval3}"/>
 									<Label class="sb-coop-stat-score" text="{d:statscore3}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row">
-									<Label class="sb-coop-stat-name" text=""/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text=""/>
 									<Label class="sb-coop-stat-value" text=""/>
 									<Label class="sb-coop-stat-score" text=""/>
 								</Panel>
 								<Panel class="sb-coop-stats__row">
-									<Label class="sb-coop-stat-name" text="#SFUI_CoopSB_Total"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="#SFUI_CoopSB_Total"/>
 									<Label class="sb-coop-stat-value" text=""/> 
 									<Label class="sb-coop-stat-score" text="{d:score}"/>
 								</Panel>
 							</Panel>
 							<Panel class="coop-mission-stats-right">
 								<Panel class="sb-coop-stats__row oddrow">
-									<Label class="sb-coop-stat-name" text="{s:bonusname0}"/>
-									<Label class="sb-coop-stat-value" text=""/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:bonusname0}"/>
+									<Label class="sb-coop-stat-value stratum-regular-condensed" text=""/>
 									<Label class="sb-coop-stat-score" text="{d:bonusscore0}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row evenrow">
-									<Label class="sb-coop-stat-name" text="{s:bonusname1}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:bonusname1}"/>
 									<Label class="sb-coop-stat-value" text=""/>
 									<Label class="sb-coop-stat-score" text="{d:bonusscore1}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row oddrow">
-									<Label class="sb-coop-stat-name" text="{s:bonusname2}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:bonusname2}"/>
 									<Label class="sb-coop-stat-value" text=""/>
 									<Label class="sb-coop-stat-score" text="{d:bonusscore2}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row evenrow">
-									<Label class="sb-coop-stat-name" text="{s:bonusname3}"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="{s:bonusname3}"/>
 									<Label class="sb-coop-stat-value" text=""/>
 									<Label class="sb-coop-stat-score" text="{d:bonusscore3}"/>
 								</Panel>
 								<Panel class="sb-coop-stats__row">
-									<Label class="sb-coop-stat-name" text=""/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text=""/>
 									<Label class="sb-coop-stat-value" text=""/>
 									<Label class="sb-coop-stat-score" text=""/>
 								</Panel>
 								<Panel class="sb-coop-stats__row">
-									<Label class="sb-coop-stat-name" text="#SFUI_CoopSB_Total"/>
+									<Label class="sb-coop-stat-name stratum-regular-condensed" text="#SFUI_CoopSB_Total"/>
 									<Label class="sb-coop-stat-value" text=""/> 
 									<Label class="sb-coop-stat-score" text="{d:bonus_score}"/>
 								</Panel>
 							</Panel>
 						</Panel>
 						<Panel class="sb-coop-stats__row sb-coop-stats__total">
-							<Label class="sb-coop-stat-name" text="#SFUI_CoopSB_FinalScore"/>
+							<Label class="sb-coop-stat-name stratum-regular-condensed" text="#SFUI_CoopSB_FinalScore"/>
 							<Label class="sb-coop-stat-value" text=""/> 
 							<Label class="sb-coop-stat-score" text="{d:total_score}"/>
 						</Panel>
@@ -312,8 +312,8 @@
 						<Panel id="id-sb-team__info--ct" class="sb-team__info__score" >
 							<Label text="{d:sb_team_score--CT}" />
 						</Panel>
-						<Label class="sb-team__info__name"		text="{s:sb_team_name--CT}" />
-						<Label class="sb-team__info__number"	text="#Scoreboard_Players_CT" />
+						<Label class="sb-team__info__name stratum-regular-condensed"		text="{s:sb_team_name--CT}" />
+						<Label class="sb-team__info__number stratum-regular-condensed"	text="#Scoreboard_Players_CT" />
 
 					</Panel>
 				</Panel>
@@ -335,8 +335,8 @@
 						<Panel id="id-sb-team__info--t" class="sb-team__info__score" >
 							<Label text="{d:sb_team_score--TERRORIST}" />
 						</Panel>
-						<Label class="sb-team__info__name"		text="{s:sb_team_name--TERRORIST}" />
-						<Label class="sb-team__info__number"	text="#Scoreboard_Players_TERRORIST" />
+						<Label class="sb-team__info__name stratum-regular-condensed"		text="{s:sb_team_name--TERRORIST}" />
+						<Label class="sb-team__info__number stratum-regular-condensed"	text="#Scoreboard_Players_TERRORIST" />
 					</Panel>
 
 				</Panel>

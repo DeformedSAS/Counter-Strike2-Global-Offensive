@@ -1,35 +1,26 @@
-@define maxBlur:  1.5;
- @define loadingScreenWidth: 1220px;
- @define info-margin: 20px 20px;
- 
+@define maxBlur: 6.0;
+@define loadingScreenWidth: 1220px;
+@define info-margin: 20px 20px;
+.loading-root
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.03);
+    opacity: 1;
+}
 
- .loading-root{
+.loading-root .mainmenu-content--offscreen
+{
+    position: 0px 0px 0px;
+    transition-property: position;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+}
 
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.03);
-  opacity: 1;
-  z-index: 5;
- }
-
-
- .loading-root .mainmenu-content--offscreen{
-
-  position: 0px 0px 0px;
-
-  transition-property: opacity;
-  transition-duration: 1s;
-  transition-timing-function: ease-in-out;
- }
-
-
-
- .loading-screen-screenshot-title{
-
+.loading-screen-screenshot-title
+{
     color: white;
-    font-size: 40px;
-	font-family: Stratum2;
-	font-weight: medium;
+    font-size: 50px;
     text-overflow: shrink;
     horizontal-align: left;
     text-align: left;
@@ -38,7 +29,7 @@
     horizontal-align:left;
     margin-bottom: 50px;
     margin-left:50px;
- }
+}
  
 .loading-root--show {
     animation-name: fade-in-animation;
@@ -64,33 +55,22 @@
   visibility: collapse;
  }
 
- .loading-screen-blur
+.loading-screen-blur
 {
-	height: 100%;
-	width: 100%;
-	brightness: 1.0;
-	blur: gaussian( 6, 6, 6 );
-
-	                                        
-	                           
-	                                          
-}
-#BackgroundMapImage {
-  transition-property: opacity;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-in-out;
+    height:100% ;
+    width: 100%;
+    blur: fastgaussian( 6, 6, 3 );
 }
 
 .loading-screen-hint-contents
 {
     height: 80px;
     width: 100%;
-	horizontal-align: center;
-	vertical-align: center;
+    horizontal-align: center;
+    vertical-align: bottom;
     flow-children: right;
-	box-shadow: shadowOffset;
-
-    margin-top: 20px;
+    visibility: collapse;
+    margin: info-margin;
 }
 
 .loading-screen-hint__icon
@@ -120,27 +100,26 @@
     brightness: 1.1;
 }
 
+.loading-screen-contents
+{
+    margin-top: 50px;
+    height: 100%;
+    max-height: 1200px;
+    width: 300px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    horizontal-align: right;
+    vertical-align: center;
+    background-color: rgba(0,0,0,0.5) opacity: 1;
+    background-image: url("file://{images}/backgrounds/bluedots_large.png");
+    background-size: backgroundDotsSize;
+    background-img-opacity: 0.03;
+    flow-children: down;
+    transition-property: height, opacity;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
 
- .loading-screen-contents{
-
-  margin-top: 50px;
-  height: 100%;
-  max-height: 1200px;
-  width: 300px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  horizontal-align: right;
-  vertical-align: center;
-
-  background-color: rgba(0,0,0,0.5) 
-
-  opacity: 1;
-  flow-children: down;
-
-  transition-property: opacity;
-  transition-duration: .5s;
-  transition-timing-function: ease-in-out;
- }
  .hidden_no_info
 {
 	opacity: 0;
@@ -149,27 +128,19 @@
     transition-timing-function: ease-in-out;
 }
 
- .loading-screen-contents-bottom{
-
-
-  height:fill-parent-flow(1);
-  max-height: 920px;
-  width: 100%;
-  horizontal-align: center;
-  vertical-align: bottom;
-
-
-
-
-  flow-children: right;
-  opacity: 1;
-
-
-
-  transition-property: opacity;
-  transition-duration: .5s;
-  transition-timing-function: ease-in-out;
- }
+.loading-screen-contents-bottom
+{
+    height:fill-parent-flow(1);
+    max-height: 920px;
+    width: 100%;
+    horizontal-align: center;
+    vertical-align: bottom;
+    flow-children: right;
+    opacity: 1;
+    transition-property: height, opacity;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
 
  .loading-screen-content__info__bg{
   width: 100%;
@@ -222,8 +193,6 @@
 
     color: white;
     font-size: 40px;
-	font-family: Stratum2;
-    font-weight: Medium;
     text-overflow: shrink;
     horizontal-align: center;
     white-space: nowrap;
@@ -247,8 +216,6 @@
     .loading-screen-content__info .loading-screen-content__titles .loading-screen-content__info__gamemode .loading-screen-content_text-gamemode{
 
      font-size: 30px;
-	 font-family: Stratum2;
-     font-weight: medium;
      color: white;
      text-overflow: shrink;
 	 horizontal-align: center;
@@ -315,9 +282,6 @@
  }
 
 
-
-
-
  .loading-screen-content__mapicon-container{
 
   height: 400px;
@@ -339,127 +303,69 @@
 
 
 
- .loading-screen-progress-container{
+.loading-screen-progress-container
+{
+    width: 100%;
+    vertical-align: bottom;
+    horizontal-align: center;
+    margin: info-margin;
+    margin-bottom: 0px;
+    flow-children: down;
+}
 
-     width: 100%;
-     vertical-align: bottom;
-     horizontal-align: center;
-     margin: info-margin;
-  margin-bottom: 0px;
-  flow-children: down;
- }
+.loading-screen-progress-secondary-container
+{
+    width: 500px;
+    horizontal-align: right;
+    margin-bottom: 10px;
+}
 
+.loading-screen-progress-text
+{
+    height: 32px;
+    width: 100%;
+    font-size: 22px;
+    color: #CCCCCCFF;
+    text-overflow: shrink;
+    vertical-align: bottom;
+    text-align: left;
+    margin-bottom: 1px;
+}
 
+.loading-screen-progress-secondary-text
+{
+    width: 100%;
+    font-family: Stratum2, 'Arial Unicode MS';
+    font-size: 16px;
+    color: #FFFFFFFF;
+    text-overflow: shrink;
+    vertical-align: bottom;
+    text-align: left;
+    margin-bottom: 5px;
+}
 
- .loading-screen-progress-secondary-container{
+.loading-root .ProgressBarLeft
+{
+    background-color: gradient( linear, 0% 0%, 100% 0%, from( #134f87FF ), to( #1ab8e0FF ) );
+}
 
-     width: 500px;
-     horizontal-align: right;
-
-     margin-bottom: 10px;
- }
-
-
- .loading-screen-progress-text{
-
-     height: 62px;
-     width: 100%;
-  font-size: 17px;
-       font-family: Stratum2;
-	 font-weight: medium;
-  color: #CCCCCCFF;
-  text-overflow: shrink;
-     vertical-align: bottom;
-     text-align: left;
-     margin-bottom: 1px;
- }
-
-
- .loading-screen-progress-secondary-text{
-
-     width: 100%;
-     font-family: Stratum2;
-	 font-weight: medium;
-  font-size: 16px;
-  color: #FFFFFFFF;
-  text-overflow: shrink;
-     vertical-align: bottom;
-     text-align: left;
-     margin-bottom: 25px;
- }
-
-
-
-
-
-
- .loading-root .ProgressBarLeft{
-
-  background-color: gradient( linear, 0% 0%, 100% 0%, from( #134f87FF ), to( #1ab8e0FF ) );
- }
-
- .loading-root #ProgressBar{
-
-
-  width: 14%;
-  height: 8px;
-  background-color: rgba(0, 0, 0, 0.671);
-  border: 0px solid rgb(58, 58, 58);
-  border-radius: 0px;
-  vertical-align: bottom;
-  horizontal-align: right;
-  box-shadow: none;
-  margin-bottom: 50px;
-  margin-right: 35px;
- }
- 
- .AspectRatio4x3 #ProgressBar{
-	 
-  width: 19%;
-  height: 8px;
-  background-color: rgba(0, 0, 0, 0.671);
-  border: 0px solid rgb(58, 58, 58);
-  border-radius: 0px;
-  vertical-align: bottom;
-  horizontal-align: right;
-  box-shadow: none;
-  margin-bottom: 50px;
-  margin-right: 35px;
- }
- 
- .AspectRatio5x4 #ProgressBar{
-	 
-  width: 20%;
-  height: 8px;
-  background-color: rgba(0, 0, 0, 0.671);
-  border: 0px solid rgb(58, 58, 58);
-  border-radius: 0px;
-  vertical-align: bottom;
-  horizontal-align: right;
-  box-shadow: none;
-  margin-bottom: 50px;
-  margin-right: 35px;
- }
- 
-  .AspectRatio16x10 #ProgressBar{
-	 
-  width: 16%;
-  height: 8px;
-  background-color: rgba(0, 0, 0, 0.671);
-  border: 0px solid rgb(58, 58, 58);
-  border-radius: 0px;
-  vertical-align: bottom;
-  horizontal-align: right;
-  box-shadow: none;
-  margin-bottom: 50px;
-  margin-right: 35px;
- }
+.loading-root #ProgressBar
+{
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.671);
+    border: 0px solid rgb(58, 58, 58);
+    border-radius: 0px;
+    margin-bottom: 4px;
+    horizontal-align: center;
+    box-shadow: none;
+    margin-bottom: 16px;
+}
  
  .loading-screen-fade--dark{
 
   width: 100%;
   height: 100%;
-  background-color: gradient(radial, 50% 50%, 0px 0px, 100% 100%, from( #00000000 ), color-stop( 0.4, #00000000), color-stop( 0.65, #000000DD), to( #000000FF ) );
  }
 
 
@@ -467,119 +373,78 @@
 
   width: 100%;
   height: 100%;
-  background-color: gradient(radial, 50% 50%, 0px 0px, 100% 100%, from( #00000099 ), color-stop( 0.4, #000000DD), color-stop( 0.65, #000000FF), to( #000000FF ) );
  }
 
- .loading-screen-model{
+.loading-screen-slide
+{
+    width: 100%;
+    height: 100%;
+    transition-property: blur, opacity, background-color;
+    transition-duration: 0.1s;
+    transition-delay: 0s;
+    transition-timing-function: ease-in-out;
+}
 
-  width: 720px;
-  height: 100%;
-  horizontal-align: center;
-  vertical-align: middle;
-  opacity: 1;
-  ui-scale: 100%;
-  margin-bottom: 128px;
+.loading-screen-slide.show
+{
+    opacity: 1;
+}
 
-  transition-property: position, brightness, ui-scale;
-  transition-duration: .25s;
-  transition-timing-function: ease-in-out;
- }
+.loading-screen-slide.show-first
+{
+    opacity: 1;
+    animation-name: slide-show-start;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
 
- .loading-screen-model--right{
+@keyframes 'slide-show-start'
+{
+    0%
+    {
+        opacity: 0.0;
+        transform: scaleX(1.1) scaleY(1.1);
+    }
+    
+    100%
+    {
+        opacity: 1.0;
+        transform: scaleX(1.0) scaleY(1.0);
+    }
+    
+}
 
-  position: 440px 0px 0px;
- }
+.loading-screen-slide.hide
+{
+    opacity: 0;
+}
 
- .loading-screen-model--left{
+.loading-screen-slide.show-blend-into-teamselect
+{
+    opacity: 1;
+    background-color: gradient( linear, 0% 80%, 0% 0%, from( #000000 ), to( #00000033 ));
+    animation-name: slide-show-end;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
 
-  position: -440px 0px 0px;
- }
-
- .loading-screen-model--right.highlight,.loading-screen-model--left.highlight{
-
-
-  ui-scale: 108%;
-
-  transition-property: ui-scale;
-  transition-duration: .25s;
-  transition-timing-function: ease-in-out;
- }
-
-
- .loading-screen-slide{
-
-  width: 100%;
-  height: 100%;
-
-  transition-property: blur, opacity, background-color;
-  transition-duration: 0.1s;
-  transition-delay: 0s;
-  transition-timing-function: ease-in-out;
- }
-
-
- .loading-screen-slide.show{
-
-  opacity: 1;
- }
-
- .loading-screen-slide.show-first{
-
-  opacity: 1;
-
-  animation-name: slide-show-start;
-  animation-duration: 0.2s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
- }
-
-
- @keyframes 'slide-show-start'{
-
-  0%{
-
-         opacity: 0.0;
-   transform: scaleX(1.1) scaleY(1.1);
-  }
-  100%{
-
-         opacity: 1.0;
-         transform: scaleX(1.0) scaleY(1.0);
-  }
- }
-
- .loading-screen-slide.hide{
-
-  opacity: 0;
- }
-
- .loading-screen-slide.show-blend-into-teamselect{
-
-  opacity: 1;
-  background-color: gradient( linear, 0% 80%, 0% 0%, from( #000000 ), to( #00000033 ));
-
-  animation-name: slide-show-end;
-  animation-duration: 0.2s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
- }
-
- @keyframes 'slide-show-end'{
-
-  0%{
-
-         opacity: 1.0;
-   transform: scaleX(1.0) scaleY(1.0);
-  }
-  100%{
-
-         opacity: 0.0;
-         transform: scaleX(1.1) scaleY(1.1);
-  }
- }
-
-
-
+@keyframes 'slide-show-end'
+{
+    0%
+    {
+        opacity: 1.0;
+        transform: scaleX(1.0) scaleY(1.0);
+    }
+    
+    100%
+    {
+        opacity: 0.0;
+        transform: scaleX(1.1) scaleY(1.1);
+    }
+    
+}
 
   .loading-screen--closing{
 
@@ -626,4 +491,10 @@
  .loading-screen-progress-secondary-container .ProgressBarLeft{
 
   background-color: gradient( linear, 0% 0%, 100% 0%, from( blueColor ), to( #006633FF ) );
+}
+
+#BackgroundMapImage {
+  transition-property: opacity;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
 }

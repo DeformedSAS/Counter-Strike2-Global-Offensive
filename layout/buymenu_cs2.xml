@@ -1,4 +1,4 @@
-<!-- xml reconstructed by Source 2 Viewer 15.0.0.0 - https://valveresourceformat.github.io -->
+
 <root>
 	<styles>
 		<include src="file://{resources}/styles/csgostyles.css" />
@@ -6,7 +6,8 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/buymenu.js" />
-		<include src="file://{resources}/scripts/common/characteranims.js" />
+		<include src="file://{resources}/scripts/buymenu_test.js" />
+		<include src="file://{resources}/scripts/common/characteranims_loadout_grid.js" />
 		<include src="file://{resources}/scripts/common/iteminfo.js" />
 		<include src="file://{resources}/scripts/mock_adapter.js" />
 	</scripts>
@@ -22,17 +23,15 @@
 		</snippet>
 		<snippet name="ItemPanel">
 			<Panel class="button-container">
-				<Label id="" text="#BuyMenu_NewUserExperience_Recommended" class="nux Hidden" />
 				<Button id="BuyButton" class="buywheel-wedge">
-					<Label class="buywheel-button__key keybind" id="WedgeKeybinding" text="X" />
-					<Label id="ItemName" class="buywheel-item__name hud-colorize-wash" />
-					<Image id="ItemIcon" class="buywheel-item__icon hud-colorize-wash" />
-					<Label id="ItemPrice" class="buywheel-item__price hud-colorize-wash" />
-					<Label id="ItemCurValue" text="{d:current-value}" class="buywheel-item__cur-value hud-colorize-wash" />
+					<Label class="buywheel-button__key keybind" id="WedgeKeybinding" text="" />
+					<Label id="ItemName" class="buywheel-item__name cl-hud-wash-color" />
+					<Image id="ItemIcon" class="buywheel-item__icon cl-hud-wash-color" />
+					<Label id="ItemPrice" class="buywheel-item__price cl-hud-wash-color" />
 				</Button>
 				<Button id="SellbackButton" class="sellback-button">
 					<TooltipPanel tooltip="#BuyMenu_Sellback">
-						<Image src="file://{images}/icons/ui/undo.vsvg" />
+						<Image src="file://{images}/icons/ui/undo.svg" />
 					</TooltipPanel>
 				</Button>
 				<Panel id="TeammateInventory" class="teammate-inventory-container" />
@@ -93,7 +92,7 @@
 					<Panel class="vline" />
 				</Panel>
 			</Panel>
-			<Panel id="BuyMenuNavBar" class="buymenu-navbar  hud-colorize-wash">
+			<Panel id="BuyMenuNavBar" class="buymenu-navbar  cl-hud-wash-color">
 				<Panel class="vertical-center left-right-flow horizontal-align-right">
 					<Label id="BuyForTeammateLabel" class="buymenu__for-teammate" text="#BuyMenu_BuyForTeammate" />
 					<Button class="PopupButton" onactivate="GameInterfaceAPI.ConsoleCommand( &apos;rebuy&apos; )">

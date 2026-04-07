@@ -84,27 +84,54 @@ var MockAdapter = ( function()
 	{
 		return _m_mockData;
 	}
+	
+	if ( !MOCK_TABLE )
+	MOCK_TABLE = {};
 
-	function FindMockTable ( key )
-	{
-		var arrTablesInUse = _m_mockData.split( ',' );
+if ( !MOCK_TABLE.defaults )
+	MOCK_TABLE.defaults = {};
 
-		for ( let group of arrTablesInUse )
-		{
-			if ( MOCK_TABLE.hasOwnProperty( group ) && MOCK_TABLE[ group ].hasOwnProperty( key ) )
+MOCK_TABLE.defaults.GetAllPlayersMatchDataJSO = function ()
+{
+	return {
+		scene: "5",
+		allplayerdata: [
 			{
-				return MOCK_TABLE[ group ];
+				xuid: "0",
+				name: "Player",
+				teamnumber: 3,
+				items: [],
+				playercolor: 0
 			}
-		}
+		]
+	};
+};
 
-		if ( MOCK_TABLE[ 'defaults' ].hasOwnProperty( key ) )
+function FindMockTable ( key )
+{
+	var arrTablesInUse = _m_mockData ? _m_mockData.split( ',' ) : [];
+
+	for ( let group of arrTablesInUse )
+	{
+		if ( MOCK_TABLE &&
+		     Object.prototype.hasOwnProperty.call( MOCK_TABLE, group ) &&
+		     MOCK_TABLE[ group ] &&
+		     Object.prototype.hasOwnProperty.call( MOCK_TABLE[ group ], key ) )
 		{
-			return MOCK_TABLE[ 'defaults' ];
+			return MOCK_TABLE[ group ];
 		}
-		else
-			return undefined;
-
 	}
+
+	if ( MOCK_TABLE &&
+	     MOCK_TABLE.defaults &&
+	     Object.prototype.hasOwnProperty.call( MOCK_TABLE.defaults, key ) )
+	{
+		return MOCK_TABLE.defaults;
+	}
+
+	return undefined;
+}
+
 
 	function _APIAccessor ( val, key, xuid = -1 )
 	{

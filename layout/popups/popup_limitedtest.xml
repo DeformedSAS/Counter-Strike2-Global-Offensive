@@ -14,7 +14,7 @@
 		<Panel class="popup-limitedtest">
 					<Panel class="popup-limitedtest-fade" />
 			<Panel class="popup-limitedtest-contents">
-				<Image class="popup-limitedtest_logo" texturewidth="550" textureheight="-1" src="file://{images}/icons/cs2_stacked_logo.svg" />
+				<Image class="popup-limitedtest_logo" texturewidth="550" textureheight="-1" src="" />
 				<Label class="popup-limitedtest-subheading stratum2Font" text="#popup_limited_test_invite" />
 				<Label class="popup-limitedtest-body stratum2Font" text="#popup_limited_test_desc" />
 				<Label class="popup-limitedtest-body popup-limitedtest-body--warning" text="#popup_limited_test_download_size"/>
@@ -28,7 +28,7 @@
 			<Image id="id-popup-limited-test-check" class="Check vertical-center horizontal-center hidden" texturewidth="24" textureheight="24" src="file://{images}/icons/ui/check.svg"/>
 			<Panel id="id-popup-limited-test-spinner" class="Spinner vertical-center horizontal-center hidden"/>
 			<Panel class="spacer"/>
-			<TextButton id="id-popup-limited-test-download-btn" class="PopupButton Positive" text="#popup_limited_test_download_btn" onactivate="PopupLimitedTest.OnOKPressed();" />
+			<TextButton id="id-popup-limited-test-download-btn" class="PopupButton Positive" text="#popup_limited_test_download_btn" onactivate="SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser('https://youtu.be/7zp1TbLFPp8'); $.DispatchEvent('UIPopupButtonClicked', '');" />
 			<TextButton id="id-popup-limited-test-quit-btn" class="PopupButton Positive hidden" text="#popup_limited_test_download_quit_btn" onactivate="PopupLimitedTest.OnQuitPressed();" />
 			<TextButton id="id-popup-limited-test-info-btn" class="PopupButton" text="#popup_limited_test_info_btn" onactivate="PopupLimitedTest.OnInfoPressed();" />
 			<TextButton id="id-popup-limited-test-close-btn" class="PopupButton" text="#GameUI_Close" onactivate="PopupLimitedTest.OnCancelPressed();" />

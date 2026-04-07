@@ -18,7 +18,7 @@
 		<snippet name="grid-slots">
 			<Panel class="loadout-grid__slots__container">
 				<Panel id="id-loadout-column0" data-slot="equipment" class="loadout-column" hittest="false" hittestchildren="false">
-					<TextButton class="stratum-medium loadout-column__title" disabled="true" text="#LoadoutSlot_Equipment" />
+					<TextButton class="stratum-regular-condensed loadout-column__title" disabled="true" text="#LoadoutSlot_Equipment" />
 					<Panel data-slot="equipment0" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
 					<Panel data-slot="equipment1" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
 					<Panel data-slot="equipment2" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
@@ -41,25 +41,16 @@
 					<Button data-slot="smg3" class="loadout-slot loadout-slot--margin-bottom" />
 					<Button data-slot="smg4" class="loadout-slot" />
 				</Panel>
-				<Panel id="id-loadout-column3" data-slot="heavy" class="loadout-column">
-					<RadioButton id="id-loadout-btn-heavy" class="loadout-column__title" text="Heavy" onactivate="LoadoutGrid.ToggleGroupDropdown( 'heavy' );" group="loudout-text-btn" />
-					<Button data-slot="heavy0" class="loadout-slot loadout-slot--margin-bottom" />
-					<Button data-slot="heavy1" class="loadout-slot loadout-slot--margin-bottom" />
-					<Button data-slot="heavy2" class="loadout-slot loadout-slot--margin-bottom" />
-					<Button data-slot="heavy3" class="loadout-slot loadout-slot--margin-bottom" />
-					<Button data-slot="heavy4" class="loadout-slot" />
-				</Panel>
-				<Panel id="id-loadout-column4" data-slot="rifle" class="loadout-column">
+				<Panel id="id-loadout-column3" data-slot="rifle" class="loadout-column">
 					<RadioButton id="id-loadout-btn-rifle" class="loadout-column__title" text="Rifles" onactivate="LoadoutGrid.ToggleGroupDropdown( 'rifle' );" group="loudout-text-btn" />
 					<Button data-slot="rifle0" class="loadout-slot loadout-slot--margin-bottom" />
 					<Button data-slot="rifle1" class="loadout-slot loadout-slot--margin-bottom" />
 					<Button data-slot="rifle2" class="loadout-slot loadout-slot--margin-bottom" />
 					<Button data-slot="rifle3" class="loadout-slot loadout-slot--margin-bottom" />
-					<Button data-slot="rifle4" class="loadout-slot loadout-slot--margin-bottom" />
-					<Button data-slot="rifle5" class="loadout-slot" />
+					<Button data-slot="rifle4" class="loadout-slot" />
 				</Panel>
-				<Panel id="id-loadout-column5" data-slot="grenade" class="loadout-column" hittest="false" hittestchildren="false">
-					<TextButton class="stratum-medium loadout-column__title" disabled="true" text="#LoadoutSlot_Grenade" />
+				<Panel id="id-loadout-column4" data-slot="grenade" class="loadout-column" hittest="false" hittestchildren="false">
+					<TextButton class="stratum-regular-condensed loadout-column__title" disabled="true" text="#LoadoutSlot_Grenade" />
 					<Panel data-slot="grenade0" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
 					<Panel data-slot="grenade1" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
 					<Panel data-slot="grenade2" class="loadout-slot loadout-slot--margin-bottom loadout-slot--skinny" />
@@ -81,11 +72,11 @@
                         	class="loadout-grid__agent"
                         	mouse_rotate="false"
                         	hittest="false"
-							style="x: 190px;"
+							style="x: 170px;"
                         	manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
                         	item="models/player/custom_player/legacy/ctm_sas.mdl"
-                        	enable_floorshadow="true"
-                        	force-no-composition-layer="true">
+                        	enable_floorshadow="false"
+                        	force-no-composition-layer="false">
             			</ItemPreviewPanel>
 						<Label style="x: 190px;" class="loadout-grid-team_title stratum-bold" text="#loadout_equip_ct" />
 						<Frame id="id-loadout-row-slots-ct" snippet="row-slots" class="" />
@@ -100,11 +91,11 @@
                         	class="loadout-grid__agent"
                         	mouse_rotate="false"
                         	hittest="false"
-							style="x: -190px;"
+							style="x: -170px;"
                         	manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
                         	item="models/player/custom_player/legacy/tm_phoenix.mdl"
-                        	enable_floorshadow="true"
-                        	force-no-composition-layer="true">                                                                                   
+                        	enable_floorshadow="false"
+                        	force-no-composition-layer="false">                                                                                   
             			</ItemPreviewPanel>
 						<Label style="x: -190px;" class="loadout-grid-team_title stratum-bold" text="#loadout_equip_t" />
 						<Frame id="id-loadout-row-slots-t" snippet="row-slots" class="horizontal-align-right" />
@@ -133,7 +124,7 @@
 				<DropDown class="content-navbar__tabs__dropdown horizontal-align-left DropDownMenuFixedWidth-128px" id="id-loadout-filter-itemdef" menuclass="DropDownMenu Width-150" oninputsubmit="LoadoutGrid.UpdateItemList();" />
 				<TooltipPanel id="id-loadout-clear-filters" tooltip="#loadout_clear_filters">
 					<Button id="" class="IconButton left-right-padding vertical-center left-right-flow" onactivate="LoadoutGrid.ClearFilters()">
-						<Label id="id-loadout-clear-filters-label" class="stratum-medium loadout-grid-cancel-text" text="{s:item_name}" />
+						<Label id="id-loadout-clear-filters-label" class="stratum-regular-condensed loadout-grid-cancel-text" text="{s:item_name}" />
 						<Image texturewidth="-1" textureheight="28" src="file://{images}/icons/ui/cancel.vsvg" />
 					</Button>
 				</TooltipPanel>

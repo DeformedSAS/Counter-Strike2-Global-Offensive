@@ -101,7 +101,7 @@
     brightness: .05;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-image: url("file://{images}/map_icons/screenshots/360p/de_overpass.png");
+    background-image: url("file://{images}/map_icons/screenshots/360p/de_mirage.png");
     background-img-opacity: 0.8;
     background-size: clip_then_cover;
 }

@@ -162,8 +162,7 @@
 
 #NewEntry0 .news-entry__body
 {
-    font-size: 18px;
-	font-family: Stratum2;
+    font-size: 16px;
     color: #dddddd;
     text-overflow: ellipsis;
     vertical-align: center;
@@ -172,7 +171,6 @@
 #NewEntry0 .news-entry__details
 {
     font-size: 20px;
-	font-family: Stratum2;
     font-weight: bold;
     color: #dddddd;
     text-overflow: ellipsis;
@@ -266,13 +264,11 @@
 .history .news-entry__title,.history .news-panel-style-short-entires .news-entry__title,.history .news-panel-style-feature-panel-visible .news-entry__title
 {
     font-size: 30px;
-	font-family: Stratum2;
 }
 
 .history .news-entry__title
 {
     font-weight: bold;
-	font-family: Stratum2;
     color:#dddddd;
 }
 
@@ -286,16 +282,15 @@
 
 .history .news-entry__body,.history .news-panel-style-short-entires .news-entry__body,.history .news-panel-style-short-entires .news-entry__details,.history .news-panel-style-feature-panel-visible .news-entry__body,.history .news-panel-style-feature-panel-visible .news-entry__details
 {
-    font-size: 17px;
-	font-family: Stratum2;
+    font-size: 14px;
     margin-top: 4px;
 }
 
 .history .news-entry__details
 {
-    font-size: 18px;
-	font-family: Stratum2;
+    font-size: 16px;
     color:#cccccc;
     text-transform: uppercase;
     font-weight: Bold;
 }
+

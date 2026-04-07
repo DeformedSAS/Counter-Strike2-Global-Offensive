@@ -22,8 +22,8 @@
 			<Panel class="friendslist-nodata">
 				<Image class="friendslist-nodata__image" src="file://{images}/icons/ui/info.svg" texturewidth="32" textureheight="32" />
 				<Panel class="friendslist-nodata-text">
-					<Label id="JsFriendsNoDataTitle" class="stratum-medium friendslist-nodata-text__title" text="#FriendsList_nodata_friends_title" />
-					<Label id="JsFriendsNoDataDesc" class="stratum-medium friendslist-nodata-text__body" text="#FriendsList_nodata_friends" />
+					<Label id="JsFriendsNoDataTitle" class="stratum-font friendslist-nodata-text__title" text="{s:no_data_title}" />
+					<Label id="JsFriendsNoDataDesc" class="friendslist-nodata-text__body" text="{s:no_data_body}" />
 				</Panel>
 			</Panel>
 		</snippet>
@@ -84,7 +84,7 @@
 						<Image class="friendslist-accordian__section__header__icon" src="file://{images}/icons/ui/player.svg" />
 						<Frame id="id-friendslist-counter" class="text-only" src="file://{resources}/layout/btn_alert.xml" />
 					</Panel>
-					<Label class="stratum-medium fontSize-ml text-letterspace-0px fontcolor-basetext left-margin-none" text="#SFUI_Lobby_FriendsListerTitle" />
+					<Label class="stratum-bold-condensed fontSize-ml text-letterspace-2px fontcolor-basetext left-margin-none" text="#SFUI_Lobby_FriendsListerTitle" />
 					<Button id="AddFriendBtn" class="IconButton horizontal-align-right" style="tooltip-position: bottom;" onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;AddFriendBtn&apos;, &apos;#AddFriend_tooltip&apos; );" onmouseout="UiToolkitAPI.HideTextTooltip();" onactivate="friendsList.OnAddFriend();">
 						<Image src="file://{images}/icons/ui/addplayer.svg" />
 					</Button>
@@ -107,7 +107,7 @@
 						<Image class="friendslist-accordian__section__header__icon" src="file://{images}/icons/ui/invite.svg" />
 						<Frame id="id-friendslist-counter" src="file://{resources}/layout/btn_alert.xml" />
 					</Panel>
-					<Label class="stratum-medium fontSize-ml text-letterspace-0px fontcolor-basetext left-margin-none" text="#SFUI_Friends_Requests" />
+					<Label class="stratum-bold-condensed fontSize-ml text-letterspace-2px fontcolor-basetext left-margin-none" text="#SFUI_Friends_Requests" />
 				</Panel>
 				<Panel id="id-friendslist-section-list" class="friendslist-accordian__section__list friendslist-accordian__section__header--bg">
 					<Frame id="id-friendslist-nodata" snippet="NoData" />

@@ -78,75 +78,6 @@ function StartSearch() {
         LobbyAPI.StartMatchmaking(MyPersonaAPI.GetMyOfficialTournamentName(), MyPersonaAPI.GetMyOfficialTeamName(), _GetTournamentOpponent(), stage);
     }
 }
-function _GoBtnParticle () //plays the particle when the GO button is pressed, this function is called through StartSearch.
-{
-    var elModel = $.GetContextPanel().GetParent().FindChildTraverse( 'GoBtnParticle' );
-    if ( !elModel || !elModel.IsValid() )
-        return;
-
-		elModel.RemoveClass( 'hidden_Particle' );
-		elModel.SetCameraPosition( -15.10, 0.00, 0.00 );
-		elModel.SetCameraAngles( 0.00,  0.00,  0.00 );
-		elModel.AddParticleSystem( 'nuke_sparks1_glow', '', true );
-		elModel.AddParticleSystem( 'nuke_sparks1_core', '', true );
-
-		function hide ( panel )
-		{
-			if ( !panel || !panel.IsValid() )
-				return;
-			
-			panel.AddClass( 'hidden_Particle' );		
-		}
-		
-		$.Schedule( 1.0, hide.bind( undefined, elModel ));
-}
-
-function StartSearchFake() // this is fake matchmaking which i primarily used for debugging the styles of the match accept popups.. nothing special, most of the magic is in the popup_accept_match_fake.js script.
-{
-    var btnStartSearch = $('#StartMatchBtn');
-    $.DispatchEvent('PlaySoundEffect', 'mainmenu_press_GO', 'MOUSE');
-
-    if (!_CheckContainerHasAnyChildChecked(_GetMapListForServerTypeAndGameMode(m_activeMapGroupSelectionPanelID))) {
-        _NoMapSelectedPopup();
-        btnStartSearch.RemoveClass('pressed');
-        return;
-    }
-
-    if (inDirectChallenge()) {
-        _DirectChallengeStartSearch();
-        return;
-    }
-
-    if (m_isWorkshop) {
-        _DisplayWorkshopModePopup();
-    } else {
-        if (!_CheckContainerHasAnyChildChecked(_GetMapListForServerTypeAndGameMode(m_activeMapGroupSelectionPanelID))) {
-            _NoMapSelectedPopup();
-            btnStartSearch.RemoveClass('pressed');
-            return;
-        }
-
-        let settings = (LobbyAPI.IsSessionActive() && !_GetTournamentOpponent()) ? LobbyAPI.GetSessionSettings() : null;
-        let stage = _GetTournamentStage();
-
-        LobbyAPI.StartMatchmaking(
-            MyPersonaAPI.GetMyOfficialTournamentName(),
-            MyPersonaAPI.GetMyOfficialTeamName(),
-            _GetTournamentOpponent(),
-            stage
-        );
-    }
-    $.Schedule(3, function() {
-        $.DispatchEvent('PlaySoundEffect', 'popup_accept_match_found', 'MOUSE');
-
-        UiToolkitAPI.ShowCustomLayoutPopupParameters(
-            '',
-            'file://{resources}/layout/popups/popup_accept_match_fake.xml',
-            '',
-            'none'
-        );
-    });
-}
 
     function _Init() {
         const cfg = GameTypesAPI.GetConfig();
@@ -268,6 +199,33 @@ function StartSearchFake() // this is fake matchmaking which i primarily used fo
         }
         _UpdateGameModeFlagsBtn();
         _UpdateDirectChallengePage();
+    }
+	function _UpdateRatingEmblem(p, mapGroupName) {
+        let elRatingEmblem = p.FindChildTraverse('jsRatingEmblem');
+        if (!elRatingEmblem || !elRatingEmblem.IsValid())
+            return;
+        elRatingEmblem.visible = m_serverSetting == 'official' &&
+            m_gameModeSetting === 'competitive' &&
+            !m_isWorkshop &&
+            LobbyAPI.GetSessionSettings() &&
+            LobbyAPI.GetSessionSettings().hasOwnProperty('game') &&
+            LobbyAPI.GetSessionSettings().game.hasOwnProperty('prime') &&
+            LobbyAPI.GetSessionSettings().game.prime;
+        let pmso = MyPersonaAPI.GetCompetitivePerMapStatsObject();
+        let score = pmso[mapGroupName] ? pmso[mapGroupName]["skillgroup"] : -1;
+        let wins = pmso[mapGroupName] ? pmso[mapGroupName]["wins"] : -1;
+        let options = {
+            root_panel: p,
+            rating_type: 'Competitive',
+            rating_map: mapGroupName,
+            full_details: true,
+            leaderboard_details: { score: score, matchesWon: wins },
+            local_player: true
+        };
+        RatingEmblem.SetXuid(options);
+        let winCountString = RatingEmblem.GetWinCountString(p);
+        p.SetDialogVariable('map-win-count', winCountString);
+        p.SetHasClass('show-win-count', winCountString != '');
     }
     function _SetUpGameModeFlagsRadioButtons() {
         const oFlags = GameModeFlags.GetFlags();
@@ -1279,33 +1237,42 @@ function StartSearchFake() // this is fake matchmaking which i primarily used fo
         UpdateIconsAndScreenshots(p, numTiles, mapGroupName, mg);
         return p;
     }
-    function _UpdateRatingEmblem(p, mapGroupName) {
-        let elRatingEmblem = p.FindChildTraverse('jsRatingEmblem');
-        if (!elRatingEmblem || !elRatingEmblem.IsValid())
-            return;
-        elRatingEmblem.visible = m_serverSetting == 'official' &&
-            m_gameModeSetting === 'competitive' &&
-            !m_isWorkshop &&
-            LobbyAPI.GetSessionSettings() &&
-            LobbyAPI.GetSessionSettings().hasOwnProperty('game') &&
-            LobbyAPI.GetSessionSettings().game.hasOwnProperty('prime') &&
-            LobbyAPI.GetSessionSettings().game.prime;
-        let pmso = MyPersonaAPI.GetCompetitivePerMapStatsObject();
-        let score = pmso[mapGroupName] ? pmso[mapGroupName]["skillgroup"] : -1;
-        let wins = pmso[mapGroupName] ? pmso[mapGroupName]["wins"] : -1;
-        let options = {
-            root_panel: p,
-            rating_type: 'Competitive',
-            rating_map: mapGroupName,
-            full_details: true,
-            leaderboard_details: { score: score, matchesWon: wins },
-            local_player: true
-        };
-        RatingEmblem.SetXuid(options);
-        let winCountString = RatingEmblem.GetWinCountString(p);
-        p.SetDialogVariable('map-win-count', winCountString);
-        p.SetHasClass('show-win-count', winCountString != '');
-    }
+function _UpdateRatingEmblem(p, mapGroupName) {
+    let elRatingEmblem = p.FindChildTraverse('jsRatingEmblem');
+    if (!elRatingEmblem || !elRatingEmblem.IsValid())
+        return;
+
+    elRatingEmblem.visible = m_serverSetting == 'official' &&
+        m_gameModeSetting === 'competitive' &&
+        !m_isWorkshop &&
+        LobbyAPI.GetSessionSettings() &&
+        LobbyAPI.GetSessionSettings().hasOwnProperty('game') &&
+        LobbyAPI.GetSessionSettings().game.hasOwnProperty('prime') &&
+        LobbyAPI.GetSessionSettings().game.prime;
+
+    let myXuid = MyPersonaAPI.GetXuid();
+    let pmso = PartyListAPI.GetFriendCompetitiveRank(myXuid);
+
+    if (!pmso) pmso = {};
+
+    let score = pmso[mapGroupName] ? pmso[mapGroupName]["skillgroup"] : -1;
+    let wins = pmso[mapGroupName] ? pmso[mapGroupName]["wins"] : -1;
+
+    let options = {
+        root_panel: p,
+        rating_type: 'Competitive',
+        rating_map: mapGroupName,
+        full_details: true,
+        leaderboard_details: { score: score, matchesWon: wins },
+        local_player: true
+    };
+
+    RatingEmblem.SetXuid(options);
+    
+    let winCountString = RatingEmblem.GetWinCountString(p);
+    p.SetDialogVariable('map-win-count', winCountString);
+    p.SetHasClass('show-win-count', winCountString != '');
+}
     function UpdateIconsAndScreenshots(p, numTiles, mapGroupName, mg) {
         const keysList = Object.keys(mg.maps);
         const iconSize = 200;
@@ -1453,9 +1420,7 @@ function StartSearchFake() // this is fake matchmaking which i primarily used fo
         const isUnrankedCompetitive = (_RealGameMode() === 'competitive') && _IsValveOfficialServer(m_serverSetting) && (GameTypesAPI.GetMapGroupAttribute(mapName, 'competitivemod') === 'unranked');
         const isNew = !isUnrankedCompetitive && (GameTypesAPI.GetMapGroupAttribute(mapName, 'showtagui') === 'new');
         elMapPanel.FindChildInLayoutFile('MapGroupNewTag').SetHasClass('hidden', !isNew || mapName === "mg_lobby_mapveto");
-        elMapPanel.FindChildInLayoutFile('MapGroupNewTagYellowLarge').SetHasClass('hidden', true);
         elMapPanel.FindChildInLayoutFile('MapSelectionTopRowIcons').SetHasClass('tall', mapName === "mg_lobby_mapveto");
-        elMapPanel.FindChildInLayoutFile('MapGroupUnrankedTag').SetHasClass('hidden', !isUnrankedCompetitive);
     }
     function _ReloadLeaderboardLayoutGivenSettings(container, lbName, strTitleOverride, strPointsTitle) {
         const elFriendLeaderboards = container.FindChildTraverse("FriendLeaderboards");
@@ -2402,6 +2367,22 @@ $.OnGameModeFlagsBtnClicked = function (resumeMatchmakingHandle = '') {
 		bot_panel.visible = true;
     }
     PlayMenu.OnPressWorkshop = OnPressWorkshop;
+	function OnPressTrainingCourse() {
+    UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+        'Training',
+        '#play_training_confirm',
+        '',
+        '#OK',
+        function() {
+            LobbyAPI.LaunchTrainingMap();
+        },
+        '#Cancel_Button',
+        function() {
+        },
+        'dim'
+        );
+    }
+	PlayMenu.OnPressTrainingCourse = OnPressTrainingCourse;
     function OnPressServerBrowser() {
         if ('0' === GameInterfaceAPI.GetSettingString('player_nevershow_communityservermessage')) {
             UiToolkitAPI.ShowCustomLayoutPopup('server_browser_popup', 'file://{resources}/layout/popups/popup_serverbrowser.xml');
@@ -2416,7 +2397,8 @@ $.OnGameModeFlagsBtnClicked = function (resumeMatchmakingHandle = '') {
         }
     }
     PlayMenu.OnPressServerBrowser = OnPressServerBrowser;
-function BotDifficultyChanged() {
+	
+    function BotDifficultyChanged() {
     const elDropDownEntry = $('#BotDifficultyDropdown').GetSelected();
     const botDiff = elDropDownEntry.id;
     GameTypesAPI.SetCustomBotDifficulty( botDiff );
@@ -2428,8 +2410,9 @@ function BotDifficultyChanged() {
         bot_panel.visible = false;
     } else {
         bot_panel.visible = true;
+       }
     }
-}
+	
 	function _UpdateBotDifficultyButton() // updates the bot difficulty state that it was last left on, which syncs to your steam cloud. see _SyncDialogsFromSessionSettings function for more detail
 	{
 		var playType = _GetPlayType();

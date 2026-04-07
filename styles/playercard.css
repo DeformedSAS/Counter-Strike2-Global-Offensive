@@ -91,18 +91,16 @@
 	height: fit-children;
 }
 
-.player-card__text,
-.player-card-row__name .player-card__text
+.player-card__text,.player-card-row__name .player-card__text
 {
-	max-height: 24px;
-	padding-right: 1px;
-	font-family: Stratum2;
-	font-size: 20px;
-	text-overflow: ellipsis;
-	font-weight: Bold;
-	text-shadow:2px 2px 2px #000000;
-	color: white;
-	overflow: clip;
+    max-height: 32px;
+    padding-right: 1px;
+    font-size: 28px;
+    text-overflow: ellipsis;
+    font-weight: Bold;
+    text-shadow:2px 2px 2px #000000;
+    color: white;
+    overflow: clip;
 }
 
 .player-card__text-subtitle
@@ -337,6 +335,11 @@
 	visibility: collapse;
 }
 
+.player-card-rating__icon-container
+{
+    margin: 0px 18px 0px 8px;
+}
+
 #GetPrestigeButtonClickable Label
 {
 	margin-left: 96px;
@@ -445,9 +448,13 @@
 {
 	visibility: visible;
 }
-
                                                                                
-                                                                       
+ .player-card-rating__labels
+{
+    flow-children:down;
+    height: fit-children;
+    vertical-align: center;
+}                                                                      
                                                                                
 .player-card-prime-upsell-container
 {
@@ -545,87 +552,78 @@
                                                                                
 .playercard-flair-carousel-container
 {
-	height: fit-children;
-	width: 100%;
-	margin-top: 8px;
+    height: fit-children;
+    width: 100%;
+    margin-top: 8px;
 }
 
 .playercard-flair-carousel
 {
-	height: fit-children;
-	width: 100%;
-	horizontal-align: left;
+    height: fit-children;
+    width: 100%;
+    horizontal-align: left;
 }
 
-.playercard-flair-carousel__page,
+.playercard-flair-carousel__page
 {
-	flow-children: right;
-	height: fit-children;
-	width: fit-children;
-	opacity: 0;
-
-	transform: translatex( 0px );
-	
-	transition-property: transform, opacity;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    flow-children: right;
+    height: fit-children;
+    width: fit-children;
+    opacity: 0;
+    transform: translatex( 0px );
+    transition-property: transform, opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .playercard-flair-carousel__page.Focused
 {
-	opacity: 1;
+    opacity: 1;
 }
 
 .PreviouslyLeft.playercard-flair-carousel__page:not(.Focused)
 {
-	transform: translatex( -100% );
-	opacity: 0;
-	
-	transition-property: transform, opacity;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-} 
+    transform: translatex( -100% );
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}
 
 .PreviouslyRight.playercard-flair-carousel__page:not(.Focused)
 {
-	transform: translatex( 100% );
-	opacity: 0;
-	
-	transition-property: transform, opacity;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    transform: translatex( 100% );
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .playercard-flair__icon
 {
-	horizontal-align: center;
-	height: 38px;
-	tooltip-position: bottom;
-	tooltip-body-position: 50% 100%;
-	img-shadow: 2px 2px 2px #000000;
+    horizontal-align: center;
+    height: 38px;
+    tooltip-position: bottom;
+    tooltip-body-position: 50% 100%;
+    img-shadow: 2px 2px 2px #000000;
 }
 
 .playercard-flair__icon__image:Hover
 {
-	transform:Scale3d(1.1, 1.1, 1.1);
-	brightness: .2;
-
-	transition-property: brightness, transform;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    transform:Scale3d(1.1, 1.1, 1.1);
+    brightness: .2;
+    transition-property: brightness, transform;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .playercard-flair-carousel-container CarouselNav
 {
-	vertical-align: middle;
-	horizontal-align: right;
-	margin-right:8px;
-	flow-children: down;
+    vertical-align: middle;
+    horizontal-align: right;
+    margin-right:8px;
+    flow-children: down;
 }
-
-
-                                                                               
-                                                                               
                                                                                
 .player-card-team
 {

@@ -189,10 +189,6 @@ CCSGOSteamInputAction.money-text-buy-icon
     -s2-mix-blend-mode: SRGBadditive; 
 
     opacity: 0.0;
-    animation-name: money-anim__add;
-    animation-duration: AddMoneyTime;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
 }
 
 @keyframes money-anim__add
@@ -206,14 +202,14 @@ CCSGOSteamInputAction.money-text-buy-icon
     }
     8%
     {
-        opacity: 1.0;
+        opacity: 0.0;
         x: AddMoneyXPos;
         y: MoneyYPosAddStart;
         z: 0px;
     }
     90%
     {
-        opacity: 1.0;
+        opacity: 0.0;
         x: AddMoneyXPos;
         y: MoneyYPosAddStart;
         z: 0px;
@@ -236,10 +232,6 @@ CCSGOSteamInputAction.money-text-buy-icon
     y: MoneyYPosAtMoney;
 
     opacity: 0.0;
-    animation-name: money-anim__remove;
-	animation-duration: RemoveMoneyTime;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 1;
 }
 
 
@@ -256,14 +248,14 @@ CCSGOSteamInputAction.money-text-buy-icon
     }
     8%
     {
-        opacity: 1.0;
+        opacity: 0.0;
         x: RemoveMoneyXPos;
         y: MoneyYPosModified;
         z: 0px;
     }
     90%
     {
-        opacity: 1.0;
+        opacity: 0.0;
         x: RemoveMoneyXPos;
         y: MoneyYPosModified;
         z: 0px;
@@ -288,17 +280,13 @@ CCSGOSteamInputAction.money-text-buy-icon
     -s2-mix-blend-mode: SRGBadditive; 
 
     opacity: 0.0;
-    animation-name: money-anim__addflash;
-	animation-duration: AddRemoveMoneyFlashTime;
-	animation-timing-function: ease-out;
-	animation-iteration-count: 1;
 }
 
 @keyframes money-anim__addflash
 {
 	0%
 	{
-		opacity: 1.0;
+		opacity: 0.0;
         x: 36px;
         y: 8px;
         z: 0px;
@@ -322,14 +310,10 @@ CCSGOSteamInputAction.money-text-buy-icon
     visibility: visible;
 
     color: AddMoneyColor;
-    x: 20px;
-    y: 8px;
+    x: 0px;
+    y: 0px;
 
     opacity: 0.0;
-	animation-name: money-anim__add-survival;
-	animation-duration: AddMoneyTime--Survival;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
 }
 
 @keyframes 'money-anim__add-survival'
@@ -343,14 +327,14 @@ CCSGOSteamInputAction.money-text-buy-icon
     }
     13%
     {
-        opacity: 1.0;
+        opacity: 0.0;
         x: AddMoneyXPos;
         y: MoneyYPosModified;
         z: 0px;
     }
     87%
     {
-        opacity: 1.0;
+        opacity: 0.0;
         x: AddMoneyXPos;
         y: MoneyYPosModified;
         z: 0px;
@@ -367,21 +351,18 @@ CCSGOSteamInputAction.money-text-buy-icon
 .money-anim.money-anim__add-flash-survival
 {
     color: FlashMoneyColor;
-    x: 20px;
-    y: 140px;
+    x: 0px;
+    y: 0px;
 
     opacity: 0.0;
-    animation-name: money-anim__add-flash-survival;
-	animation-duration: AddRemoveMoneyFlashTime--Survival;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
+
 }
 
 @keyframes money-anim__add-flash-survival
 {
 	0%
 	{
-		opacity: 1.0;
+		opacity: 0.0;
         transform: scale3d( 1, 1, 1 );
         x: 36px;
         y: 40px;
@@ -413,4 +394,26 @@ CSGOHudMoney .steam-button-glyph
     height: 24px;
 }
 
-         
+.digitpanel-container
+{
+    height: 36px;
+    transform: translateY(0px);
+    horizontal-align: left;
+	margin-left: 15px;
+}
+
+.digitpanel-container .digitpanel__digit
+{
+    transition-property: transform;
+    transition-duration: 10s;
+    transition-timing-function: ease-in-out;
+}
+
+.digitpanel-container Label
+{
+    width: 18px;
+    font-size: 38px;
+    font-weight: bold;
+	font-family: Stratum2;
+    color: defaultColor;
+}

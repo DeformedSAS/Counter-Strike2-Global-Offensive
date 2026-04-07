@@ -1,132 +1,155 @@
-                             
-
 CarouselNav
 {
-	flow-children: right;
+    flow-children: right;
 }
 
 CarouselNav:disabled
 {
-	visibility: collapse;
+    visibility: collapse;
 }
 
 #ItemPips
 {
-	flow-children: right;
-	vertical-align: middle;
-	margin-right: 5px;
+    flow-children: right;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
+.mini-store__carousel-nav #ItemPips
+{
+    horizontal-align: center;
+}
+
+.mini-store__carousel-nav #ItemPips .PaginationButton
+{
+    width: 14px;
+    height: 14px;
+    background-color: rgba(0, 0, 0, 0.418);
+    margin: 0px 2px;
+    horizontal-align: center;
+}
+
+.mini-store__carousel-nav #ItemPips .PaginationButton:selected
+{
+    background-color: rgba(255, 255, 255, 0.555);
+    border-radius: 0px;
+}
+
+.xpshop__crate-lootlist-carousel-nav
+{
+    width: 100%;
+    vertical-align: center;
+    margin: 8px;
+}
+
+.xpshop__crate-lootlist-carousel-nav #ItemPips
+{
+    visibility: collapse;
+}
 
 .OverMaxPips #ItemButtons
 {
-	visibility: collapse;
+    visibility: collapse;
 }
 
 #ItemCount
 {
-	visibility: collapse;
-	margin-right: 4px;
-	margin-top: 1px;
-	text-align: right;
-	color: #aaa;
-}
-.OverMaxPips #ItemCount
-{
-	visibility: collapse;
+    visibility: collapse;
+    margin-right: 4px;
+    margin-top: 1px;
+    text-align: right;
+    color: #aaa;
 }
 
-                                                                                          
-.OverlayPips #PreviousItemButton, .OverlayPips #NextItemButton
+.OverMaxPips #ItemCount
 {
-	visibility: collapse;
+    visibility: collapse;
+}
+
+.OverlayPips #PreviousItemButton,.OverlayPips #NextItemButton
+{
+    visibility: collapse;
 }
 
 .OverlayPips .PaginationButton
 {
-	background-color: black;
-	border: 2px solid #63adc8;
-	box-shadow: -1px -1px 3px 3px fill #000;
-	margin: 4px 2px 8px 8px;
-
-	transition-property: background-color;
-	transition-duration: 0.2s;
+    background-color: black;
+    border: 2px solid #63adc8;
+    box-shadow: -1px 1px 3px 0px fill #000;
+    margin: 4px 2px 8px 8px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
 }
 
 .OverlayPips .PaginationButton:selected
 {
-	background-color: #63adc8;
+    background-color: #63adc8;
 }
 
-                                                         
 .OverlayPips.SmallPips
 {
-	margin: 3px;
+    margin: 3px;
 }
 
 .OverlayPips.SmallPips .PaginationButton
 {
-	width: 10px;
-	height: 10px;
-	border-width: 1px;
+    width: 10px;
+    height: 10px;
+    border-width: 1px;
 }
 
-.InventoryCarousel-Container #ItemPips,
-.popup-acknowledge #ItemPips,
-.player-card-row__name CarouselNav #ItemPips
+.InventoryCarousel-Container #ItemPips,.popup-acknowledge #ItemPips,.player-card-row__name CarouselNav #ItemPips
 {
-	visibility: collapse;
+    visibility: collapse;
 }
 
 .op-tier__reward-container CarouselNav
 {
-	vertical-align: bottom;
-	transform: rotateZ(90deg);
-	horizontal-align: right;
-	margin-bottom: 20px;
-	ui-scale: 75%;
+    vertical-align: bottom;
+    transform: rotateZ(90deg);
+    horizontal-align: right;
+    margin-bottom: 20px;
+    ui-scale: 75%;
 }
-
-                                                                  
 
 .VRMode .PaginationArrow
 {
-	width: 100px;
-	height: 100px;
-	background-size: 64px 64px;
-	margin-right: 20px;
-
-	opacity: 1;
+    width: 100px;
+    height: 100px;
+    background-size: 64px 64px;
+    margin-right: 20px;
+    opacity: 1;
 }
 
 .VRMode .PaginationArrow:hover:enabled
 {
-	brightness: 1.6;
+    brightness: 1.6;
 }
+
 .VRMode .PaginationArrow:active
 {
-	brightness: 1.3;
+    brightness: 1.3;
 }
 
 .VRMode .PaginationArrow:disabled
 {
-	brightness: 0.2;
+    brightness: 0.2;
 }
 
 .VRMode .PaginationButton
 {
-	width: 100px;
-	height: 100px;
-
-	opacity: 1;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
 }
 
 .VRMode .PaginationButton:not(:selected)
 {
-	brightness: 0.5;
+    brightness: 0.5;
 }
 
 .VRMode .PaginationButton:hover
 {
-	brightness: 1.5;
+    brightness: 1.5;
 }
+

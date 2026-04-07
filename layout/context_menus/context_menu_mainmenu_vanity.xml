@@ -30,6 +30,7 @@
 					<Label text="#SFUI_Map_coop_kasbah" value="sirocco_night" id="ui_mainmenu_bkgnd_movie_sirocco_night"/>
 					<Label text="#SFUI_Map_de_vertigo" value="vertigo" id="ui_mainmenu_bkgnd_movie_vertigo"/>
 					<Label text="#SFUI_Map_cs_office" value="office" id="ui_mainmenu_bkgnd_movie_office"/>
+					<Label text="#SFUI_Map_cs_italy" value="italy" id="ui_mainmenu_bkgnd_movie_italy"/>
 					<Label text="#SFUI_Map_de_nuke" value="nuke" id="ui_mainmenu_bkgnd_movie_nuke"/>
 					<Label text="#SFUI_Map_de_dust2" value="dust2" id="ui_mainmenu_bkgnd_movie_dust2"/>
 					<Label text="#SFUI_Map_de_train" value="train" id="ui_mainmenu_bkgnd_movie_train"/>

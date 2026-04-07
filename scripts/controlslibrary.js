@@ -244,43 +244,7 @@ function JSResetTransition() {
     $('#RepaintBugChild').RemoveClass('TestTransition');
     $('#RepaintBugGrandchild').RemoveClass('TestTransition');
 }
-function JSControlsPageStartParticles() {
-    for (const curPanel of $('#ControlsLibParticles').FindChildrenWithClassTraverse('TestParticlePanel')) {
-        curPanel.StartParticles();
-    }
-}
-function JSControlsPageStopPlayEndCapParticles() {
-    for (const curPanel of $('#ControlsLibParticles').FindChildrenWithClassTraverse('TestParticlePanel')) {
-        curPanel.StopParticlesWithEndcaps();
-    }
-}
-function JSControlsPageSetControlPointParticles(cp, xpos, ypos, zpos) {
-    for (const curPanel of $('#ControlsLibParticles').FindChildrenWithClassTraverse('TestParticlePanel')) {
-        curPanel.SetControlPoint(cp, 0, 1 + ypos, zpos);
-        curPanel.SetControlPoint(cp, xpos, ypos, zpos);
-    }
-}
-function JSPanelStartParticles(name) {
-    for (const curPanel of $.GetContextPanel().FindChildrenWithClassTraverse(name)) {
-        curPanel.StartParticles();
-    }
-}
-function JSPanelStopPlayEndCapParticles(name) {
-    for (const curPanel of $.GetContextPanel().FindChildrenWithClassTraverse(name)) {
-        curPanel.StopParticlesWithEndcaps();
-    }
-}
-function JSPanelSetControlPointParticles(name, cp, xpos, ypos, zpos) {
-    for (const curPanel of $.GetContextPanel().FindChildrenWithClassTraverse(name)) {
-        curPanel.SetControlPoint(cp, 0, 1 + ypos, zpos);
-        curPanel.SetControlPoint(cp, xpos, ypos, zpos);
-    }
-}
-function JSPanelSetParticlesName(name, particleName) {
-    for (const curPanel of $.GetContextPanel().FindChildrenWithClassTraverse(name)) {
-        curPanel.SetParticleNameAndRefresh(particleName);
-    }
-}
+
 function ShowHideWinPanel(bshow, teamOverride = 2, mode = 'casual') {
     let elPanel = $.GetContextPanel().FindChildInLayoutFile('ZooWinPanel');
     elPanel.RemoveClass('WinPanelRoot--Win--T');

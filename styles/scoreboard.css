@@ -31,7 +31,6 @@ Label {
 	padding-top: 20px;
 
 	padding-left:20px;
-	border-radius: 4px;
 	padding-right:20px;
 
 
@@ -163,25 +162,16 @@ Label {
 	
  }
 
-.sb-team__info__name,
-.sb-team__info__number {
-
-	font-size: 12px;
-
-	                   
-
-	margin-top: 2px;
-
-	horizontal-align: center;
-	text-align: center;
-
-	text-shadow-fast:1px 1px 1px 1.0 #000000;
-
-	max-width: 90px;
-	overflow: squish noclip;
-
+.sb-team__info__name,.sb-team__info__number
+{
+    font-size: 20px;
+    margin-top: 2px;
+    horizontal-align: center;
+    text-align: center;
+    text-shadow:1px 1px 1px 1.0 #000000;
+    max-width: 90px;
+    overflow: squish noclip;
 }
-
 .sb-team__info__number{
 
 	opacity: 0.2;
@@ -290,54 +280,38 @@ Label {
 	-s2-mix-blend-mode: SRGBadditive;
 }
 
-#id-sb-meta__labels__mode-map{
-
-	font-size: 18px;
-	horizontal-align: left;
-
-	                      
-	color: grey;
-	-s2-mix-blend-mode: SRGBadditive;
-
-	position: 40px 0px 0px;
-
-	font-weight: bold;
-	font-family: Stratum2, 'Arial Unicode MS';
-
-	text-overflow: shrink;
-	max-width: 550px;
+#id-sb-meta__labels__mode-map
+{
+    font-size: 22px;
+    horizontal-align: left;
+    color: grey;
+    position: 40px 0px 0px;
+    font-weight: bold;
+    text-overflow: shrink;
+    max-width: 550px;
 }
 
 
-#id-sb-meta__labels__server {
-	font-size: 18px;
-	horizontal-align: left;
-
-	vertical-align: center;
-	position: 0px 10px 0px;
-	color: grey;
-	-s2-mix-blend-mode: SRGBadditive;
-
-	font-weight: bold;
-	font-family: Stratum2, 'Arial Unicode MS';
-
-	text-overflow: ellipsis;
-	max-width: 550px;
+#id-sb-meta__labels__server
+{
+    font-size: 18px;
+    horizontal-align: left;
+    vertical-align: center;
+    position: 0px 10px 0px;
+    color: grey;
+    font-weight: bold;
+    font-family: Stratum2, 'Arial Unicode MS';
+    text-overflow: ellipsis;
+    max-width: 550px;
 }
 
-#id-sb-meta__labels__server-viewers {
-
-	font-size: 14px;
-
-	horizontal-align: right;
-	                      
-
-	color: grey;
-	-s2-mix-blend-mode: SRGBadditive;
-
-	                      
-	font-weight: normal;
-	font-family: Stratum2, 'Arial Unicode MS';
+#id-sb-meta__labels__server-viewers
+{
+    font-size: 14px;
+    horizontal-align: right;
+    color: grey;
+    font-weight: normal;
+    font-family: Stratum2, 'Arial Unicode MS';
 }
 
 #id-sb-meta__button-panel {
@@ -423,13 +397,11 @@ Button.sb-row__cell:hover {
   	                    
 }
 
-#id-sb-meta__musickit Label{
-	font-size: 14px;
-
-	vertical-align: center;
-	color: grey;
-	-s2-mix-blend-mode: SRGBadditive;
-
+#id-sb-meta__musickit Label
+{
+    font-size: 18px;
+    vertical-align: center;
+    color: grey;
 }
 #id-sb-meta__musickit-image{
 
@@ -459,43 +431,40 @@ Button.sb-row__cell:hover {
 }
 
 
-#id-gametime__time{
-
-	font-size: 18px;
-	font-weight: bold;
-	font-family: Stratum2 Bold Monodigit, 'Arial Unicode MS';
-	color: grey;
-
-	horizontal-align: center;
-	vertical-align: bottom;
-
-	-s2-mix-blend-mode: SRGBadditive;
-	text-align: center;
-	letter-spacing: 0.2px;
-
-	max-width: 100px;
-  	             
-	margin-left: 10px;
-	text-overflow: shrink;
-
+.time_container__time
+{
+    font-size: 18px;
+    font-family: Stratum2 Mono, "Arial Unicode MS";
+    color: grey;
+    horizontal-align: center;
+    vertical-align: bottom;
+    text-align: center;
+    max-width: 100px;
+    margin-left: 10px;
+    text-overflow: shrink;
 }
 
-#id-gametime__desc{
+#id-gametime__desc
+{
+    font-size: 18px;
+    color: grey;
+    font-weight: bold;
+    vertical-align: bottom;
+    max-width: 150px;
+    text-overflow: shrink;
+}
 
-	font-size: 18px;
-	color: grey;
-	-s2-mix-blend-mode: SRGBadditive;
-	
-  	                   
-
-	font-weight: bold;
-
-	vertical-align: bottom;
-	                                  
-
-	max-width: 150px;
-  	             
-	text-overflow: shrink;
+.time_container__time
+{
+    font-size: 18px;
+    font-family: ST2MDCOND, "Arial Unicode MS";
+    color: grey;
+    horizontal-align: center;
+    vertical-align: bottom;
+    text-align: center;
+    max-width: 100px;
+    margin-left: 10px;
+    text-overflow: shrink;
 }
 
 

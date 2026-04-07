@@ -31,8 +31,6 @@
 			<Panel class="eom-chars__layout eom-chars__layout--scrimcomp2v2">
 				<Panel class="eom-chars__layout--scrimcomp2v2__team1__glow" />
 				<Panel class="eom-chars__layout--scrimcomp2v2__team2__glow" />
-				<Image id="id-eom-chars__layout__logo--ct" texturewidth='1024' textureheight='-1' class="eom-chars__layout__team-logo" />
-				<Image id="id-eom-chars__layout__logo--t" texturewidth='1024' textureheight='-1' class="eom-chars__layout__team-logo" />
 				<Frame id="id-eom-characters__player-container" class="character-lineup" src="file://{resources}/layout/characterlineup.xml" />
 			</Panel>
 		</snippet>
@@ -40,7 +38,6 @@
 		<snippet name="snippet-eom-chars__layout--classic" >
 			<Panel class="eom-chars__layout eom-chars__layout--classic">
 				<Panel class="eom-chars__layout--classic__team__glow" />
-				<Image id="id-eom-chars__layout__logo--myteam" texturewidth='1024' textureheight='-1' class="eom-chars__layout__team-logo" />
 				<Frame id="id-eom-characters__player-container" class="character-lineup" src="file://{resources}/layout/characterlineup.xml" />
 			</Panel>
 		</snippet>	
@@ -48,7 +45,6 @@
 		<snippet name="snippet-eom-chars__layout--cooperative" >
 			<Panel class="eom-chars__layout eom-chars__layout--cooperative">
 				<Panel class="eom-chars__layout--classic__team__glow" />
-				<Image id="id-eom-chars__layout__logo--myteam" texturewidth='1024' textureheight='-1' class="eom-chars__layout__team-logo" />
 				<Frame id="id-eom-characters__player-container" class="character-lineup" src="file://{resources}/layout/characterlineup.xml" />
 			</Panel>
 		</snippet>		

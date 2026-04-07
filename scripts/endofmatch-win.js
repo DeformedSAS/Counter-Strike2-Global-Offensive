@@ -1,228 +1,148 @@
 'use strict';
 
-var EOM_Win = ( function () {
+var EOM_Win = (function() {
 
+    var DEBUG_VACLIVE = false; // THIS is for the giant red box across the screen, old vac live message box.
+    var DEBUG_CANCELLED = false; // this is for the one that just replaces the text in eom win.
 
-	var _m_pauseBeforeEnd = 4.0;
-	var _m_cP = $.GetContextPanel();
+    var _m_pauseBeforeEnd = 5.0;
+    var _m_cP = $.GetContextPanel();
 
-                                                     
+    var _m_oMatchEndData;
+    var _m_oScoreData;
 
-	var _m_arrTopPlayerXuid = [];
-	var _m_localPlayerScoreboardPosition;
+    const TEAM_T = 2;
+    const TEAM_CT = 3;
 
-	var _m_oMatchEndData = {};
-	var _m_oScoreData = {};
-	var _m_oTime = {};
-	var _m_oResults = {};
+    function _SetVictoryStatement() {
+        _m_oScoreData = MockAdapter.GetScoreDataJSO();
+        _m_oMatchEndData = MockAdapter.GetMatchEndWinDataJSO();
 
-	function _GetFreeForAllTopThreePlayers_Response( first, second, third )
-	{
-		_m_arrTopPlayerXuid[ 0 ] = first;
-		_m_arrTopPlayerXuid[ 1 ] = second;
-		_m_arrTopPlayerXuid[ 2 ] = third;
+        if (!_m_oScoreData || !_m_oMatchEndData) {
+            $.Msg("[PanoramaScript] Missing match data");
+            return false;
+        }
 
-		_SetPlayerWinners();
-	}	
+        var winningTeam = _m_oMatchEndData.winning_team_number;
+        var localTeam = MockAdapter.GetPlayerTeamNumber(MockAdapter.GetLocalPlayerXuid());
+        var localWon = (winningTeam === localTeam);
 
-	function _GetFreeForAllPlayerPosition_Response( pos )
-	{
-		_m_localPlayerScoreboardPosition = pos;
-	}
+        _m_cP.RemoveClass('eom-win_won');
+        _m_cP.RemoveClass('eom-win_lost');
 
-function _SetVictoryStatement()
-{
-    var _m_oScoreData = GameStateAPI.GetScoreDataJSO();
+        var result = "#eom-result-tie3";
+        if (winningTeam === TEAM_T || winningTeam === TEAM_CT) {
+            result = localWon ? "#eom-result-win3" : "#eom-result-loss3";
+            if (localWon) {
+                _m_cP.AddClass('eom-win_won');
+            } else {
+                _m_cP.AddClass('eom-win_lost');
+            }
+        }
 
-    if ( !_m_oScoreData ||
-        !_m_oScoreData["teamdata"] ||
-        !_m_oScoreData["teamdata"]["CT"] ||
-        !_m_oScoreData["teamdata"]["TERRORIST"] )
-        return false;
-   $.DispatchEvent('PlaySoundEffect', 'UIPanorama.gameover_show', 'MOUSE');
+        var isCancelled = _m_oMatchEndData.hasOwnProperty('match_cancelled') && _m_oMatchEndData.match_cancelled; // vac live cancel message instead of a giant red box at the top of the screen. debug only.
+        
+        if (DEBUG_CANCELLED || isCancelled) {
+            _m_cP.RemoveClass('eom-win_won');
+            _m_cP.RemoveClass('eom-win_lost');
+            result = '#SFUI_match_cancelled';
+            
+            if (_m_oMatchEndData.hasOwnProperty('cancel_reason_code') && _m_oMatchEndData.cancel_reason_code) {
+                if (typeof _ShowMatchCancelledEarlyWithReasonExplanation === "function") {
+                    _ShowMatchCancelledEarlyWithReasonExplanation(_m_oMatchEndData.cancel_reason_code);
+                }
+            }
+        }
+        var teamName = MockAdapter.GetTeamClanName(
+            MockAdapter.GetPlayerTeamName(MockAdapter.GetLocalPlayerXuid())
+        );
 
-    _m_cP.FindChildTraverse('WinTeam').RemoveClass('hidden');
-    var winningTeam;
-    var winningTeamNumber = _m_oMatchEndData["winning_team_number"];
-    var result = "eom-result-tie2";
+        var ctScore = (_m_oScoreData.teamdata && _m_oScoreData.teamdata.CT) ? _m_oScoreData.teamdata.CT.score : 0;
+        var tScore = (_m_oScoreData.teamdata && _m_oScoreData.teamdata.TERRORIST) ? _m_oScoreData.teamdata.TERRORIST.score : 0;
+        var localScore = (localTeam === TEAM_T) ? tScore : ctScore;
+        var otherScore = (localTeam === TEAM_T) ? ctScore : tScore;
 
-    if (winningTeamNumber == 2) {
-        winningTeam = "terrorist";
-    } else if (winningTeamNumber == 3) {
-        winningTeam = "ct";
-    }
+        _m_cP.SetDialogVariable("win-result", $.Localize(result));
+        _m_cP.SetDialogVariable("teamname", teamName);
+        _m_cP.SetDialogVariableInt("score_local_player", localScore);
+        _m_cP.SetDialogVariableInt("score_other", otherScore);
 
-    var localPlayerTeamNumber = MockAdapter.GetPlayerTeamNumber(MockAdapter.GetLocalPlayerXuid());
+        var elPanel = _m_cP.FindChildTraverse("WinTeam");
+        if (elPanel) {
+            elPanel.AddClass("visible");
+            elPanel.style.opacity = 1;
+            elPanel.TriggerClass("show");
+        }
 
-    result = (winningTeamNumber == localPlayerTeamNumber) ? "eom-result-win2" : 
-             (winningTeamNumber === 0) ? "eom-result-tie2" :
-             "eom-result-loss2";
-
-    if (winningTeam) {
-        var teamAbbreviation = (winningTeam === 'ct') ? winningTeam : 't';
-        _SetCoinModel(winningTeam, teamAbbreviation);
-        _SetWinTeamText(winningTeam);
         _AnimStart();
-    } else {
-        var elWinnerLabel = $.GetContextPanel().FindChildTraverse('WinTeamBackgroundText');
-        elWinnerLabel.text = $.Localize('#eom-tie');
-        elWinnerLabel.TriggerClass('move');
+        $.Schedule(0.05, function() {
+            $.DispatchEvent('PlaySoundEffect', 'UIPanorama.gameover_show', 'MOUSE');
+        });
+
+        return true;
     }
 
-    _m_cP.SetDialogVariable("win-result", $.Localize(result));
+    function _AnimStart() {
+        var elPanel = _m_cP.FindChildTraverse("WinTeam");
+        if (elPanel) {
+            elPanel.TriggerClass("show");
+            elPanel.AddClass("visible");
+        }
+    }
 
-    return true;
-}
+    function _ShowVacLivePanel() {
+        var elPanel = _m_cP.FindChildTraverse("VacLive");
+        if (elPanel) {
+            elPanel.TriggerClass("show");
+            $.DispatchEvent('PlaySoundEffect', 'UIPanorama.gameover_show', 'MOUSE');
+        }
+    }
 
+    function _DisplayMe() {
+        _m_oMatchEndData = MockAdapter.GetMatchEndWinDataJSO();
+        _m_oScoreData = MockAdapter.GetScoreDataJSO();
 
+        if (!_m_oMatchEndData || !_m_oScoreData) {
+            return false;
+        }
+        if (GameStateAPI.GetGameModeInternalName(false) == 'deathmatch')
+            return false;
 
-	function _SetCoinModel( winningTeam, team )
-	{
-		var elModel = _m_cP.FindChildTraverse( 'WinCoinModel' );
-		elModel.SetScene( "resource/ui/econ/ItemModelPanelCharWeaponInspect.res",
-			'models/inventory_items/scoreboard_logos/logo_' + team + '.mdl',
-			false
-		);
-	}
+        if (DEBUG_VACLIVE || (_m_oMatchEndData.hasOwnProperty('vac_live') && _m_oMatchEndData.vac_live)) {
+            _ShowVacLivePanel();
+        } else {
+            _SetVictoryStatement();
+        }
 
-	function _SetWinTeamText( team )
-	{
-		var elLabel = _m_cP.FindChildTraverse( 'WinTeamName' );
-		var clanName = GameStateAPI.GetTeamClanName( team.toUpperCase() );
-		elLabel.text = clanName;
-	}
+        return true;
+    }
 
-	function _AnimStart ()
-	{
-		var elCoinModel = $.GetContextPanel().FindChildTraverse( 'WinCoinModel' );
-		var elTeamLabel = $.GetContextPanel().FindChildTraverse( 'WinTeamName' );
-		var elWinnerLabel = $.GetContextPanel().FindChildTraverse( 'WinTeamBackgroundText' );
+    function _Start() {
+        if (_DisplayMe()) {
+            if (EndOfMatch) {
+                EndOfMatch.SwitchToPanel("eom-win");
+                EndOfMatch.StartDisplayTimer(_m_pauseBeforeEnd);
+                $.Schedule(_m_pauseBeforeEnd, _End);
+            }
+        } else {
+            _End();
+        }
+    }
 
-		elCoinModel.SetCameraPreset( 1, false );
-		elCoinModel.RemoveClass( 'hidden' );
-		elCoinModel.SetCameraPreset( 0, true );
-		elWinnerLabel.TriggerClass( 'move' );
-		elTeamLabel.TriggerClass( 'move' );
-	}
+    function _End() {
+        if (EndOfMatch) EndOfMatch.ShowNextPanel();
+    }
 
-	function _SetPlayerWinners()
-	{
-		var elPlayers = _m_cP.FindChildTraverse( 'WinPlayers' );
-		elPlayers.RemoveClass( 'hidden' );
+    function _Shutdown() {}
 
-		elPlayers.RemoveAndDeleteChildren();
+    return {
+        name: "eom-win",
+        Start: _Start,
+        Shutdown: _Shutdown
+    };
 
-		for ( var i = 0; i < _m_arrTopPlayerXuid.length; i++ )
-		{
-			var elPlayer = $.CreatePanel( 'Panel', elPlayers, 'Player + entry' );
-			elPlayer.BLoadLayoutSnippet( "PlayerWinner" );
-
-			var elAvatar = elPlayer.FindChildTraverse( 'WinPlayersAvatar' );
-			elAvatar.BLoadLayoutSnippet( 'AvatarPlayerCard' );
-
-			elPlayer.FindChildTraverse( 'WinPlacement' ).text = $.Localize( "#scoreboard_arsenal_" + i );
-			elPlayer.SetDialogVariable( 'winner_name', GameStateAPI.GetPlayerName( _m_arrTopPlayerXuid[ i ] ));
-
-			var bIsBot = GameStateAPI.IsFakePlayer( _m_arrTopPlayerXuid[ i ] );
-			var xuidForAvatarLookup = bIsBot ? '0' : _m_arrTopPlayerXuid[ i ];
-
-			Avatar.Init( elAvatar, xuidForAvatarLookup, 'playercard' );
-
-			if ( bIsBot )
-			{
-				var team = GameStateAPI.GetPlayerTeamName( _m_arrTopPlayerXuid[ i ] );
-				elAvatar.FindChildTraverse( 'JsAvatarImage' ).SetDefaultImage( 'file://{images}/icons/scoreboard/avatar-' + team + '.png' );
-				elAvatar.FindChildTraverse( 'JsAvatarImage' ).RemoveClass( 'hidden' );
-			}
-			
-
-			if ( i > 0 )
-			{
-				elPlayer.AddClass( 'eom-win__player--small' );
-			}
-		}
-	}
-
-	function _DisplayMe() 
-	{
-		_m_oMatchEndData = MockAdapter.GetMatchEndWinDataJSO();
-		_m_oScoreData = MockAdapter.GetScoreDataJSO();
-		
-		if ( !_m_oMatchEndData )
-		{
-			return false;
-		}
-
-		var bFreeForAll = ( _m_oMatchEndData[ 'winning_player' ] != 0 );
-
-		if ( bFreeForAll )
-		{
-			                                                 
-			                                                                                                  
-
-			                                                
-		  	                                                             
-			
-			return false;
-		}
-		else             
-		{
-			return _SetVictoryStatement();
-		}
-
-		return true;
-	}
-	                                                         
-	                                                                      
-	  
-	  
-
-	function _Start() 
-	{
-		                              
-
-		if ( _DisplayMe() )
-		{
-			EndOfMatch.SwitchToPanel( 'eom-win' );
-			EndOfMatch.StartDisplayTimer( _m_pauseBeforeEnd );
-			
-			$.Schedule( _m_pauseBeforeEnd, _End );
-		}
-		else
-		{
-			_End();
-		}
-	}
-
-	function _End() 
-	{
-		                            
-
-		EndOfMatch.ShowNextPanel();
-	}
-
-	function _Shutdown()
-	{
-	}
-
-	                      
-	return	{
-        name: 'eom-win',
-		Start									: _Start,
-		GetFreeForAllTopThreePlayers_Response	: _GetFreeForAllTopThreePlayers_Response,
-		GetFreeForAllPlayerPosition_Response:    _GetFreeForAllPlayerPosition_Response,
-		Shutdown: _Shutdown,
-	};
 })();
 
-
-                                                                                                    
-                                           
-                                                                                                    
-(function () {
-
-	if ( EndOfMatch )
-		EndOfMatch.RegisterPanelObject( EOM_Win );
-
-
+(function() {
+    if (EndOfMatch) EndOfMatch.RegisterPanelObject(EOM_Win);
 })();

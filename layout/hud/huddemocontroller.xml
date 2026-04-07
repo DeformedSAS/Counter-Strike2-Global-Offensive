@@ -1,0 +1,87 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/csgostyles.css" />
+        <include src="file://{resources}/styles/hud/huddemocontroller.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/hud/huddemocontroller.js" />
+    </scripts>
+    <CSGOHudDemoController hittest="false">
+        <Panel id="Root">
+            <Panel id="Settings" hittest="true" onactivate="HudDemoController.EatClick()">
+                <Panel class="CheckBox" id="XRayCheckbox" onactivate="HudDemoController.ToggleXRay();">
+                    <ToggleButton id="XRayToggleButton" />
+                    <Panel class="CheckBoxBody">
+                        <Label class="CheckBoxTitle" text="#CSGO_Demo_Settings_XRay" />
+                    </Panel>
+                </Panel>
+                <Panel class="CheckBox" id="TrueViewCheckBox" onactivate="HudDemoController.ToggleTrueView();">
+                    <ToggleButton id="TrueViewToggleButton" />
+                    <Panel class="CheckBoxBody">
+                        <Label class="CheckBoxTitle" text="#CSGO_Demo_Settings_TrueView_Enable" />
+                        <Label class="Explanation" text="#CSGO_Demo_Settings_TrueView_Explanation" />
+                    </Panel>
+                </Panel>
+                <Panel class="CheckBox" id="TrueViewDOACheckBox" onactivate="HudDemoController.ToggleTrueViewDOACommands();">
+                    <ToggleButton id="TrueViewDOAToggleButton" />
+                    <Panel class="CheckBoxBody">
+                        <Panel class="CheckBoxTitle">
+                            <Label text="#CSGO_Demo_Settings_TrueViewDOA" />
+                            <Image src="file://{images}/icons/ui/hourglass.svg" />
+                        </Panel>
+                        <Label class="Explanation" text="#CSGO_Demo_Settings_TrueViewDOA_Explanation" />
+                    </Panel>
+                </Panel>
+                <Panel class="CheckBox" id="TrueViewWrongVersionCheckBox" onactivate="HudDemoController.ToggleTrueViewWrongVersion();">
+                    <ToggleButton id="TrueViewWrongVersionToggleButton" />
+                    <Panel class="CheckBoxBody">
+                        <Label class="CheckBoxTitle" text="#CSGO_Demo_Settings_TrueViewWrongVersion" />
+                        <Label class="Explanation" text="#CSGO_Demo_Settings_TrueViewWrongVersion_Explanation" />
+                    </Panel>
+                </Panel>
+            </Panel>
+            <Panel id="Contents" hittest="true" onactivate="HudDemoController.EatClick()">
+                <Panel id="SliderRow">
+                    <Panel id="RoundMarkers" />
+                    <Panel id="HighlightMarkers" />
+                    <Panel id="HighlightIcons" />
+                    <Slider id="Slider" class="HorizontalSlider" direction="horizontal" />
+                </Panel>
+                <Panel id="ControlRow">
+                    <Panel id="PlayButton" onactivate="HudDemoController.OnPlayClicked()">
+                        <Image id="PlayIcon" src="file://{images}/icons/ui/play.svg" />
+                        <Image id="PauseIcon" src="file://{images}/icons/ui/pause.svg" />
+                    </Panel>
+                    <Image id="HighlightsButton" class="interactive" src="file://{images}/icons/ui/film.svg" onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;HighlightsButton&apos;, &apos;#tooltip_demo_highlights_toggle&apos; );" onmouseout="UiToolkitAPI.HideTextTooltip();" onactivate="HudDemoController.OnHighlightsToggle()" />
+                    <Label id="TimeLabel" text="#CSGO_Demo_Time" />
+                    <Panel id="TimeControls">
+                        <Label class="interactive" text="#CSGO_Demo_MinusSeconds" onactivate="HudDemoController.OnStepTimeBackward()" />
+                        <Image id="TimeIcon" src="file://{images}/icons/ui/clock.svg" />
+                        <Label class="interactive" text="#CSGO_Demo_PlusSeconds" onactivate="HudDemoController.OnStepTimeForward()" />
+                    </Panel>
+                    <Panel id="RoundControls">
+                        <Image id="RoundPrev" class="interactive" src="file://{images}/icons/ui/skip.svg" onactivate="HudDemoController.OnStepInterval(-1)" />
+                        <Panel id="RoundRestart" class="interactive" onactivate="HudDemoController.OnStepInterval(0)">
+                            <Label id="IntervalLabel" text="#CSGO_Demo_Round" />
+                            <Label id="RoundNumber" text="{d:round_number}" />
+                        </Panel>
+                        <Image id="RoundNext" class="interactive" src="file://{images}/icons/ui/skip.svg" onactivate="HudDemoController.OnStepInterval(1)" />
+                    </Panel>
+                    <Panel id="SpeedControls">
+                        <Label id="TimeScale" class="interactive" onactivate="HudDemoController.OnShowTimeScaleContextMenu()" />
+                    </Panel>
+                    <Panel id="HotKeyLabels">
+                        <Label id="HotKey_Next_Camera" class="hotkeylabel" text="#CSGO_Demo_Next_Camera" />
+                        <Label id="HotKey_Player_Next" class="hotkeylabel" text="#CSGO_Demo_Player_Next" />
+                        <Label id="HotKey_Toggle_Mouse_Cursor" class="hotkeylabel" text="{s:mouse-mode}" />
+                    </Panel>
+                    <Panel id="SettingsButton" class="interactive" onactivate="HudDemoController.ToggleSettingsVisible()">
+                        <Image id="TimeIcon" src="file://{images}/icons/ui/settings.svg" />
+                    </Panel>
+                    <Label id="EndPlayback" class="interactive" text="{s:end-playback}" onactivate="HudDemoController.OnStopPlayback()" />
+                </Panel>
+            </Panel>
+        </Panel>
+    </CSGOHudDemoController>
+</root>
+

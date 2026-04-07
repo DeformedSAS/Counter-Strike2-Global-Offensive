@@ -1,364 +1,345 @@
 'use strict';
 
 
+
 var EOM_Rank = (function () {
 
-	var _m_pauseBeforeEnd = 1.0;
-	var _m_cP = $.GetContextPanel();
+    var _m_pauseBeforeEnd = 1.0;
+    var _m_cP = $.GetContextPanel();
+
+    const DEBUG_RANK = true; // this is for debugging the ranks, used in the cs2 trailers.
 
 
                                                      
 
-	_m_cP.Data().m_retries = 0;
-	
-	var _DisplayMe = function()
-	{
+    _m_cP.Data().m_retries = 0;
+    
+    var _DisplayMe = function()
+    {
+                                                                        
+    
+                                            
+           
+                                               
+                           
+           
 
-		                                     
-		    
-		                                          
-		   	             
-		    
+                                                                 
+                                            
+        if ( !DEBUG_RANK )
+        {
+            if ( !_m_cP.bXpDataReady && !MockAdapter.GetMockData() )
+            {
+                                                                       
+                return false;
+            }
+        }
 
-		if ( !_m_cP.bXpDataReady && !MockAdapter.GetMockData() )
-		{
-		                                                           
-			return false;
-		}
+        if( MyPersonaAPI.GetElevatedState() !== 'elevated' )
+        {
+            return false;
+        }
 
-		if( MyPersonaAPI.GetElevatedState() !== 'elevated' )
-		{
-			return false;
-		}
+        var xPPerLevel = MyPersonaAPI.GetXpPerLevel();
+        
+        var xp_t = ( function( reason, xp )
+        {
+            
+            var _m_reason = reason;
+            var _m_xp = xp;
+    
+            return {
+                
+                m_reason: _m_reason,
+                m_xp: _m_xp
+            }
+        } );
 
-		var xPPerLevel = MyPersonaAPI.GetXpPerLevel();
-		
-		var xp_t = ( function( reason, xp )
-		{
-			
-			var _m_reason = reason;
-			var _m_xp = xp;
-	
-			return {
-				
-				m_reason: _m_reason,
-				m_xp: _m_xp
-			}
-		} );
+        var oXpData = MockAdapter.XPDataJSO( _m_cP );
 
-		var oXpData = MockAdapter.XPDataJSO( _m_cP );
+        if ( DEBUG_RANK )
+        {
 
-		if ( !oXpData )
-			return false;
-		
-		var elProgress = _m_cP.FindChildInLayoutFile( "id-eom-rank__bar-container" );
-		var elNew = _m_cP.FindChildInLayoutFile( "id-eom-rank__new-reveal" );
-		var elCurrent = _m_cP.FindChildInLayoutFile( "id-eom-rank__current" );
-		var elBar = _m_cP.FindChildInLayoutFile( "id-eom-rank__bar" );
-		var elRankLister = _m_cP.FindChildInLayoutFile( "id-eom-rank__lister" );
-		var elRankListerItems = _m_cP.FindChildInLayoutFile( "id-eom-rank__lister__items" );
+            function _r ( min = 0, max = 1000 )
+            {
+                return Math.ceil( Math.random() * ( ( max - min ) + min ) );
+            };
 
-		var arrPreRankXP = [];                                     
-		var arrPostRankXP = [];                                    
-		var totalXP = 0;
+            oXpData = {
+                "xp_earned":
+                {
+                    "2": 1000,                    
+                    "6": 1000,                    
+                },
+                "current_level": _r(0,39),
+                "current_xp": 3900,                   
+            };
+        }
+        if ( !oXpData )
+            return false;
 
-		var maxLevel = InventoryAPI.GetMaxLevel();
+        var elProgress = _m_cP.FindChildInLayoutFile( "id-eom-rank__bar-container" );
+        var elNew = _m_cP.FindChildInLayoutFile( "id-eom-new-reveal" );
+        var elCurrent = _m_cP.FindChildInLayoutFile( "id-eom-rank__current" );
+        var elBar = _m_cP.FindChildInLayoutFile( "id-eom-rank__bar" );
+        var elRankLister = _m_cP.FindChildInLayoutFile( "id-eom-rank__lister" );
+        var elRankListerItems = _m_cP.FindChildInLayoutFile( "id-eom-rank__lister__items" );
 
-		               
-		var currentRank = oXpData[ "current_level" ];
-		currentRank = currentRank < maxLevel ? currentRank : maxLevel;
+        var arrPreRankXP = [];                                     
+        var arrPostRankXP = [];                                    
+        var totalXP = 0;
 
-		elCurrent.SetDialogVariableInt( "level", currentRank );
-		elCurrent.SetDialogVariable( 'name', $.Localize( '#XP_RankName_' + currentRank, elCurrent ) );
-	
-		_m_cP.FindChildInLayoutFile( "id-eom-rank__current__emblem" ).SetImage( "file://{images}/icons/xp/level" + currentRank + ".png" );
+        var maxLevel = InventoryAPI.GetMaxLevel();
+        var elPanel = _m_cP.FindChildTraverse( 'id-eom-rank__current' );    
+        elPanel.TriggerClass( 'show' );
+        _m_cP.AddClass( 'eom-rank-show' );
 
-		            
-		var newRank = currentRank < maxLevel ?  ( currentRank + 1 ) : maxLevel;
-		
-		elNew.SetDialogVariableInt( "level", newRank );
-		elNew.SetDialogVariable( 'rank_new_name', $.Localize( '#XP_RankName_' + newRank, elNew ) );
-		_m_cP.SetDialogVariable( 'rank_new_rank', $.Localize( '#XP_RankName_Display_Rank', elNew ) );
+                       
+        var currentRank = oXpData[ "current_level" ];
+        currentRank = currentRank < maxLevel ? currentRank : maxLevel;
 
-		_m_cP.FindChildInLayoutFile( "id-eom-rank__new-reveal__emblem" ).SetImage( "file://{images}/icons/xp/level" + newRank + ".png" );
+        elCurrent.SetDialogVariableInt( "level", currentRank );
+        elCurrent.SetDialogVariable( 'name', $.Localize( '#XP_RankName_' + currentRank, elCurrent ) );
+    
+        _m_cP.FindChildInLayoutFile( "id-eom-rank__current__emblem" ).SetImage( "file://{images}/icons/xp/level" + currentRank + ".png" );
 
-		var elCurrentListerItem;
+                    
+        var newRank = currentRank < maxLevel ?  ( currentRank + 1 ) : maxLevel;
+        var elCurrentListerItem;
+        var _xpSoundNum = 1;
+        var xp = 0;
 
-		var _xpSoundNum = 1;
+        var _AddXPBar = function( reason, xp )
+        {
+                                                                     
+            var sPerXp = 0.0005;
 
-		var xp = 0;
+            var duration = sPerXp * xp;
 
-		
-		var _AddXPBar = function( reason, xp )
-		{
-			                                                         
+            var sPerSoundTick = 0.082;
+            for ( var t = sPerSoundTick; t < duration; t += sPerSoundTick )
+            {
+                $.Schedule( animTime + t, function()
+                {
+                    $.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.Ticker', 'eom-rank' );
+                } );
+            }
+            $.Schedule( animTime, function()
+            {
+                if ( !elBar.IsValid() )
+                    return 0;
 
-			var sPerXp = 0.0005;
+                var elRankSegment = $.CreatePanel( 'Panel', elBar, 'id-eom-rank__bar__segment' );
+                elRankSegment.AddClass( "eom-rank__bar__segment" );
 
-			var duration = sPerXp * xp;
+                                                    
+                elBar.MoveChildAfter( elRankLister, elRankSegment );
 
-			var sPerSoundTick = 0.082;
-			for ( var t = sPerSoundTick; t < duration; t += sPerSoundTick )
-			{
-				$.Schedule( animTime + t, function()
-				{
-					$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.Ticker', 'eom-rank' );
-				} );
-			}
+                        
+                var colorClass;
+                if ( reason == "old" )
+                {
+                    colorClass = "eom-rank__blue";
+                }
+                else if ( reason == "levelup" )
+                {
+                    colorClass = "eom-rank__purple";
+                }
+                else if ( reason == "6" || reason == "7" )
+                {
+                    colorClass = "eom-rank__yellow";
+                }
+                else if ( reason == "9" || reason == "10" || reason == "59" )
+                {
+                    colorClass = "eom-rank__yellow";
+                }
+                else
+                {
+                    colorClass = "eom-rank__green";
+                }
 
-			$.Schedule( animTime, function()
-			{
-				if ( !elBar.IsValid() )
-					return 0;
+                $.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.Milestone_0' + _xpSoundNum.toString(), 'eom-rank' );
+                if ( _xpSoundNum < 4 )
+                {
+                    _xpSoundNum++;
+                }
 
-				var elRankSegment = $.CreatePanel( 'Panel', elBar, 'id-eom-rank__bar__segment' );
-				elRankSegment.AddClass( "eom-rank__bar__segment" );
+                elRankSegment.AddClass( colorClass );
 
-				                                    
-				elBar.MoveChildAfter( elRankLister, elRankSegment );
+                elRankSegment.style.width = '0%';
 
-				        
-				var colorClass;
-				if ( reason == "old" )
-				{
-					colorClass = "eom-rank__blue";
-				}
-				else if ( reason == "levelup" )
-				{
-					colorClass = "eom-rank__purple";
-				}
-				else if ( reason == "6" || reason == "7" )
-				{
-					colorClass = "eom-rank__yellow";
-				}
-				else if ( reason == "9" || reason == "10" || reason == "59" )
-				{
-					colorClass = "eom-rank__yellow";
-				}
-				else
-				{
-					colorClass = "eom-rank__green";
-				}
+                $.Schedule( 0.0, function()
+                {
+                    if ( elRankSegment && elRankSegment.IsValid() )
+                    {
+                        elRankSegment.style.width = ( xp / xPPerLevel * 70.8 ) + '%;';                               
+                    }
+                } );
+                
+                elRankSegment.style.transitionDuration = duration + "s";
 
-				$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.Milestone_0' + _xpSoundNum.toString(), 'eom-rank' );
-				if ( _xpSoundNum < 4 )
-				{
-					_xpSoundNum++;
-				}
+                                             
+                if ( elCurrentListerItem )
+                {
+                    elCurrentListerItem.AddClass( "eom-rank__lister__item--old" );
+                }
 
-				elRankSegment.AddClass( colorClass );
+                                    
+                if ( elRankListerItems && elRankListerItems.IsValid() )
+                {
+                    elCurrentListerItem = $.CreatePanel( 'Panel', elRankListerItems, 'id-eom-rank__lister__items__' + reason );
+                    elCurrentListerItem.BLoadLayoutSnippet( "snippet_rank__lister__item" );
 
-				elRankSegment.style.width = '0%';
+                    elCurrentListerItem.RemoveClass( "eom-rank__lister__item--appear" );
 
-				$.Schedule( 0.0, function()
-				{
-					if ( elRankSegment && elRankSegment.IsValid() )
-					{
-						elRankSegment.style.width = ( xp / xPPerLevel * 70.8 ) + '%;';                               
-					}
-				} );
-				
-				elRankSegment.style.transitionDuration = duration + "s";
+                    var elAmtLabel = elCurrentListerItem.FindChildTraverse( 'id-eom-rank__lister__item__amt' );
+                    elAmtLabel.SetDialogVariable( "xp", xp );
+                    elAmtLabel.text = $.Localize( "#EOM_XP_Bar", elAmtLabel );
+                    elAmtLabel.AddClass( colorClass );
 
-				                             
-				if ( elCurrentListerItem )
-				{
-					elCurrentListerItem.AddClass( "eom-rank__lister__item--old" );
-					
-				}
+                    var elDescLabel = elCurrentListerItem.FindChildTraverse( 'id-eom-rank__lister__item__desc' );
 
-				                    
-				if ( elRankListerItems && elRankListerItems.IsValid() )
-				{
-					elCurrentListerItem = $.CreatePanel( 'Panel', elRankListerItems, 'id-eom-rank__lister__items__' + reason );
-					elCurrentListerItem.BLoadLayoutSnippet( "snippet_rank__lister__item" );
+                    elDescLabel.SetDialogVariable( "gamemode", $.Localize( "#SFUI_GameMode_" + MatchStatsAPI.GetGameMode() ) );
+                    elDescLabel.text = $.Localize( "#XP_Bonus_RankUp_" + reason, elDescLabel );
+                }
+            } );
 
-					elCurrentListerItem.RemoveClass( "eom-rank__lister__item--appear" );
+            return duration;
+        }
 
-					var elAmtLabel = elCurrentListerItem.FindChildTraverse( 'id-eom-rank__lister__item__amt' );
-					elAmtLabel.SetDialogVariable( "xp", xp );
-					elAmtLabel.text = $.Localize( "#EOM_XP_Bar", elAmtLabel );
-					elAmtLabel.AddClass( colorClass );
+                             
+        totalXP += parseInt( oXpData[ "current_xp" ] );
 
-					var elDescLabel = elCurrentListerItem.FindChildTraverse( 'id-eom-rank__lister__item__desc' );
+                        
+        Object.keys( oXpData[ "xp_earned" ] ).forEach( function( key, index ) 
+        {
 
-					elDescLabel.SetDialogVariable( "gamemode", $.Localize( "#SFUI_GameMode_" + MatchStatsAPI.GetGameMode() ) );
+            var xp = parseInt( oXpData[ "xp_earned" ][ key ] );
 
-					elDescLabel.text = $.Localize( "#XP_Bonus_RankUp_" + reason, elDescLabel );
-				}
+                                                                      
+            if ( totalXP + xp < xPPerLevel )
+            {
+                arrPreRankXP.push( xp_t( key, xp ) );
+            }
+            else
+            {
+                var xp_upto = xPPerLevel - totalXP;
+                var xp_remainder = totalXP + xp - xPPerLevel;
 
-			} );
+                                                                                   
+                if ( xp_upto > 0 )
+                {
+                    arrPreRankXP.push( xp_t( key, xp_upto ) );
+                    arrPostRankXP.push( xp_t( key, xp_remainder ) );
+                }
+                else
+                    arrPostRankXP.push( xp_t( key, xp ) );
+            }
 
-			return duration;
-		}
-
-		                     
-		totalXP += parseInt( oXpData[ "current_xp" ] );
-
-		                
-		Object.keys( oXpData[ "xp_earned" ] ).forEach( function( key, index ) 
-		{
-
-			var xp = parseInt( oXpData[ "xp_earned" ][ key ] );
-
-			                                                          
-			if ( totalXP + xp < xPPerLevel )
-			{
-				arrPreRankXP.push( xp_t( key, xp ) );
-			}
-			else
-			{
-				var xp_upto = xPPerLevel - totalXP;
-				var xp_remainder = totalXP + xp - xPPerLevel;
-
-				                                                                   
-				if ( xp_upto > 0 )
-				{
-					arrPreRankXP.push( xp_t( key, xp_upto ) );
-					arrPostRankXP.push( xp_t( key, xp_remainder ) );
-				}
-				else
-					arrPostRankXP.push( xp_t( key, xp ) );
-			}
-
-			totalXP += xp;
-
-		} );
+            totalXP += xp;
+        } );
 
 
-		                                     
-		  
-		  
-		  
-		  
+                                             
+          
+          
+          
+          
 
-		function _AnimSequenceNext( func, duration = 0 )
-		{
-			$.Schedule( animTime, func );
+        function _AnimSequenceNext( func, duration = 0 )
+        {
+            $.Schedule( animTime, func );
 
-			animTime += duration;
-		}
+            animTime += duration;
+        }
 
-		var _AnimPause = function( sec )
-		{
-			animTime += sec;
-		}
+        var _AnimPause = function( sec )
+        {
+            animTime += sec;
+        }
 
-		var animTime = 0;
-		_AnimPause( 1.0 );
-		              
-		if ( oXpData[ "current_xp" ] > 0 )
-			_AnimPause( _AddXPBar( "old", oXpData[ "current_xp" ] ) );
+        var animTime = 0;
+        _AnimPause( 1.0 );
+                      
+        if ( oXpData[ "current_xp" ] > 0 )
+            _AnimPause( _AddXPBar( "old", oXpData[ "current_xp" ] ) );
 
-		         
-		for ( var i = 0; i < arrPreRankXP.length; i++ )
-		{
-			_AnimPause( 1.0 );
-			if ( arrPreRankXP[ i ].m_xp > 0 )
-				_AnimPause( _AddXPBar( arrPreRankXP[ i ].m_reason, arrPreRankXP[ i ].m_xp ) );
-		}
+                 
+        for ( var i = 0; i < arrPreRankXP.length; i++ )
+        {
+            _AnimPause( 1.0 );
+            if ( arrPreRankXP[ i ].m_xp > 0 )
+                _AnimPause( _AddXPBar( arrPreRankXP[ i ].m_reason, arrPreRankXP[ i ].m_xp ) );
+        }
 
-		            
-		if ( totalXP >= xPPerLevel )
-		{
-			           
-			_AnimSequenceNext( function()
-			{
-				$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.BarFull', 'eom-rank' );
-				if ( _m_cP && _m_cP.IsValid() )
-				{
-					_m_cP.FindChildTraverse( "id-eom-rank__bar--shine" ).AddClass( "eom-rank__bar--shine--on" );
-				}
+                    
+        if ( totalXP >= xPPerLevel )
+        {
+                       
+            _AnimSequenceNext( function()
+            {
+                $.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.BarFull', 'eom-rank' );
+                elProgress.FindChildInLayoutFile( 'id-eom-rank-bar-white' ).AddClass( 'eom-rank__bar--white--show' );
+            }, 1 );
 
-			}, 1 );
+                       
+                                                 
+            _AnimSequenceNext( function()
+            {
+                if ( !elProgress || !elProgress.IsValid() || 
+                    !elCurrent || !elCurrent.IsValid() ||
+                    !elBar || !elBar.IsValid() ||
+                    !elNew || !elNew.IsValid() ||
+                    !elCurrent || !elCurrent.IsValid() )
+                    return;
 
-			           
-			_AnimSequenceNext( function()
-			{
-				$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.NewRank', 'eom-rank' );
+                $.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.XP.NewRank', 'eom-rank' );
 
-				                             
-				if ( elCurrentListerItem && elCurrentListerItem.IsValid() )
-				{
-					elCurrentListerItem.AddClass( "eom-rank__lister__item--old" );
-				}
+                                 
+                elBar.FindChildrenWithClassTraverse( "eom-rank__bar__segment" ).forEach( entry => entry.DeleteAsync( .0 ) );
 
-				                    
-				elCurrentListerItem = $.CreatePanel( 'Panel', elRankListerItems, 'id-eom-rank__lister__items__' + 'rank-up' );
-				elCurrentListerItem.BLoadLayoutSnippet( "snippet_rank__lister__item" );
-
-				elCurrentListerItem.RemoveClass( "eom-rank__lister__item--appear" );
-
-				elCurrentListerItem.FindChildTraverse( 'id-eom-rank__lister__item__amt' ).text = $.Localize( "{s:rank_new_name}", elNew );
-				elCurrentListerItem.FindChildTraverse( 'id-eom-rank__lister__item__desc' ).text = $.Localize( "{s:rank_new_rank}", elNew );
-
-			}, 1 );
-
-			                                     
-			_AnimSequenceNext( function()
-			{
-				if ( !elProgress || !elProgress.IsValid() || 
-					!elCurrent || !elCurrent.IsValid() ||
-					!elBar || !elBar.IsValid() ||
-					!elNew || !elNew.IsValid() ||
-					!elCurrent || !elCurrent.IsValid() )
-					return;						
-				
-				elProgress.AddClass( "subdue" );
-				elCurrent.AddClass( "subdue" );
-
-				                 
-				elBar.FindChildrenWithClassTraverse( "eom-rank__bar__segment" ).forEach( entry => entry.DeleteAsync( .0 ) );
-
-				elNew.RemoveClass( "hidden" );
-
-				elNew.Children().forEach( entry => entry.AddClass( "appear" ) );
-				
+                                                       
+                elCurrent.SetDialogVariableInt( "level", newRank );
+                elCurrent.SetDialogVariable( 'name', $.Localize( '#XP_RankName_' + newRank, elCurrent ) );
+                _m_cP.SetDialogVariable( 'rank_new', $.Localize( '#XP_RankName_Display', elCurrent ) );
 				$.Schedule( 0.5, _PlayParticles );
 
-				                                                                 
+                _m_cP.FindChildInLayoutFile( "id-eom-rank__current__label" ).text = $.Localize( "{s:rank_new}", elCurrent );
+                _m_cP.FindChildInLayoutFile( "id-eom-rank__current__emblem" ).SetImage( "file://{images}/icons/xp/level" + newRank + ".png" );
 
-				elCurrent.SetDialogVariableInt( "level", newRank );
-				elCurrent.SetDialogVariable( 'name', $.Localize( '#XP_RankName_' + newRank, elCurrent ) );
-				_m_cP.SetDialogVariable( 'rank_new', $.Localize( '#XP_RankName_Display', elCurrent ) );
+                elNew.RemoveClass( "hidden" );
+                elNew.FindChildInLayoutFile( 'id-eom-new-reveal-image' ).SetImage( "file://{images}/icons/xp/level" + newRank + ".png" );
+                elNew.TriggerClass( "eom-rank-new-reveal--anim" );
 
-				_m_cP.FindChildTraverse( "id-eom-rank__current__label" ).text = $.Localize( "{s:rank_new}", elCurrent );
+            }, 3 );
 
-				_m_cP.FindChildTraverse( "id-eom-rank__current__emblem" ).SetImage( "file://{images}/icons/xp/level" + newRank + ".png" );
+            _AnimSequenceNext( function()
+            {
+                if ( !elProgress || !elProgress.IsValid() || 
+                    !elCurrent || !elCurrent.IsValid() ||
+                    !elBar || !elBar.IsValid() ||
+                    !elNew || !elNew.IsValid() ||
+                    !elCurrent || !elCurrent.IsValid() )
+                    return;
 
-			}, 2 );
+                elProgress.FindChildInLayoutFile( 'id-eom-rank-bar-white' ).RemoveClass( 'eom-rank__bar--white--show' );
+            } );
 
-			_AnimSequenceNext( function()
-			{
-				if ( !elProgress || !elProgress.IsValid() || 
-					!elCurrent || !elCurrent.IsValid() ||
-					!elBar || !elBar.IsValid() ||
-					!elNew || !elNew.IsValid() ||
-					!elCurrent || !elCurrent.IsValid() )
-					return;	
-				
-				elProgress.RemoveClass( "subdue" );
-				elNew.FindChildInLayoutFile( 'id-eom-rank__new-reveal__emblem' ).AddClass( 'move-to-current-rank' );
-				elNew.AddClass( "eom-rank__new-reveal--fade" );
-				elCurrent.RemoveClass( "subdue" );
-			} );
+                            
+            for ( var i = 0; i < arrPostRankXP.length; i++ )
+            {
+                _AnimPause( _AddXPBar( arrPostRankXP[ i ].m_reason, arrPostRankXP[ i ].m_xp ) );
+                
+            }
 
-			  	            
-			for ( var i = 0; i < arrPostRankXP.length; i++ )
-			{
-				_AnimPause( 1.0 );
-				_AnimPause( _AddXPBar( arrPostRankXP[ i ].m_reason, arrPostRankXP[ i ].m_xp ) );
-			}
+            _AnimPause( 2.0 );
+        }
 
-			_AnimPause( 2.0 );
-		}
+                   
+        _AnimSequenceNext( function()
+        {
 
-
-		           
-		_AnimSequenceNext( function()
-		{
-
-			                                          
+                                                      
 
 		}, 1 );
 
@@ -384,43 +365,44 @@ var EOM_Rank = (function () {
                                                                       
   
   
-	function _Start() 
-	{
-		if ( MockAdapter.GetMockData() && !MockAdapter.GetMockData().includes( 'RANK' ) )
-		{
-			_End();
-			return;
-		}
-		
-		if ( _DisplayMe() )
-		{
-			EndOfMatch.SwitchToPanel( 'eom-rank' );
-			EndOfMatch.StartDisplayTimer( _m_pauseBeforeEnd );
-			
-			$.Schedule( _m_pauseBeforeEnd, _End );
-		}
-		else
-		{
-			_End();
-			return;
-		}	
-	}
+    function _Start() 
+    {
+        if ( MockAdapter.GetMockData() && !MockAdapter.GetMockData().includes( 'RANK' ) )
+        {
+            _End();
+            return;
+        }
+        
+        if ( _DisplayMe() )
+        {
+            EndOfMatch.SwitchToPanel( 'eom-rank' );
+            EndOfMatch.StartDisplayTimer( _m_pauseBeforeEnd );
+            
+            $.Schedule( _m_pauseBeforeEnd, _End );
+        }
+        else
+        {
+            _End();
+            return;
+        }   
+    }
 
-	function _End() 
-	{
-		EndOfMatch.ShowNextPanel();
-	}
+    function _End() 
+    {
+        EndOfMatch.ShowNextPanel();
+    }
 
-	function _Shutdown()
-	{
-	}
+    function _Shutdown()
+    {
+                                                                      
+    }
 
-	                      
-	return {
-	    name: 'eom-rank',
-		Start: _Start,
-		Shutdown: _Shutdown,
-	};
+                          
+    return {
+        name: 'eom-rank',
+        Start: _Start,
+        Shutdown: _Shutdown,
+    };
 } )();
 
                                                                                                     
@@ -428,5 +410,5 @@ var EOM_Rank = (function () {
                                                                                                     
 (function () {
 
-	EndOfMatch.RegisterPanelObject( EOM_Rank );
+    EndOfMatch.RegisterPanelObject( EOM_Rank );
 })();

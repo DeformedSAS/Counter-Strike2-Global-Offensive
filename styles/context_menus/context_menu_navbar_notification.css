@@ -60,7 +60,7 @@
 .context-menu-notification .context-menu-notification__text-block .context-menu-notification__label.tooltip
 {
     visibility: collapse;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 4px;
 }
 
@@ -76,7 +76,16 @@
 
 .context-menu-notification .context-menu-notification__text-block .context-menu-notification__text-btn Label
 {
-    font-size: 14px;
+    font-size: 12px;
+    font-family: Stratum2, "Arial Unicode MS";
+    font-weight: normal;
+    text-decoration: underline;
+    color: blueColor;
+}
+
+.link-shit
+{
+	font-size: 12px;
     font-family: Stratum2, "Arial Unicode MS";
     font-weight: normal;
     text-decoration: underline;
@@ -93,4 +102,6 @@
     width: 30px;
     height: 30px;
 }
+
+
 

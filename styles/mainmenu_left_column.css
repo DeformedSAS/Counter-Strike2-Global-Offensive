@@ -5,7 +5,7 @@
     vertical-align: bottom;
     width: 620px;
     flow-children: up;
-    visibility: collapse;
+    visibility: visible;
 	transform: translateX(0);
     transition-property: transform;
     transition-duration: .25s;

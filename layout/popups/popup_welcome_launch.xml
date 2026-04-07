@@ -8,7 +8,7 @@
 	<scripts>
 		<include src="file://{resources}/scripts/popups/popup_welcome_launch.js" />
 	</scripts>
-	<PopupCustomLayout class="PopupPanel Hidden" popupbackground="dim" onload="" oncancel="WelcomeLaunch.OnCancelPressed()">
+	<PopupCustomLayout class="PopupPanel Hidden" popupbackground="blur" onload="" oncancel="WelcomeLaunch.OnCancelPressed()">
 		<Panel>
 			<Panel class="popup_welcome_bg" />
 			<Panel class="popup_welcome_fade" />
@@ -16,8 +16,8 @@
 			<Label class="popup_welcome_body stratum-regular fontSize-l" text="#cs2go_welcome_message" />
 		</Panel>
 		<Panel class="PopupButtonRow">
-		    <TextButton class="PopupButton" text="GITHUB" onactivate="WelcomeLaunch.OnGithubButtonPressed()" />
-			<TextButton class="PopupButton" text="#SFUI_Radio_Go" onactivate="WelcomeLaunch.OnOKPressed()" />
+		    <TextButton class="PopupButton stratum-medium-condensed" text="GITHUB" onactivate="WelcomeLaunch.OnGithubButtonPressed()" />
+			<TextButton class="PopupButton stratum-medium-condensed" text="#SFUI_Radio_Go" onactivate="WelcomeLaunch.OnOKPressed()" />
 		</Panel>
 	</PopupCustomLayout>
 </root>

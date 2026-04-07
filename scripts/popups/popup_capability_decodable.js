@@ -208,7 +208,7 @@ var CapabilityDecodable = ( function()
 		else
 		{
 			_SetCaseModelImage( m_caseId, 'PopUpInspectModelOrImage' );
-			_SetCaseModelCamera( 1, false );
+			_SetCaseModelCamera( 2, false );
 
 			if ( !ItemInfo.ItemMatchDefName( m_caseId, 'spray' ) && !ItemInfo.ItemDefinitionNameSubstrMatch( m_caseId, 'tournament_pass_' ) )
 			{
@@ -479,7 +479,7 @@ var CapabilityDecodable = ( function()
 		else
 		{
 			$.Schedule( 1, _PlayCaseModelAnim.bind( undefined, 'open' ) );
-			_SetCaseModelCamera( 3, true );
+			_SetCaseModelCamera( 2, true );
 			
 			elCase = m_elImageOrModel.FindChildInLayoutFile( 'InspectItemModel' );
 			delay = 2.3;

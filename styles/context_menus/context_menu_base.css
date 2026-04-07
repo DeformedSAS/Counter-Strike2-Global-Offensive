@@ -11,7 +11,7 @@
 	flow-children: down;
 	width: fit-children;
 	background-color: contextMenuBackground;
-    opacity: 1;
+    opacity: 0.5;
 	box-shadow: shadowOffset;
 	border-radius: btnBorderRadius;
 }

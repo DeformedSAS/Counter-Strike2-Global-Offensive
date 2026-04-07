@@ -25,8 +25,8 @@
 					<Label allowrawtext="true" text="TeamSelect"/>
 				</RadioButton>
 
-				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="PanelTypeTab('CSGOHudVote')" >
-					<Label allowrawtext="true" text="Vote"/>
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOBuymenu', 'file://{resources}/layout/buymenu_cs2.xml');" >
+					<Label allowrawtext="true" text="buymenu"/>
 				</RadioButton>
             
                                                                                        
@@ -37,7 +37,7 @@
 					<Label allowrawtext="true" text="Anim"/>
 				</RadioButton>
 
-				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOEndOfMatch', 'file://{resources}/layout/endofmatch.xml'); $.DispatchEvent('EndOfMatch_Show')">
+				<RadioButton selected="false" class="content-navbar__tabs__btn" group="tests" onactivate="LayoutTab('CSGOEndOfMatch', 'file://{resources}/layout/eom_debug.xml');">
 					<Label text="EndOfMatch"/>
 				</RadioButton>
 

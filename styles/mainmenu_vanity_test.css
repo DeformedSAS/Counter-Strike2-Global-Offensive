@@ -5,26 +5,26 @@ visibility: collapse;
 
 .mainmenu-vanity-2
 {
-	width: 800px;
-	z-index: -1;
+	width: 700px;
+	z-index: -2;
 	y: -15px;
 }
 
 .mainmenu-vanity-3
 {
-	width: 800px;
+	width: 700px;
 	z-index: -2;
 	y: -15px;
 }
 .mainmenu-vanity-4
 {
-	width: 800px;
-	z-index: -3;
+	width: 900px;
+	z-index: -1;
 	y: -20px;
 }
 .mainmenu-vanity-5
 {
-	width: 800px;
-	z-index: -3;
+	width: 900px;
+	z-index: -1;
 	y: -20px;
 }

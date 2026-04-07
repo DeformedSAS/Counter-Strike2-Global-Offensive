@@ -100,26 +100,23 @@ DelayLoadPanel.Offscreen
 
 .popup-acknowledge__info__title
 {
-	font-size: 64px;
-	font-family: Stratum2;
-	font-weight: medium;
-	letter-spacing: 0px;
-	color: rgb(141, 141, 141);
-	text-align: center;
-	-s2-mix-blend-mode: additive;
-	text-shadow:0px 0px 0px #535353;
-	text-transform: uppercase;
+    font-size: 64px;
+    color: rgb(141, 141, 141);
+    text-align: center;
+    text-transform: uppercase;
+    -s2-mix-blend-mode: additive;
 }
 
 .popup-acknowledge__info__itemname
 {
-	font-size: 28px;
-	font-family: Stratum2;
-	width: 900px;
-	font-weight: bold;
-	height: fit-children;
-	vertical-align: bottom;
-	white-space: normal;
+    font-size: 28px;
+    width: fit-children;
+    max-width: 900px;
+    font-weight: bold;
+    height: fit-children;
+    vertical-align: bottom;
+    white-space: normal;
+    text-overflow: ellipsis;
 }
 
                                                                                

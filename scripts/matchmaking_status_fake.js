@@ -165,7 +165,7 @@ function _TriggerFakeConfirm() {
     elStatusSearching.RemoveClass('hidden');
     elLabel.text = $.Localize("Searching for players and servers...");
 
-    $.Schedule(10.0, function() {
+    $.Schedule(5.0, function() {
         elLabel.text = $.Localize("Confirming match...");
 
         $.Schedule(1.0, function() {

@@ -14,6 +14,7 @@
 	</scripts>
 
 
+
 	<Panel class="full-width full-height" useglobalcontext="true">
 		<Panel id="InspectModelContainer" class="popup-inspect-modelpanel" >
 			<ItemPreviewPanel id="InspectItemModel"
@@ -22,7 +23,8 @@
 							item=""
 							mouse_rotate="true"
 							enable_floorshadow="true"
-							sound="weapon"/>
+							sound="weapon"
+							force-no-composition-layer="true"/> 
 			<ItemImage id="InspectItemImage" large="true" class="popup-inspect-image hidden"/>
 		</Panel>
 		<Panel id="InspectModelCharContainer" class="popup-inspect-modelpanel popup-inspect-modelpanel--char hidden">
@@ -31,7 +33,8 @@
 							manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
 							item="models/player/custom_player/legacy/ctm_sas.mdl"
 							enable_floorshadow="true"
-							mouse_rotate="true"/>
+							mouse_rotate="true"
+							force-no-composition-layer="true"/> 
 		</Panel>
 	</Panel>
 </root>

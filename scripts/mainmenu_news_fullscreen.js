@@ -3,37 +3,30 @@
 var NewsPanel;
 (function (NewsPanel) {
 
-    const GITHUB_API_URL = "https://api.github.com/repos/DeformedSAS/Counter-Strike2-Global-Offensive/releases";
+    // Pointing directly to your raw JSON file
+    const NEWS_FEED_URL = "https://raw.githubusercontent.com/DeformedSAS/Counter-Strike2-Global-Offensive/main/news.json";
 
     function _GetGitHubFeed() {
-        $.AsyncWebRequest(GITHUB_API_URL, {
+        $.AsyncWebRequest(NEWS_FEED_URL, {
             type: 'GET',
             success: function (data) {
                 try {
-                    const releases = (typeof data === "string") ? JSON.parse(data) : data;
-                    if (!releases || !releases.length) {
-                        $.Msg("[PanoramaScript] No GitHub releases found.");
+                    // Parse the JSON data from your repo
+                    const feed = (typeof data === "string") ? JSON.parse(data) : data;
+                    
+                    if (!feed || !feed.items) {
+                        $.Msg("[PanoramaScript] Invalid news.json format.");
                         return;
                     }
 
-                    const feed = {
-                        items: releases.map(r => ({
-                            title: r.name || r.tag_name || "Untitled Release",
-                            date: r.published_at ? r.published_at.substring(0, 10) : "Unknown date",
-                            description: r.body || "No description provided.",
-                            imageUrl: null,
-                            link: r.html_url || "",
-                            categories: []
-                        }))
-                    };
-
+                    // Pass the feed directly to the display function
                     _OnFeedReceived(feed);
                 } catch (e) {
-                    $.Msg("[PanoramaScript] parse error:", e);
+                    $.Msg("[PanoramaScript] Error parsing news.json:", e);
                 }
             },
             error: function (err) {
-                $.Msg("[PanoramaScript] Failed to fetch GitHub feed:", err);
+                $.Msg("[PanoramaScript] Failed to fetch news.json:", err);
             }
         });
     }
@@ -51,7 +44,9 @@ var NewsPanel;
         feed.items.forEach(function (item, i) {
             let elEntry = $.CreatePanel('Panel', elLister, 'NewEntry' + i, { acceptsinput: true });
 
-            const isFeatured = !foundFirstNewsItem && !item.categories.includes('Minor');
+            // Checks your 'categories' array in news.json
+            const isFeatured = !foundFirstNewsItem && (!item.categories || !item.categories.includes('Minor'));
+            
             if (isFeatured) {
                 foundFirstNewsItem = true;
                 elEntry.AddClass('new');
@@ -59,8 +54,11 @@ var NewsPanel;
 
             elEntry.BLoadLayoutSnippet(isFeatured ? 'featured-news-full-entry' : 'history-news-full-entry');
 
+            // Sets the image from your 'imageUrl' field
             let elImage = elEntry.FindChildInLayoutFile('NewsHeaderImage');
-            elImage.SetImage(item.imageUrl || "file://{images}/store/default-news.png");
+            if (elImage) {
+                elImage.SetImage(item.imageUrl || "file://{images}/store/default-news.png");
+            }
 
             let elInfo = $.CreatePanel('Panel', elEntry, 'NewsInfo' + i);
             elInfo.BLoadLayoutSnippet(isFeatured ? 'featured-news-info' : 'history-news-info');
@@ -79,9 +77,11 @@ var NewsPanel;
 
             const clearNew = i == 0;
             elEntry.SetPanelEvent("onactivate", () => {
-                SteamOverlayAPI.OpenURL(item.link);
+                if (item.link) {
+                    SteamOverlayAPI.OpenURL(item.link);
+                }
                 if (clearNew) {
-                    GameInterfaceAPI.SetSettingString('ui_news_last_read_link', item.link);
+                    GameInterfaceAPI.SetSettingString('ui_news_last_read_link', item.link || "");
                     elEntry.RemoveClass('new');
                 }
             });
@@ -91,4 +91,3 @@ var NewsPanel;
     _GetGitHubFeed();
 
 })(NewsPanel || (NewsPanel = {}));
-

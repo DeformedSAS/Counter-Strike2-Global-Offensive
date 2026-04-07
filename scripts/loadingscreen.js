@@ -4,7 +4,7 @@ var LoadingScreen = ( function() {
 
 	var cvars = [ 'mp_roundtime', 'mp_fraglimit', 'mp_maxrounds' ];
 	var cvalues = [ '0', '0', '0' ];
-	const MAX_SLIDES = 10;
+	const MAX_SLIDES = 5;
     const SLIDE_DURATION = 4;
     let m_slideShowJob = null;
 	let m_mapName = null;
@@ -12,13 +12,16 @@ var LoadingScreen = ( function() {
 
 	var _Init = function ()
 	{
+		LDNScreenMusicS2('loading');
 		$('#ProgressBar').value = 0;
 
         $('#LoadingScreenGameMode').AddClass("hidden_no_info");
+		$('#LoadingScreenMapName').AddClass("hidden_no_info");
+		$('#LoadingScreenGameMode').AddClass("hidden_no_info");
 		$('#LoadingScreenInfo').AddClass("hidden_no_info");
+		$('#LoadingScreenGamemodeInfo').AddClass("hidden_no_info");
 		$('#LoadingScreenGameModeIcon').AddClass("hidden_no_info");
 		$('#BlaBlaTrucSeperator').AddClass("hidden_no_info");
-		
 
 		$('#LoadingScreenMapName').text = "";
 		$('#LoadingScreenGameMode' ).SetLocalizationString( "" );
@@ -26,7 +29,7 @@ var LoadingScreen = ( function() {
 		$('#LoadingScreenGameModeIcon').SetImage("");
 
 		var elBackgroundImage = $.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage');
-		elBackgroundImage.SetImage("file://{images}/map_icons/screenshots/1080p/background.png");
+		elBackgroundImage.SetImage("file://{images}/map_icons/screenshots/1080p/default.png");
         const elSlideShow = $.GetContextPanel().FindChildTraverse('LoadingScreenSlideShow');
         elSlideShow.RemoveAndDeleteChildren();
 	    $('#LoadingScreenIcon').visible = false;
@@ -171,7 +174,7 @@ function _EndSlideShow()
 			m_mapName = mapName || GameStateAPI.GetMapName();
 
 			var elBackgroundImage = $.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage');		
-			elBackgroundImage.SetImage("file://{images}/map_icons/screenshots/1080p/background.png");
+			elBackgroundImage.SetImage("file://{images}/map_icons/screenshots/1080p/default.png");
 
 			var mapIconFailedToLoad = function () {
 			    $('#LoadingScreenMapName').RemoveClass("loading-screen-content__info__text-title-short");
@@ -219,9 +222,29 @@ function _EndSlideShow()
 
 		_InitSlideShow();
         $('#LoadingScreenGameMode').RemoveClass("hidden_no_info");
-        $('#LoadingScreenInfo').RemoveClass("hidden_no_info");	
+		$('#LoadingScreenMapName').RemoveClass("hidden_no_info");
+		$('#LoadingScreenGameMode').RemoveClass("hidden_no_info");
+		$('#LoadingScreenInfo').RemoveClass("hidden_no_info");
+		$('#LoadingScreenGamemodeInfo').RemoveClass("hidden_no_info");
 		$('#LoadingScreenGameModeIcon').RemoveClass("hidden_no_info");
-		$('#BlaBlaTrucSeperator').RemoveClass("hidden_no_info"); 
+		$('#BlaBlaTrucSeperator').RemoveClass("hidden_no_info");
+	}
+	
+	var LDNScreenMusicS2 = function ( type )
+	{
+		var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
+		var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
+		var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
+		musicName = musicName.replace(/^#musickit_/, '');
+
+		if (type == 'loading' && GameStateAPI.GetCSGOGameUIStateName() == 'CSGO_GAME_UI_STATE_LOADINGSCREEN') {
+			InventoryAPI.PlayItemPreviewMusic(itemId, 'startround_01.mp3');
+			InventoryAPI.StopItemPreviewMusic();
+	
+			var randomAction = Math.random() < 0.5 ? "Music.StartAction_01." : "Music.StartAction_02.";
+	
+			$.DispatchEvent('PlaySoundEffect', 'Music.StartAction.' + musicName, 'MOUSE');
+		}
 	}
 
 	var _SetCharacterAnim = function ( elPanel, settings )

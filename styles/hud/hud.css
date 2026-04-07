@@ -27,7 +27,6 @@ CSGOHud,
 	height: 100%;
 
 	-s2-mix-blend-mode: opaque;
-	border-radius: 4px;
 	blur: fastgaussian( 2, 2, 4 );
 }
 
@@ -37,7 +36,6 @@ CSGOHud,
 	height: 100%;
 
 	-s2-mix-blend-mode: opaque;
-	border-radius: 4px;
 	blur: fastgaussian( 1, 1, 3 );
 }
 

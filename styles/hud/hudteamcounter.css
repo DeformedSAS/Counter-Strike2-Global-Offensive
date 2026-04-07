@@ -328,7 +328,6 @@ CSGOHudTeamCounter
     padding: 0px 2px;
     z-index: -1;
     flow-children: down;
-    ignore-parent-flow: true;
     y: 54px;
 }
 
@@ -464,7 +463,7 @@ CSGOHudTeamCounter
     height: 100%;
     horizontal-align: center;
     vertical-align: center;
-    visibility: collapse;
+    visibility: visible;
 }
 
 .avatar-speaking
@@ -644,22 +643,22 @@ CSGOHudTeamCounter
     width: AvatarSWidth;
     height: AvatarSHeight;
     horizontal-align: center;
-    vertical-align: top;
+    vertical-align: top;   
     background-color: #7f7f7f;
 }
 
-.AvatarS__PlayerImage
+.AvatarS__PlayerImage 
 {
-    vertical-align: middle;
-    width: 100%;
+	vertical-align: middle;
+	width: 100%;
     height: 100%;
     background-color: black;
 }
 
 .AvatarS__PlayerImage .AvatarImage
 {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .AvatarS__HealthBar
@@ -703,16 +702,20 @@ CSGOHudTeamCounter
     height: 20px;
     horizontal-align: center;
     vertical-align: middle;
-    text-shadow: hud-outline-shadow;
+             
+              
+    text-shadow-fast: 0px 1px #00000026;
 }
 
 .AvatarS__Bot
 {
     width: 26px;
     height: 26px;
+
     x: 0px;
     y: 2px;
     horizontal-align: center;
+                                   
 }
 
 .AvatarS__Dominated
@@ -728,7 +731,7 @@ CSGOHudTeamCounter
     width: 16px;
     height: 28px;
     x: 13px;
-    y: -1px;
+    y: -1px;  
 }
 
 .AvatarS__Sound
@@ -738,6 +741,8 @@ CSGOHudTeamCounter
     flow-children: right;
     vertical-align: middle;
     img-shadow: 1px 1px 1px 1.0 #0000003b;
+                                               
+                                    
     opacity: .5;
 }
 
@@ -755,6 +760,10 @@ CSGOHudTeamCounter
     y: 0px;
     vertical-align: middle;
     img-shadow: 1px 1px 1px 1.0 #0000003b;
+}
+
+.AvatarS__Sound--Off
+{
 }
 
 .AvatarS__SoundShadow--2
@@ -780,6 +789,10 @@ CSGOHudTeamCounter
     blur: gaussian( 2 );
     transform: translate3d( 2px, 2px, 0px );
     wash-color: black;
+}
+
+.AvatarS__Spectate
+{
 }
 
 #TeamCounter
@@ -1105,6 +1118,20 @@ CSGOHudTeamCounter
         transform: scale3d( 1.4, 1.4, 1 );
     }
     
+}
+
+.BombPulseAnim {
+    animation-name: bombDet;
+    animation-duration: 0.9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.BombLinesAnim {
+    animation-name: bombLines;
+    animation-duration: 0.9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 #GameScore

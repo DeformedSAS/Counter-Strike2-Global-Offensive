@@ -7,6 +7,7 @@ var InventoryInspect = ( function()
 	var _Init = function()
 	{
 		var itemId = $.GetContextPanel().GetAttributeString( "itemid", null );
+		$.Msg( "[PanoramaScript] DEBUG ITEM ID:", itemId );
 
 		                                               
 		    

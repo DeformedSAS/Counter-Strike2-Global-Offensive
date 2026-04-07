@@ -6,8 +6,11 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/common/teamcolor.js" />
+		<include src="file://{resources}/scripts/rating_emblem.js" />
 		<include src="file://{resources}/scripts/common/sessionutil.js" />
+		<include src="file://{resources}/scripts/common/anim_background.js" />
 		<include src="file://{resources}/scripts/avatar.js" />
+		<include src="file://{resources}/scripts/honor_icon.js" />
 		<include src="file://{resources}/scripts/playercard.js" />
 	</scripts>
 
@@ -27,10 +30,20 @@
 				<Label id="JsPlayerSkillLabel" class="player-card__text-subtitle player-card__text-subtitle--multiline" text=""/>
 			</Panel>
 		</snippet>
+        <snippet name="PlayerCardRatingEmblem">
+            <Panel class="player-card-skillgroup player-card-border hidden">
+                <Panel class="player-card-rating__icon-container">
+                    <Frame src="file://{resources}/layout/rating_emblem.xml" />
+                </Panel>
+                <Panel class="player-card-rating__labels">
+                    <Label id="jsRatingText" class="player-card__text-subtitle player-card__text-subtitle--multiline stratum-medium" text="{s:rating-text}" html="true" />
+                </Panel>
+            </Panel>
+        </snippet>
 	</snippets>
 	
 	<Panel class="player-card" useglobalcontext="false">
-
+        <Panel id="AnimBackground" class="miniprofilebkg" />
 		<Panel id="JsPlayerCardSectoins" class="full-width">
 		<Panel id="JsPlayerCardBg" class="player-card-row__bg-image" blurrects="JsPlayerXp"/>
 		<Panel id="JsPlayerCardSectoins" class="player-card__sections">
@@ -47,7 +60,8 @@
 					                           
 
 					<Panel id="JsPlayerCardName" class="player-card-row__name" >
-						<Label id="JsPlayerName" class="player-card__text" text=""/>
+					<Frame id="jsHonorIcon" class="vertical-center" src="file://{resources}/layout/honor_icon.xml" />
+						<Label id="JsPlayerName" class="player-card__text stratum-regular-condensed" text=""/>
 						<Panel id="FlairCarouselAndControls" class="playercard-flair-carousel-container">
 							<Carousel id="FlairCarousel" class="playercard-flair-carousel" panels-visible="1" hittest="false">
 

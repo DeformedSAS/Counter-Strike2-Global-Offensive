@@ -427,9 +427,8 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 
 .CreditsTitle
 {
-	font-size: 40px;
-	font-family: Stratum2;
-	font-weight: bold;
+	font-size: 30px;
+	font-family: High Speed;
 }
 .CreditsSubTitle
 {
@@ -447,7 +446,7 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 .CreditsHeaderTitle
 {
 	font-size: 27px;
-	font-family: Stratum2;
+	font-family: ST2MDCOND;
 	font-weight: bold;
 }
 .CreditContainer
@@ -459,10 +458,12 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 .Credit-Name
 {
 	color: white;
-	font-family: Stratum2;
+	font-family: ST2RGCOND;
 	font-weight: medium;
 	padding-left: 8px;
 	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: 1px;
     width: 40%;
 }
 .Credit-Desc
@@ -488,4 +489,43 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 	opacity: .08;
 	background-color: white;
 	margin-bottom: 4px;
+}
+
+.settings-music-row {
+    width: 100%;
+    flow-children: right;
+    vertical-align: middle;
+    padding-right: 0px;
+}
+
+.settings-music-row CSGOSettingsSlider {
+    width: fill-parent-flow(1.0);
+}
+
+.settings-music-preview-btn {
+    vertical-align: middle;
+    margin-left: 4px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    transition-property: background-color, brightness;
+    transition-duration: 0.1s;
+}
+
+.settings-music-preview-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+	sound: "UIPanorama.mainmenu_rollover";
+    brightness: 1.5;
+}
+
+.settings-music-preview-btn:active {
+    brightness: 2.0;
+	sound: "UIPanorama.generic_button_press";
+}
+
+.settings-music-preview-btn Image {
+    wash-color: #888888;
+}
+
+.settings-music-preview-btn:hover Image {
+    wash-color: white;
 }

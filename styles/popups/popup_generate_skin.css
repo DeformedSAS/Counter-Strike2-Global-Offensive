@@ -1,0 +1,40 @@
+.Content {
+    width: 500px;
+    height: fit-children;
+    flow-children: down;
+    horizontal-align: center;
+    vertical-align: center;
+}
+
+.Options {
+    flow-children: down;
+    horizontal-align: center;
+    vertical-align: center;
+
+    margin: 12px;
+}
+
+.Options DropDown {
+    width: 300px;
+    margin-bottom: 4px;
+}
+
+.Options TextEntry {
+    width: 300px;
+    margin-bottom: 4px;
+}
+
+
+ItemPreviewPanel {
+    width: 500px;
+    height: 250px;
+}
+
+ItemImage {
+    width: 500px;
+    height: 250px;
+}
+
+.hidden {
+    visibility: collapse;
+}

@@ -4,8 +4,6 @@ var WelcomeLaunch = (function () {
         var strGoalVersion = $.GetContextPanel().GetAttributeString("uisettingversion", '');
         GameInterfaceAPI.SetSettingString('ui_popup_weaponupdate_version', strGoalVersion);
         $.DispatchEvent('UIPopupButtonClicked', '');
-		$.DispatchEvent('PlayMainMenuMusic', true, true );
-		_PlayMenuSong();
     }
 
     function _OnCancelPressed() {
@@ -13,12 +11,8 @@ var WelcomeLaunch = (function () {
     }
 
     function _OnGithubButtonPressed() {
-        SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser("https://github.com/DeformedSAS/CS-GO-Custom-Panorama-CS2-");
+        SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser("https://github.com/DeformedSAS/Counter-Strike2-Global-Offensive");
     }
-	
-	function _PlayMenuSong() {
-	 $.DispatchEvent('PlayMainMenuMusic', true, false );
-	 }
 
     return {
         OnOKPressed: _OnOKPressed,
@@ -26,6 +20,3 @@ var WelcomeLaunch = (function () {
         OnGithubButtonPressed: _OnGithubButtonPressed,
     };
 })();
-
-$.DispatchEvent('PlayMainMenuMusic', false, true);
-$.DispatchEvent('PlaySoundEffect', 'UIPanorama.welcome_popup', 'MOUSE');

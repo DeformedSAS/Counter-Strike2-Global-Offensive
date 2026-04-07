@@ -818,3 +818,21 @@ CSGOHudRadar Label
     transform-origin: 50% 50% parent-relative;
     overflow: noclip;
 }
+
+.RadarBlur
+{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.RadarBlur--Round
+{
+    border-radius: 50%;
+    overflow: clip;
+}
+
+.RadarBlur--Square
+{
+    overflow: clip;
+}

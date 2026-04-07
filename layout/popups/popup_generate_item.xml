@@ -1,0 +1,124 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/mainmenu.css" />
+    	<include src="file://{resources}/styles/popups/popups_shared.css" />
+    	<include src="file://{resources}/styles/popups/popup_generate_skin.css" />
+  	</styles>
+  	<scripts>
+		<include src="file://{resources}/scripts/common/formattext.js" />
+  	    <include src="file://{resources}/scripts/common/iteminfo.js" />
+  	</scripts>
+  	<script>
+  		function CreateItem()
+		{
+			var itemIdx = GetSelectedItemId();
+
+            GameInterfaceAPI.ConsoleCommand(`csgo_econ_action_preview S00000${itemIdx}A0009999D0009999`);
+		}
+
+		function UpdateWeaponPreview()
+		{
+			var itemIdx = GetSelectedItemId();
+			if(itemIdx == '')
+				return;
+			var itemId = InventoryAPI.GetFauxItemIDFromDefAndPaintIndex( itemIdx, 0 );
+			var model = ItemInfo.GetModelPathFromJSONOrAPI( itemId );
+
+			var elModel = $.GetContextPanel().FindChildInLayoutFile('ItemPreview');
+			var elImage = $.GetContextPanel().FindChildInLayoutFile('InspectItemImage');
+
+			if(model) {
+				elModel.RemoveClass('hidden');
+				elImage.AddClass('hidden');
+				elModel.SetScene(
+					"resource/ui/econ/ItemModelPanelCharWeaponInspect.res",
+					model,
+					false
+				);
+			} else {
+				elImage.RemoveClass('hidden');
+				elModel.AddClass('hidden');
+				elImage.itemid = itemId;
+
+			}
+		}
+
+		function Inspect()
+		{
+			var itemIdx = GetSelectedItemId();
+			var itemId = InventoryAPI.GetFauxItemIDFromDefAndPaintIndex( itemIdx, 0 );
+
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/popups/popup_inventory_inspect.xml',
+				'itemid=' + itemId +
+				'&' + 'inspectonly=true' +
+				'&' + 'viewfunc=primary',
+				'none'
+			);
+		}
+
+		function GetSelectedItemId()
+		{
+			var itemId = $.GetContextPanel().FindChildInLayoutFile('itemIdx').GetSelected().GetAttributeString( "value", "" );
+
+			if(itemId == 'showfromfield')
+				itemId = $.GetContextPanel().FindChildInLayoutFile('itemIdxField').text;
+
+			$.GetContextPanel().FindChildInLayoutFile('itemIdxField').SetHasClass('hidden', itemId != 'showfromfield');
+
+			return itemId;
+		}
+
+		function FillItems()
+		{
+			for (let i = 0; i < 10000; i++) {
+				var itemId = InventoryAPI.GetFauxItemIDFromDefAndPaintIndex( i, 0 );
+				var itemName = InventoryAPI.GetItemName(itemId);
+
+				if(itemName == '' || itemName == undefined || !itemName)
+					continue;
+				
+				var elDropdown = $.GetContextPanel().FindChildInLayoutFile('itemIdx');
+				var newEntry = $.CreatePanel('Label', elDropdown, "item"+i, {
+						class: 'DropDownMenu Width-250 White',
+						value: i,
+						text: itemName
+					});
+
+				elDropdown.AddOption(newEntry);
+			}
+			elDropdown.SetSelected( 'item1' );
+		}
+		$.CreatePanel('ItemPreviewPanel', $.GetContextPanel().FindChildInLayoutFile('Content'), 'ItemPreview', {
+			manifest: 'resource/ui/econ/ItemModelPanelCharWeaponInspect.res',
+			enable_floorshadow: true,
+			mouse_rotate: true,
+			class: 'hidden',
+		});
+		$.CreatePanel('ItemImage', $.GetContextPanel().FindChildInLayoutFile('Content'), 'InspectItemImage', {
+			large: true,
+			class: 'hidden',
+		});
+		FillItems();
+		UpdateWeaponPreview();
+  	</script>
+
+  	<Panel class="PopupPanel Hidden" popupbackground="dim" defaultfocus="itemIdx">
+  		<Label class="PopupTitle" text="ITEM GENERATOR 3000" />
+		<Panel id="Content" class="Content">
+			<Panel class="Options">
+				<DropDown class="PopupButton White" id="itemIdx" menuclass="DropDownMenu Width-250" oninputsubmit="UpdateWeaponPreview()" >
+					<Label text="CustomID" id="showfromfield" value="showfromfield"/>
+				</DropDown>
+    			<TextEntry class="hidden" maxchars="6" textmode="numeric" id="itemIdxField" placeholder="67" ontextentrychange="UpdateWeaponPreview()"/>
+			</Panel>
+		</Panel>
+		<Panel class="PopupButtonRow">
+			<TextButton class="PopupButton" text="#UI_Inspect" onactivate="Inspect()" />
+			<TextButton class="PopupButton" text="#UI_Submit" onactivate="CreateItem()" />
+			<TextButton class="PopupButton" text="#UI_Cancel" onactivate="$.DispatchEvent( 'UIPopupButtonClicked', '' );" />
+		</Panel>
+  	</Panel>
+</root>

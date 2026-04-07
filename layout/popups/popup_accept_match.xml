@@ -47,7 +47,7 @@
 			<Panel class="accept-match__bg">
 				<Panel id="AcceptMatchMapImage" class="accept-match__map"/>
 				<Panel id="AcceptMatchDataContainer" class="accept-match__data">
-					<Label class="accept-match__data__title stratum-medium" text="#match_ready_title"/>
+					<Label class="accept-match__data__title stratum-regular-condensed" text="#match_ready_title"/>
 					<Panel class="accept-match__seperator"/>
 					<Panel class="accept-match__data__details">
 						<Image id="AcceptMatchModeIcon" class="accept-match__top-icon" src="file://{images}/icons/ui/competitive.svg" textureheight="24" texturewidth="24"/>
@@ -81,10 +81,10 @@
 				</Panel>
 
 				<Button id="AcceptMatchBtn" class="FlatButton Positive" onactivate="PopupAcceptMatch.OnAcceptMatchPressed();">
-					<Label  class="stratum-medium" text="#match_ready_accept"/>
+					<Label  class="stratum-bold-condensed" text="#match_ready_accept"/>
 				</Button>
 				 <Panel id="AcceptMatchGameServer" class="accept-match__data__gameserver">
-                    <Label text="TEST GAME SERVER CODE" class="accept-match__data__gameserver__text stratum-regular" />
+                    <Label text="#match_ready_gameserver" class="accept-match__data__gameserver__text stratum-regular" />
                 </Panel>
 
 				<Panel id="AcceptMatchCountdown" class="accept-match__data__time">

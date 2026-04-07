@@ -349,6 +349,36 @@ Label.MonoNumbersFont,TextEntry.MonoNumbersFont
 	font-weight: bold;
 }
 
+/* stratum2 condensed fonts start */
+
+.stratum-regular-condensed
+{
+    font-family: ST2RGCOND, "Arial Unicode MS";
+    font-weight: normal;
+}
+
+.stratum-bold-condensed
+{
+    font-family: ST2BDCOND, "Arial Unicode MS";
+}
+
+.stratum-black-condensed
+{
+    font-family: ST2BLCOND, "Arial Unicode MS";
+}
+
+.stratum-light-condensed
+{
+    font-family: ST2LTCOND, "Arial Unicode MS";
+}
+
+.stratum-medium-condensed
+{
+    font-family: ST2MDCOND, "Arial Unicode MS";
+}
+
+/* stratum2 condensed fonts end */
+
 .positiveColor
 {
 	wash-color: positiveColor;
@@ -973,48 +1003,57 @@ ContextMenuCustomLayout #ContextMenuBody
 
 CSGOTooltipManager TooltipText #TextLabel,CSGOTooltipManager .ShortTextTooltip #TextLabel
 {
-	font-size: 15px;
-	tooltip-position: bottom;
-	tooltip-body-position: 50% 100%;
+    font-size: 14px;
 }
 
 CSGOTooltipManager TooltipText #TextLabel
 {
-	color: #c8c8c8;
+    color: #c8c8c8;
 }
 
 CSGOTooltipManager TooltipTitleText #TitleLabel
 {
-	font-size: 18px;
+    font-size: 14px;
 }
 
 CSGOTooltipManager TooltipTitleText #TextLabel
 {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 CSGOTooltipManager #Contents,CSGOTooltipManager .ShortTextTooltip #Contents
 {
-	border-radius: 5px;
-	border: 0px;
-	box-shadow: fill #0000005e 0px 0px 8px 0px;
-	margin: 19px;
+    border-radius: 5px;
+    border: 0px;
+    box-shadow: fill #0000005e 0px 0px 8px 0px;
+    margin-left: 19px;
 }
 
 CSGOTooltipManager #Contents
 {
-	background-color: rgba(15, 15, 15, 0.99);
+    background-color: rgba(15, 15, 15, 0.99);
 }
 
 CSGOTooltipManager .ShortTextTooltip #Contents
 {
-	background-color: #1e2d3d;
-	padding: 8px 10px 6px 10px;
+    background-color: #1e2d3d;
+    padding: 8px 10px 6px 10px;
 }
 
 CSGOTooltipManager .TooltipContainer
 {
-	padding-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.tooltip-offer-wear
+{
+    y:-15px;
+}
+
+.tooltip-laptop-topbar
+{
+    x: -100px;
+    y:-180px;
 }
 
 ToggleButton
@@ -1458,17 +1497,17 @@ CSGOSettingsEnumDropDown.PopupButton
 
 .PopupButton Label,.PopupButton:Selected Label,DropDown.PopupButton:focus Label,CSGOSettingsEnumDropDown.PopupButton Label
 {
-	color: White;
-	horizontal-align: center;
-	vertical-align: middle;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: medium;
-	font-size: 24px;
-	margin: 10px 12px 8px;
-	font-family: stratum2Font;
-	text-overflow: shrink;
-	letter-spacing: 0px;
+    color: White;
+    horizontal-align: center;
+    vertical-align: middle;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: medium;
+    font-size: 24px;
+    margin: 10px 12px 8px;
+    font-family: ST2MDCOND;
+    text-overflow: shrink;
+    letter-spacing: 0px;
 }
 
 .PopupButton Image,CSGOSettingsEnumDropDown Image,CSGOSettingsEnumDropDown.PopupButton Image
@@ -1866,16 +1905,6 @@ DropDownMenu Label Image
 	wash-color: white;
 }
 
-.IconButton:selected
-{
-	background-color: white;
-}
-
-.IconButton:selected Image
-{
-	wash-color: black;
-}
-
 .IconButton:disabled
 {
 	wash-color: disabledColor;
@@ -1883,7 +1912,7 @@ DropDownMenu Label Image
 
 .IconButton:not(.no-hover):hover
 {
-	sound: "UIPanorama.generic_button_rollover";
+	sound: "generic_button_rollover";
 }
 
 .IconButton:active
@@ -2422,10 +2451,12 @@ ProgressBar
 {
 	width: 32px;
 	height: 32px;
+
 	background-image: url("file://{images}/icons/ui/loading.svg");
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	background-size: contain;
+
 	animation-name: SpinnerRotate;
 	animation-duration: 1.25s;
 	animation-timing-function: linear;
@@ -2437,27 +2468,27 @@ ProgressBar
 	0%
 	{
 		transform: scaleX( 1 );
-		clip:radial(50% 50%, 0deg, 360deg);
+		                               
+		clip:radial(50% 50%, 0deg, 0deg);
 	}
 	
 	49%
 	{
 		transform: scaleX( 1 );
-		clip:radial(50% 50%, 0deg, 0deg);
+		clip:radial(50% 50%, 0deg, 360deg);
 	}
-	
 	50%
 	{
 		transform: scaleX( -1 );
-		clip:radial(50% 50%, 0deg, 0deg);
+		                               
+		clip:radial(50% 50%, 0deg, 360deg);
 	}
 	
 	100%
 	{
 		transform: scaleX( -1 );
-		clip:radial(50% 50%, 0deg, 360deg);
+		clip:radial(50% 50%, 0deg, 0deg);
 	}
-	
 }
 
 .Arrow

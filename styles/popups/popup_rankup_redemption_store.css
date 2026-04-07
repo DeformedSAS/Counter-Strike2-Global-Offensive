@@ -1,7 +1,6 @@
 .PopupPanel
 {
     background-color: none;
-    box-shadow: none;
     border: 1px solid rgba(0,0,0,0);
 }
 
@@ -16,8 +15,7 @@
 {
     width: 100%;
     height: 100%;
-    ignore-parent-flow:true;
-    blur: mipmapgaussian(4, 4, 2);
+    blur: fastgaussian(4, 4, 2);
     background-image: url("file://{images}/backgrounds/weekly_rewards.png");
     background-size: cover;
     background-position: 50% 50%;

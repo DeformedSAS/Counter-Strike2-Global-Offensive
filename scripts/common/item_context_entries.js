@@ -67,13 +67,7 @@ var ItemContextEntires = ( function (){
 				var slotsub = ItemInfo.GetSlotSubPosition(id);
 				return ( ( slotsub ) && ( slotsub.startsWith( "equipment" ) || slotsub.startsWith( "grenade" ) ) ) ? '' : 'BottomSeparator';
 			},
-			AvailableForItem: function ( id ) {
-				                              
-				                                                         
-				                             
-					                                                                                      
-
-				                                                                 
+			AvailableForItem: function ( id ) {  
 				return ItemInfo.IsPreviewable( id );
 			},
 			OnSelected:  function ( id ) {
@@ -959,7 +953,7 @@ var ItemContextEntires = ( function (){
 				return !InventoryAPI.IsMarketable( id ) ? 'TopSeparator' : '';
 			},
 			AvailableForItem: function ( id ) {
-				return InventoryAPI.IsDeletable( id );
+				return true;
 			},
 			OnSelected: function ( id ) {
 				$.DispatchEvent( 'ContextMenuEvent', '' );

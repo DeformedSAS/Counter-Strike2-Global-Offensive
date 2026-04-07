@@ -18,7 +18,7 @@
 
 .popup-inspect-modelpanel_darken
 {
-	brightness: 1;
+	brightness: 3;
 }
 .mainmenu-content__container VerticalScrollBar {
 	margin-right: 0px;
@@ -28,7 +28,7 @@
 {
 	blur: gaussian( 4, 4, 8 );
 	opacity: .7;
-	brightness: 1;
+	brightness: 3;
 }
 
 .popup-inspect-image

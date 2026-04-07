@@ -24,6 +24,7 @@
     $.DefineEvent( 'ShowContentPanel', 0, 'no args', 'Show a content panel' );
     $.DefineEvent( 'InitAvatar', 2, 'xuid, type of panel', 'Update the avatar panel data for a xuid' );
     $.DefineEvent( 'ForceRestartVanity', 0, '' );
+	$.DefineEvent( 'UpdateHudMoney', 2, '' );
 	$.DefineEvent( 'EndOfMatch_Show', 0, '' );
     $.DefineEvent( 'OpenPlayMenu', 0, 'no args', 'opens the play menu from anywhere. EXAMPLE from party menu settings button from client' );
     $.DefineEvent( 'OpenInventory', 0, 'no args', 'opens the inventory menu from anywhere.' );

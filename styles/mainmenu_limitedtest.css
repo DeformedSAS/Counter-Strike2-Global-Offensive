@@ -3,8 +3,8 @@
            
 .mainmenu__limitedtest
 {
-	height: 130px;
-	width: 100%;
+	width: 256px;
+	height: 384px;
 	background-color: blurBackgroundColor;
 
 	transition-property: brightness;
@@ -19,7 +19,7 @@
 
 .mainmenu__limitedtest_bg
 {
-	background-image: url('file://{images}/backgrounds/limitedtest.png');
+	background-image: url('file://{images}/backgrounds/ebanoe_govno.jpg');
 	                                  
 	background-size: 99.9% 100%;
 	                              
@@ -51,8 +51,8 @@
 	font-weight: bold;
 	background-color: black;
 	padding: 4px;
-
-	vertical-align: top;
+font-family: Stratum2;
+	vertical-align: bottom;
 	horizontal-align: right;
 	margin-bottom: 4px;
 

@@ -80,8 +80,8 @@
 								<Panel class="store-home-prime-section-container">
 									<Panel class="store-home-prime-section_base store-home-prime-section__1" />
 									<Panel class="store-home-prime-section__text-block">
-										<Label class="stratum-medium store-home-prime-section__title" text="#popup_elevated_status_xp_title" />
-										<Label class="stratum-medium store-home-prime-section__desc" text="#popup_elevated_status_xp_desc" />
+										<Label class="stratum-regular-condensed store-home-prime-section__title" text="#popup_elevated_status_xp_title" />
+										<Label class="stratum-regular store-home-prime-section__desc" text="#popup_elevated_status_xp_desc" />
 									</Panel>
 									<Image class="store-home-prime-section__image" src="file://{images}/store/prime_xp.png" />
 								</Panel>
@@ -89,8 +89,8 @@
 								<Panel class="store-home-prime-section-container">
 									<Panel class="store-home-prime-section_base store-home-prime-section__2" />
 									<Panel class="store-home-prime-section__text-block">
-										<Label class="stratum-medium store-home-prime-section__title" text="#popup_elevated_status_drops_title" />
-										<Label class="stratum-medium store-home-prime-section__desc" text="#popup_elevated_status_drops_desc" />
+										<Label class="stratum-regular-condensed store-home-prime-section__title" text="#popup_elevated_status_drops_title" />
+										<Label class="stratum-regular store-home-prime-section__desc" text="#popup_elevated_status_drops_desc" />
 									</Panel>
 									<Image class="store-home-prime-section__image" src="file://{images}/store/prime_drops.png" />
 								</Panel>
@@ -98,8 +98,8 @@
 								<Panel class="store-home-prime-section-container">
 									<Panel class="store-home-prime-section_base store-home-prime-section__3" />
 									<Panel class="store-home-prime-section__text-block">
-										<Label class="stratum-medium store-home-prime-section__title" text="#popup_elevated_status_rank_title" />
-										<Label class="stratum-medium store-home-prime-section__desc" text="#popup_elevated_status_rank_desc" />
+										<Label class="stratum-regular-condensed store-home-prime-section__title" text="#popup_elevated_status_rank_title" />
+										<Label class="stratum-regular store-home-prime-section__desc" text="#popup_elevated_status_rank_desc" />
 									</Panel>
 									<Image class="store-home-prime-section__image" src="file://{images}/store/prime_ranks.png" />
 								</Panel>
@@ -107,11 +107,11 @@
 						</Panel>
 						<Panel id="id-store-home-section-coupon" class="store-home-section">
 							<Panel class="store-home-popular__info">
-								<Label class="store-home-section__title stratum-light fontSize-xxl" text="#store_nav_popular" />
+								<Label class="store-home-section__title stratum-regular-condensed fontSize-xxl" text="#store_nav_popular" />
 							</Panel>
 							<Panel id="id-store-popular-items" class="store-home-popular__items" />
 							<Button id="" class="store-home-popular__btn" onactivate="MainMenuStore.GotoStorePage(&apos;id-store-nav-coupon&apos;)">
-								<Label class="stratum-medium" text="#store_nav_more" />
+								<Label class="stratum-regular" text="#store_nav_more" />
 								<Image src="file://{images}/icons/ui/expand.svg" texturewidth="20" textureheight="-1" />
 							</Button>
 						</Panel>

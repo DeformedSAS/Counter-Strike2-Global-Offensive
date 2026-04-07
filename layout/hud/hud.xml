@@ -124,7 +124,7 @@
 		                                                                
 		<CSGOHudFreezePanel id="HudFreezePanel" hittest="false" hittestchildren="false" />
 
-		<CSGOHudBlurTarget id="HudBlur" blurrects="Scoreboard EndOfMatch BuyMenu sliding-panel--TERRORIST sliding-panel--CT" class="HudBlur" hittest="false" hittestchildren="false">
+		<CSGOHudBlurTarget id="HudBlur" blurrects="Scoreboard BuyMenu sliding-panel--TERRORIST sliding-panel--CT" class="HudBlur" hittest="false" hittestchildren="false">
 			<CSGOBackbufferImagePanel class="full-width full-height" />
 		</CSGOHudBlurTarget>
 

@@ -1,0 +1,58 @@
+<!-- xml reconstructed by Source 2 Viewer 17.0.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/mission_tile.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/formattext.js" />
+		<include src="file://{resources}/scripts/segmented_progress_bar.js" />
+		<include src="file://{resources}/scripts/mission_tile.js" />
+	</scripts>
+	<Panel class="mission-root hidden" require-composition-layer="true" useglobalcontext="true">
+		<Panel id="missionButton" class="mission-mainmenu full-width full-height">
+			<Panel class="background-contents">
+				<Image id="missionArtBG" class="mission-art-bg" />
+				<Panel class="mission-bg" />
+				<Panel id="id-mission-bg-searching" class="mission-bg-searching" />
+			</Panel>
+			<Panel class="mission-main-content">
+				<Panel class="mission-header">
+					<Label class="mission-title" text="#weekly_mission_title" />
+					<Label class="mission-time-remaining" html="true" text="#weekly_mission_expiration" />
+				</Panel>
+				<Panel class="mission-location">
+					<Label class="mission-mode-mapgroup" html="true" text="#mission_location" />
+				</Panel>
+				<Image id="missionMapicon" defaultsrc="file://{images}/icons/ui/random_map.svg" texturewidth="64" textureheight="64" />
+				<Image id="missionModeicon" defaultsrc="file://{images}/icons/ui/random_map.svg" texturewidth="64" textureheight="64" />
+				<Panel class="mission-main">
+					<Label id="mission-main-label" class="mission-directive" html="true" text="#mission_directive:f" />
+				</Panel>
+				<Panel class="mission-progress-container">
+					<Panel id="progressBaContainer" class="progress-bar-container" />
+					<Panel class="mission-xp-reward-container">
+						<Image class="mission-xp-reward-img" clampfractionalpixelpositions="false" texturewidth="-1" textureheight="30" src="file://{images}/icons/mission-xp-reward.svg" />
+						<Label class="mission-xp-reward" text="#mission_xp_remaining" />
+					</Panel>
+				</Panel>
+				<Panel class="mission-additional-container">
+					<Label class="mission-additional" html="true" text="{s:mission_partial}" />
+				</Panel>
+				<Panel class="searching">
+					<Label class="mission-additional" html="true" text="#mission_searching" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel class="mission-complete">
+			<Panel class="background-contents">
+				<Panel class="mission-bg" />
+				<Panel id="id-mission-bg-searching" class="mission-bg-searching" />
+			</Panel>
+			<Panel class="mission-header--complete">
+				<Label class="mission-title" text="#weekly_mission_title_complete" />
+				<Label class="mission-time-remaining" html="true" text="#weekly_mission_next_mission" />
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

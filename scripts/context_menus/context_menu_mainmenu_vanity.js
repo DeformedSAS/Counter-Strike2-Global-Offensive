@@ -38,6 +38,7 @@ var MainMenuVanityContextMenu = (function () {
                 GameInterfaceAPI.SetSettingString(`ui_vanitysetting_loadoutslot_${shortTeam}`, loadoutSubSlot);
                 $.DispatchEvent('ForceRestartVanity');
                 $.DispatchEvent('ContextMenuEvent', '');
+				$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.generic_button_press', 'MOUSE' );
             });
 
             return elItem;
