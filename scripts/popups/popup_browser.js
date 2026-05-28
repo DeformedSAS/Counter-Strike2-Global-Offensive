@@ -42,7 +42,7 @@ var PopupNews = ( function()
 
 	function _HTMLFinishRequest ()
 	{
-		$.Schedule( 0.3, function()
+		$.Schedule( 0, function()
 		{
 			var elHTML = $.GetContextPanel().FindChildTraverse( 'BlogHTML' );
 			if ( elHTML )

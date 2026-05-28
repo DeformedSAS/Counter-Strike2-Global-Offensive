@@ -19,7 +19,7 @@
 		<Panel id="MatchStatusSearching" class="left-right-flow matchmaking-status-searching" >
 			<Panel class="matchmaking-status-left">
 				<Image id="MatchStatusFailIcon" class="vertical-center horizontal-center warningColor matchmaking-status-fail-icon hidden" texturewidth="36" textureheight="-1" src="file://{images}/icons/ui/warning.svg"/>
-				<Label id="MatchStatusTime" class="matchmaking-status-time" text="00:00"/>
+				<Label id="MatchStatusTime" class="matchmaking-status-time mono-spaced-font-bold" text="00:00"/>
 			</Panel>
 			<Label id="MatchStatusSearchingLabel" class="matchmaking-status-header" html="true" text=""/>
 		</Panel>

@@ -38,7 +38,7 @@ CSGOHudAlerts .alert-bar-bg
 {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.0);
     background-image: url("file://{images}/backgrounds/bluedots_large.png");
     background-size: backgroundDotsSize;
     background-img-opacity: .04;
@@ -57,7 +57,6 @@ CSGOHudAlerts #AlertText
     vertical-align: center;
     horizontal-align: center;
     color: white;
-    text-shadow: 1px 1px 1px 2 #000000d2;
     transform: translateY(0px);
     font-size: 18px;
 	font-family: Stratum2;

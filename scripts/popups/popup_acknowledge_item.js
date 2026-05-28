@@ -10,7 +10,7 @@ var AcknowledgeItems = ( function()
 		_Init();
 	};
 
-	var _Init = function()
+    var _Init = function()
 	{
 		var items = _GetItems();
 
@@ -23,7 +23,6 @@ var AcknowledgeItems = ( function()
 		var numItems = items.length;
 		_AcknowledgeAllItems.SetItemsToSaveAsNew( items );
 
-		                                                                                                        
 		var elParent = $.GetContextPanel().FindChildInLayoutFile( 'AcknowledgeItemsCarousel' );
 		elParent.RemoveAndDeleteChildren();
 
@@ -33,12 +32,14 @@ var AcknowledgeItems = ( function()
 				'DelayLoadPanel', 
 				elParent, 
 				'carousel_delay_load_' + i,
-				{ class: 'Offscreen' } );
+				{ class: 'Offscreen' } 
+			);
 
 			elDelayLoadPanel.SetLoadFunction( _MakeItemPanel.bind( null, items[i], i, numItems ) );
+			
 			elDelayLoadPanel.ListenForClassRemoved( 'Offscreen' );
 		}
-	};
+	}; 
 
 	var _MakeItemPanel = function( item, index, numItems, elParent )
 	{

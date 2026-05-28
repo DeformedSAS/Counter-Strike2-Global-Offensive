@@ -50,7 +50,7 @@ var LoadoutGrid = ( function() {
             UpdateCharModel('t');
             FillOutGridItems('ct');
             FillOutGridItems('t');
-            m_updatedFromShowItemInLoadout = false;
+            m_updatedFromShowItemInLoadout = true;
         }
 
         if (!m_inventoryUpdatedHandler) {
@@ -80,14 +80,11 @@ var LoadoutGrid = ( function() {
         SetUpTeamSelectBtns();
         InitSortDropDown();
         UpdateGridShuffleIcons();
-        
-        ChangeSelectedTeamOverride('ct');
-
+        $.DispatchEvent("Activated", $.GetContextPanel().FindChildInLayoutFile('id-loadout-select-team-btn-t'), "mouse");
+        $.DispatchEvent("Activated", $.GetContextPanel().FindChildInLayoutFile('id-loadout-select-team-btn-ct'), "mouse");
         let elItemList = $('#id-loadout-item-list');
-        if (elItemList) {
-            elItemList.SetAttributeInt('DragScrollSpeedHorizontal', 0);
-            elItemList.SetAttributeInt('DragScrollSpeedVertical', 0);
-        }
+        elItemList.SetAttributeInt('DragScrollSpeedHorizontal', 0);
+        elItemList.SetAttributeInt('DragScrollSpeedVertical', 0);
         RegisterGridItemEvents('ct');
         RegisterGridItemEvents('t');
     }

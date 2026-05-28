@@ -105,14 +105,15 @@
                     <CSGOBlurTarget id="MainMenuBackground" blurrects="mainmenu-content__blur-target id-mainmenu-mini-store-panel Scoreboard JsStreamPanel JsMainMenuNavBar">
                         <CSGOBackbufferImagePanel class="full-width full-height"/>
                         <Panel id="MainMenuMovieParent" />
-                        <Panel id="MainMenuVanityParent"/>
+                        <Panel id="MainMenuVanityParent" />
+                        <Panel class="mainmenu-vanity__vignette" hittest="false" />
+                        <Panel class="mainmenu-vanity__vignette--bottom" hittest="false" />
+                        <Panel id="MainMenuVanityInfo" class="full-width full-height MainMenuModeOnly" hittest="false" />
                     </CSGOBlurTarget>
                     <Frame id="JsLeftColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_left_column.xml" />
 					<Frame id="Scoreboard" class="scoreboard PauseMenuModeOnly" src="file://{resources}/layout/scoreboard.xml" />
                     <Frame id="JsRightColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_right_column.xml" />
                     <Panel id="JsActiveMissionPanel" class="mainmenu_active-mission-container PauseMenuModeOnly" />
-					<Panel id="JsNewsContainer" class="mainmenu_news_container hidden" >
-					</Panel>
                     <Panel id="JsMainMenuContent" class="mainmenu-content mainmenu-content--offscreen" hittest="true">
                         <Panel class="mainmenu-content__blur">
                             <Panel id="mainmenu-content__blur-target" />
@@ -224,7 +225,7 @@
                             <RadioButton id="MainMenuNavBarNews"
                                          class="mainmenu-top-navbar__radio-btn"
                                          group="NavBar"
-                                         onactivate="MainMenu.NavigateToTab('JsNews', 'mainmenu_news_fullscreen');">
+                                         onactivate="MainMenu.NavigateToTab('JsNews', 'mainmenu_news');">
                                 <Label class="mainmenu-top-navbar__radio-btn__label stratum-regular-condensed" text="#CSGO_MainMenu_News"/>
                                 <Panel id="MainMenuWatchAlert" class="navbar-btn__notification hidden">
                                </Panel>

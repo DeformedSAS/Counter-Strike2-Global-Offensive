@@ -1,0 +1,28 @@
+<!-- xml reconstructed by Source 2 Viewer 19.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/teamintromenu.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/async.js" />
+		<include src="file://{resources}/scripts/teamintromenu.js" />
+	</scripts>
+	<snippets>
+		<snippet name="TeamIntroTeammateInfo">
+			<Panel hittest="false" class="team-intro-teammate-info hidden">
+				<CSGOAvatarImage id="AvatarImage" />
+				<Label id="Name" class="team-intro-teammate-name" />
+			</Panel>
+		</snippet>
+	</snippets>
+	<CSGOTeamSelectMenu class="teamintro-root">
+		<Panel id="TeamIntroHeader" class="team-intro-header hidden">
+			<Image id="TeamIntroIcon" class="team-intro-icon" />
+			<Label id="TeamIntroHalfLabel" class="team-intro-half-label" />
+			<Label id="TeamIntroTeamLabel" class="team-intro-team-label" />
+		</Panel>
+		<Panel id="TeamIntroTeammateInfos" class="full-width full-height" />
+		<Panel id="TeamIntroFade" class="full-width full-height team-intro-fade hidden" />
+	</CSGOTeamSelectMenu>
+</root>

@@ -99,7 +99,7 @@ var CharacterButtons = ( function() {
 		                   
 		var elZoomButton = $.GetContextPanel().FindChildInLayoutFile( 'LoadoutSingleItemModelZoom' );
 		if ( elZoomButton.checked )
-			elZoomButton.checked = false;
+			elZoomButton.checked = true;
 
 		var data = $.GetContextPanel().Data();
 		data.m_modelPanelSettings.cameraPreset = data.m_characterToolbarButtonSettings.cameraPresetUnzoomed;
@@ -113,6 +113,27 @@ var CharacterButtons = ( function() {
 		CharacterAnims.PlayAnimsOnPanel( modelRenderSettingsOneOffTempCopy );
 
 		StoreAPI.RecordUIEvent( "PlayCheer", 1 );
+	}
+	
+	function _PlayDefeat ()
+	{
+		                   
+		var elZoomButton = $.GetContextPanel().FindChildInLayoutFile( 'LoadoutSingleItemModelZoom' );
+		if ( elZoomButton.checked )
+			elZoomButton.checked = false;
+
+		var data = $.GetContextPanel().Data();
+		data.m_modelPanelSettings.cameraPreset = data.m_characterToolbarButtonSettings.cameraPresetUnzoomed;
+
+		                                                                                        
+		                                                
+		var modelRenderSettingsOneOffTempCopy = ItemInfo.DeepCopyVanityCharacterSettings( data.m_modelPanelSettings );
+		modelRenderSettingsOneOffTempCopy.arrModifiers = [ InventoryAPI.GetCharacterDefaultCheerByItemId( modelRenderSettingsOneOffTempCopy.charItemId ) ];
+		modelRenderSettingsOneOffTempCopy.activity = 'ACT_CSGO_UIPLAYER_DEFEAT';
+
+		CharacterAnims.PlayAnimsOnPanel( modelRenderSettingsOneOffTempCopy );
+
+		StoreAPI.RecordUIEvent( "PlayDefeat", 1 );
 	}
 
 	function _PreviewModelVoice ()
@@ -162,6 +183,7 @@ var CharacterButtons = ( function() {
     return {
 		InitCharacterButtons:	 				_InitCharacterButtons,
 		PlayCheer: 								_PlayCheer,
+		PlayDefeat: 							_PlayDefeat,
 		PreviewModelVoice: 						_PreviewModelVoice,
 		ZoomCamera:								_ZoomCamera,
     };

@@ -12,7 +12,7 @@ var StoreItems;
         prime: [],
         market: [],
         key: [],
-        store: []
+        store: [],
     };
 
     function MakeStoreItemList() {
@@ -26,7 +26,8 @@ var StoreItems;
             prime: [],
             market: [],
             key: [],
-            store: []
+            store: [],
+			nightmode2: []
         };
 
         let isPerfectWorld = (MyPersonaAPI.GetLauncherType() === "perfectworld");
@@ -63,6 +64,7 @@ var StoreItems;
             }
         }
         GetTournamentItems();
+		GetNightMode2Items();
     }
     StoreItems.MakeStoreItemList = MakeStoreItemList;
 
@@ -134,6 +136,39 @@ var StoreItems;
         }
     }
     StoreItems.GetTournamentItems = GetTournamentItems;
+	
+	
+
+
+    function GetNightMode2Items() {
+        var items = [
+      [ 7029, 7030 ],
+      [ 7033, 7034 ],
+      [ 7031, 7032 ],
+      [ 7035, 7036 ],
+      [ 7038, 7037 ],
+      [ 7040, 7039 ]
+    ]
+
+        for (let i = 0; i < items.length; i++) {
+
+            let FauxItemId = InventoryAPI.GetFauxItemIDFromDefAndPaintIndex(items[i][0], 0);
+            let itemPrice = ItemInfo.GetStoreSalePrice(FauxItemId, 1);
+
+            let storeItem = {
+                id: FauxItemId,
+                useTinyNames: false,
+                isDisabled: !isPurchaseable(FauxItemId),
+                isNotReleased: !isPurchaseable(FauxItemId),
+                linkedid: InventoryAPI.GetFauxItemIDFromDefAndPaintIndex(items[i][1], 0)
+            };
+
+            m_oItemsByCategory.nightmode2.push(storeItem);
+        }
+    }
+
+
+StoreItems.GetTournamentItems = GetTournamentItems;
 
     function warningTextTournamentItems(isPurchaseable, itemid) {
         return !isPurchaseable

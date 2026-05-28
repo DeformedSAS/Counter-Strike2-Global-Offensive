@@ -22,7 +22,9 @@
 					onmouseout="UiToolkitAPI.HideTextTooltip();">
 					<Image class="" src="file://{images}/icons/ui/cheer.svg" />
 				</Button>
-				
+				<Button id="PlayDefeat" class="IconButton" onactivate="CharacterButtons.PlayDefeat();" onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;PlayDefeat&apos;, &apos;#tooltip_character_defeat&apos; );" onmouseout="UiToolkitAPI.HideTextTooltip();">
+                <Image class="" src="file://{images}/icons/ui/defeat_anim.svg" />
+                </Button>
 				<Button id="PreviewModelVoice"
 					class="IconButton"
 					onactivate="CharacterButtons.PreviewModelVoice();"

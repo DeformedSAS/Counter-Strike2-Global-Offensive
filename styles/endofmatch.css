@@ -212,6 +212,8 @@
 {
     opacity:0;
 	background-color: rgba(0, 0, 0, 0.88);
+	transition-property: opacity;
+    transition-duration: 0.2s;
     vertical-align:center;
 }
 

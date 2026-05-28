@@ -143,7 +143,25 @@ var CapabilityDecodable = ( function()
 		}
 
 		_SetUpPanelElements();
+		_SetBackgroundMovie();
 		$.DispatchEvent( 'CapabilityPopupIsOpen', true );
+	};
+	
+	var _SetBackgroundMovie = function()
+	{
+		var videoPlayer = $( '#DecodableBGMovie' );
+		if ( !( videoPlayer && videoPlayer.IsValid() ) )
+			return;
+
+		                                                                                                
+		var backgroundMovie = GameInterfaceAPI.GetSettingString('ui_mainmenu_bkgnd_movie_CC4ECB9');
+
+		                                                                                     
+		videoPlayer.SetAttributeString( 'data-type', backgroundMovie );
+
+		                          
+		videoPlayer.SetMovie( "file://{resources}/videos/" + backgroundMovie + ".webm" );
+		videoPlayer.Play();
 	};
 
 	var _SetUpPanelElements = function()
@@ -1095,7 +1113,7 @@ var CapabilityDecodable = ( function()
 
 	var _HidePanelForLootlistItemPreview = function()
 	{
-		m_Inspectpanel.visible = false;
+		m_Inspectpanel.visible = true;
 	}
 
 	var _ClosePopUp = function()

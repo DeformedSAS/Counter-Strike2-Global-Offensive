@@ -2,23 +2,14 @@
 
 var InventoryInspect = ( function()
 {
-	var _m_PanelRegisteredForEvents;
+	let _m_PanelRegisteredForEvents;
 	
 	var _Init = function()
 	{
+		$.GetContextPanel().SetAttributeString('popup-id', $.GetContextPanel().id);
 		var itemId = $.GetContextPanel().GetAttributeString( "itemid", null );
 		$.Msg( "[PanoramaScript] DEBUG ITEM ID:", itemId );
-
-		                                               
-		    
-		   	                                              
-		   	       
-		    
-
-		                                                                      
-		                                
-		                                                                        
-		                                                                                                     
+                                           
 		if ( !_m_PanelRegisteredForEvents )
 		{
 			_m_PanelRegisteredForEvents = $.RegisterForUnhandledEvent( 'PanoramaComponent_Inventory_PlayerEquipSlotChanged', InventoryInspect.ShowNotification );
@@ -29,6 +20,7 @@ var InventoryInspect = ( function()
 		_PlayShowPanelSound( itemId );
 		_SetupLootlistNavPanels( itemId );
 		_LoadEquipNotification();
+		_SetBackgroundMovie();
 
 		var styleforPopUpInspectFullScreenHostContainer = $.GetContextPanel().GetAttributeString( 'extrapopupfullscreenstyle', null );
 		if ( styleforPopUpInspectFullScreenHostContainer )
@@ -48,6 +40,23 @@ var InventoryInspect = ( function()
 		{
 			StoreAPI.RecordUIEvent( "Inventory_Inspect", defIdx );
 		}
+	};
+	
+	var _SetBackgroundMovie = function()
+	{
+		var videoPlayer = $( '#InspectBGMovie' );
+		if ( !( videoPlayer && videoPlayer.IsValid() ) )
+			return;
+
+		                                                                                                
+		var backgroundMovie = GameInterfaceAPI.GetSettingString('ui_mainmenu_bkgnd_movie_CC4ECB9');
+
+		                                                                                     
+		videoPlayer.SetAttributeString( 'data-type', backgroundMovie );
+
+		                          
+		videoPlayer.SetMovie( "file://{resources}/videos/" + backgroundMovie + ".webm" );
+		videoPlayer.Play();
 	};
 
 	var _UpdatePanelData = function( itemId )
@@ -115,8 +124,9 @@ var InventoryInspect = ( function()
 			                
 			inspectSound = "inventory_inspect_graffiti";
 		} else if(slot == "musickit") {
-			                 
-			inspectSound = "inventory_inspect_musicKit";
+        $.Schedule( 0.1, function() {
+            $.DispatchEvent( "PlaySoundEffect", "inventory_inspect_musicKit", "MOUSE" );
+        });
 		} else if(slot == "flair0") {
 			            
 			inspectSound = "inventory_inspect_coin";
@@ -390,6 +400,7 @@ var InventoryInspect = ( function()
 	return{
 		Init: _Init,
 		ShowNotification: _ShowNotification,
+		SetBackgroundMovie: _SetBackgroundMovie,
 		ClosePopup: _ClosePopup,
 		ItemAcquired: _ItemAcquired
 	};

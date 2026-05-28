@@ -76,7 +76,6 @@ var EOM_Win = (function() {
 
         _AnimStart();
         $.Schedule(0.05, function() {
-            $.DispatchEvent('PlaySoundEffect', 'UIPanorama.gameover_show', 'MOUSE');
         });
 
         return true;
@@ -94,7 +93,6 @@ var EOM_Win = (function() {
         var elPanel = _m_cP.FindChildTraverse("VacLive");
         if (elPanel) {
             elPanel.TriggerClass("show");
-            $.DispatchEvent('PlaySoundEffect', 'UIPanorama.gameover_show', 'MOUSE');
         }
     }
 

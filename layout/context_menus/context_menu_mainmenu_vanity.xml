@@ -22,6 +22,7 @@
     <Panel class="ContextMenuItem" onload="MainMenuVanityContextMenu.Init();">
         <TooltipPanel id="MainMenuMovieSceneSelector" class="SettingsMenuDropdownContainer" tooltip="#GameUI_MainMenuMovieScene_Tooltip">
 				<CSGOSettingsEnumDropDown class="content-navbar__tabs__dropdown_vanity" convar="ui_mainmenu_bkgnd_movie_CC4ECB9" ondropdownselectionchanged="$.DispatchEvent('CSGOMainInitBackgroundMovie');">
+				    <Label text="#SFUI_Map_de_cache" value="cache" id="ui_mainmenu_bkgnd_movie_cache"/>
 					<Label text="#SFUI_Map_de_ancient" value="ancient" id="ui_mainmenu_bkgnd_movie_ancient"/>
 					<Label text="#SFUI_Map_de_anubis" value="anubis" id="ui_mainmenu_bkgnd_movie_anubis"/>
 					<Label text="#SFUI_Map_de_overpass" value="overpass" id="ui_mainmenu_bkgnd_movie_overpass"/>
@@ -32,6 +33,7 @@
 					<Label text="#SFUI_Map_cs_office" value="office" id="ui_mainmenu_bkgnd_movie_office"/>
 					<Label text="#SFUI_Map_cs_italy" value="italy" id="ui_mainmenu_bkgnd_movie_italy"/>
 					<Label text="#SFUI_Map_de_nuke" value="nuke" id="ui_mainmenu_bkgnd_movie_nuke"/>
+					<Label text="#SFUI_Map_de_nuke_outside" value="nuke_outside" id="ui_mainmenu_bkgnd_movie_nuke_outside"/>
 					<Label text="#SFUI_Map_de_dust2" value="dust2" id="ui_mainmenu_bkgnd_movie_dust2"/>
 					<Label text="#SFUI_Map_de_train" value="train" id="ui_mainmenu_bkgnd_movie_train"/>
 					<Label text="#SFUI_Map_de_mirage" value="mirage" id="ui_mainmenu_bkgnd_movie_mirage"/>

@@ -18,6 +18,7 @@
 		<Panel class="right-left-flow horizontal-align-right vertical-center">
 			<TextButton id="InspectCloseBtn"
 					class="PopupButton"
+					style="text-transform: uppercase;"
 					text="#GameUI_Close"
 					onactivate="InspectActionBar.CloseBtnAction();"/>
 			<TextButton id="SingleAction"

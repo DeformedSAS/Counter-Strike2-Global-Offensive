@@ -5,7 +5,7 @@ var EOM_Skillgroup = (function () {
     var _m_pauseBeforeEnd = 1.0;
     var _m_cP = $.GetContextPanel();
 
-    const DEBUG_SKILLGROUP = true; // rankup debug
+    const DEBUG_SKILLGROUP = false; // rankup debug
     const DEBUG_PREMIER = false;     // premier debug
     const DEBUG_RANKDOWN = false;  // rankdown debug, both premier and regular skillgroup.
 
@@ -97,8 +97,10 @@ var EOM_Skillgroup = (function () {
         if ( DEBUG_SKILLGROUP )
         {
             winsNeededForRank = 0;
-            oData.mode = 'competitive';
+            mode = 'competitive';
+
         }
+		
         else if ( DEBUG_PREMIER )
         {
             winsNeededForRank = 0;

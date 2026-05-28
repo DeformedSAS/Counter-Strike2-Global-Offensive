@@ -9,7 +9,10 @@
 		<include src="file://{resources}/scripts/endofmatch-characters.js" />
 		<include src="file://{resources}/scripts/common/characteranims.js" />
 		<include src="file://{resources}/scripts/common/iteminfo.js" />
+		<include src="file://{resources}/scripts/common/async.js" />
 		<include src="file://{resources}/scripts/characterlineup.js" />
+		<include src="file://{resources}/scripts/vanity_player_info.js" />
+		<include src="file://{resources}/scripts/player_stats_card.js" />
 		<include src="file://{resources}/scripts/scoreboard.js" />
 		<include src="file://{resources}/scripts/mock_adapter.js" />
 	</scripts>

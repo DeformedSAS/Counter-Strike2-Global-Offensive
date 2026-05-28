@@ -1,5 +1,5 @@
 'use strict';
-
+$.DispatchEvent('PlayMainMenuMusic', false, true);
 var EndOfMatch = (function () {
     var _m_cP = $("#EndOfMatch");
     if (!_m_cP) _m_cP = $("#PanelToTest");
@@ -11,9 +11,7 @@ var EndOfMatch = (function () {
     $.RegisterEventHandler("EndOfMatch_Show", _m_cP, _Start);
     $.RegisterForUnhandledEvent("EndOfMatch_Shutdown", _Shutdown);
     $.RegisterForUnhandledEvent("OnMouseEnableBinding", _ToggleBetweenScoreboardAndCharacters);
-    $.DispatchEvent("PlayMainMenuMusic", false, false);
-
-    _m_cP.AddClass("eom--fade-in-enabled");
+    $.DispatchEvent("PlayMainMenuMusic", false, true);
 
     _m_cP.Data()._m_arrPanelObjects = [];
     _m_cP.Data()._m_currentPanelIndex = -1;
@@ -66,7 +64,7 @@ var EndOfMatch = (function () {
             _m_cP.Data()._m_jobStart = null;
         }
 
-        _m_cP.SetHasClass('scoreboard-visible', true);
+        _m_cP.SetHasClass('scoreboard-visible', false);
 
         $.Schedule(3.0, () => {
             for (var j = 0; j < 10; ++j) {
@@ -109,18 +107,6 @@ var EndOfMatch = (function () {
         _m_cP.SetFocus();
     }
 
-    function EndOfMatch_Music(type) {
-        var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
-        var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
-        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId).replace(/^#musickit_/, '');
-
-        if (type === 'loading' && GameStateAPI.GetCSGOGameUIStateName() === 'CSGO_GAME_UI_STATE_INGAME') {
-            InventoryAPI.PlayItemPreviewMusic(itemId, 'endofmatch.mp3');
-            InventoryAPI.StopItemPreviewMusic();
-            $.DispatchEvent('PlaySoundEffect', 'Music.EndOfMatch.' + musicName, 'MOUSE');
-        }
-    }
-
     function _ShowPanelStart() {
         if (!_m_cP || !_m_cP.IsValid())
             return;
@@ -144,15 +130,12 @@ var EndOfMatch = (function () {
 	function _Start ( bHardCut ) 
 	{
 	    _Initialize();
-		EndOfMatch_Music('loading');
 		if ( bHardCut )
 		{     
 			_m_cP.Data()._m_jobStart = $.Schedule( 0.0, _ => 
 			{
 		        _m_cP.Data()._m_jobStart = null;
-		        _m_cP.RemoveClass( "eom--fade-in-enabled" );
 		        _ShowPanelStart();
-		        _m_cP.AddClass( "eom--fade-in-enabled" );
 				_ShowNextPanel();
 		    } );
 		}
@@ -228,6 +211,15 @@ var EndOfMatch = (function () {
 
         _m_cP.RemoveClass("eom--reveal");
     }
+	
+	function _StartTestShow(mockData) {
+        MockAdapter.SetMockData(mockData);
+        $.DispatchEvent("Scoreboard_ResetAndInit");
+        $.DispatchEvent("OnOpenScoreboard");
+        _Initialize();
+        _ShowPanelStart();
+        $.Schedule(1.25, _ShowNextPanel);
+    }
 
     return {
         ShowNextPanel: _ShowNextPanel,
@@ -236,6 +228,6 @@ var EndOfMatch = (function () {
         StartDisplayTimer: _StartDisplayTimer,
         EnableToggleBetweenScoreboardAndCharacters: _EnableToggleBetweenScoreboardAndCharacters,
         ToggleBetweenScoreboardAndCharacters: _ToggleBetweenScoreboardAndCharacters,
-        Start: _Start // ← exposed for dev triggers
+        Start: _Start
     };
 })();

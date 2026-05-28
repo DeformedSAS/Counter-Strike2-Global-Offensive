@@ -14,17 +14,13 @@
         <include src="file://{resources}/scripts/generated/items_event_current_generated_store.js" />
 		<include src="file://{resources}/scripts/common/iteminfo.js" />
 	</scripts>
-
-	<PopupCustomLayout class="PopupPanel Capability Hidden"
-						useglobalcontext="true"
-						popupbackground="blur"
-						oncancel="InventoryInspect.ClosePopup();"
-						onload="InventoryInspect.Init()">
-
+	<PopupCustomLayout class="PopupPanel Capability Hidden" useglobalcontext="true" popupbackground="blur" oncancel="InventoryInspect.ClosePopup();" onload="InventoryInspect.Init()">
 		<Panel class="mainmenu-content__container mainmenu-content__container--inspect" useglobalcontext="true">
 			<Panel class="full-width full-height top-bottom-flow vertical-center">
 				<Panel id="PopUpInspectFullScreenHostContainer" class="full-width full-height">
+				<Movie class="inspect_bg_movie" id="InspectBGMovie" src="" sound="none" controls="none" repeat="true" hittest="false" />
 					<Frame id="PopUpInspectModelOrImage" src="file://{resources}/layout/popups/popup_inspect_model-image.xml" />
+					<Panel class="popup-inspect-border" hittest="false" />
 					<Frame id="PopUpInspectHeader" class='hidden' src="file://{resources}/layout/popups/popup_inspect_header.xml" />
 					<Frame id="PopUpCapabilityHeader" class='hidden' src="file://{resources}/layout/popups/popup_capability_header.xml" />
 					<Panel id="id-lootlist-title-container" class="inv-lootlist-title-container">

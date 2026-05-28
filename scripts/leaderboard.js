@@ -15,6 +15,7 @@ const regionToRegionName = {
 var Leaderboard;
 (function (Leaderboard) {
     function _msg(msg) {
+        $.Msg("[Leaderboard] "+msg);
     }
     let m_bEventsRegistered = false;
     let m_myXuid = MyPersonaAPI.GetXuid();
@@ -44,14 +45,9 @@ var Leaderboard;
     function UnregisterEventHandlers() {
         _msg('UnregisterEventHandlers');
         if (m_bEventsRegistered) {
-            $.UnregisterForUnhandledEvent('PanoramaComponent_Leaderboards_Dirty', m_LeaderboardsDirtyEventHandler);
-            $.UnregisterForUnhandledEvent('PanoramaComponent_Leaderboards_StateChange', m_LeaderboardsStateChangeEventHandler);
-            $.UnregisterForUnhandledEvent('PanoramaComponent_FriendsList_NameChanged', m_FriendsListNameChangedEventHandler);
             if (m_lbType === 'party') {
-                $.UnregisterForUnhandledEvent('PanoramaComponent_PartyList_RebuildPartyList', m_LobbyPlayerUpdatedEventHandler);
             }
             if (m_lbType === 'general') {
-                $.UnregisterForUnhandledEvent('PanoramaComponent_MyPersona_SetPlayerLeaderboardSafeName', m_NameLockEventHandler);
             }
             m_bEventsRegistered = false;
         }
@@ -348,9 +344,9 @@ function _UpdateGoToMeButton() {
             }
             elEntry.enabled = true;
             if (m_lbType === 'party' && oPlayer.XUID) {
-                elAvatar.PopulateFromSteamID(oPlayer.XUID);
+                elAvatar.steamid = oPlayer.XUID;
                 elAvatar.visible = true;
-                _SetHonorIcon(elEntry, oPlayer.XUID);
+                // _SetHonorIcon(elEntry, oPlayer.XUID);
             }
             else {
                 elAvatar.visible = false;
@@ -411,67 +407,59 @@ function _UpdateGoToMeButton() {
     function _UpdatePartyList() {
         if (m_lbType !== 'party')
             return;
+        _msg("im here");
         let elStatus = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-loading');
         let elData = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-nodata');
         let elLeaderboardList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-list');
         elLeaderboardList.SetHasClass('hidden', false);
         elStatus.SetHasClass('hidden', true);
         elData.SetHasClass('hidden', true);
-        function OnMouseOver(xuid) {
-            $.DispatchEvent('LeaderboardHoverPlayer', xuid);
-        }
-        function OnMouseOut() {
-            $.DispatchEvent('LeaderboardHoverPlayer', '');
-        }
+        // function OnMouseOver(xuid) {
+        //     $.DispatchEvent('LeaderboardHoverPlayer', xuid);
+        // }
+        // function OnMouseOut() {
+        //     $.DispatchEvent('LeaderboardHoverPlayer', '');
+        // }
         let elList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-entries');
+        if (!elList) {
+            $.Msg("[leaderboard.js] Missing panel: id-leaderboard-entries");
+            return;
+        }
+        elList.RemoveAndDeleteChildren();
         if (LobbyAPI.IsSessionActive()) {
-            let members = LobbyAPI.GetSessionSettings().members;
+            _msg("im here 2");
             function GetPartyLBRow(idx) {
-                let oPlayer = null;
-                let machine = 'machine' + idx;
-                let bValidPartyPlayer = members.hasOwnProperty(machine) && members[machine].hasOwnProperty('player0') &&
-                    members[machine].player0.hasOwnProperty('xuid');
-                if (!bValidPartyPlayer)
-                    return null;
-                let xuid = members[machine].player0.xuid;
-                oPlayer = LeaderboardsAPI.GetEntryDetailsObjectByXuid(m_leaderboardName, xuid);
-                if (!oPlayer.XUID) {
-                    oPlayer.XUID = xuid;
-                }
-                if (PartyListAPI.GetFriendCompetitiveRankType(xuid) === "Premier") {
-                    let partyScore = PartyListAPI.GetFriendCompetitiveRank(xuid);
-                    let partyWins = PartyListAPI.GetFriendCompetitiveWins(xuid);
-                    if (partyScore || partyWins) {
-                        oPlayer.score = PartyListAPI.GetFriendCompetitiveRank(xuid);
-                        oPlayer.matchesWon = PartyListAPI.GetFriendCompetitiveWins(xuid);
-                        oPlayer.rankWindowStats = PartyListAPI.GetFriendCompetitivePremierWindowStatsObject(xuid);
-                        _msg('PartyList player ' + xuid + ' score=' + oPlayer.score + ' wins=' + oPlayer.matchesWon + ' data={' + JSON.stringify(oPlayer) + '}');
-                    }
+                let xuid = PartyListAPI.GetXuidByIndex(idx);
+                let oPlayer = {
+                    XUID: xuid,
+                    displayName: PartyListAPI.GetFriendName(xuid),
+                    rank: 15,
+                    matchesWon: 42,
+                    matchesTied: 5,
+                    matchesLost: 13,
+                    pct: 85.5,
+                    region: 1,
+                    rankWindowStats: {}
+                };
+                let partyScore = PartyListAPI.GetFriendCompetitiveRank(xuid);
+                let partyWins = PartyListAPI.GetFriendCompetitiveWins(xuid);
+                if (partyScore || partyWins) {
+                    oPlayer.score = PartyListAPI.GetFriendCompetitiveRank(xuid);
+                    oPlayer.matchesWon = PartyListAPI.GetFriendCompetitiveWins(xuid);
+                    _msg('PartyList player ' + xuid + ' score=' + oPlayer.score + ' wins=' + oPlayer.matchesWon + ' data={' + JSON.stringify(oPlayer) + '}');
                 }
                 return oPlayer;
             }
-let elList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-entries');
-if (!elList) {
-    $.Msg("[leaderboard.js] Missing panel: id-leaderboard-entries");
-    return;
-}
-
-elList.SetLoadListItemFunction((parent, nPanelIdx, reusePanel) => {
-    let oPlayer = GetPartyLBRow(nPanelIdx);
-
-    if (!reusePanel || !reusePanel.IsValid()) {
-        reusePanel = $.CreatePanel("Button", elList, oPlayer ? oPlayer.XUID : '');
-        reusePanel.BLoadLayoutSnippet("leaderboard-entry");
-    }
-
-    _AddPlayer(reusePanel, oPlayer, nPanelIdx);
-
-    reusePanel.SetPanelEvent('onmouseover', oPlayer ? OnMouseOver.bind(reusePanel, oPlayer.XUID) : OnMouseOut);
-    reusePanel.SetPanelEvent('onmouseout', OnMouseOut);
-
-    return reusePanel;
-});
-            elList.UpdateListItems(PartyListAPI.GetCount());
+            _msg("players: "+PartyListAPI.GetCount());
+            for (let i = 0; i < PartyListAPI.GetCount(); i++) {
+                $.Msg(i);
+                let oPlayer = GetPartyLBRow(i);
+            
+                var reusePanel = $.CreatePanel("Button", elList, oPlayer ? oPlayer.XUID : '');
+                reusePanel.BLoadLayoutSnippet("leaderboard-entry");
+            
+                _AddPlayer(reusePanel, oPlayer, i);
+            }
         }
     }
     function OnLeaderboardDirty(type) {

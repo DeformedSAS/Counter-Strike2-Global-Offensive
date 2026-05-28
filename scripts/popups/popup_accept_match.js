@@ -79,7 +79,7 @@ var PopupAcceptMatch = ( function(){
 		{
 			$( '#AcceptMatchDataContainer' ).SetHasClass( 'auto', true );
 			_UpdateUiState();
-			m_jsTimerUpdateHandle = $.Schedule( 5, _OnNqmmAutoReadyUp );
+			m_jsTimerUpdateHandle = $.Schedule( 2, _OnNqmmAutoReadyUp );
 		}
 
 		_PopulatePlayerList();
@@ -380,7 +380,8 @@ var PopupAcceptMatch = ( function(){
 		Init					: _Init,
 		ReadyForMatch			: _ReadyForMatch,
 		FriendsListNameChanged	: _FriendsListNameChanged,
-		OnAcceptMatchPressed	: _OnAcceptMatchPressed
+		OnAcceptMatchPressed	: _OnAcceptMatchPressed,
+		OnCustomCancelPopup	: _OnCustomCancelPopup
 	}
 
 })();

@@ -425,35 +425,36 @@ var ItemContextEntires = ( function (){
 				);
 			}
 		},
-		{
-			          
-			name: 'equip_musickit',
-			CustomName: function (id) {
-				return _GetItemToReplaceName(id, 'noteam');
-			},
-			populateFilter: ['inspect', 'loadout'],
-			style: function (id){
-				                                                                                       
-				return false;
-			},
-			AvailableForItem: function ( id ) {
-				return ItemInfo.GetSlotSubPosition(id) === 'musickit' && !ItemInfo.IsEquippedForNoTeam(id) && !ItemInfo.IsShuffleEnabled( id, 'noteam' );
-			},
-			OnSelected: function( id )
-			{
-				$.DispatchEvent( 'ContextMenuEvent', '' );
-				var isMusicvolumeOn = InventoryAPI.TestMusicVolume();
-				if ( !isMusicvolumeOn )
-				{
-					$.DispatchEvent( 'ShowResetMusicVolumePopup', '' );
-				}
-				else
-				{
-					$.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.equip_musicKit', 'MOUSE' );
-					EquipItem( id, [ 'noteam' ] );
-				}
-			}
-		},
+{
+    name: 'equip_musickit',
+    CustomName: function (id) {
+        return _GetItemToReplaceName(id, 'noteam');
+    },
+    populateFilter: ['inspect', 'loadout'],
+    style: function (id){
+        return false;
+    },
+    AvailableForItem: function ( id ) {
+        return ItemInfo.GetSlotSubPosition(id) === 'musickit' && !ItemInfo.IsEquippedForNoTeam(id) && !ItemInfo.IsShuffleEnabled( id, 'noteam' );
+    },
+    OnSelected: function( id )
+    {
+        $.DispatchEvent( 'ContextMenuEvent', '' );
+        var isMusicvolumeOn = InventoryAPI.TestMusicVolume();
+        if ( !isMusicvolumeOn )
+        {
+            $.DispatchEvent( 'ShowResetMusicVolumePopup', '' );
+        }
+        else
+        {
+            $.Schedule( 0.1, function() {
+                $.DispatchEvent( 'PlaySoundEffect', 'UIPanorama.equip_musicKit', 'MOUSE' );
+            });
+            
+            EquipItem( id, [ 'noteam' ] );
+        }
+    }
+},
 		{
 			                     
 			name: 'add_musickit_to_shuffle',

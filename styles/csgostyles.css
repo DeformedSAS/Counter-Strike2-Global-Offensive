@@ -209,6 +209,16 @@ Label.MonoNumbersFont,TextEntry.MonoNumbersFont
 	font-family: Stratum2 Bold Monodigit, 'Arial Unicode MS';
 }
 
+.stratum-regular-monodigit
+{
+	font-family: Stratum2 Regular Monodigit, 'Arial Unicode MS';
+}
+
+.stratum-bold-monodigit
+{
+	font-family: Stratum2 Bold Monodigit, 'Arial Unicode MS';
+}
+
 .fontWeight-Bold
 {
 	font-weight: bold;

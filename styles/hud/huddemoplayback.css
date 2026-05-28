@@ -4,7 +4,6 @@
     width: fit-children;
     flow-children: down;
     background-color: rgba( 100, 100, 100, 0.5 );
-    world-blur: hudWorldBlur;
     border: 1px solid black;
     transition-property: opacity;
     transition-duration: .2s;

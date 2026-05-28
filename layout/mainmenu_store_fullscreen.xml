@@ -105,16 +105,23 @@
 								</Panel>
 							</Panel>
 						</Panel>
-						<Panel id="id-store-home-section-coupon" class="store-home-section">
-							<Panel class="store-home-popular__info">
-								<Label class="store-home-section__title stratum-regular-condensed fontSize-xxl" text="#store_nav_popular" />
-							</Panel>
-							<Panel id="id-store-popular-items" class="store-home-popular__items" />
-							<Button id="" class="store-home-popular__btn" onactivate="MainMenuStore.GotoStorePage(&apos;id-store-nav-coupon&apos;)">
-								<Label class="stratum-regular" text="#store_nav_more" />
-								<Image src="file://{images}/icons/ui/expand.svg" texturewidth="20" textureheight="-1" />
-							</Button>
-						</Panel>
+                        <Panel id="id-store-home-section-coupon" class="store-home-section">
+                            <Panel class="store-home-popular__info">
+                                <Label class="store-home-section__title stratum-regular-condensed fontSize-xxl" text="#store_nav_popular" />
+                            </Panel>
+                            <Panel id="id-store-popular-items" class="store-home-popular__items" />
+                            <Button class="store-home-popular__btn" onactivate="MainMenuStore.GotoStorePage(&apos;id-store-nav-coupon&apos;)">
+                                <Label class="stratum-regular" text="#store_nav_more" />
+                                <Image src="file://{images}/icons/ui/expand.svg" texturewidth="20" textureheight="-1" />
+                            </Button>
+                        </Panel>
+
+                        <Panel id="id-store-home-section-nightmode2" class="store-home-section">
+                            <Panel class="store-home-popular__info">
+                                <Label class="store-home-section__title stratum-regular-condensed fontSize-xxl" text="#store_nav_section_coupon_nightmode2" />
+                            </Panel>
+                            <Panel id="id-store-nightmode2-items" class="store-home-popular__items" />
+                        </Panel>
 					</Panel>
 				</Panel>
 				<Panel id="id-store-search" class="inv-category">

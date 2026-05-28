@@ -163,7 +163,7 @@ var CharacterAnims = ( function()
 
 		if ( 'cameraPreset' in settings )
 		{
-			cam = settings.cameraPreset;
+			cam = 1;
 			                                               
 		}
 

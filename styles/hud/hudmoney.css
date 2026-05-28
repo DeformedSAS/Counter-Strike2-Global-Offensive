@@ -57,7 +57,7 @@
     opacity: 1.0;
 	horizontal-align: left;
 	vertical-align: bottom;
-	y: 50px;
+	y: 30px;
     z-index: 1;
     transition-property: opacity;
     transition-timing-function: linear;

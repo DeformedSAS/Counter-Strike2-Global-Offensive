@@ -99,6 +99,8 @@
 						<Label text="#leaderboard_column_region" class="leaderboard_cell faded" />
 					</Panel>
 				</Button>
+			    <Panel id="id-leaderboard-entries" class="leaderboard__list">
+			    </Panel>
 			</Panel>
 		</Panel>
 	</Panel>

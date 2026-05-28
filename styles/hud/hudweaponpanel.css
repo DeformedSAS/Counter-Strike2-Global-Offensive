@@ -19,7 +19,6 @@ CSGOHudWeaponPanel
 
 CSGOHudWeaponPanel Label
 {
-    font-family: Stratum2, 'Arial Unicode MS';
 }
 
                                                                                                  
@@ -101,9 +100,10 @@ CSGOHudWeaponPanel Label
 
 .WeaponPanelTop__Icon--Defuse
 {
-	x: 90px;
-	y: 55px;
-	vertical-align: bottom;
+	
+	horizontal-align: center;
+	margin-left: 650px;
+	margin-top: 40px;
 	height: 60px;
 }
 .WeaponPanelTop__Icon--Show
@@ -358,9 +358,9 @@ CSGOHudWeaponPanel Label
 @keyframes 'KillIconShowAnim1'
 {
 	0%   { opacity: 0; pre-transform-scale2d: 0.4; brightness: 0.6; }
-	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; } /* flash */
+	30%  { opacity: 1; pre-transform-scale2d: 1.25; brightness: 2.2; } 
 	60%  { opacity: 1; pre-transform-scale2d: 1.05; brightness: 1.2; }
-	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; } /* normal */
+	100% { opacity: 1; pre-transform-scale2d: 1; brightness: 1; } 
 }
 
 @keyframes 'KillIconShowAnim2'
@@ -514,13 +514,10 @@ CSGOHudWeaponPanel Label
 .Ammo__Burst
 {
 	flow-children: right;
-	x: 74px;
-	y: 5px;
+	x: 50px;
+	y: 45px;
+	overflow: noclip;
 	visibility: collapse;
-	margin-left: 4px;
-	                        
-                                        
-	
 }
 
 .Ammo__Burst--Burst,
@@ -538,6 +535,7 @@ CSGOHudWeaponPanel Label
 	height: burstIconSize;
 	margin-right: 2px;
 	padding: 22px;
+	overflow: noclip;
     img-shadow: 0px 0px 1px #00000044;
 }
 
@@ -557,8 +555,10 @@ CSGOHudWeaponPanel Label
 .AmmoAnim
 {
 	width: 95px;
+	horizontal-align: center;
 	height: 100%;
-	margin-right: -70px;
+	margin-top: 40px;
+	margin-left: 250px;
 }
 
 .WeaponPanel--Simple .AmmoAnim
@@ -571,17 +571,25 @@ CSGOHudWeaponPanel Label
 {
 	width: 100%;
 	height: 100%;
-	visibility: collapse;
+	animation-name: weapon--change;
+    animation-duration: 0.1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
 }
 
 .AmmoAnim__Bullets--Hidden
 {
-	visibility: collapse;
+	opacity: 0;
+	animation-name: weapon--change2;
+    animation-duration: 0.1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
 }
 
 .AmmoAnim__BulletIcon
 {
-	width: 16px;
+	width: 25px;
+	visibility: collapse;
 	y: bulletYOffset;
     img-shadow: 0px 0px 1px #00000022;
 }
@@ -598,32 +606,13 @@ CSGOHudWeaponPanel Label
 
 .AmmoAnim__BulletIcon--Pos1
 {
-	x: 45px;
-}
-
-.AmmoAnim__BulletIcon--Pos2
-{
 	x: 35px;
 }
 
-.AmmoAnim__BulletIcon--Pos3
-{
-	x: 25px;
-}
-
-.AmmoAnim__BulletIcon--Pos4
-{
-	x: 15px;
-}
-
-.AmmoAnim__BulletIcon--Pos5
-{
-	x: 5px;
-}
 
 .AmmoAnim__BulletIcon--Anim
 {
-	animation-name: BulletAnim;
+	animation-name: BulletReloadAnim;
 	animation-duration: 0.13s;
 	animation-timing-function: linear;
 	animation-iteration-count: 1;
@@ -652,13 +641,13 @@ CSGOHudWeaponPanel Label
 	0%
 	{
 		opacity: 0.0; 
-		transform: translateX(-20px);
+		transform: translateY(-20px);
 	}
 
 	100%
 	{
 		opacity: 1.0;
-		transform: translateX(0px);
+		transform: translateY(0px);
 	}
 }
 
@@ -676,14 +665,15 @@ CSGOHudWeaponPanel Label
 	visibility: collapse;
 }
 
-.AmmoAnim__ShellIcon--Red
+.AmmoAnim__ShellIcon--Red .Ammo__Clip
 {
 	wash-color-fast: red;
+	color: red;
 }
 
 .AmmoAnim__ShellIcon--Anim
 {
-	visibility: visible;
+	visibility: collapse;
 	opacity: 0.0;
 
 	animation-name: ShellAnim;

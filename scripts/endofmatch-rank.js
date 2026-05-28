@@ -7,7 +7,7 @@ var EOM_Rank = (function () {
     var _m_pauseBeforeEnd = 1.0;
     var _m_cP = $.GetContextPanel();
 
-    const DEBUG_RANK = true; // this is for debugging the ranks, used in the cs2 trailers.
+    const DEBUG_RANK = false; // this is for debugging the ranks, used in the cs2 trailers.
 
 
                                                      

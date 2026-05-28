@@ -1,103 +1,85 @@
-'use strict';
+"use strict";
+/// <reference path="csgo.d.ts" />
+var NewsPanel;
+(function (NewsPanel) {
 
-var NewsPanel = (function () {
+    const NEWS_FEED_URL = "https://raw.githubusercontent.com/DeformedSAS/Counter-Strike2-Global-Offensive/main/news.json";
 
-	var _GetRssFeed = function()
-	{
-		BlogAPI.RequestRSSFeed();
-	}
+    function _GetGitHubFeed() {
+        $.AsyncWebRequest(NEWS_FEED_URL, {
+            type: 'GET',
+            success: function (data) {
+                try {
+                    const feed = (typeof data === "string") ? JSON.parse(data) : data;
+                    
+                    if (!feed || !feed.items) {
+                        $.Msg("[PanoramaScript] Invalid news.json format.");
+                        return;
+                    }
+                    _OnFeedReceived(feed);
+                } catch (e) {
+                    $.Msg("[PanoramaScript] Error parsing news.json:", e);
+                }
+            },
+            error: function (err) {
+                $.Msg("[PanoramaScript] Failed to fetch news.json:", err);
+            }
+        });
+    }
 
-	var _OnRssFeedReceived = function( feed )
-	{
-		                                          
+    function _OnFeedReceived(feed) {
+        if ($.GetContextPanel().BHasClass('news-panel--hide-news-panel')) return;
 
-		if( $.GetContextPanel().BHasClass( 'news-panel--hide-news-panel' ) )
-		{
-			return;
-		};
-		
-		var elLister = $.GetContextPanel().FindChildInLayoutFile( 'NewsPanelLister' );
+        let elLister = $.GetContextPanel().FindChildInLayoutFile('NewsPanelLister');
+        if (!elLister || !feed || !feed.items) return;
 
-		if ( elLister === undefined || elLister === null || !feed )
-			return;
+        elLister.RemoveAndDeleteChildren();
 
-		elLister.RemoveAndDeleteChildren();
+        let foundFirstNewsItem = false;
 
-		                                     
-		var foundFirstNewsItem = false;
+        feed.items.forEach(function (item, i) {
+            let elEntry = $.CreatePanel('Panel', elLister, 'NewEntry' + i, { acceptsinput: true });
+            const isFeatured = !foundFirstNewsItem && (!item.categories || !item.categories.includes('Minor'));
+            
+            if (isFeatured) {
+                foundFirstNewsItem = true;
+                elEntry.AddClass('new');
+            }
 
-		feed[ 'items' ].forEach( function( item, i )
-		{
-			var elEntry = $.CreatePanel( 'Panel', elLister, 'NewEntry' + i, {
-				acceptsinput: true
-			} );
+            elEntry.BLoadLayoutSnippet(isFeatured ? 'featured-news-full-entry' : 'history-news-full-entry');
+            let elImage = elEntry.FindChildInLayoutFile('NewsHeaderImage');
+            if (elImage) {
+                elImage.SetImage(item.imageUrl || "file://{images}/store/default-news.png");
+            }
 
-			var lastReadItem = GameInterfaceAPI.GetSettingString( 'ui_news_last_read_link' );
+            let elInfo = $.CreatePanel('Panel', elEntry, 'NewsInfo' + i);
+            elInfo.BLoadLayoutSnippet(isFeatured ? 'featured-news-info' : 'history-news-info');
 
-			                                                           
-			if ( !foundFirstNewsItem && !item.categories.includes( 'Minor' ) )
-			{
-				foundFirstNewsItem = true;
+            let description = item.description || "";
+            if (description.length > 200) {
+                description = description.slice(0, 200) + "...";
+            }
 
-				                                             
-				elEntry.AddClass( 'new' );
+            elInfo.SetDialogVariable('news_item_date', item.date);
+            elInfo.SetDialogVariable('news_item_title', item.title);
+            elInfo.SetDialogVariable('news_item_body', description);
 
-				if ( item.link != lastReadItem )
-				{
-					UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_news.xml',
-						'date=' + item.date + "&" + 
-						'title=' + item.title + "&" + 
-						'link=' + item.link );
-				}
+            let blurTarget = elEntry.FindChildInLayoutFile('NewsEntryBlurTarget');
+            if (blurTarget) blurTarget.AddBlurPanel(elInfo);
 
-				GameInterfaceAPI.SetSettingString( 'ui_news_last_read_link', item.link );
-			}
+            const clearNew = i == 0;
+            elEntry.SetPanelEvent("onactivate", () => {
+                if (item.link) {
+                    SteamOverlayAPI.OpenURL(item.link);
+                }
+                if (clearNew) {
+                    GameInterfaceAPI.SetSettingString('ui_news_last_read_link', item.link || "");
+                    elEntry.RemoveClass('new');
+                }
+            });
+        });
+    }
 
-			elEntry.BLoadLayoutSnippet( 'news-full-entry' );
-			var elImage = elEntry.FindChildInLayoutFile( 'NewsHeaderImage' );
-			if ( item.imageUrl )
-			{
-				elImage.SetImage( item.imageUrl );
-			}
-			else
-			{
-				elImage.SetImage( "file://{images}/store/default-news.png" );
-			}
+    _GetGitHubFeed();
 
-			var elEntryInfo = $.CreatePanel( 'Panel', elEntry, 'NewsInfo' + i );
-			elEntryInfo.BLoadLayoutSnippet( 'news-info' );
-
-			elEntryInfo.SetDialogVariable( 'news_item_date', item.date );
-			elEntryInfo.SetDialogVariable( 'news_item_title', item.title );
-			elEntryInfo.SetDialogVariable( 'news_item_body', item.description );
-
-			         
-			elEntry.FindChildInLayoutFile( 'NewsEntryBlurTarget' ).AddBlurPanel( elEntryInfo );
-
-			elEntry.SetPanelEvent( "onactivate", function( link, elEntry, clearNew )
-			{
-				SteamOverlayAPI.OpenURL( link );
-
-				if ( clearNew )
-				{
-					GameInterfaceAPI.SetSettingString( 'ui_news_last_read_link', link );
-					elEntry.RemoveClass( 'new' );
-				}
-
-			}.bind( SteamOverlayAPI, item.link, elEntry, i == 0 ) );
-		
-		} );
-	};
-
-	return {
-		GetRssFeed			: _GetRssFeed,
-		OnRssFeedReceived: _OnRssFeedReceived,
-	};
-})();
-
-
-( function()
-{
-	NewsPanel.GetRssFeed();
-	$.RegisterForUnhandledEvent( "PanoramaComponent_Blog_RSSFeedReceived", NewsPanel.OnRssFeedReceived );
-})();
+})(NewsPanel || (NewsPanel = {}));

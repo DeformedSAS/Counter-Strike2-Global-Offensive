@@ -29,7 +29,7 @@
     <snippet name="snippet-eom-lower--default">
       <Panel>
         <CSGOEndOfMatchCharactersPanel id="id-eom-characters-root" class="" />
-        <Panel id="id-eom-scoreboard-container" class="horizontal-center eom-scoreboard">
+        <Panel id="id-eom-scoreboard-container" class="horizontal-center">
           <CSGOBlurTarget
             id="id-eom-scoreboard-blur"
             class="HudBlur"
@@ -79,7 +79,16 @@
       style="width: 100%; height: 48px; position: 0px 0px 0px;"
       hittest="false"
       hittestchildren="false">
-      <CSGOBackbufferImagePanel class="full-width full-height" />
+      <CSGOBlurTarget 
+        id="id-eom-navbar-blur" 
+        class="HudBlur" 
+        blurrects="id-eom-navbar-blur-bg" 
+        texture-sampling="true"
+        hittest="false" 
+        hittestchildren="false" 
+        style="z-index: -1;">
+        <CSGOBackbufferImagePanel class="full-width full-height" scaling="stretch-to-cover-preserve-aspect" />
+      </CSGOBlurTarget>
     </Panel>
     <Panel class="content-navbar">
       <Panel id="id-content-navbar__tabs" class="content-navbar__tabs" />

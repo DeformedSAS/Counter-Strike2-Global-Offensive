@@ -236,7 +236,7 @@
             </Panel>
             <Panel id="id-navbar-tabs" class="content-navbar__tabs content-navbar__tabs--dark content-navbar__tabs--noflow">
                 <Panel id="GameModeSelectionRadios" class="left-right-flow vertical-center horizontal-center full-height">
-				     <RadioButton id="premier" group="gamemodes" class="content-navbar__tabs__btn DEVModeONLY">
+				     <RadioButton id="premier" group="gamemodes" class="content-navbar__tabs__btn">
                         <Label text="#SFUI_GameModePremier" />
                         <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
                     </RadioButton>

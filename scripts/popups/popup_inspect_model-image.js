@@ -50,7 +50,7 @@ var InspectModelImage = ( function (){
 
 			CharacterAnims.PlayAnimsOnPanel( settings );
 
-			elPanel.SetCameraPreset( 7, false );
+			elPanel.SetCameraPreset( 1, false );
 	
 		}
 

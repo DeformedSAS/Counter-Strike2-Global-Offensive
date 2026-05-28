@@ -96,28 +96,19 @@ CSGOHud,
 	margin-bottom: 2px;
 	flow-children: down;
 }
-#HudBottomGradient
-{
-    background-color: gradient( linear, 0% 100%, 0% 50%, from( rgba(0,0,0,0.8) ), to( rgba(0,0,0,0) ) );
-    width: 100%;
-    height: 600px;
-    vertical-align:bottom;
-    opacity: 1;
-}
 
-#HudLowerLeft
+#HudHealthArmorPanel
 {
-	padding-right: 650px;
-	padding-bottom: 25px;
+	margin-right: 650px;
+	margin-bottom: 25px;
     horizontal-align: center;
     vertical-align: bottom;                                                                                                                                   
 }
 
-#HudLowerLeftChatStatus
+#HudLowerLeft
 {
     horizontal-align: left;
     vertical-align: bottom;
-	padding-bottom: 10px;
                                                                                                                                          
 }
 

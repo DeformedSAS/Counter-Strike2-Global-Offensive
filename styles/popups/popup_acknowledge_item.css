@@ -19,10 +19,10 @@ DelayLoadPanel.Offscreen
 
 .popup__rarity-bar
 {
-	width: 16px;
-	height: 100%;
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( white, to(rgba(175, 175, 175, .75) ));
-	box-shadow: 0px 0px 6px 3px fill rgba(0, 0, 0, 0.5);
+    width: 16px;
+    height: 100%;
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( white, to(rgba(175, 175, 175, .75) )));
+    box-shadow: 0px 2px 6px 0px fill rgba(0, 0, 0, 0.5);
 }
 
 .popup-acknowledge__bg
@@ -46,12 +46,19 @@ DelayLoadPanel.Offscreen
 	background-position: 50% 50%;
 }
 
+.popup-acknowledge-inspect-border
+{
+    background-color: gradient( linear, 0% 100%, 0% 0%, from( rgba(0, 0, 0, 0.932) ), color-stop(0.4, rgba(0, 0, 0, 0) ), color-stop(0.6, rgba(0, 0, 0, 0) ), to(rgba(0, 0, 0, 0.89) ));
+    width: 100%;
+    height: 100%;
+}
+
 .popup-acknowledge__item
 {
 	width: 100%;
 	height: fit-children;
 	vertical-align: middle;
-	margin: 0px 0px 64px 0px;
+	margin: 0px 0px 0px 0px;
 	box-shadow: 0px 0px 6px 3px fill rgba(0, 0, 0, 0.493);
 
 	transform: translatex( 0px );
@@ -63,39 +70,35 @@ DelayLoadPanel.Offscreen
 
 .popup-acknowledge__item__model
 {
-	width: 100%;
-	height: 512px;
+    height: 576px;
+    width: 1080px;
 }
 
 .popup-acknowledge__item__image
 {
-	width: height-percentage( 130% );
-	height: 384px;
-	vertical-align: middle;
-	horizontal-align: center;
-	margin: 64px 0px;
+    width: height-percentage( 130% );
+    height: 576px;
+    vertical-align: middle;
+    horizontal-align: center;
+    margin: 0px 0px;
 }
 
-                                                                               
-                                                                               
-                                                                               
 .popup-acknowledge__info-block
 {
-	vertical-align: bottom;
-	flow-children: down;
-	margin-left: 96px;
-	margin-bottom: 32px;
-
-	transition-property: opacity, transform;
-	transition-duration: .5s;
-	transition-timing-function: ease-in;
+    vertical-align: bottom;
+    flow-children: down;
+    margin-left: 96px;
+    margin-bottom: 96px;
+    transition-property: opacity, transform;
+    transition-duration: .5s;
+    transition-timing-function: ease-in;
 }
 
 .popup-acknowledge__info__title-container
 {
-	vertical-align: top;
-	margin: 32px 0px 0px 96px;
-	flow-children: right;
+    vertical-align: top;
+    margin: 32px 0px 0px 96px;
+    flow-children: right;
 }
 
 .popup-acknowledge__info__title
@@ -119,72 +122,66 @@ DelayLoadPanel.Offscreen
     text-overflow: ellipsis;
 }
 
-                                                                               
-                                                                               
-                                                                               
-
 .popup-acknowledge__subtitle
 {
-	visibility: visible;
+    visibility: visible;
 }
 
 .popup-acknowledge__subtitle.hidden
 {
-	visibility: collapse;
+    visibility: collapse;
 }
 
 .popup-acknowledge__subtitle-label
 {
-	font-size: 18px;
-		font-family: Stratum2;
-	font-weight: medium;
-	width: 520px;
-	height: fit-children;
-	max-height: 24px;
-	vertical-align: middle;
-	white-space: normal;
+    font-size: 18px;
+    width: fit-children;
+    height: fit-children;
+    max-height: 24px;
+    vertical-align: middle;
+    white-space: normal;
 }
 
 .popup-acknowledge__subtitle_seticon
 {
-	height: 72px;
-	width: height-percentage( 130% );
-	img-shadow: 2px 2px 2px #000000;
+    height: 72px;
+    img-shadow: 2px 2px 2px #000000;
 }
 
-                                                                               
+.popup-acknowledge__subtitle_seticon.popup-acknowledge__subtitle_seticon_tiny
+{
+    height: 20px;
+}
+
 .popup-acknowledge__item-count
 {
-	width: fit-children;
-	height: fit-children;
-	vertical-align: bottom;
-	border-radius: 5px;
-	padding: 8px;
-	background-color: rgba(0, 0, 0, 0.5);
-	color: rgba(255, 255, 255, 0.25);
-	margin: 0px 32px 32px 0px;
-	horizontal-align: right;
+    width: fit-children;
+    height: fit-children;
+    vertical-align: bottom;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.25);
+    margin: 0px 96px 96px 0px;
+    horizontal-align: right;
 }
 
 .popup-acknowledge .PopupButtonRow
 {
-	width: 100%;
-	margin: 0px 32px 0px 32px;
-}
-
-.popup-acknowledge .PopupButton
-{
-	margin-top: 8px;
+    width: 100%;
+    margin: 0px 32px 0px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.068);
 }
 
 .Focused .popup-acknowledge__item
 {
-	opacity: 1;
-	transform: translatex( 0px );
-	transition-property: transform, opacity;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    opacity: 1;
+    transform: translatex( 0px );
+    transition-property: transform, opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
+
 .Focused .popup-acknowledge__item__model.popup-acknowledge__item__model--vertical
 {
     height: 940px;
@@ -193,68 +190,57 @@ DelayLoadPanel.Offscreen
 
 .PreviouslyLeft:not(.Focused) .popup-acknowledge__item
 {
-	transform: translatex( -100% );
-	opacity: 0.01;	                                                                                                       
-	
-	transition-property: transform, opacity;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    transform: translatex( -100% );
+    opacity: 0.01;
+    transition-property: transform, opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .PreviouslyRight:not(.Focused) .popup-acknowledge__item
 {
-	transform: translatex( 100% );
-	opacity: 0.01;	                                                                                                       
-	
-	transition-property: transform, opacity;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+    transform: translatex( 100% );
+    opacity: 0.01;
+    transition-property: transform, opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
 }
 
 .popup-acknowledge CarouselNav
 {
-	vertical-align: center;
-	width: 100%;
-	padding: 0px 32px;
-	margin-bottom: 32px;
+    vertical-align: center;
+    width: 100%;
+    padding: 0px 32px;
+    margin-bottom: 32px;
+    z-index: 5;
 }
 
 .popup-acknowledge__equip
 {
-	visibility: visible;
-	vertical-align: bottom;
-	horizontal-align: left;
-	width: 512px;
+    visibility: visible;
+    vertical-align: bottom;
+    horizontal-align: left;
+    margin-left: 48px;
+    z-index: 5;
 }
 
 .popup-acknowledge__equip.hidden
 {
-	visibility: collapse;
+    visibility: collapse;
 }
 
 .popup-acknowledge__equip .PopupButton
 {
-	horizontal-align: center;
-	margin-bottom: 32px;
-}
-
-.popup-acknowledge__equip .PopupButton Label
-{
-	font-size: 12px;
-	font-family: Stratum2;
-	font-weight: medium;
-	border: 1px solid rgba(255, 255, 255, 0.05);
-	padding:8px;
-	margin: 0px;
-	border-radius: 5px;
+    horizontal-align: center;
+    vertical-align: center;
 }
 
 .op-tier__reward-tier
 {
-	visibility: collapse;
+    visibility: collapse;
 }
 
 .tier-reward .op-tier__reward-tier
 {
-	visibility: visible;
+    visibility: visible;
 }

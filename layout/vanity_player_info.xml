@@ -47,6 +47,7 @@
 				    			texturewidth="128"
 				    			scaling="stretch-to-fit-preserve-aspect"
 				    			style="tooltip-position: bottom;"/>
+								<Frame src="file://{resources}/layout/rating_emblem.xml" />
                 </Panel>
             </Panel>
         </Panel>

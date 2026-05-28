@@ -75,7 +75,6 @@
 .map-selection-list--official-skirmish,
 .map-selection-list--official-gungameprogressive,
 .map-selection-list--official-retakes,
-.map-selection-list--official-survival,
 .map-selection-list--listen-competitive,
 .map-selection-list--listen-scrimcomp2v2,
 .map-selection-list--listen-skirmish,
@@ -99,7 +98,6 @@
 .map-selection-list--official-skirmish .map-selection-btn__groupmap-icons,
 .map-selection-list--official-gungameprogressive .map-selection-btn__groupmap-icons,
 .map-selection-list--official-retakes .map-selection-btn__groupmap-icons,
-.map-selection-list--official-survival .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-competitive .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__groupmap-icons,
 .map-selection-list--listen-skirmish .map-selection-btn__groupmap-icons,
@@ -122,7 +120,6 @@
 .map-selection-list--official-skirmish .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--official-gungameprogressive .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--official-retakes .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
-.map-selection-list--official-survival .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-competitive .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
 .map-selection-list--listen-skirmish .map-selection-btn__groupmap-icons .map-selection-btn__map-icon,
@@ -142,7 +139,6 @@
 .map-selection-list--official-skirmish .map-selection-btn__ratingemblem,
 .map-selection-list--official-gungameprogressive .map-selection-btn__ratingemblem,
 .map-selection-list--official-retakes .map-selection-btn__ratingemblem,
-.map-selection-list--official-survival .map-selection-btn__ratingemblem,
 .map-selection-list--listen-competitive .map-selection-btn__ratingemblem,
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__ratingemblem,
 .map-selection-list--listen-skirmish .map-selection-btn__ratingemblem,
@@ -154,7 +150,7 @@
 {
     horizontal-align: center;
     vertical-align: center;
-    y: 100px;
+    y: 92px;
 }
 
 .map-selection-list--official-competitive .map-selection-btn,
@@ -224,18 +220,10 @@
     horizontal-align: center;
 }
 
-.map-selection-list--official-survival
-{
-    width: 100%;
-	height: 100%;
-	overflow: noclip;
-    margin-left: 7%;
-}
-
 .map-selection-list--official-survival .map-selection-btn
 {
-    width: 320px;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     margin: 0px 8px;
     vertical-align: center;
 }
@@ -259,7 +247,7 @@
 {
     flow-children: right-wrap;
     width: 100%;
-    margin-left: 7%;
+    margin-left: 6%;
     margin-top: 8px;
     margin-bottom: 8px;
 }
@@ -274,9 +262,17 @@
 .map-selection-list--listen-survival .map-selection-btn
 {
     margin: 8px 8px;
-    width: 12%;
+    width: 10.5%;
     height: 48%;
     vertical-align: top;
+}
+
+.map-selection-list--listen-survival .map-selection-btn
+{
+    margin: 0px 5px;
+    width: 21%;
+    height: 90%;
+    vertical-align: center;
 }
 
 .map-selection-list--listen-deathmatch .map-selection-btn__map-icon,
@@ -288,10 +284,34 @@
 .map-selection-list--listen-scrimcomp2v2 .map-selection-btn__map-icon,
 .map-selection-list--listen-survival .map-selection-btn__map-icon
 {
-    width: 110px;
-    height: 110px;
+    width: 60%;
+    height: width-percentage(100%);
     margin: 0px;
     horizontal-align: center;
+}
+
+.map-selection-list--listen-deathmatch Label.map-selection-info__map-name,
+.map-selection-list--listen-competitive Label.map-selection-info__map-name,
+.map-selection-list--listen-casual Label.map-selection-info__map-name,
+.map-selection-list--listen-retakes Label.map-selection-info__map-name,
+.map-selection-list--official-competitive Label.map-selection-info__map-name,
+.map-selection-list--official-survival Label.map-selection-info__map-name,
+.map-selection-list--official-scrimcomp2v2 Label.map-selection-info__map-name,
+.map-selection-list--listen-scrimcomp2v2 Label.map-selection-info__map-name
+{
+    font-size: 24px;
+    height: 28px;
+    margin-bottom: 4px;
+}
+
+.map-selection-list--official-survival Label.map-selection-info__map-name
+{
+	font-size: 28px;
+}
+
+.map-selection-list--listen-survival Label.map-selection-info__map-name
+{
+	font-size: 28px;
 }
 
 .map-selection-list--workshop
@@ -1153,7 +1173,7 @@
     width: 224px;
     height: width-percentage(117%);
     border: 0px solid rgba(202, 202, 202, 0.10);
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px 0px;
+    box-shadow: shadowOffset;
     tooltip-position: bottom;
     transition-property: border, box-shadow, brightness, opacity;
     transition-duration: .25s;
@@ -1607,9 +1627,10 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
     horizontal-align: right;
     vertical-align: center;
     min-width: 300px;
-    margin: 12px 0px;
+    
+    margin: 12px 30px;
 
-    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 16px 2px rgba(9, 219, 9, 0.25);
     border: 1px solid rgba(9, 219, 9, 0.336);
     background-color: rgba(9, 49, 9, 0.651);
 
@@ -1621,13 +1642,15 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
 .play-menu__playbtn:hover
 {
     sound: "UIPanorama.mainmenu_rollover";
+    box-shadow: 0px 0px 25px 3px rgba(9, 219, 9, 0.55),
+                0px 0px 10px 1px rgba(9, 219, 9, 0.3);
 }
 
 .play-menu__playbtn:hover .play-menu__playbtn__bar
 {
     brightness: 2;
-    box-shadow: 0px 0px 124px 5px rgba(4, 179, 4, 0.637);
-    transition-property: brightness, box-shadow;
+    box-shadow: none;
+    transition-property: brightness;
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
 }
@@ -1678,8 +1701,8 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
     width: 1px;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.075);
-    box-shadow: 0px 0px 64px 5px rgba(6, 141, 6, 0.767);
-    transition-property: brightness, box-shadow;
+    box-shadow: none; 
+    transition-property: brightness;
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
 }
@@ -1721,6 +1744,7 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
 .play-menu__playbtn.play-menu__playbtn--stopsearch
 {
     border: 1px solid rgba(204, 11, 11, 0.336);
+    box-shadow: 0px 0px 16px 2px rgba(204, 11, 11, 0.25);
 }
 
 .play-menu__playbtn.play-menu__playbtn--stopsearch:disabled
@@ -1732,15 +1756,21 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
     transition-timing-function: ease-in-out;
 }
 
+.play-menu__playbtn.play-menu__playbtn--stopsearch:hover
+{
+    box-shadow: 0px 0px 25px 3px rgba(204, 11, 11, 0.55),
+                0px 0px 10px 1px rgba(204, 11, 11, 0.3);
+}
+
 .play-menu__playbtn.play-menu__playbtn--stopsearch:hover .play-menu__playbtn__bar
 {
-    box-shadow: 0px 0px 124px 5px rgba(179, 39, 4, 0.637);
+    box-shadow: none;
 }
 
 .play-menu__playbtn.play-menu__playbtn--stopsearch .play-menu__playbtn__bar
 {
     background-color: rgba(190, 16, 16, 0.24);
-    box-shadow: 0px 0px 64px 5px rgba(109, 34, 34, 0.767);
+    box-shadow: none;
 }
 
 .play-menu__playbtn.play-menu__playbtn--stopsearch .play-menu__playbtn__bg
