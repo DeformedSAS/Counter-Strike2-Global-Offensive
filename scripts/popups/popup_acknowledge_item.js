@@ -80,13 +80,15 @@ var AcknowledgeItems = ( function()
 			   	                                                                                                                                                                           
 			    
 		}
+		
+		
 
 		var rarityColor = ItemInfo.GetRarityColor( item.id );
 		elTitle.style.washColor = rarityColor;
 
-		var elMovie = elItemTile.FindChildInLayoutFile( 'AcknowledgeMovie' );
-		elMovie.SetHasClass( 'operation', isOperationReward );
-		_WashColorBackGroundMovie( elMovie, isOperationReward ? 'none' : rarityColor );
+		var elParticle = elItemTile.FindChildInLayoutFile( 'AcknowledgeMovie' );
+		elParticle.SetHasClass( 'operation', isOperationReward );
+		_WashColorBackGroundMovie( elParticle, isOperationReward ? 'none' : rarityColor );
 
 		var elBar = elItemTile.FindChildInLayoutFile( 'AcknowledgeBar' );
 		elBar.style.washColor = rarityColor;
@@ -94,6 +96,7 @@ var AcknowledgeItems = ( function()
 		_ShowGiftPanel( elItemTile, item.id );
 		_ShowSetPanel( elItemTile, item.id );
 		_ItemCount( elItemTile, index, numItems );
+		_GoBtnParticle( elItemTile, item.id );
 		ResizeForVerticalItem(elItemTile, item.id);
 
 		                 
@@ -102,11 +105,27 @@ var AcknowledgeItems = ( function()
 		                                   
 		               
 	};
+	
+	function _GoBtnParticle()
+    {
+    var elModel = $.GetContextPanel().FindChildTraverse( 'AcknowledgeMovie' );
+    if ( !elModel )
+        return;
 
-	var _WashColorBackGroundMovie = function( elMovie, rarityColor )
+    elModel.style.visibility = 'visible';
+	
+	elModel.AddClass('popup-acknowledge-gradient-bg');
+
+    elModel.SetCameraPosition( -30.10, 0.00, 0.00 );
+    elModel.SetCameraAngles( 0.00, 0.00, 0.00 );
+    elModel.AddParticleSystem( 'nuke_sparks1_core', '', true );
+    }
+
+	var _WashColorBackGroundMovie = function( elParticle, rarityColor )
 	{
-		elMovie.style.washColor = rarityColor;
+		elParticle.style.washColor = rarityColor;
 	};
+	
 	function ResizeForVerticalItem(elItemTile, id) {
         if (ItemInfo.IsCharacter(id)) {
             let elPanel = elItemTile.FindChildInLayoutFile('AcknowledgeItemModel');

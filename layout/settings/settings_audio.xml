@@ -169,6 +169,16 @@
                         </Button>
                     </Panel>
                     <Panel class="horizontal-separator" />
+					
+					<Panel class="SettingsMenuDropdownContainer">
+						<Label text="#SFUI_Settings_Mute_MVP_Live_Players" class="half-width"/>
+						<CSGOSettingsEnumDropDown class="PopupButton White" convar="snd_mute_mvp_music_live_players">
+							<Label text="#GameUI_Yes" id="mutemvpliveplayers1" value="1"/>
+							<Label text="#GameUI_No"  id="mutemvpliveplayers0" value="0"/>
+						</CSGOSettingsEnumDropDown>
+					</Panel>
+					<Panel class="horizontal-separator" />
+					
 
                     <CSGOSettingsSlider text="#SFUI_Settings_DZ_Music_Volume" max="0.6" min="0" percentage="true" convar="snd_dzmusic_volume" />
                 </Panel>

@@ -3,10 +3,10 @@
 @define rank-bar-length-extra: 300px;
 @define rank-bar-length-total: 700px;
 @define rank-bar-length-offset: 150px;
-@define xp-blue: rgba(42,176,237,1 );
-@define xp-green: rgba(124,188,10,1 );
+@define xp-blue: rgba(42, 176, 237, 1);
+@define xp-green: rgba(124, 188, 10, 1);
 @define xp-red: #8C2121;
-@define xp-yellow: rgba(204,204,46,1 );
+@define xp-yellow: rgba(204, 204, 46, 1);
 @define xp-purple: #9966CC;
 .eom-rank
 {
@@ -86,15 +86,16 @@
 {
     flow-children: none;
     vertical-align: top;
-    margin-top: 60px;
+    margin-top: 50px;
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 5px;
     min-height: 32px;
+    overflow: noclip;
     transition-property: opacity;
     transition-duration: 1.0s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-    flow-children:none;
+    flow-children: none;
 }
 
 #id-eom-rank__bar-container #id-eom-rank__bar--bg

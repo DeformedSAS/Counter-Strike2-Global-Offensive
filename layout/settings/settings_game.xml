@@ -61,7 +61,7 @@
 				</Panel>
 			
 				<Panel class ="top-bottom-flow full-width">
-					                                       
+															
 					<Panel class="SettingsMenuDropdownContainer">
 						<Label text="#SFUI_Settings_Enable_Game_Instructor" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="gameinstructor_enable">
@@ -71,7 +71,7 @@
 					</Panel>
 					<Panel class="horizontal-separator"/>
 
-					                          
+															
 					<TooltipPanel class="SettingsMenuDropdownContainer" tooltip="#SFUI_Settings_Network_Bandwidth_Info">
 						<Label text="#SFUI_Settings_Network_Bandwidth" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="rate">
@@ -90,7 +90,7 @@
 					</TooltipPanel>
 					<Panel class="horizontal-separator"/>
 
-					                       
+															
 					<Panel class="SettingsMenuDropdownContainer">
 						<Label text="#SFUI_SteamToast_Location" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="ui_steam_overlay_notification_position">
@@ -102,12 +102,30 @@
 					</Panel>
 					<Panel class="horizontal-separator"/>
 
-					                     
+										 
 					<Panel class="SettingsMenuDropdownContainer">
 						<Label text="#SFUI_Settings_Enable_Console" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="con_enable">
 							<Label text="#GameUI_Yes" id="enableconsole0" value="1"/>
 							<Label text="#GameUI_No"  id="enableconsole1" value="0" />
+						</CSGOSettingsEnumDropDown>
+					</Panel>
+					<Panel class="horizontal-separator"/>
+
+					<Panel class="SettingsMenuDropdownContainer">
+						<Label text="#SFUI_Invites_MainMenu_Only" class="half-width"/>
+						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_invites_only_mainmenu">
+							<Label text="#GameUI_Yes" id="mainmenu_only_invites" value="1"/>
+							<Label text="#GameUI_No"  id="both_invites" value="0" />
+						</CSGOSettingsEnumDropDown>
+					</Panel>
+					<Panel class="horizontal-separator"/>
+
+					<Panel class="SettingsMenuDropdownContainer">
+						<Label text="#SFUI_Invites_Friends_Only" class="half-width"/>
+						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_invites_only_friends">
+							<Label text="#GameUI_Yes" id="friend_only_invites" value="1"/>
+							<Label text="#GameUI_No"  id="anyone_can_invite" value="0" />
 						</CSGOSettingsEnumDropDown>
 					</Panel>
 					<Panel class="horizontal-separator"/>

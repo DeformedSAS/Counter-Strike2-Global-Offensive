@@ -123,6 +123,7 @@ var TeamIntroMenu = (function () {
         StartTeamIntro: _StartTeamIntro
     };
 })();
+
 (function () {
-    $.RegisterForUnhandledEvent("StartTeamIntro", TeamIntroMenu.StartTeamIntro);
+    $.GetContextPanel().StartTeamIntro = TeamIntroMenu.StartTeamIntro;
 })();

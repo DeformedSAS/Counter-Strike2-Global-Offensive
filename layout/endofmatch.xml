@@ -30,13 +30,7 @@
       <Panel>
         <CSGOEndOfMatchCharactersPanel id="id-eom-characters-root" class="" />
         <Panel id="id-eom-scoreboard-container" class="horizontal-center">
-          <CSGOBlurTarget
-            id="id-eom-scoreboard-blur"
-            class="HudBlur"
-            blurrects="eom-scoreboard"
-            hittest="false"
-            hittestchildren="false"
-            style="z-index: -1;">
+          <CSGOBlurTarget id="id-eom-scoreboard-blur" class="HudBlur" blurrects="eom-scoreboard" hittest="false" hittestchildren="false" style="z-index: -1;">
             <CSGOBackbufferImagePanel class="full-width full-height" />
           </CSGOBlurTarget>
         </Panel>
@@ -52,7 +46,7 @@
         </Panel>
         <Panel id="EomCancelReason3" class="eom-cancelled vaclive">
           <Label id="matchCancelledTitle" class="stratum-bold-italic" text="#SFUI_match_cancelled" />
-          <Label id="matchCancelledDesc" class="stratum-bold" text="#SFUI_match_abort_match_abnormal_behavior" />
+          <Label id="matchCancelledDesc" class="stratum-bold" text="#SFUI_match_abort_match_abnormal_behavior_pano" />
         </Panel>
       </Panel>
     </snippet>
@@ -66,43 +60,18 @@
   </snippets>
   <CSGOEndOfMatch useglobalcontext="true" class="eom">
     <Panel id="id-eom-fallback-background" class="hidden">
-      <Image
-        id="BackgroundMapImage"
-        class="full-width full-height"
-        src=""
-        defaultsrc="file://{images}/map_icons/screenshots/1080p/default.png"
-        scaling="stretch-to-cover-preserve-aspect" />
+      <Image id="BackgroundMapImage" class="full-width full-height" src="" defaultsrc="file://{images}/map_icons/screenshots/1080p/default.png" scaling="stretch-to-cover-preserve-aspect" />
     </Panel>
-    <Panel
-      id="id-eom-navbar-blur-bg"
-      class="eom-navbar-blur-bg"
-      style="width: 100%; height: 48px; position: 0px 0px 0px;"
-      hittest="false"
-      hittestchildren="false">
-      <CSGOBlurTarget 
-        id="id-eom-navbar-blur" 
-        class="HudBlur" 
-        blurrects="id-eom-navbar-blur-bg" 
-        texture-sampling="true"
-        hittest="false" 
-        hittestchildren="false" 
-        style="z-index: -1;">
+    <Panel id="id-eom-navbar-blur-bg" class="eom-navbar-blur-bg" style="width: 100%; height: 48px; position: 0px 0px 0px;" hittest="false" hittestchildren="false">
+      <CSGOBlurTarget id="id-eom-navbar-blur" class="HudBlur" blurrects="id-eom-navbar-blur-bg" texture-sampling="true" hittest="false" hittestchildren="false" style="z-index: -1;">
         <CSGOBackbufferImagePanel class="full-width full-height" scaling="stretch-to-cover-preserve-aspect" />
       </CSGOBlurTarget>
     </Panel>
     <Panel class="content-navbar">
       <Panel id="id-content-navbar__tabs" class="content-navbar__tabs" />
       <Panel class="time_container">
-        <CSGOGameTimeLabel
-          id="id-gametime__desc"
-          class="timer time_container__time"
-          text="{s:s_gametime_desc}"
-          audible-seconds="3"
-          soundevent-on-finish="UI.DeathMatch.EndTimer" />
-        <CSGOGameTimeLabel
-          id="id-gametime__time"
-          class="timer time_container__time"
-          text="#Time_Clean" />
+        <CSGOGameTimeLabel id="id-gametime__desc" class="timer time_container__time" text="{s:s_gametime_desc}" audible-seconds="3" soundevent-on-finish="UI.DeathMatch.EndTimer" />
+        <CSGOGameTimeLabel id="id-gametime__time" class="timer time_container__time" text="#Time_Clean" />
       </Panel>
     </Panel>
     <Panel id="id-display-timer-progress-bar-container">

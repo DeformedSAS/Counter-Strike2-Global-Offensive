@@ -145,6 +145,7 @@ Label
 	vertical-align: bottom;
 	horizontal-align: center;
 	width: 30px;
+	visibility:collapse;
 	height: 30px;
 	position: 40px 0px 0px;
 	brightness: 0.2;

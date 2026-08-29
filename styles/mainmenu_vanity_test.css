@@ -2,29 +2,17 @@
 {
 visibility: collapse;
 }
-
-.mainmenu-vanity-2
-{
-	width: 700px;
-	z-index: -2;
-	y: -15px;
-}
-
+.mainmenu-vanity-2,
 .mainmenu-vanity-3
 {
-	width: 700px;
-	z-index: -2;
-	y: -15px;
+    transform: scale3d( 0.65, 0.65, 1.0 );
+    y: -15px;
 }
-.mainmenu-vanity-4
-{
-	width: 900px;
-	z-index: -1;
-	y: -20px;
-}
+
+.mainmenu-vanity-4,
 .mainmenu-vanity-5
 {
-	width: 900px;
-	z-index: -1;
-	y: -20px;
+    transform: scale3d( 0.80, 0.80, 1.0 );
+    
+    y: -20px;
 }

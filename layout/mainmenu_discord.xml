@@ -1,0 +1,23 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/csgostyles.css" />
+        <include src="file://{resources}/styles/mainmenu.css" />
+        <include src="file://{resources}/styles/mainmenu_web_shared.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/mainmenu_discord.js" />
+    </scripts>
+
+    <Panel class="mainmenu-content__container" useglobalcontext="true">
+        <Panel id="main-content" class="full-width full-height mainmenu-news-content__container">
+            <HTML id="DiscordHTML" 
+                  class="full-width full-height" 
+                  acceptsinput="true" 
+                  acceptsfocus="true" 
+                  focusonhover="true" 
+                  mousetracking="true" 
+                  popuplinks="false" 
+                  url="https://discord.com/app" />
+        </Panel>
+    </Panel>
+</root>

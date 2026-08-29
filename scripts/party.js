@@ -31,7 +31,7 @@ var PartyMenu = ( function()
         var elPartyMembersList = elPartySection.FindChildInLayoutFile( 'PartyMembers' );
         _UpdateNumPlayersInparty();
 
-                                                                                            
+                                                                                                                                                                    
         var bIsSearching = _IsSearching();
         if ( m_prevMembersInParty >= PartyListAPI.GetPartySessionUiThreshold() || bIsSearching )
         {
@@ -45,8 +45,8 @@ var PartyMenu = ( function()
             elPartyMembersList.RemoveAndDeleteChildren();
         }
 
-                                                                       
-                                                                                                                                       
+                                                                                                        
+                                                                                                                                                                                                                                                
         elPartySection.GetParent().SetHasClass( 'friendslist-party-searching', bIsSearching && ( m_prevMembersInParty <= 1 ) );
 
         _UpdateLeaveBtn( m_prevMembersInParty );
@@ -55,14 +55,19 @@ var PartyMenu = ( function()
     var _UpdateNumPlayersInparty = function()
     {
         var numPlayersActuallyInParty = PartyListAPI.GetCount();
-
         if ( numPlayersActuallyInParty > m_prevMembersInParty )
         {
-            $.DispatchEvent( 'PlaySoundEffect', 'PanoramaUI.Lobby.Joined', 'PartyList' );
+            if ( numPlayersActuallyInParty > 1 )
+            {
+                $.DispatchEvent( 'PlaySoundEffect', 'PanoramaUI.Lobby.Joined', 'PartyList' );
+            }
         }
         else if ( numPlayersActuallyInParty < m_prevMembersInParty )
         {
-            $.DispatchEvent( 'PlaySoundEffect', 'PanoramaUI.Lobby.Left', 'PartyList' );
+            if ( m_prevMembersInParty > 1 )
+            {
+                $.DispatchEvent( 'PlaySoundEffect', 'PanoramaUI.Lobby.Left', 'PartyList' );
+            }
         }
         
         m_prevMembersInParty = numPlayersActuallyInParty;
@@ -84,8 +89,8 @@ var PartyMenu = ( function()
 
     var _UpdateMembersList = function( lobbySettings, numPlayersActuallyInParty )
     {
-                                                                          
                                                                                                   
+                                                                                                                                  
         var maxAllowedInLobby = 15;
         var numPlayersPossibleInMode = SessionUtil.GetMaxLobbySlotsForGameMode( lobbySettings.mode );
 
@@ -160,7 +165,7 @@ var PartyMenu = ( function()
         var winsNeededForRank = SessionUtil.GetNumWinsNeededForRank( skillgroupType );
         var elRank = elPartyMember.FindChildInLayoutFile( 'PartyRank' ); 
 
-                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                
         
         if ( wins < winsNeededForRank || ( wins >= winsNeededForRank && skillGroup < 1 ) || !PartyListAPI.GetFriendPrimeEligible( xuid ) )
         {
@@ -194,8 +199,8 @@ var PartyMenu = ( function()
         var elCount = elPanel.FindChildInLayoutFile( 'PartyTitleAlertText' );
         elCount.text = numPlayersActuallyInParty +'/' +numPlayersPossibleInMode;
 
-                                                                                 
-                                                                  
+                                                                                                         
+                                                                                                          
     }
 
     var _SetAttributeStringsOnAvatarPanel = function( elAvatar, xuid )
@@ -213,7 +218,7 @@ var PartyMenu = ( function()
     {
         var openCard = function( xuid )
         {
-                                                                                                         
+                                                                                                                                                                                                      
             $.DispatchEvent( 'SidebarContextMenuActive', true );
 
             if ( xuid !== 0 )
@@ -258,7 +263,7 @@ var PartyMenu = ( function()
 
     var _SessionUpdate = function( updateType )
     {
-                                                                                                              
+                                                                                                                                                                                    
         if ( LobbyAPI.IsSessionActive() )
         {
             if ( m_eventRebuildPartyList == undefined )
@@ -311,29 +316,29 @@ var PartyMenu = ( function()
         });
     };
 
-                                                                                                        
+                                                                                                                                                                
     var _UpdateLeaveBtn = function ()
     {
         var elLeaveBtn = elPartySection.FindChildInLayoutFile( 'PartyLeaveBtn' );
         elLeaveBtn.visible = ( !GameStateAPI.IsLocalPlayerPlayingMatch() && LobbyAPI.IsSessionActive() );
     };
 
-var _AddOnActivateLeaveBtn = function ()
-{
-    var elLeaveBtn = elPartySection.FindChildInLayoutFile( 'PartyLeaveBtn' );
-    elLeaveBtn.SetPanelEvent( 'onactivate', function()
-    { 
-        LobbyAPI.CloseSession();
+    var _AddOnActivateLeaveBtn = function ()
+    {
+        var elLeaveBtn = elPartySection.FindChildInLayoutFile( 'PartyLeaveBtn' );
+        elLeaveBtn.SetPanelEvent( 'onactivate', function()
+        { 
+            LobbyAPI.CloseSession();
 
-        $.Schedule( 0.1, function() {
-            LobbyAPI.CreateSession();
+            $.Schedule( 0.1, function() {
+                LobbyAPI.CreateSession();
+            });
         });
-    });
-};
+    };
     
-                                                                                                        
-                              
-                                                                                                        
+                                                                                                                                                                
+                                      
+                                                                                                                                                                
     var _GetSearchStatus = function()
     {
         return LobbyAPI.GetMatchmakingStatusString();
@@ -345,7 +350,7 @@ var _AddOnActivateLeaveBtn = function ()
         return ( StatusString !== '' && StatusString !== null ) ? true : false;
     };
 
-                                                                                                        
+                                                                                                                                                                
 
     var _ShowMatchmakingStatusTooltipEvent = function()
     {
@@ -366,13 +371,12 @@ var _AddOnActivateLeaveBtn = function ()
     {
         return !elPartySection.BHasClass( 'hidden' );
     };
-	
-	var _ShowMatchAcceptPopUp = function( map )
-	{
-		var popup = UiToolkitAPI.ShowGlobalCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_accept_match.xml', 'map_and_isreconnect=' + map + ',false' );
-		//var popup = UiToolkitAPI.ShowGlobalCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_accept_match_fake.xml', 'map_and_isreconnect=' + map + ',false' );
-		$.DispatchEvent( "ShowAcceptPopup", popup );
-	};
+    
+    var _ShowMatchAcceptPopUp = function( map )
+    {
+        var popup = UiToolkitAPI.ShowGlobalCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_accept_match.xml', 'map_and_isreconnect=' + map + ',false' );
+        $.DispatchEvent( "ShowAcceptPopup", popup );
+    };
 
     return {
         Init    : _Init,
@@ -383,12 +387,6 @@ var _AddOnActivateLeaveBtn = function ()
     };
 } )();
 
-
-
-
-                                                                                                    
-                                           
-                                                                                                    
 (function()
 {
     PartyMenu.Init();

@@ -1,6 +1,5 @@
 .loadout-grid-container
 {
-    margin-right: 64px;
 }
 
 .loadout-grid-container .loadout-grid__slots
@@ -10,6 +9,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background-color: rgba(0, 0, 0, 0.25);
     margin-bottom: 8px;
+	margin-right: 64px;
     transition-property: border;
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
@@ -411,6 +411,8 @@
 	width: 1400px;
 	height: 100%;
 	vertical-align: center;
+	transform: scale3d(1.1, 1.1, 1.1);
+	y: 20px;
 	horizontal-align: right;
 	transition-property: opacity, brightness;
 	transition-duration: .25s;
@@ -734,5 +736,7 @@
 }
 
 VerticalScrollBar {
-	margin-left: 64px;
+	opacity: 0;
+	visibility: collapse;
+	overflow: noclip;
 }

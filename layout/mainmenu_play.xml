@@ -220,8 +220,7 @@
                             <Label text="#play_setting_offline" />
                             <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
 						</RadioButton>
-                        <RadioButton id="PlayWorkshop" group="playtype" data-type="workshop" class="content-navbar__tabs__btn new DEVModeONLY" onactivate="PlayMenu.OnPressWorkshop();">
-						    <Label class="new" text="#settings_new" />
+                        <RadioButton id="PlayWorkshop" group="playtype" data-type="workshop" class="content-navbar__tabs__btn" onactivate="PlayMenu.OnPressWorkshop();">
                             <Label text="#play_setting_workshop" />
                             <Panel id="GameModeAlert" class="navbar-btn__notification-dot hidden" />
 						</RadioButton>
@@ -364,10 +363,6 @@
                                     </TooltipPanel>
                                 </Panel>
                             </Panel>
-                            <Panel id="jsLimitedTestWarning" class="gamemode-setting-limited-test-warning-container DEVModeONLY">
-                                <Image texturewidth="20" textureheight="20" class="vertical-center" src="file://{images}/icons/ui/info.svg" />
-                                <Label id="jsLimitedTestWarning" class="fontSize-sm stratum-medium gamemode-setting-limited-test-warning" text="#match_ready_match_unranked_warning_2" />
-                            </Panel>
                             <Button class="gamemode-setting-radiobutton vertical-align-bottom ignore-parent-flow" id="WorkshopVisitButton" onactivate="CSGOOpenSteamWorkshop()">
                                 <Image texturewidth="20" textureheight="20" src="file://{images}/icons/ui/link.svg" />
                                 <Label text="#CSGO_Workshop_Visit" />
@@ -379,12 +374,7 @@
                     </Panel>
                 </Panel>
                 <Panel id="PlayMenuActionBar" class="play-menu-controls-actions-bar">
-					<ItemPreviewPanel id="GoBtnParticle"
-										class="go-btn-particle hidden"
-										manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
-										hittest="false"
-										item=""
-										mouse_rotate="false"/>
+					<ItemPreviewPanel id="GoBtnParticle" class="go-btn-particle hidden" manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res" hittest="false" item="" mouse_rotate="false"/>		
                     <Panel class="play-menu-controls-actions-bar__right">
                         <Panel class="full-height">
                             <Panel class="play-menu-controls-action-bar__right__go-cancel right-left-flow">

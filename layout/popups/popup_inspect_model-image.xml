@@ -9,7 +9,7 @@
 
 	<scripts>
 		<include src="file://{resources}/scripts/popups/popup_inspect_model-image.js" />
-		<include src="file://{resources}/scripts/common/characteranims_loadout_grid.js" />
+		<include src="file://{resources}/scripts/common/characteranims.js" />
 		<include src="file://{resources}/scripts/common/tint_spray_icon.js" />
 	</scripts>
 
@@ -33,7 +33,17 @@
 							manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res"
 							item="models/player/custom_player/legacy/ctm_sas.mdl"
 							enable_floorshadow="true"
-							mouse_rotate="true"
+							mouse_rotate="false"
+							force-no-composition-layer="true"/> 
+		</Panel>
+		<Panel id="InspectModelViewContainer" class="popup-inspect-modelpanel">
+			<ItemPreviewPanel id="InspectModelView"
+							class="full-width full-height"
+							manifest="resource/ui/econ/itemmodelviewinspect_test.res"
+							item=""
+							mouse_rotate="false"
+							enable_floorshadow="true"
+							sound="weapon"
 							force-no-composition-layer="true"/> 
 		</Panel>
 	</Panel>

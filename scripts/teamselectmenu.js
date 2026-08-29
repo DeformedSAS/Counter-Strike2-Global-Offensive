@@ -105,7 +105,7 @@ var TeamSelectMenu;
         elModelPanel.GetParent().SetHasClass('highlight', false);
         elModelPanel.ApplyActivityModifier(elModelPanel.id === 'TeamCharT' ? 'terrorist' : 'ct');
         elModelPanel.ApplyActivityModifier('Pistol');
-        elModelPanel.PlayActivity('ACT_CSGO_UIPLAYER_IDLE_ALT', true);
+        elModelPanel.PlayActivity('ACT_CSGO_UIPLAYER_IDLE', true);
     }
 
     function _SelectTeam(team) {

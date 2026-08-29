@@ -1,0 +1,385 @@
+/* Prettified by Source 2 Viewer 19.1.0.0 - https://valveresourceformat.github.io */
+
+.popup-can-apply-container
+{
+	horizontal-align: center;
+	vertical-align: bottom;
+	height: 100%;
+}
+
+.popup-can-apply-button-container
+{
+	min-width: 350px;
+	flow-children: right;
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+.popup-can-apply-button
+{
+	background-color: positiveColor;
+	flow-children: right;
+	padding: 10px 20px;
+	margin: 8px;
+	vertical-align: center;
+	border-radius: 3px;
+	transition-property: brightness, background-color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply-button:hover:not(:disabled)
+{
+	brightness: 1.5;
+	transition-property: brightness, background-color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply-button:disabled
+{
+	wash-color: disabledColor;
+}
+
+.popup-can-apply-button.popup-can-apply-button--next,.popup-can-apply-button.popup-can-apply-button--cancel
+{
+	background-color: rgba(0, 0, 0, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	padding: 8px 19px;
+	transition-property: transform, opacity;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply-button.popup-can-apply-button--next Image,.popup-can-apply-button.popup-can-apply-button--cancel Image
+{
+	transform: scaleX(-1);
+}
+
+.popup-can-apply-button.popup-can-apply-button--next.hidden,.popup-can-apply-button.popup-can-apply-button--cancel.hidden
+{
+	transform: translateX( -30px );
+	opacity: 0;
+	transition-property: transform, opacity;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply-button.popup-can-apply-button--next:hover:not(:disabled),.popup-can-apply-button.popup-can-apply-button--cancel:hover:not(:disabled)
+{
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	background-color: rgba(0, 0, 0, 0.719);
+}
+
+.popup-can-apply-button Label
+{
+	font-size: 18px;
+	font-family: Stratum2, 'Arial Unicode MS';
+	color: white;
+	font-weight: bold;
+}
+
+.popup-can-apply-button Image
+{
+	vertical-align: center;
+	margin-left: 12px;
+}
+
+.can_apply_previewonly_phantom_display .popup-can-apply-button-container #CanApplyContinue
+{
+	visibility: collapse;
+}
+
+.can_apply_previewonly_phantom_display .popup-can-apply-button-container .popup-can-apply-button--next,.can_apply_previewonly_phantom_display .popup-can-apply-button-container .popup-can-apply-button--cancel
+{
+	horizontal-align: center;
+}
+
+.popup-can-apply-item-image
+{
+	width: height-percentage( 135%);
+	height: 100px;
+}
+
+.popup-can-apply-item-image--anim
+{
+	animation-name: PickedSlot;
+	animation-duration: 0.3s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+}
+
+.popup-can-apply_remove_btn
+{
+	flow-children: down;
+	transition-property: transform;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+	overflow: noclip;
+	transform: scale3d( 1, 1, 1);
+}
+
+.popup-can-apply_remove_btn:hover:not(:disabled)
+{
+	transform: scale3d( 1.05, 1.05, 1);
+	transition-property: transform, opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply_remove_btn.is_sticker_remove_unselected
+{
+	opacity: .3;
+	brightness: .7;
+	transform: scale3d( .8, .8, 1);
+}
+
+.popup-can-apply_remove_btn.is_sticker_remove_selected
+{
+	opacity: 1;
+	brightness: 1;
+	brightness: 1.2;
+}
+
+.popup-can-apply_remove_btn .popup-can-apply_remove__image
+{
+	width: height-percentage( 135%);
+	height: 100px;
+}
+
+.popup-can-apply_remove_btn .popup-can-apply_remove__image.popup-can-apply_remove__image__coupon
+{
+	width: height-percentage( 100%);
+	vertical-align: bottom;
+}
+
+.popup-can-apply_remove_btn .popup-can-apply_remove__label
+{
+	transform: translateY(35px);
+	margin-left: 0px;
+	horizontal-align: center;
+	text-align: center;
+}
+
+.popup-can-apply_remove_btn .popup-can-apply_remove__selected
+{
+	vertical-align: center;
+	horizontal-align: center;
+	background-color: positiveColor;
+	padding: 4px;
+	margin-bottom: 8px;
+	border-radius: 50%;
+	transform: translateY(16px);
+	opacity: 0;
+	transition-property: transform, opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply_remove_btn:selected .popup-can-apply_remove__selected
+{
+	opacity: 1;
+	transform: translateY(8px);
+	transition-property: transform, opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.popup-can-apply_remove_btn .RadioBox
+{
+	visibility: collapse;
+}
+
+.cart-item__price
+{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 4px;
+	padding: 0px 6px;
+	border-radius: 14px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #efefef ), to( rgb( 212, 211, 211 )));
+}
+
+.cart-item__price .inline-coin-icon
+{
+	height: 14px;
+	width: 14px;
+	vertical-align: top;
+	transform: translateY(-3px);
+	color: black;
+	wash-color: black;
+}
+
+.popup-can-apply_remove_btn .cart-item__price,.tooltip-souvenir-receipt .cart-item__price,.cart-item__price.popup-capability__souvenir-discount__cost
+{
+	color: black;
+}
+
+.cart-item__price.popup-can-apply_remove__label__coupon
+{
+	z-index: 5;
+	transform: rotateZ( -45deg ) translateX( 15px ) translateY( 90px );
+	padding-left: 5px;
+	padding-right: 20px;
+	font-size: 20px;
+	background-color: #00000000;
+}
+
+.popup-capability__apply-sticker-hints,.popup-capability__apply-keychain-hints
+{
+	background-color: rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	padding: 8px 8px;
+	visibility: collapse;
+	margin-top: 200px;
+	opacity: 1;
+	horizontal-align: center;
+	flow-children: right;
+}
+
+.popup-capability__apply-sticker-hints.show-sticker-apply-hints,.popup-capability__apply-sticker-hints.show-keychain-apply-hints,.popup-capability__apply-keychain-hints.show-sticker-apply-hints,.popup-capability__apply-keychain-hints.show-keychain-apply-hints
+{
+	visibility: visible;
+}
+
+.popup-capability__apply-sticker-hints .popup-capability__apply-sticker-hints__separator,.popup-capability__apply-keychain-hints .popup-capability__apply-sticker-hints__separator
+{
+	height: 30px;
+	vertical-align: center;
+	width: 1px;
+	background-color: rgba(255, 255, 255, 0.342);
+}
+
+.popup-capability__apply-sticker-hints .popup-capability__apply-sticker-hints__icons,.popup-capability__apply-keychain-hints .popup-capability__apply-sticker-hints__icons
+{
+	margin: 0px 12px;
+	flow-children: down;
+	vertical-align: center;
+	ui-scale: 70%;
+	tooltip-position: top;
+}
+
+.popup-capability__apply-sticker-hints .popup-capability__apply-sticker-hints__icons .popup-capability__apply-sticker-hints__action-icon,.popup-capability__apply-keychain-hints .popup-capability__apply-sticker-hints__icons .popup-capability__apply-sticker-hints__action-icon
+{
+	opacity: .9;
+	vertical-align: center;
+}
+
+.popup-capability__apply-sticker-hints .popup-capability__apply-sticker-hints__icons .popup-capability__apply-sticker-hints__mouse-icon,.popup-capability__apply-keychain-hints .popup-capability__apply-sticker-hints__icons .popup-capability__apply-sticker-hints__mouse-icon
+{
+	horizontal-align: center;
+}
+
+.popup-capability__remove-sticker-hint
+{
+	background-color: rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	padding: 8px 16px;
+	visibility: collapse;
+	margin-top: 200px;
+	horizontal-align: center;
+	flow-children: right;
+}
+
+.popup-capability__remove-sticker-hint.show-sticker-remove-hints
+{
+	visibility: visible;
+}
+
+.popup-capability__remove-sticker-hint Label
+{
+	margin-left: 8px;
+	vertical-align: center;
+}
+
+.popup-capability__craft-souvenir-hint
+{
+	background-color: rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	padding: 8px 16px;
+	visibility: collapse;
+	margin-top: 230px;
+	margin-left: 150px;
+	margin-right: 150px;
+	horizontal-align: center;
+	flow-children: right;
+}
+
+.popup-capability__craft-souvenir-hint.show-craft-souvenir-hints
+{
+	visibility: visible;
+}
+
+.popup-capability__craft-souvenir-hint Label
+{
+	margin-left: 8px;
+	vertical-align: center;
+	color: #FFD700;
+}
+
+#StickerScrapeLevelContainer Label
+{
+	font-size: 16px;
+}
+
+#StickerScrapeLevelSlider #SliderTrack
+{
+	border-radius: 3px;
+}
+
+#StickerScrapeLevelSlider
+{
+	padding-left: 16px;
+	margin-top: 2px;
+	height: 16px;
+	width: 200px;
+	vertical-align: center;
+}
+
+#StickerScrapeLevelSlider #SliderTrackProgress
+{
+	background-color: #d0bfbf98;
+	border-radius: 3px;
+}
+
+#StickerScrapeLevelContainer:disabled
+{
+	opacity: .2;
+}
+
+#StickerScrapeLevelContainer.StickerScrapeLevelContainerHidden
+{
+	opacity: 0;
+}
+
+#StickerScrapeLevelContainer #SliderThumb,#StickerScrapeLevelContainer#SliderThumb
+{
+	background-color: baseText;
+	border-radius: 2px;
+	width: 16px;
+	height: 16px;
+	align: center center;
+	box-shadow: fill 1px 1px 4px 1px #00000050;
+}
+
+@keyframes 'PickedSlot'
+{
+	0%
+	{
+		transform: scale3d( 1, 1, 1 );
+	}
+	
+	50%
+	{
+		transform: scale3d( 1.1, 1.1, 1.1 );
+		brightness: 5;
+	}
+	
+	100%
+	{
+		transform: scale3d( 1, 1, 1 );
+		brightness: 1;
+	}
+	
+}
+

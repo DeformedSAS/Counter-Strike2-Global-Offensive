@@ -129,7 +129,7 @@ var Avatar = ( function()
 
 	var _UpdateTalkingState = function( elAvatar, xuid, bCalledFromScheduledFunction )
 	{
-		if ( !elAvatar || !elAvatar.IsValid() )
+		if ( !elAvatar || typeof elAvatar.IsValid !== 'function' || !elAvatar.IsValid() )
 			return;
 
 		var elSpeaking = elAvatar.FindChildTraverse( 'JsAvatarSpeaking' );

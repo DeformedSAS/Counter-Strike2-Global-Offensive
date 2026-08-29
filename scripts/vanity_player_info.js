@@ -3,10 +3,8 @@
 /// <reference path="avatar.ts" />
 /// <reference path="common/sessionutil.ts" />
 /// <reference path="mock_adapter.ts" />
-/// <reference path="rating_emblem.ts" />
 /// <reference path="honor_icon.ts" />
 var VanityPlayerInfo;
-var OVERRIDE_PREMIER_SCORE = 25000;
 (function (VanityPlayerInfo) {
 
     function CreateOrUpdateVanityInfoPanel(elParent = null, oSettings = null) {
@@ -19,7 +17,6 @@ var OVERRIDE_PREMIER_SCORE = 25000;
         _SetHonorIcon(elParent, oSettings.xuid);
         _SetLobbyLeader(elParent, oSettings.xuid);
         _ShowSettingsBtn(elParent, oSettings.xuid);
-		UpdateVoiceIcon(elParent, oSettings.xuid);
 
         const container = elParent.FindChildInLayoutFile('vanity-info-container') || elParent;
         _AddOpenPlayerCardAction(container, oSettings.xuid);
@@ -159,43 +156,30 @@ var OVERRIDE_PREMIER_SCORE = 25000;
 
         newPanel.RemoveClass('no-valid-xp');
     }
-	
+    
     function _SetSkillGroup(newPanel, xuid) {
-    const isLocalPlayer = (xuid === MyPersonaAPI.GetXuid());
-    let rating_type, score, wins;
+        let rating_type, wins;
 
-    if (isLocalPlayer && !PartyListAPI.IsPartySessionActive()) {
-        rating_type = 'Premier';
-        score = (OVERRIDE_PREMIER_SCORE !== null) ? OVERRIDE_PREMIER_SCORE : MyPersonaAPI.GetPipRankCount(rating_type);
-        wins = MyPersonaAPI.GetPipRankWins(rating_type);
-    } else {
-        rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
-        score = (rating_type === 'Premier' && OVERRIDE_PREMIER_SCORE !== null) ? OVERRIDE_PREMIER_SCORE : PartyListAPI.GetFriendCompetitiveRank(xuid);
-        wins = PartyListAPI.GetFriendCompetitiveWins(xuid);
-    }
+        if ((xuid === MyPersonaAPI.GetXuid()) && !PartyListAPI.IsPartySessionActive()) {
+            rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
+            wins = MyPersonaAPI.GetPipRankWins(rating_type);
+        } else {
+            rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
+            wins = PartyListAPI.GetFriendCompetitiveWins(xuid);
+        }
 
-    var skillGroup = PartyListAPI.GetFriendCompetitiveRank(xuid, rating_type);
-    var winsNeededForRank = SessionUtil.GetNumWinsNeededForRank(rating_type);
-    var elRank = newPanel.FindChildInLayoutFile('vanity-skillgroup-frame'); 
+        var skillGroup = PartyListAPI.GetFriendCompetitiveRank(xuid, rating_type);
+        var winsNeededForRank = SessionUtil.GetNumWinsNeededForRank(rating_type);
+        var elRank = newPanel.FindChildInLayoutFile('vanity-skillgroup-frame'); 
 
-    if (wins < winsNeededForRank || (wins >= winsNeededForRank && skillGroup < 1) || !FriendsListAPI.GetFriendPrimeEligible(xuid)) {
-        elRank.visible = false;
-        if (rating_type !== 'Premier') return;
-    }
-    var imageName = (rating_type !== 'Competitive') ? rating_type : 'skillgroup';
-    elRank.SetImage('file://{images}/icons/skillgroups/' + imageName + skillGroup + '.svg');
-    elRank.visible = true;
-    let options = {
-        root_panel: newPanel,
-        do_fx: true,
-        full_details: false,
-        rating_type: rating_type,
-        leaderboard_details: { score: score, matchesWon: wins },
-        local_player: isLocalPlayer
-    };
+        if (wins < winsNeededForRank || (wins >= winsNeededForRank && skillGroup < 1) || !FriendsListAPI.GetFriendPrimeEligible(xuid)) {
+            elRank.visible = false;
+            return;
+        }
 
-    RatingEmblem.SetXuid(options);
-    newPanel.SetDialogVariable('rating-text', RatingEmblem.GetRatingDesc(newPanel));
+        var imageName = (rating_type !== 'Competitive') ? rating_type : 'skillgroup';
+        elRank.SetImage('file://{images}/icons/skillgroups/' + imageName + skillGroup + '.svg');
+        elRank.visible = true;
     }
 
     function _SetHonorIcon(elPanel, xuid) {
@@ -207,23 +191,25 @@ var OVERRIDE_PREMIER_SCORE = 25000;
         };
         HonorIcon.SetOptions(honorIconOptions);
     }
-	function _ShowPrestigeUpgrade(elPanel, xuid, isLocalPlayer) {
+
+    function _ShowPrestigeUpgrade(elPanel, xuid, isLocalPlayer) {
         let bPrestigeAvailable = isLocalPlayer && (FriendsListAPI.GetFriendLevel(xuid) >= InventoryAPI.GetMaxLevel());
         elPanel.FindChildInLayoutFile('vanity-xp-prestige').SetHasClass('hidden', !bPrestigeAvailable);
         if (bPrestigeAvailable) {
             elPanel.FindChildInLayoutFile('vanity-xp-prestige').SetPanelEvent('onactivate', _OnActivateGetPrestigeButtonClickable);
         }
     }
-	var _OnActivateGetPrestigeButtonClickable = function()
-	{
-		UiToolkitAPI.ShowCustomLayoutPopupParameters(
-			'',
-			'file://{resources}/layout/popups/popup_inventory_inspect.xml',
-			'itemid=' + '0' +                                                                                          
-			'&' + 'asyncworkitemwarning=no' +
-			'&' + 'asyncworktype=prestigecheck'
-		);
-	};
+
+    var _OnActivateGetPrestigeButtonClickable = function()
+    {
+        UiToolkitAPI.ShowCustomLayoutPopupParameters(
+            '',
+            'file://{resources}/layout/popups/popup_inventory_inspect.xml',
+            'itemid=' + '0' +                                                                                                                     
+            '&' + 'asyncworkitemwarning=no' +
+            '&' + 'asyncworktype=prestigecheck'
+        );
+    };
 
     function UpdateVoiceIcon(elAvatar, xuid) {
         Avatar.UpdateTalkingState(elAvatar, xuid);
@@ -260,4 +246,10 @@ var OVERRIDE_PREMIER_SCORE = 25000;
             }
         });
     }
+	
+	return {
+    };
+	
 })(VanityPlayerInfo || (VanityPlayerInfo = {}));
+
+$.RegisterForUnhandledEvent( "PanoramaComponent_PartyList_PlayerActivityVoice", VanityPlayerInfo.UpdateVoiceIcon );

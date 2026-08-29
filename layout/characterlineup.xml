@@ -29,7 +29,7 @@
 				</ItemPreviewPanel>
 				<Panel id="id-charlineup__player__info" class="charlineup__player__info">
 						<Button id="id-charlineup__player__commend" class="hidden charlineup__player__commend hidden">
-							<Image src="file://{images}/icons/ui/VoteReadyForMatch.svg" />
+							<Image src="" />
 						</Button>
 					<Panel class="charlineup__player__identity">	
 						<CSGOAvatarImage id="id-charlineup__player__avatar" class="charlineup__player__avatar hidden" scaling='stretch-to-fit-y-preserve-aspect' />

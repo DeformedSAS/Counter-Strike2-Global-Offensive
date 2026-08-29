@@ -9,6 +9,7 @@
         <include src="file://{resources}/scripts/mainmenu.js"/>
 		<include src="file://{resources}/scripts/new_news_entry_check.js"/>
 		<include src="file://{resources}/scripts/vanity_player_info.js"/>
+		<include src="file://{resources}/scripts/avatar.js" />
         <include src="file://{resources}/scripts/common/characteranims.js"/>
         <include src="file://{resources}/scripts/common/iteminfo.js"/>
         <include src="file://{resources}/scripts/common/licenseutil.js"/>
@@ -20,79 +21,74 @@
     <snippets>
         <snippet name="MainMenuMovieSnippet">
             <Panel>
-                <Movie class="mainmenu-movie MainMenuModeOnly"
-                       id="MainMenuMovie"
-                       src=""
-                       sound=""
-                       controls="none"
-                       repeat="true"
-                       hittest="false">
+                <Movie class="mainmenu-movie MainMenuModeOnly" id="MainMenuMovie" src="" sound="" controls="none" repeat="true" hittest="false">   
                 </Movie>
             </Panel>
         </snippet>
       <snippet name="MainMenuVanitySnippet">
 			<Panel>
 				<Panel id="JsMainmenu_Vanity-Container" class="mainmenu-vanity MainMenuModeOnly">
-					<ItemPreviewPanel id="MainMenuVanityPlayer0"
-                                      class="full-width full-height vanity-hidden"
-                                      manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
-                                      item="models/player/custom_player/legacy/tm_phoenix.mdl"
-                                      mouse_rotate="false"
-                                      enable_floorshadow="true"
-                                      hittest="false"> 
-                        <Panel id="id-mainmenu-vanity-hover" hittest="true"/>
-					</ItemPreviewPanel>
+            <ItemPreviewPanel id="MainMenuVanityPlayer0"
+                              class="full-width full-height vanity-hidden"
+							  style="x: -50px;"
+                              manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
+                              item="models/player/custom_player/legacy/tm_phoenix.mdl"
+                              mouse_rotate="false"
+                              enable_floorshadow="true"
+                              hittest="false"> 
+                <Panel id="id-mainmenu-vanity-hover" hittest="true"/>
+            </ItemPreviewPanel>
 
-					<ItemPreviewPanel id="MainMenuVanityPlayer1"
-									class="full-width full-height mainmenu-vanity-2 vanity-hidden"
-									style="margin-left: 600px;"
-									manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
-									item="models/player/custom_player/legacy/tm_balkan_variantf.mdl"
-									mouse_rotate="false"
-									enable_floorshadow="true"
-									hittest="false"> 
-						<Panel id="id-mainmenu-vanity-hover" hittest="true"/>
-					</ItemPreviewPanel>
+            <ItemPreviewPanel id="MainMenuVanityPlayer1"
+                              class="full-width full-height mainmenu-vanity-2 vanity-hidden"
+                              style="x: 300px; z-index: -3;"
+                              manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
+                              item="models/player/custom_player/legacy/tm_balkan_variantf.mdl"
+                              mouse_rotate="false"
+                              enable_floorshadow="true"
+                              hittest="false"> 
+                <Panel id="id-mainmenu-vanity-hover" hittest="true"/>
+            </ItemPreviewPanel>
 
-					<ItemPreviewPanel id="MainMenuVanityPlayer2"
-									class="full-width full-height mainmenu-vanity-3 vanity-hidden"
-									style="margin-left: 10px;"
-									manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
-									item="models/player/custom_player/legacy/tm_professional_varf1.mdl"
-									mouse_rotate="false"
-									enable_floorshadow="true"
-									hittest="false"> 
-						<Panel id="id-mainmenu-vanity-hover" hittest="true"/>
-					</ItemPreviewPanel>
+            <ItemPreviewPanel id="MainMenuVanityPlayer2"
+                              class="full-width full-height mainmenu-vanity-3 vanity-hidden"
+                              style="x: -300px; z-index: -3;"
+                              manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
+                              item="models/player/custom_player/legacy/tm_professional_varf1.mdl"
+                              mouse_rotate="false"
+                              enable_floorshadow="true"
+                              hittest="false"> 
+                <Panel id="id-mainmenu-vanity-hover" hittest="true"/>
+            </ItemPreviewPanel>
 
-					<ItemPreviewPanel id="MainMenuVanityPlayer3"
-									class="full-width full-height mainmenu-vanity-4 vanity-hidden"
-									manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
-									style="margin-left: 800px;"
-									item="models/player/custom_player/legacy/tm_balkan_variantj.mdl"
-									mouse_rotate="false"
-									enable_floorshadow="true"
-									hittest="false"> 
-						<Panel id="id-mainmenu-vanity-hover" hittest="true"/>
-					</ItemPreviewPanel>
+            <ItemPreviewPanel id="MainMenuVanityPlayer3"
+                              class="full-width full-height mainmenu-vanity-4 vanity-hidden"
+                              style="x: 540px; z-index: -1;"
+                              manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
+                              item="models/player/custom_player/legacy/tm_balkan_variantj.mdl"
+                              mouse_rotate="false"
+                              enable_floorshadow="true"
+                              hittest="false"> 
+                <Panel id="id-mainmenu-vanity-hover" hittest="true"/>
+            </ItemPreviewPanel>
 
-					<ItemPreviewPanel id="MainMenuVanityPlayer4"
-									class="full-width full-height mainmenu-vanity-5 vanity-hidden"
-									style="margin-left: -300px; "
-									manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
-									item="models/player/custom_player/legacy/tm_phoenix.mdl"
-									mouse_rotate="false"
-									enable_floorshadow="true"
-									hittest="false">
-						<Panel id="id-mainmenu-vanity-hover" hittest="true"/>
-					</ItemPreviewPanel>
+            <ItemPreviewPanel id="MainMenuVanityPlayer4"
+                              class="full-width full-height mainmenu-vanity-5 vanity-hidden"
+                              style="x: -540px; z-index: -1;"
+                              manifest="resource/ui/econ/ItemModelPanelCharMainMenu.res"
+                              item="models/player/custom_player/legacy/tm_phoenix.mdl"
+                              mouse_rotate="false"
+                              enable_floorshadow="true"
+                              hittest="false">
+                <Panel id="id-mainmenu-vanity-hover" hittest="true"/>
+            </ItemPreviewPanel>
                 </Panel>
             </Panel>
         </snippet>
     </snippets>
     <CSGOMainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" useglobalcontext="true" oncancel="MainMenu.OnEscapeKeyPressed();">
 	<Panel id="IntroPanel" class="IntroBackground" hittest="false">
-     <Movie id="IntroVideo" class="IntroVideoStyle" src="file://{resources}/videos/intro.webm" controls="none" repeat="false" autoplay="false" />   
+     <Movie id="IntroVideo" class="IntroVideoStyle" src="file://{resources}/videos/intro_govno.webm" hittest="false" controls="none" repeat="false" autoplay="false" />   
       </Panel>
         <Panel id="MainMenuContainerPanel" class="MainMenuContainer">
             <Panel id="NotificationsContainer" class="MainMenuNotification hidden MainMenuModeOnly" onmouseover="MainMenu.ShowNotificationBarTooltip();" onmouseout="UiToolkitAPI.HideTextTooltip();">
@@ -108,11 +104,11 @@
                         <Panel id="MainMenuVanityParent" />
                         <Panel class="mainmenu-vanity__vignette" hittest="false" />
                         <Panel class="mainmenu-vanity__vignette--bottom" hittest="false" />
-                        <Panel id="MainMenuVanityInfo" class="full-width full-height MainMenuModeOnly" hittest="false" />
                     </CSGOBlurTarget>
                     <Frame id="JsLeftColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_left_column.xml" />
 					<Frame id="Scoreboard" class="scoreboard PauseMenuModeOnly" src="file://{resources}/layout/scoreboard.xml" />
                     <Frame id="JsRightColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_right_column.xml" />
+					<Panel id="MainMenuVanityInfo" class="full-width full-height MainMenuModeOnly" hittest="false" />
                     <Panel id="JsActiveMissionPanel" class="mainmenu_active-mission-container PauseMenuModeOnly" />
                     <Panel id="JsMainMenuContent" class="mainmenu-content mainmenu-content--offscreen" hittest="true">
                         <Panel class="mainmenu-content__blur">
@@ -146,13 +142,15 @@
                                 </Panel>
 							</RadioButton>
 						    <RadioButton id="MainMenuNavBarOverwatch"
-									class="mainmenu-top-navbar__radio-iconbtn DEVModeONLY MainMenuModeOnly"
+									class="mainmenu-top-navbar__radio-iconbtn MainMenuModeOnly"
 									group="NavBar"
 									onactivate="MainMenu.NavigateToTab('JsOverwatch', 'mainmenu_overwatch');"
 									onmouseover="UiToolkitAPI.ShowTextTooltip( 'MainMenuNavBarOverwatch', '#tooltip_navbar_overwatch' );"
 									onmouseout="UiToolkitAPI.HideTextTooltip();">
 							    <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/overwatch.svg" />
-								<Frame id="MainMenuWatchAlert" class="hidden" src="file://{resources}/layout/btn_alert.xml" />
+								<Panel id="MainMenuOverwatchAlert" class="navbar-btn__notification overwatch">
+								<Label id="MainMenuOverwatchAlertText" class="navbar-btn__notification-text" text="+"/>
+							</Panel>
                             </RadioButton>
                             <RadioButton id="MainMenuNavBarSettings"
                                         class="mainmenu-top-navbar__radio-iconbtn "
@@ -165,6 +163,22 @@
                                     <Label class="navbar-btn__notification-text" text="{d:num_settings}"/>
                                 </Panel>
                             </RadioButton>
+                            <RadioButton id="MainMenuNavDiscord"
+                                        class="mainmenu-top-navbar__radio-iconbtn DEVModeONLY"
+                                        group="NavBar"
+                                        onactivate="MainMenu.NavigateToTab('JsDiscord', 'mainmenu_discord');"
+                                        onmouseover="UiToolkitAPI.ShowTextTooltip('MainMenuNavDiscord', 'Discord');"
+                                        onmouseout="UiToolkitAPI.HideTextTooltip();">
+                                <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/message.svg"/>
+							</RadioButton>
+                            <RadioButton id="MainMenuNavYTMusic"
+                                        class="mainmenu-top-navbar__radio-iconbtn DEVModeONLY"
+                                        group="NavBar"
+                                        onactivate="MainMenu.NavigateToTab('JsYTMusic', 'mainmenu_yt_music');"
+                                        onmouseover="UiToolkitAPI.ShowTextTooltip('MainMenuNavYTMusic', 'YT Music');"
+                                        onmouseout="UiToolkitAPI.HideTextTooltip();">
+                                <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/music_kit.svg"/>
+							</RadioButton>
                             <RadioButton id="MainMenuNavBarDevAlertMgr"
                                         class="mainmenu-top-navbar__radio-iconbtn DEVModeONLY"
                                         group="NavBar"
@@ -180,7 +194,10 @@
 									onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;MainMenuNavBarQuit&apos;, &apos;#tooltip_navbar_quit&apos; );"
 									onmouseout="UiToolkitAPI.HideTextTooltip();">
                              <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/power.svg" />
-                            </RadioButton>
+							</RadioButton>
+                            <Button id="VacNet" class="mainmenu-top-navbar__radio-iconbtn" data-type="workshop" onactivate="MainMenu.VacNet_CSOW();" onmouseover="UiToolkitAPI.ShowTextTooltip( &apos;VacNet&apos;, &apos;#tooltip_navbar_vacnet&apos; );" onmouseout="UiToolkitAPI.HideTextTooltip();">
+                                <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/vacnet.svg" />
+							</Button>
                             <Panel id="id-notifications-container" class="mainmenu-top-navbar__alerts MainMenuModeOnly">
                                 <Panel id="id-alert-navbar-gc-connecting" class="mainmenu-top-navbar__alerts__gc">
                                     <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/gc_connecting_inner.svg" scaling="stretch-to-fit-preserve-aspect" />
@@ -271,15 +288,11 @@
                 </CSGOBlurTarget>
                 <CSGOBlurTarget id="MainMenuFriendsAndParty" hittest="false" blurrects="CSGOLoadingScreen">
                     <Panel id="JsMainMenuSidebar" class="mainmenu-sidebar" hittest="false">
-                        <Panel id="mainmenu-sidebar__blur-target"
-                               class="mainmenu-sidebar__container"
-                               onmouseover="MainMenu.ExpandSidebar()"
-                               onmouseout="MainMenu.MinimizeSidebar();">
-                        </Panel>
-                        <Panel class="mainmenu-sidebar__seperator"/>
+                        <Panel id="mainmenu-sidebar__blur-target" class="mainmenu-sidebar__container" onmouseover="MainMenu.ExpandSidebar()" onmouseout="MainMenu.MinimizeSidebar();" />
+                        <Panel class="mainmenu-sidebar__seperator" />
                     </Panel>
-                    <CSGOChat id="PartyChat"/>
-                    <Frame id="MatchmakingReconnectPanel" src="file://{resources}/layout/match-reconnect.xml"/>
+                    <CSGOChat id="PartyChat" />
+                    <Frame id="MatchmakingReconnectPanel" src="file://{resources}/layout/match-reconnect.xml" />
                 </CSGOBlurTarget>
             </Panel>
         </Panel>

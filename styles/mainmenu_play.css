@@ -1187,8 +1187,8 @@
 
 .map-selection-btn.coop-map-tile
 {
-    height: 100%;
-    width: height-percentage(100%);
+	height: 552px;
+	width: height-percentage(70%);
 }
 
 .map-selection-btn__screenshot
@@ -2128,20 +2128,20 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
 
 .play-menu-mapandlbs-container
 {
-    flow-children: right;
-    horizontal-align: right;
-    margin-right: 16px;
-    width: 100%;
+	flow-children: right;
+	horizontal-align: right;
+	margin-right: 16px;
+	width: 100%;
 }
 
 .play-menu-svl-auto-squad-toggle-container
 {
-    flow-children: right;
-    vertical-align: bottom;
-    horizontal-align: right;
-    margin-left: 16px;
-    margin-right: 16px;
-    width: 100%;
+	flow-children: right;
+	vertical-align: bottom;
+	horizontal-align: right;
+	margin-left: 16px;
+	margin-right: 16px;
+	width: 100%;
 }
 
 #SurvivalAutoSquadToggle.PopupButton:not(.PopupButton:disabled):selected
@@ -2337,6 +2337,8 @@ ToggleButton .map-selection-info__new,RadioButton .map-selection-info__new
 {
 	width: 256px;
 	height: 256px;
+	wash-color: rgb(33, 180, 33);
+	margin-right: 50px;
 
 	vertical-align: center;
 	horizontal-align: right;

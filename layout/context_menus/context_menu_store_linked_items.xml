@@ -13,7 +13,7 @@
     <Panel class="store-linked-items" onload="StoreLinkedItems.Init();" acceptsinput="true" acceptsfocus="true">
         <Panel id="id-store-linked-items-images" class="store-linked-items__tiles" />
         <Panel class="store-linked-items__warning">
-            <Image class="vertical-center" src="file://{images}/icons/ui/info.vsvg" texturewidth="16" textureheight="16" />
+            <Image class="vertical-center" src="file://{images}/icons/ui/info.svg" texturewidth="16" textureheight="16" />
             <Label id="id-store-linked-items-warning" class="store-linked-items__warning__text stratum2Font" text="{s:warning}" />
         </Panel>
     </Panel>

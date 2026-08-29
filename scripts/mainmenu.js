@@ -15,16 +15,12 @@ var MainMenu = ( function() {
     var _m_aCurrentLobbyVanityData = [];
     var _m_mapLastVanityDataByXuid = {};
     var _m_setInitializedXuids = {};
-	let m_latestVaniyData = {};
+	let m_latestVanityData = {};
     var _m_mapLastAnimTimeByXuid = {};
 	var devmode = 0;
     let g_sRemoteModVersion = "";
-    const CURRENT_MOD_VERSION = "1.9.0b"; // update this when releasing a new version
-	var _debug_d3gk_IsQOutOfDate = false; // d3gks notification debug stuff which is pretty much no longer used because of the new notification button..   
-	var _debug_d3gk_IsQVAC = false;   
-	var _debug_d3gk_IsQOverwatch = false; 
-	const _m_elNotificationsContainer = $('#id-notifications-container');
-	var _debug_d3gk_IsQOffline = false;       
+    const CURRENT_MOD_VERSION = "1.9.0b"; // update this when releasing a new version 
+	const _m_elNotificationsContainer = $('#id-notifications-container');      
 	var _m_notificationSchedule = false;  // schedules the notifications i guess? i don't really know what it does and i'm lazy to take a look at it..
 	var _m_bVanityAnimationAlreadyStarted = false; // checks if the vanity agent anim is already playing. this is causing the vanity to appear for a split second when disconnecting from a server. unable to fix for now.
 	var _m_bHasPopupNotification = false; // if you have a popup notification this will turn to true, if not it's going to stay at false.
@@ -32,16 +28,11 @@ var MainMenu = ( function() {
 	var _m_NotificationBarColorClasses = [ // notif color classes if you can't really read this somehow.. very simple you can add your own notification color classes. wow very cool
 		"NotificationRed", "NotificationYellow", "NotificationGreen", "NotificationLoggingOn"
 	];
-
 	var _m_storePopupElement = null;
 	var m_TournamentPickBanPopup = null;
-
 	var _m_hOnEngineSoundSystemsRunningRegisterHandle = null;
-
 	var _m_jobFetchTournamentData = null;
-	const TOURNAMENT_FETCH_DELAY = 1;
-
-	                                         
+	const TOURNAMENT_FETCH_DELAY = 1;                                      
 	let nNumNewSettings = UpdateSettingsMenuAlert();
 
 	function UpdateSettingsMenuAlert()
@@ -87,6 +78,7 @@ var _OnInitFadeUp = function()
         var ShowMenu = function() { // does the magic stuff for the mainmenu to show after 3s of the intro screen.
             $.DispatchEvent('PlayMainMenuMusic', true, true); // without this, the mainmenu music would not play, + i added a check to play the mainmenu music after initfadeup is done
             _PlayMenuSong();
+			BlogAPI.RequestRSSFeed(); // without this, news would never show up on startup.
 
             if ( elIntro ) {
                 elIntro.AddClass( 'FadingOut' );
@@ -104,6 +96,9 @@ var _OnInitFadeUp = function()
         $.Schedule( bNoVid ? 0.0 : 3.0, ShowMenu ); // if -novid is present, the delay is 0 to show the mainmenu, if it isn't present then the delay is 3 seconds to show the mainmenu.
 
         _m_playedInitalFadeUp = true;
+		BlogAPI.RequestRSSFeed();
+		GameInterfaceAPI.ConsoleCommand('sv_allowupload 1');
+	    GameInterfaceAPI.ConsoleCommand('log_color LOADING FFFF00FF');
 
         if ( GameInterfaceAPI.GetEngineSoundSystemsRunning() )
         {
@@ -197,8 +192,6 @@ var _OnShowMainMenu = function() {
 
     GameInterfaceAPI.SetSettingString('panorama_play_movie_ambient_sound', '1');
 	GameInterfaceAPI.SetSettingString('@panorama_ECO_mode', '0');
-    GameInterfaceAPI.ConsoleCommand('sv_allowupload 1');
-	GameInterfaceAPI.ConsoleCommand('log_color LOADING FFFF00FF');
     GameInterfaceAPI.SetSettingString('dsp_room', '7');
     GameInterfaceAPI.SetSettingString('snd_soundmixer', 'MainMenu_Mix');
 	GameInterfaceAPI.SetSettingString('cl_ragdoll_collide', '1');
@@ -224,6 +217,7 @@ var _OnShowMainMenu = function() {
     _GcLogonNotificationReceived();
     _BetaEnrollmentStatusChange();
     _UpdateStoreAlert();
+	_UpdateOverwatch();
     _DeleteSurvivalEndOfMatch();
     _DeletePauseMenuMissionPanel();
     _ShowHideAlertForNewEventForWatchBtn();
@@ -232,8 +226,9 @@ var _OnShowMainMenu = function() {
     _ShowFloatingPanels();
     _RightColumnLoad();
     _PlayMenuSong();
+	_InsureSessionCreated();
     CheckModVersionAsync();
-	$.RegisterKeyBind($.GetContextPanel(), "key_home", _OpenDevUI);
+	BlogAPI.RequestRSSFeed();
 
     if (GameInterfaceAPI.HasCommandLineParm('-devmode')) {
         devmode = 1;
@@ -256,19 +251,6 @@ var _OnShowMainMenu = function() {
         notifContainer.visible = true;
     }
 }; 
-
-    function _OpenDevUI() { // shashliks item shit
-						var items = [
-					{ label: 'SKIN GENERATOR 3000', jsCallback: function() {
-						UiToolkitAPI.ShowCustomLayoutPopup('', 'file://{resources}/layout/popups/popup_generate_skin.xml');
-					} },
-					{ label: 'ITEM GENERATOR 3000', jsCallback: function() {
-						UiToolkitAPI.ShowCustomLayoutPopup('', 'file://{resources}/layout/popups/popup_generate_item.xml');
-					} }
-				];
-
-        		UiToolkitAPI.ShowSimpleContextMenu( '', 'GeneratorsContextMenu', items );
-	}
 
 
 function CheckModVersionAsync() {
@@ -473,30 +455,6 @@ function CheckModVersionAsync() {
 		$.DispatchEvent('PlayMainMenuMusic', false, false );  
 		                                                                  
 	};
-	
-    function _CreateUpdateVanityInfo(oSettings) {
-        $.Schedule(.1, () => {
-            const elVanityPlayerInfo = VanityPlayerInfo.CreateOrUpdateVanityInfoPanel($.GetContextPanel().FindChildInLayoutFile('MainMenuVanityInfo'), oSettings);
-            if (elVanityPlayerInfo) {
-                $.GetContextPanel().FindChildInLayoutFile('MainMenuVanityParent').AddBlurPanel(elVanityPlayerInfo.FindChildInLayoutFile('vanity-info-container'));
-                let defName = '';
-                let weaponId = oSettings.weaponItemId
-                    ? oSettings.weaponItemId
-                    : (oSettings.hasOwnProperty('vanity_data') && oSettings.vanity_data)
-                        ? oSettings.vanity_data.split(',')[4]
-                        : '';
-                let team = oSettings.hasOwnProperty('team') && oSettings.team
-                    ? oSettings.team
-                    : (oSettings.hasOwnProperty('vanity_data') && oSettings.vanity_data)
-                        ? oSettings.vanity_data.split(',')[0]
-                        : '';
-                if (weaponId) {
-                    defName = InventoryAPI.GetItemDefinitionName(weaponId);
-                }
-                elVanityPlayerInfo.SetHasClass('move-up', (defName === 'weapon_negev' || defName === 'weapon_m249') && team === 'ct');
-            }
-        });
-    }
 
     function CreateOrUpdateVanityInfoPanel(elParent = null, oSettings = null) {
     if (!elParent) elParent = $.GetContextPanel();
@@ -533,7 +491,6 @@ function CheckModVersionAsync() {
     _SetSkillGroup(newPanel, oSettings.xuid);
     _SetLobbyLeader(newPanel, oSettings.xuid);
     _ShowSettingsBtn(newPanel, oSettings.xuid);
-	_PlayerActivityVoice(newPanel, oSettings.xuid);
     
     const container = newPanel.FindChildInLayoutFile('vanity-info-container');
     if (container) _AddOpenPlayerCardAction(container, oSettings.xuid);
@@ -793,6 +750,16 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 			$('#MainMenuBackground').AddClass('Dim');
 	};
 	
+	function _OnGcHelloReceived() {
+        //_CheckPopupNotificationsAtLogon();
+        _UpdateUnlockCompAlert();
+        //VacNetAPI.UpdateReviewerInfo();
+    }
+	
+	function _OnReviewInfoRecieved(bHasAccess) {
+        $.GetContextPanel().SetHasClass('show-vacnet-link', bHasAccess);
+    }
+	
 	var _AddStream = function()
 	{
 		var elStream = $.CreatePanel( 'Panel', $.FindChildInContext( '#JsStreamContainer' ), 'JsStreamPanel' );
@@ -866,11 +833,10 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 	};
 	
     function _ShowFloatingPanels() {
-    // Show the main columns
     $.FindChildInContext('#JsLeftColumn').SetHasClass('hidden', false);
     $.FindChildInContext('#JsRightColumn').SetHasClass('hidden', false);
+    //$.FindChildInContext('#MainMenuVanityInfo').SetHasClass('hidden', false);
 
-    // Show each vanity panel
     for (let i = 0; i < MAX_PLAYERS; i++) {
         let vanityPanel = $.FindChildInContext("#id-player-vanity-info-" + i);
         if (vanityPanel) {
@@ -881,7 +847,8 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
     function _HideFloatingPanels() {
     $.FindChildInContext('#JsLeftColumn').SetHasClass('hidden', true);
     $.FindChildInContext('#JsRightColumn').SetHasClass('hidden', true);
-
+    //$.FindChildInContext('#MainMenuVanityInfo').SetHasClass('hidden', true);
+	
     for (let i = 0; i < MAX_PLAYERS; i++) {
         let vanityPanel = $.FindChildInContext("#id-player-vanity-info-" + i);
         if (vanityPanel) {
@@ -889,6 +856,7 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
         }
       }
     }   
+	
     function _RightColumnLoad() // because for some reason, _ShowFloatingPanels cannot for the love of god load the frame id from mainmenu.xml, it's being loaded by this script which is hooked up to _OnShowMainMenu. i really have no clue why it's doing that.
     {
     var elRightColumn = $.CreatePanel('Panel', $.FindChildInContext('#JsRightColumn'), 'JsRightColumn');
@@ -939,16 +907,6 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 		elHover.SetPanelEvent( 'onmouseout', OnMouseOut );
 		_UpdateLocalPlayerVanity();
 	}
-    const _UpdateLocalPlayerVanity = function () {
-        const oSettings = ItemInfo.GetOrUpdateVanityCharacterSettings();
-       // const oLocalPlayer = m_aDisplayLobbyVanityData.filter(storedEntry => { return storedEntry.isLocalPlayer === true; });
-       // oSettings.playeridx = oLocalPlayer.length > 0 ? oLocalPlayer[0].playeridx : 0;
-        oSettings.xuid = MyPersonaAPI.GetXuid();
-        oSettings.isLocalPlayer = true;
-        _ApplyVanitySettingsToLobbyMetadata(oSettings);
-        //_UpdatePlayerVanityModel(oSettings);
-        _CreateUpdateVanityInfo(oSettings);
-    };
 	
 	var _ForceRestartVanity = function() // code was fixed by shashlik, works 10 times better now. the only thing left from my code is the vanity player info tracking
 	{
@@ -964,7 +922,7 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 			return;
 		}
 
-		m_latestVaniyData = {};
+		m_latestVanityData = {};
 		_LobbyPlayerUpdated();
 	};
 
@@ -973,7 +931,7 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 		_HideVanityPanels();
 
 		let partySize = PartyListAPI.GetCount();
-		let a_currentVaniyData = {};
+		let a_currentVanityData = {};
 
 		_VanityDebugMsg('Party size: '+partySize);
 
@@ -996,16 +954,16 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 			oSettings.playerIdx = 0;
 			oSettings.isLocalPlayer = true;
 
-			const bIsVanityUpdated = m_latestVaniyData[0] ? oSettings.vanityData != m_latestVaniyData[0] : true;
+			const bIsVanityUpdated = m_latestVanityData[0] ? oSettings.vanityData != m_latestVanityData[0] : true;
 			_VanityDebugMsg(bIsVanityUpdated);
 
-			a_currentVaniyData[0] = _CreateVanitySettings(oSettings);
-			m_latestVaniyData[0] = oSettings.vanityData;
+			a_currentVanityData[0] = _CreateVanitySettings(oSettings);
+			m_latestVanityData[0] = oSettings.vanityData;
 
 			if(bIsVanityUpdated)
-				_UpdateOrCreateVanityPanel( 0, a_currentVaniyData[0] );
+				_UpdateOrCreateVanityPanel( 0, a_currentVanityData[0] );
 
-			_UpdateVanityInfoPanel( 0, a_currentVaniyData[0] );
+			_UpdateVanityInfoPanel( 0, a_currentVanityData[0] );
 		}
 
 		for (let i = 0; i < 5; i++) {
@@ -1018,20 +976,20 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 			oSettings.playerIdx = i;
 			oSettings.isLocalPlayer = bIsSelf;
 
-			// need be sure, maybe m_latestVaniyData[i] not initialized
-			const bIsVanityUpdated = m_latestVaniyData[i] ? oSettings.vanityData != m_latestVaniyData[i] : true;
+			// need be sure, maybe m_latestVanityData[i] not initialized
+			const bIsVanityUpdated = m_latestVanityData[i] ? oSettings.vanityData != m_latestVanityData[i] : true;
 			_VanityDebugMsg(bIsVanityUpdated);
 		
-			a_currentVaniyData[i] = _CreateVanitySettings(oSettings);
-			m_latestVaniyData[i] = oSettings.vanityData;
+			a_currentVanityData[i] = _CreateVanitySettings(oSettings);
+			m_latestVanityData[i] = oSettings.vanityData;
 
 			if(bIsSelf && bIsVanityUpdated)
 				_ApplyVanitySettingsToLobbyMetadata(oSettings);
 
 			if(bIsVanityUpdated)
-				_UpdateOrCreateVanityPanel( i, a_currentVaniyData[i] );
+				_UpdateOrCreateVanityPanel( i, a_currentVanityData[i] );
 
-			_UpdateVanityInfoPanel( i, a_currentVaniyData[i] );
+			_UpdateVanityInfoPanel( i, a_currentVanityData[i] );
 		}
 	};
 
@@ -1056,93 +1014,99 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 			oSettings.panel.RemoveClass( 'vanity-hidden' );
 		}
 	}
-	
-	function _UpdateVanityInfoPanel( playerIdx, oSettings ) 
-    {
-        let vanityPanel = $('#MainMenuVanityPlayer'+playerIdx);
-        if(!vanityPanel) {
-            return;
-        }
 
-        const vanityInfoPanelId = "id-player-vanity-info-" + playerIdx;
-        let elVanityInfoPanel = vanityPanel.FindChildInLayoutFile(vanityInfoPanelId);
-
-        if (!elVanityInfoPanel) {
-            elVanityInfoPanel = $.CreatePanel('Button', vanityPanel, vanityInfoPanelId);
-            elVanityInfoPanel.BLoadLayout('file://{resources}/layout/vanity_player_info.xml', false, false);
-            elVanityInfoPanel.AddClass('vanity-info-loc-' + playerIdx);
-
-            _TrackVanityBone(elVanityInfoPanel, playerIdx);
-        }
-
-        var sWeapon = oSettings.weapon || "";
-        var bIsCT = (oSettings.team === 3 || oSettings.team === '3');
-        var bIsHeavyCT = (sWeapon === "heavy3" || sWeapon === "heavy4");
-
-        if (bIsCT && bIsHeavyCT) {
-            elVanityInfoPanel.AddClass('move-up');
-        } else {
-            elVanityInfoPanel.RemoveClass('move-up');
-        }
-
-        VanityPlayerInfo.CreateOrUpdateVanityInfoPanel(elVanityInfoPanel, oSettings);
-    }
-
-  function _UpdateVanityInfoPanelBlur( playerIdx, oSettings ) // script doesn't work properly, blur messes up the positioning and where other panels are. needs debugging.
-  {
-    let elParent = $( '#MainMenuVanityInfo' );
-    if(!elParent) {
-      _VanityDebugMsg('Panel MainMenuVanityInfo not exists.');
-      return;
+function _UpdateVanityInfoPanel( playerIdx, oSettings )
+{
+    let vanityPanel = $('#MainMenuVanityInfo');
+    if(!vanityPanel) {
+        _VanityDebugMsg('_UpdateVanityInfoPanel::Panel MainMenuVanityInfo not exists.');
+        return;
     }
 
     const vanityInfoPanelId = "id-player-vanity-info-" + playerIdx;
-        let elVanityInfoPanel = elParent.FindChildInLayoutFile(vanityInfoPanelId);
+    let elVanityInfoPanel = vanityPanel.FindChildInLayoutFile(vanityInfoPanelId);
 
-        if (!elVanityInfoPanel) {
-            elVanityInfoPanel = $.CreatePanel('Button', elParent, vanityInfoPanelId);
-            elVanityInfoPanel.BLoadLayout('file://{resources}/layout/vanity_player_info.xml', false, false);
-            elVanityInfoPanel.AddClass('vanity-info-loc-' + playerIdx);
+    if (!elVanityInfoPanel) {
+        elVanityInfoPanel = $.CreatePanel('Button', vanityPanel, vanityInfoPanelId);
+        elVanityInfoPanel.BLoadLayout('file://{resources}/layout/vanity_player_info.xml', false, false);
+        elVanityInfoPanel.AddClass('vanity-info-loc-' + playerIdx);
 
-      _VanityDebugMsg('Creating panel '+vanityInfoPanelId);
+        _VanityDebugMsg('Creating panel '+vanityInfoPanelId);
 
-            _TrackVanityBone(elVanityInfoPanel, playerIdx);
-  
-      $( '#MainMenuVanityParent' ).AddBlurPanel(elVanityInfoPanel.FindChildInLayoutFile('vanity-info-container'));
+        _TrackVanityBone(elVanityInfoPanel, playerIdx);
+        
+        let jsLeftColumn = $.FindChildInContext('#JsLeftColumn'); // this fixes the bug that makes the vanity player info from others show up while in a content panel when they join your lobby.
+        if (jsLeftColumn && jsLeftColumn.BHasClass('hidden')) {
+            elVanityInfoPanel.AddClass('hidden_info');
         }
 
-        VanityPlayerInfo.CreateOrUpdateVanityInfoPanel(elVanityInfoPanel, oSettings);
-  }
+        let elBackground = $('#MainMenuBackground');
+        if (elBackground) {
+            elBackground.AddBlurPanel(elVanityInfoPanel.FindChildInLayoutFile('vanity-info-container'));
+        }
+    }
 
+    if ( oSettings ) {
+        let isCTHeavy = ( oSettings.team === 'ct' ) && 
+                        ( oSettings.loadoutSlot === 'heavy3' || oSettings.loadoutSlot === 'heavy4' );
 
-	var _TrackVanityBone = function( elPanel, index ) // all this does is track the bone for the player info panel. thanks versus.js
-	{
-	    if ( !elPanel || !elPanel.IsValid() ) return;
+        elVanityInfoPanel.isCTHeavyWeapon = isCTHeavy;
+    }
 
-	    var elVanityModel = $( '#MainMenuVanityPlayer' + index );
-		
-	    if ( elVanityModel ) {
-	        var elScene = elVanityModel.FindChildTraverse( 'VanityScene' ) || elVanityModel;
+    VanityPlayerInfo.CreateOrUpdateVanityInfoPanel(elVanityInfoPanel, oSettings);
+}
 
-	        if ( elScene && elScene.SetActiveSceneContext ) {
-	            elScene.SetActiveSceneContext( 0 ); 
+var _TrackVanityBone = function( elPanel, index )
+{
+    if ( !elPanel || !elPanel.IsValid() ) return;
 
-	            var bonePos = elScene.GetBonePositionInPanelSpace( 'pelvis_0' );
-			
-	            bonePos.y -= 0; 
-	            bonePos.x += 0; 
+    var elVanityModel = $( '#MainMenuVanityPlayer' + index );
+    
+    if ( elVanityModel ) {
+        if (typeof elVanityModel.SetActiveSceneContext === 'function') {
+            elVanityModel.SetActiveSceneContext( 0 ); 
+        }
 
-				try {
-	            	elPanel.style.position = bonePos.x + "px " + bonePos.y + "px 0px";
-				} catch (error) {
-				}
-	        }
-	    }
+        var bonePos = elVanityModel.GetBonePositionInPanelSpace( 'pelvis_0' );
 
-	    $.Schedule( .0, function() {
-	        _TrackVanityBone( elPanel, index );
-	    });
-	};
+        try { // use offsets for proper tracking, this aligns with the xml based positioning, also depends on the value of scale3d for others.
+            var xOffsets = [-50, 300, -300, 540, -540]; // player slot 1 and 2 are the same size, smaller for the immersive distance.
+            var currentX = xOffsets[index] || 0; // player 3 and 4 are also the same size, but larger to make them look like they are slightly behind the lobby leader, also have distance.
+
+            if ( index === 1 || index === 2 ) {
+                bonePos.x = ( bonePos.x * 0.65 ) + currentX;
+            } else if ( index === 3 || index === 4 ) {
+                bonePos.x = ( bonePos.x * 0.80 ) + currentX;
+            } else {
+                bonePos.x = bonePos.x + currentX; 
+            }
+
+            // Default offset
+            var yOffset = 145;
+
+            // applies only to m249 or negev so that the vanity player info panel does not go out of bounds.
+            if ( elPanel.isCTHeavyWeapon === true ) {
+                if ( index === 1 || index === 2 ) {
+                    yOffset = 400; 
+                } else if ( index === 3 || index === 4 ) {
+                    yOffset = 360;
+                } else {
+                    yOffset = 260; 
+                }
+            }
+
+            bonePos.y -= yOffset;
+            
+            VanityPlayerInfo.SetVanityInfoPanelPos($('#MainMenuVanityInfo'), index, bonePos, "id-player-vanity-info-" + index);
+        } catch (error) {
+            _VanityDebugMsg('[PanoramaScript] Can\'t set position in panel id-player-vanity-info-'+index );
+        }
+    }
+
+    $.Schedule( 0.01, function() {
+        _TrackVanityBone( elPanel, index );
+    });
+};
 
 	function _CreateVanitySettings( oSettings )
 	{
@@ -1162,25 +1126,34 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 			oSettings.loadoutSlot, oSettings.weaponItemId );
 	};
 	
+function _HideVanityPanels()
+{
+    let partySize = PartyListAPI.IsPartySessionActive() ? PartyListAPI.GetCount() : 1;
+    
+    let vanityInfoParent = $('#MainMenuVanityInfo');
 
-	function _HideVanityPanels()
-	{
-		let partySize = PartyListAPI.IsPartySessionActive() ? PartyListAPI.GetCount() : 1;
+    for (let i = 0; i < 5; i++) {
+        let vanityPanel = $('#MainMenuVanityPlayer' + i);
+        let hide = i >= partySize;
 
-		for (let i = 0; i < Object.keys(m_latestVaniyData).length; i++) {
-		    let vanityPanel = $('#MainMenuVanityPlayer'+i);
-		    if (!vanityPanel) continue;
+        if (vanityPanel) {
+            vanityPanel.SetHasClass('hidden', hide);
+        }
 
-		    let hide = i >= partySize;
+        if (vanityInfoParent) {
+            const vanityInfoPanelId = "id-player-vanity-info-" + i;
+            let elVanityInfoPanel = vanityInfoParent.FindChildInLayoutFile(vanityInfoPanelId);
+            
+            if (hide && elVanityInfoPanel) {
+                elVanityInfoPanel.DeleteAsync(0);
+            }
+        }
 
-		    vanityPanel.SetHasClass('vanity-hidden', hide);
-
-			const vanityInfoPanelId = "id-player-vanity-info-"+i;
-			let elVanityInfoPanel = vanityPanel.FindChildInLayoutFile(vanityInfoPanelId);
-			if(elVanityInfoPanel && hide)
-				elVanityInfoPanel.DeleteAsync(0);
-		}
-	}
+        if (hide && m_latestVanityData[i] !== undefined) {
+            delete m_latestVanityData[i];
+        }
+    }
+}
 
 	function _VanityDebugMsg( msg ) {
 		return;
@@ -1575,6 +1548,49 @@ else if ( backgroundMap === 'vertigo' )
 			vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );   
             //vanityPanel.SetSceneAngles( 0, 0, 0, true );   			
 		}
+		else if ( backgroundMap === 'ancient_day' )
+		{
+           vanityPanel.SetFlashlightAmount( 3 );
+
+           vanityPanel.SetFlashlightFOV( 55 );
+           vanityPanel.SetFlashlightColor( 2.2, 2.0, 1.8 );
+
+           vanityPanel.SetAmbientLightColor( 0.35, 0.38, 0.30 );
+
+           vanityPanel.SetDirectionalLightModify( 0 );
+           vanityPanel.SetDirectionalLightColor( 0.75, 0.65, 0.45 );
+           vanityPanel.SetDirectionalLightDirection( 0.1, 0.67, -0.71 );
+
+           vanityPanel.SetDirectionalLightModify( 1 );
+           vanityPanel.SetDirectionalLightColor( 0.18, 0.22, 0.25 );
+           vanityPanel.SetDirectionalLightDirection( -0.86, -0.18, -0.47 );
+
+           vanityPanel.SetDirectionalLightModify( 2 );
+           vanityPanel.SetDirectionalLightColor( 0.10, 0.18, 0.10 );
+           vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );
+           //vanityPanel.SetSceneAngles( 0, 0, 0, true );   			
+		}
+        else if ( backgroundMap === 'ancient_night' )
+        {
+           vanityPanel.SetFlashlightAmount( 3 );
+           vanityPanel.SetFlashlightFOV( 75 );
+           vanityPanel.SetFlashlightColor( 0.9, 1.0, 1.1 );
+
+           vanityPanel.SetAmbientLightColor( 0.08, 0.12, 0.16 );
+
+           vanityPanel.SetDirectionalLightModify( 0 );
+           vanityPanel.SetDirectionalLightColor( 0.05, 0.12, 0.25 );
+           vanityPanel.SetDirectionalLightDirection( 0.10, 0.67, -0.71 );
+
+           vanityPanel.SetDirectionalLightModify( 1 );
+           vanityPanel.SetDirectionalLightColor( 0.03, 0.05, 0.10 );
+           vanityPanel.SetDirectionalLightDirection( -0.86, -0.18, -0.47 );
+
+           vanityPanel.SetDirectionalLightModify( 2 );
+           vanityPanel.SetDirectionalLightColor( 0.08, 0.10, 0.16 );
+           vanityPanel.SetDirectionalLightDirection( 0.76, 0.48, -0.44 );
+		   //vanityPanel.SetSceneAngles( 0, 0, 0, true ); 
+        }
 		else if ( backgroundMap === 'blacksite' )
 		{
 			vanityPanel.SetFlashlightAmount( 1 );
@@ -1753,7 +1769,7 @@ else if ( backgroundMap === 'vertigo' )
     if (!elAlert) return;
 
     elAlert.SetDialogVariable("alert_value", "W.I.P");
-    elAlert.RemoveClass("hidden");
+    elAlert.AddClass("hidden");
     }
 	
     function _OnShowXrayCasePopup(toolid, caseId, bShowPopupWarning = false) {
@@ -1897,6 +1913,7 @@ else if ( backgroundMap === 'vertigo' )
 			'none'
 		);
 	};
+	
     function _UpdateStoreAlert() { // this function is for testing and currently does not work..
     let hideAlert;
     let objStore;
@@ -2099,9 +2116,9 @@ else if ( backgroundMap === 'vertigo' )
     if (g_bModVersionOutdated) {
         const notification = {
         color_class: "yellow-alert",
-        icon: "client_update",
-        title: $.Localize("#SFUI_MainMenu_Outofdate_Title"),
-        tooltip: "#SFUI_MainMenu_Outofdate_Body",
+        icon: "client_update_github",
+        title: $.Localize("#SFUI_MainMenu_Outofdate_Title_GitHub"),
+        tooltip: "#SFUI_MainMenu_Outofdate_Body_GitHub",
 		link: "https://github.com/DeformedSAS/Counter-Strike2-Global-Offensive/releases"
     };
       aAlerts.push(notification);
@@ -2283,158 +2300,12 @@ else if ( backgroundMap === 'vertigo' )
 			}
 		}
 	};
-	var _DevAlertMgr = function()
-	{
-		$('#MainMenuNavBarHome').checked = true;
-		UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle( 
-		'CS:GO Main Menu Alerts',
-		'Actions available:',
-		'',
-		'Remove all',
-		function() 
-		{ 
-			_debug_d3gk_IsQOffline = false;
-			_debug_d3gk_IsQOutOfDate = false;
-			_debug_d3gk_IsQOverwatch = false;
-			_debug_d3gk_IsQVAC = false;
-		}, 
-		'Out Of Date',
-		function() 
-		{ 
-			_debug_d3gk_IsQOffline = false;
-			_debug_d3gk_IsQOutOfDate = true;
-			_debug_d3gk_IsQOverwatch = false;
-			_debug_d3gk_IsQVAC = false;
-		}, 
-		'More...',
-		function() 
-		{ 
-			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle( 
-			'CS:GO Main Menu Alerts',
-			'Actions available: More...',
-			'',
-			'Overwatch Ban',
-			function() 
-			{ 
-				_debug_d3gk_IsQOffline = false;
-				_debug_d3gk_IsQOutOfDate = false;
-				_debug_d3gk_IsQOverwatch = true;
-				_debug_d3gk_IsQVAC = true;
-			}, 
-			'VAC Ban',
-			function() 
-			{ 
-				_debug_d3gk_IsQOffline = false;
-				_debug_d3gk_IsQOutOfDate = true;
-				_debug_d3gk_IsQOverwatch = false;
-				_debug_d3gk_IsQVAC = true;
-			}, 
-			'Offline',
-			function() 
-			{ 
-				_debug_d3gk_IsQOffline = true;
-				_debug_d3gk_IsQOutOfDate = true;
-				_debug_d3gk_IsQOverwatch = false;
-				_debug_d3gk_IsQVAC = false;
-			}, 
-			'dim' );
-		}, 
-		'dim' );
-		
-		_UpdateNotificationBar();
-	};
-	
-	var _DevPopups = function()
-	{		
-	$('#MainMenuNavBarHome').checked = true;
-		UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle( 
-		'CS:GO',
-		'Popups available:',
-		'',
-		'Default...', 
-		function() 
-		{
-			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle( 
-			'CS:GO',
-			'Popups available:',
-			'',
-			'Accept Match',
-			function() 
-			{ 
-				UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_accept_match.xml', '', 'none' ); 
-			}, 
-			'Matchmaking',
-			function() 
-			{ 
-				UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_go_team_matchmaking.xml', '', 'none' ); 
-			}, 
-			'More...',
-			function() 
-			{ 
-				UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle( 
-				'CS:GO',
-				'Popups available:',
-				'',
-				'Operation Store',
-				function() 
-				{ 
-					_NavigateToTab('JsDbg', 'playercard');
-					//UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_license_register.xml', '', 'none' ); 
-				}, 
-				'News',
-				function() 
-				{ 
-					UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_news.xml', '', 'none' );  
-					// UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_operation_store.xml', '', 'none' ); 
-					// _NavigateToTab('JsAccept', 'popups/popup_accept_match');
-				}, 
-				'Premier',
-				function() 
-				{ 
-					// _NavigateToTab('JsDbg', 'console');
-					// Nav Drawer // UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_navdrawer.xml', '', 'none' ); 
-					UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_premier_matchmaking.xml', '', 'none' ); 
-				}, 
-				'dim' );
-			}, 
-			'dim' );
-		}, 
-		'More...',
-		function() 
-		{
-			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle( 
-			'CS:GO',
-			'Popups available:',
-			'',
-			'Rank',
-			function() 
-			{ 
-				UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_acknowledge_xpgrant.xml', '', 'none' ); 
-			}, 
-			'Overwatch Verdict',
-			function() 
-			{ 
-				UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_mainmenu_overwatch_verdict.xml', '', 'none' ); 
-			}, 
-			'PickBan',
-			function() 
-			{ 
-				UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_tournament_pickban.xml', '', 'none' ); 
-			}, 
-			'dim' );
-		},
-		'Cancel',
-		function() 
-		{
-		}, 
-		'dim' );
-	};
 	
 var _ShowDevContextMenu = function() {
     function showOperation() {
         var elPanel = UiToolkitAPI.ShowCustomLayoutPopupParameters(
             '',
-            'file://{resources}/layout/popups/popup_exec_js.xml',
+            'file://{resources}/layout/operation/operation_main.xml',
             'none'
         );
         $.DispatchEvent('PlaySoundEffect', 'tab_mainmenu_inventory', 'MOUSE');
@@ -2455,18 +2326,8 @@ var _ShowDevContextMenu = function() {
         { label: 'DevUI', jsCallback: _NavigateToTab.bind(undefined, 'JSTests1', 'mainmenu_tests') },
         { label: 'CS360', jsCallback: _NavigateToTab.bind(undefined, 'JSCS360', 'mainmenu_playerstats') },
 
-        { label: 'MainMenuPerf', jsCallback: _NavigateToTab.bind(undefined, 'JsPerf', 'mainmenu_perf') },
-
-        { label: 'CSGOsStore', jsCallback: _NavigateToTab.bind(undefined, 'JSSmallStore', 'mainmenu_store') },
-        { label: 'CSGOsNews', jsCallback: _NavigateToTab.bind(undefined, 'JSNews', 'mainmenu_news') },
-
-        { label: 'ServerBrowser', jsCallback: _NavigateToTab.bind(undefined, 'JSServerBrowser', 'server_browser/server_browser') },
-        { label: 'DemoPlaybackPanel', jsCallback: _NavigateToTab.bind(undefined, 'CSGOHudDemoPlayback', 'hud/huddemoplayback') }, // doesn't work? not really sure.. it never appears. might be worth debugging to implement it like in cs2.
-
         { label: 'WelcomePopup', jsCallback: showWelcomePopup.bind(undefined) },
 
-        //{ label: 'Console', jsCallback: _NavigateToTab.bind(undefined, 'JSConsole', 'console') }, broken
-        { label: 'YouTube', jsCallback: _WebBrowser.bind(undefined) },
         { label: 'S2 Buymenu', jsCallback: _NavigateToTab.bind(undefined, 'JSBuymenu2', 'buymenu_cs2') },
         { label: 'S1 Buymenu', jsCallback: _NavigateToTab.bind(undefined, 'JSBuymenu', 'buymenu') },
 
@@ -2484,6 +2345,11 @@ var _ShowDevContextMenu = function() {
 	var _WebBrowser = function()
 {
     UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_browser.xml', '', 'none' );
+};
+
+var _VacNet_CSOW = function()
+{
+    UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_vacnet_csow.xml', '', 'none' );
 };
 var _OpStore = function()
 {
@@ -2745,6 +2611,7 @@ var _UnPauseMainMenuCharacter = function() {
 		OnEquipSlotChanged	 				: _OnEquipSlotChanged,
 		OpenPlayMenu						: _OpenPlayMenu,
 		WebBrowser                          : _WebBrowser,
+		VacNet_CSOW                          : _VacNet_CSOW,
 		OpStore                             : _OpStore,
 		ShowDevContextMenu                    : _ShowDevContextMenu,
 		OpenWatchMenu						: _OpenWatchMenu,
@@ -2772,14 +2639,14 @@ var _UnPauseMainMenuCharacter = function() {
 		ResetAcknowlegeHandler				: _ResetAcknowlegeHandler,
 		ShowNotificationBarTooltip			: _ShowNotificationBarTooltip,
 		ShowVote 							: _ShowVote,
-		DevPopups							: _DevPopups,
 		ShowStoreStatusPanel				: _ShowStoreStatusPanel,
 		HideStoreStatusPanel				: _HideStoreStatusPanel,
 		SetBackgroundMovie					: _SetBackgroundMovie,
 		PauseMainMenuCharacter				: _PauseMainMenuCharacter,
-		UnPauseMainMenuCharacter				: _UnPauseMainMenuCharacter,
+		UnPauseMainMenuCharacter			: _UnPauseMainMenuCharacter,
 		ShowTournamentStore					: _ShowTournamentStore,
 		TournamentDraftUpdate				: _TournamentDraftUpdate,
+		UpdateOverwatch						: _UpdateOverwatch,
 		ResetSurvivalEndOfMatch				: _ResetSurvivalEndOfMatch,
 		OnGoToCharacterLoadoutPressed		: _OnGoToCharacterLoadoutPressed,
 		ResetNewsEntryStyle					: _ResetNewsEntryStyle,
@@ -2790,8 +2657,9 @@ var _UnPauseMainMenuCharacter = function() {
 		GoToCharacterLoadout				: _GoToCharacterLoadout,
 		OpenSubscriptionUpsell				: _OpenSubscriptionUpsell,
 		UpdateUnlockCompAlert				: _UpdateUnlockCompAlert,
-		DevAlertMgr							: _DevAlertMgr,
-		PlayerActivityVoice                 : _PlayerActivityVoice
+		PlayerActivityVoice                 : _PlayerActivityVoice,
+		OnGcHelloReceived                   : _OnGcHelloReceived,
+		OnReviewInfoRecieved                : _OnReviewInfoRecieved
 	};
 })();
 
@@ -2819,10 +2687,11 @@ var _UnPauseMainMenuCharacter = function() {
 	$.RegisterForUnhandledEvent( 'PanoramaComponent_MyPersona_GameMustExitNowForAntiAddiction', MainMenu.GameMustExitNowForAntiAddiction );
 	$.RegisterForUnhandledEvent( 'PanoramaComponent_MyPersona_GcLogonNotificationReceived', MainMenu.GcLogonNotificationReceived );
 	$.RegisterForUnhandledEvent( 'PanoramaComponent_MyPersona_BetaEnrollmentStatusChange', MainMenu.BetaEnrollmentStatusChange );
-	$.RegisterForUnhandledEvent( 'PanoramaComponent_GC_Hello', MainMenu.UpdateUnlockCompAlert );
+	$.RegisterForUnhandledEvent('PanoramaComponent_GC_Hello', MainMenu.OnGcHelloReceived);
 	$.RegisterForUnhandledEvent( 'PanoramaComponent_MyPersona_InventoryUpdated', MainMenu.InventoryUpdated );
 	$.RegisterForUnhandledEvent( "PanoramaComponent_Lobby_MatchmakingSessionUpdate", MainMenu.LobbyPlayerUpdated );
 	$.RegisterForUnhandledEvent( "PanoramaComponent_Lobby_PlayerUpdated", MainMenu.LobbyPlayerUpdated );
+	$.RegisterForUnhandledEvent( 'PanoramaComponent_Overwatch_CaseUpdated', MainMenu.UpdateOverwatch );
 	$.RegisterForUnhandledEvent( 'InventoryItemPreview', MainMenu.OnInventoryInspect );
 	$.RegisterForUnhandledEvent( 'LootlistItemPreview', MainMenu.OnLootlistItemPreview );
 	$.RegisterForUnhandledEvent( 'ShowXrayCasePopup', MainMenu.OnShowXrayCasePopup );
@@ -2850,6 +2719,8 @@ var _UnPauseMainMenuCharacter = function() {
 	$.RegisterForUnhandledEvent( "MainMenuSwitchVanity", MainMenu.SwitchVanity );
 	$.RegisterForUnhandledEvent("PanoramaComponent_PartyList_PlayerActivityVoice", MainMenu.PlayerActivityVoice);
 	$.RegisterForUnhandledEvent( "MainMenuGoToCharacterLoadout", MainMenu.GoToCharacterLoadout );
+	$.RegisterForUnhandledEvent( "PanoramaComponent_Lobby_PlayerRemoved", MainMenu.LobbyPlayerUpdated );
+	//$.RegisterForUnhandledEvent('VacNet_OnReviewerInfoReceived', MainMenu.OnReviewInfoRecieved);
 	
 	MainMenu.MinimizeSidebar();
 	MainMenu.InitVanity();

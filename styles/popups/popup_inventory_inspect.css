@@ -9,12 +9,11 @@
     height: 100%;
     horizontal-align:center;
     vertical-align:center;
-    background-image: url("file://{images}/backgrounds/inspect.svg");
     background-repeat: no-repeat;
     background-size: auto 101%;
     background-position: 50% 50%;
     background-img-opacity: 0.2;
-    transition-property: opacity, transform;
+    transition-property: opacity;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
 }
@@ -30,6 +29,7 @@
 	opacity: 1;
 	visibility: visible;
 	brightness: 1;
+	transform: scale3d(1.5, 1.5, 1);
     transition-property: filter; 
     transition-duration: 0.5s; 
     transition-timing-function: ease-in-out; 
@@ -38,15 +38,11 @@
 .AspectRatio4x3 .inspect_bg_movie,
 .AspectRatio5x4 .inspect_bg_movie
 {
-	                                                                                                                                                               
-	transform: translateX( -17% );
 	overflow: noclip;
 }
 
 .AspectRatio16x10 .inspect_bg_movie
 {
-	                                                                                                                                                               
-	transform: translateX( -10% );
 	overflow: noclip;
 }
 
@@ -55,7 +51,6 @@
 {
 	width: 2520px;
 	height: 1080px;
-	transform: scaleY( 1.3 ) translateY( -15% );
 	overflow: noclip;
 }
 .AspectRatio22x15 .inspect_bg_movie
@@ -88,10 +83,6 @@
     height: 450px;
     horizontal-align: center;
     vertical-align: middle;
-    transform: translateY( 0% );
-    transition-property: transform;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in-out;
 }
 
 #id-character-button-container
@@ -110,20 +101,21 @@
 
 .popup-inspect-image.y-offset
 {
-    transform: translateY( -10% );
-    transition-property: transform;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in-out;
 }
 
 .popup-inspect-modelpanel--char
 {
-    width: 1300px;
+	width: 1200px;
     height: 100%;
-    vertical-align: bottom;
-    transition-property: opacity, transform;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in-out;
+	vertical-align: bottom;
+}
+
+.popup-inspect-modelpanel--char2
+{
+	width: 1200px;
+    height: 100%;
+	vertical-align: bottom;
+	horizontal-align: center;
 }
 
 .popup-char-model-controls

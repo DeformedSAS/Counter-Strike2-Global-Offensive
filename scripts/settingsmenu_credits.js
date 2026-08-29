@@ -23,7 +23,7 @@ var SettingsMenuCredits = ( function() {
 
 		sanitize_names = GameInterfaceAPI.GetSettingString( 'cl_sanitize_player_names' ) != 0;
 		hide_avatars = GameInterfaceAPI.GetSettingString( 'cl_hide_avatar_images' ) != 0;
-		$.Msg('Borrwed from Classic Offensive, ZooL please dont kill me..');
+		$.Msg('ZooL approved. Hes fine with his code being in CS2:GO.');
 		
 		var dummy = 0;
 		initiated = true;

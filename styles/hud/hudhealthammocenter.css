@@ -4,7 +4,7 @@
 @define yText: 2px;
 @define healthHeight: 53px;
 @define HA-width: 800px;
-CSGOHudHealthAmmoCenter
+CSGOHudHealthArmor
 {
 	height: 180px;
 	vertical-align: bottom;
@@ -14,7 +14,7 @@ CSGOHudHealthAmmoCenter
 	visibility: collapse;
 }
 
-CSGOHudHealthAmmoCenter.HUD--HA--active
+CSGOHudHealthArmor.HUD--HA--active
 {
 	visibility: visible;
 }
@@ -56,7 +56,7 @@ CSGOHudHealthAmmoCenter.HUD--HA--active
 	
 }
 
-CSGOHudHealthAmmoCenter.HUD--no-player
+CSGOHudHealthArmor.HUD--no-player
 {
 	visibility: collapse;
 }
@@ -644,8 +644,7 @@ CSGOHudHealthAmmoCenter.HUD--no-player
 	horizontal-align: center;
 	vertical-align: center;
 	background-color: hud-blur-bg-color;
-	world-blur: hudWorldBlur;
-	opacity-mask: url("s2r://panorama/images/masks/circle_png.vtex");
+	opacity-mask: url("file://{images}/masks/circle.png");
 }
 
 .hud-HA-center__circle
@@ -802,8 +801,7 @@ CSGOHudHealthAmmoCenter.HUD--no-player
 {
 	width: 100%;
 	height: card-svg-height;
-	opacity-mask: url("s2r://panorama/images/hud/kill_mask.vsvg");
-	world-blur: hudWorldBlur;
+	opacity-mask: url("file://{images}/hud/kill_mask.svg");
 	background-color: hud-blur-bg-color;
 }
 
@@ -811,8 +809,8 @@ CSGOHudHealthAmmoCenter.HUD--no-player
 {
 	width: 100%;
 	height: card-svg-height;
-	opacity-mask: url("s2r://panorama/images/hud/kill_mask.vsvg");
-	background-image: url("s2r://panorama/images/backgrounds/bluedots_large_png.vtex");
+	opacity-mask: url("file://{images}/hud/kill_mask.svg");
+	background-image: url("file://{images}/backgrounds/bluedots_large.png");
 	background-size: backgroundDotsSize;
 	background-img-opacity: 0.2;
 }
@@ -1119,13 +1117,11 @@ Label.hud-HA__kills__count
 	width: spec-width;
 	height: 72px;
 	border-radius: 5px;
-	world-blur: hudWorldBlur;
 	background-color: hud-blur-bg-color;
 }
 
 .HudSpecplayer__Bg.HUD--weapon--scoped
 {
-	world-blur: none;
 }
 
 .HudSpecplayer__Bg_panel
@@ -1134,7 +1130,7 @@ Label.hud-HA__kills__count
 	height: 72px;
 	vertical-align: bottom;
 	horizontal-align: center;
-	background-image: url("s2r://panorama/images/backgrounds/bluedots_large_png.vtex");
+	background-image: url("file://{images}/backgrounds/bluedots_large.png");
 	background-size: backgroundDotsSize;
 	background-img-opacity: .03;
 }
@@ -1195,7 +1191,7 @@ Label.hud-HA__kills__count
 
 .HUD--team--ct .HudSpecplayerRoot__avatardefault
 {
-	background-image: url("s2r://panorama/images/hud/teamcounter/teamcounter_alivebgct_png.vtex");
+	background-image: url("file://{images}/hud/teamcounter/teamcounter_alivebgct.png");
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -1203,7 +1199,7 @@ Label.hud-HA__kills__count
 
 .HUD--team--terrorist .HudSpecplayerRoot__avatardefault
 {
-	background-image: url("s2r://panorama/images/hud/teamcounter/teamcounter_alivebgt_png.vtex");
+	background-image: url("file://{images}/hud/teamcounter/teamcounter_alivebgt.png");
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -1215,7 +1211,6 @@ Label.hud-HA__kills__count
 	vertical-align: center;
 	padding-left: 14px;
 	max-width: 190px;
-	text-overflow: ellipsis;
 	flow-children: down;
 }
 
@@ -1228,7 +1223,7 @@ Label.hud-HA__kills__count
 	width: 190px;
 	color: rgba(255, 255, 255, 0.753);
 	white-space: nowrap;
-	text-overflow: shrink min( 14px ) ellipsis;
+	text-overflow: ellipsis;
 }
 
 #jsHonorIcon
@@ -1408,7 +1403,7 @@ Label.hud-HA__kills__count
 	background-repeat: no-repeat;
 	background-position: 15% 41%;
 	background-size: 17% 215%;
-	background-image: url("s2r://panorama/images/hud/winpanel/ct_patch_png.vtex");
+	background-image: url("file://{images}/hud/winpanel/ct_patch.png");
 	visibility: collapse;
 }
 

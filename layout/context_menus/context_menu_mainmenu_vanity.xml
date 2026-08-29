@@ -24,6 +24,8 @@
 				<CSGOSettingsEnumDropDown class="content-navbar__tabs__dropdown_vanity" convar="ui_mainmenu_bkgnd_movie_CC4ECB9" ondropdownselectionchanged="$.DispatchEvent('CSGOMainInitBackgroundMovie');">
 				    <Label text="#SFUI_Map_de_cache" value="cache" id="ui_mainmenu_bkgnd_movie_cache"/>
 					<Label text="#SFUI_Map_de_ancient" value="ancient" id="ui_mainmenu_bkgnd_movie_ancient"/>
+					<Label text="#SFUI_Map_de_ancient_day" value="ancient_day" id="ui_mainmenu_bkgnd_movie_ancient_day"/>
+					<Label text="#SFUI_Map_de_ancient_night" value="ancient_night" id="ui_mainmenu_bkgnd_movie_ancient_night"/>
 					<Label text="#SFUI_Map_de_anubis" value="anubis" id="ui_mainmenu_bkgnd_movie_anubis"/>
 					<Label text="#SFUI_Map_de_overpass" value="overpass" id="ui_mainmenu_bkgnd_movie_overpass"/>
 					<Label text="#SFUI_Map_dz_sirocco" value="sirocco" id="ui_mainmenu_bkgnd_movie_sirocco"/>

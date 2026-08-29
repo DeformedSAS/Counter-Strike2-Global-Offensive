@@ -1,6 +1,6 @@
 "use strict";
 
-var MusicPreview = (function () { // note that this is really bad code but atleast it mostly works properly.. don't try to preview music after leaving a match tho. it's a nightmare. and no ai was used here.
+var MusicPreview = (function () {
 
     var m_schfnMusicMvpPreviewEnd = null;
     var m_currentEvent = ""; 
@@ -29,12 +29,23 @@ var MusicPreview = (function () { // note that this is really bad code but atlea
         }
 
         var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
+        
+        // equip item debug
+        $.Msg("[PanoramaScript] Equipped Item ID = " + itemId + "\n");
+        
         if (!itemId) return;
 
         var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
-        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
-        if (!musicName || musicName === "") {
+        
+        // extracted music kit id debug
+        $.Msg("[PanoramaScript] Music Kit ID = " + musicId + "\n");
 
+        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
+        
+        // internal string name debug
+        $.Msg("[PanoramaScript] Music Name = " + musicName + "\n");
+
+        if (!musicName || musicName === "") {
             _CleanupCurrent();
             _PlayMenuSong();
             return;
@@ -62,10 +73,13 @@ var MusicPreview = (function () { // note that this is really bad code but atlea
 
         m_currentEvent = eventName;
 
+        $.DispatchEvent('PlayMainMenuMusic', true, true); 
+        _StopMenuMusic();
+        InventoryAPI.PlayItemPreviewMusic(itemId, 'startround_01.mp3');
+        InventoryAPI.StopItemPreviewMusic();
+
         $.Schedule(0.01, function() {
             if (m_currentEvent === eventName) {
-                _StopMenuMusic();
-				 $.DispatchEvent('PlayMainMenuMusic', false, false);
                 $.DispatchEvent('PlaySoundEffect', eventName, 'MOUSE');
             }
         });

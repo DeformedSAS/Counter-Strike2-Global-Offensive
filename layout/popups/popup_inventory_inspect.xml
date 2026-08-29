@@ -14,7 +14,7 @@
         <include src="file://{resources}/scripts/generated/items_event_current_generated_store.js" />
 		<include src="file://{resources}/scripts/common/iteminfo.js" />
 	</scripts>
-	<PopupCustomLayout class="PopupPanel Capability Hidden" useglobalcontext="true" popupbackground="blur" oncancel="InventoryInspect.ClosePopup();" onload="InventoryInspect.Init()">
+	<PopupCustomLayout class="PopupPanel Capability Hidden" useglobalcontext="true" popupbackground="blur" popupfullscreenopaque="true" oncancel="InventoryInspect.ClosePopup();" onload="InventoryInspect.Init()">
 		<Panel class="mainmenu-content__container mainmenu-content__container--inspect" useglobalcontext="true">
 			<Panel class="full-width full-height top-bottom-flow vertical-center">
 				<Panel id="PopUpInspectFullScreenHostContainer" class="full-width full-height">

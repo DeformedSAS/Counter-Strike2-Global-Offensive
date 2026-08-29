@@ -1,42 +1,42 @@
-                                       
+/* Prettified by Source 2 Viewer 19.1.0.0 - https://valveresourceformat.github.io */
 
-@define winPanelPosY: 210px;
-@define winPanelPosYRoundEndReport: 120px;
+@define winPanelPosY: 190px;
+@define winPanelWidth: 640px;
+@define winPanelPosYDeathmatch: 0px;
 @define winPanelPosYSurvival: 0px;
-@define winPanelWidth: 1020px;
-@define winPanelHeight: 78px;
-@define winPanelHeightSurvival: 108px;
+@define winPanelHeightSurvival: 0px;
 @define musicKitAnimDuration: 0.0s;
-
-
 CSGOHudWinPanel Label
 {
-    font-family: Stratum2, 'Arial Unicode MS';
+	font-family: Stratum2, 'Arial Unicode MS';
 }
-
-
-                                                                               
-                                                                               
-                                                                               
 
 .WinPanelRoot
 {
-	width: winPanelWidth;
-	height: 500px;
-
-	horizontal-align: center;
+	width: 100%;
+	height: fit-children;
 	y: winPanelPosY;
-
+	horizontal-align: center;
 	flow-children: down;
+	transition-property: position, opacity;
+	transition-duration: .3s;
+	transition-timing-function: ease-out;
 }
 
-.WinPanelRoot.ShowRoundEndReport {
-	y: winPanelPosYRoundEndReport;
+.winpanelrow--ris
+{
+	horizontal-align: center;
 }
 
-.ShowRoundEndReport #RoundImpactScoreReport,
-.ShowRoundEndReport #RoundImpactScoreMain {
-	visibility: visible;
+.ris__main
+{
+	width: 0px;
+	visibility: collapse;
+	transition-property: width, brightness, position;
+	transition-duration: 0.3s, .5s, 0.5s;
+	transition-delay: .2s;
+	transition-timing-function: ease-in-out;
+	brightness: 100;
 }
 
 .ShowRoundEndReport #WinPanelRow,
@@ -47,49 +47,22 @@ CSGOHudWinPanel Label
 	visibility: collapse;
 }
 
+.winpanel-round-end-report-visible .ris__main
+{
+	visibility: visible;
+	width: winPanelWidth;
+	brightness: 1;
+}
 
-.WinPanelRoot--SurvivalVictory.WinPanelRoot,
-.WinPanelRoot--SurvivalDeath.WinPanelRoot
+.endofmatch .WinPanelRoot
+{
+	opacity: 0;
+}
+
+.WinPanelBasicContainer
 {
 	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.281);
-	y: winPanelPosYSurvival;
-}
-
-.WinPanelFadeParent
-{
-	width: 100%;
-	height: 100%;
-	flow-children: down;
-}
-
-.WinPanelRoot--ShowAnim .WinPanelFadeParent
-{
-	opacity: 1.0;
-	animation-name: WinPanelRootShowAnim;
-	animation-duration: 0.2s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
-}
-
-.WinPanelRoot--SurvivalVictory.WinPanelRoot--ShowAnim .WinPanelFadeParent,
-.WinPanelRoot--SurvivalDeath.WinPanelRoot--ShowAnim .WinPanelFadeParent
-{
-	opacity: 1.0;
-	animation-name: WinPanelRootShowAnimSurvival;
-	animation-duration: 0.5s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 1;
-}
-
-.WinPanelRoot--HideAnim .WinPanelFadeParent
-{
-	opacity: 0.0;
-	animation-name: WinPanelRootHideAnim;
-	animation-duration: 0.2s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
+	horizontal-align: center;
 }
 
 .WinPanelRoot--ForceHide
@@ -97,386 +70,313 @@ CSGOHudWinPanel Label
 	visibility: collapse;
 }
 
-@keyframes 'WinPanelRootShowAnim'
+.WinPanelRow--White-flash
 {
-	0%
-	{
-		 opacity: 0.0;
-	}
-
-	100%
-	{
-		opacity: 1.0;
-	}
+	transform: scaleY(0);
+	height: 50%;
+	background-color: white;
+	horizontal-align: center;
+	box-shadow: #ffffffcc 0px 0px 10px 05px ;
+	z-index: 3;
+	transition-property: transform, opacity;
+	transition-duration: .1s, .1s;
+	transition-timing-function: ease-in;
 }
 
-@keyframes 'WinPanelRootShowAnimSurvival'
+.WinPanelRoot--ShowAnim .WinPanelRow--White-flash
 {
-	0%
-	{
-		transform: Scale3d( 3.0, 3.0, 3.0 ) translateY( 500px );
-		opacity: 0.0;
-	}
-
-	20%
-	{
-		opacity: 1.0;
-	}
-
-	100%
-	{
-		transform: Scale3d( 1, 1, 1 ) translateY( 0px );
-		opacity: 1.0;
-	}
-}
-
-@keyframes 'WinPanelRootHideAnim'
-{
-	0%
-	{
-		 opacity: 1.0;
-	}
-
-	100%
-	{
-		opacity: 0.0;
-	}
-}
-
-                                                                               
-                                                                               
-                                                                               
-
-.WinPanelRow
-{
-	width: 100%;
-	margin-bottom: 0px;
-	visibility: visible;
-}
-
-.WinPanelRow--Hidden,
-.WinPanelRoot--SurvivalVictory .WinPanelRow--Main,
-.WinPanelRoot--SurvivalDeath .WinPanelRow--Main
-{
-	visibility: collapse;
+	transform: scaleY(1);
+	height: 50%;
+	opacity: 0;
+	transition-property: transform, opacity;
+	transition-duration: .25s, 1s;
+	transition-timing-function: ease-out;
 }
 
 .WinPanelRow--Main
 {
-	height: winPanelHeight;
+	width: 920px;
+	transform: scale3d( 0, 1, 1 );
+	height: 80px;
+	
+	background-color: white;
+	opacity-mask: url("file://{images}/masks/fade-both-right-left2.png");
+	horizontal-align: center;
+	z-index: 2;
+	opacity: 0;
+	transition-property: transform, background-color, opacity;
+	transition-delay: .0s, .25s, .25s;
+	transition-duration: .25s, .25s, 0s;
+	transition-timing-function: ease-in;
 }
 
-
-.WinPanelRow--FlowDown
+.WinPanelRoot--ShowAnim .WinPanelRow--Main
 {
+	transform: scale3d( 1, 1, 1 );
+	background-color: rgba(255, 255, 255, 0);
+	opacity: 1;
+	transition-property: transform, background-color, opacity;
+	transition-delay: .25s, 0s, 0s;
+	transition-duration: .25s, .25s, 25s;
+	transition-timing-function: ease-in;
+}
+
+.hud-team-t .WinPanelRoot--ShowAnim.WinPanelRoot--CTWin .WinPanelRow--Main,
+.hud-team-ct .WinPanelRoot--ShowAnim.WinPanelRoot--TWin .WinPanelRow--Main
+{
+	background-color: rgba(110, 7, 7, 0.9);
+}
+
+.hud-team-t .WinPanelRoot--ShowAnim.WinPanelRoot--TWin .WinPanelRow--Main,
+.hud-team-ct .WinPanelRoot--ShowAnim.WinPanelRoot--CTWin .WinPanelRow--Main
+{
+	background-color: rgba(3, 107, 12, 0.9);
+}
+
+.WinPanelRow__Contents
+{
+	width: 100%;
 	flow-children: down;
 }
 
-.WinPanelRow--Anim
+.WinPanelRow__BG__Glitch
 {
-	opacity: 1.0;
-	
-	animation-name: WinPanelRowAnim;
-	animation-duration: 0.0s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	visibility: collapse;
+	background-size: auto auto;
+	background-image: url("file://{resources}/videos/digital_glitch.webm");
+	-s2-mix-blend-mode: additive;
 }
 
-@keyframes 'WinPanelRowAnim'
+.WinPanelRoot--ShowAnim .WinPanelRow__BG__Glitch
+{
+	visibility: visible;
+	animation-name: eom-show-glitch;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes 'eom-show-glitch'
 {
 	0%
 	{
-		opacity: 0.0; 
-		transform: translateY( 300px );
+		opacity: 1;
 	}
-
+	
 	100%
 	{
-		opacity: 1.0; 
-		transform: translateY( 0px );
+		opacity: 0.0;
 	}
+	
 }
 
-.WinPanelRow__Title
+.WinPanelRoot--ShowAnim .WinPanelRow__BG__Glitch
 {
-	width: 100%;
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #00000033 ) , color-stop(0.50, #00000066), color-stop( 0.80, #00000033 ), to( #00000000 ) );
-	padding: 5px;
-	font-size: 18px;
-	font-weight: normal;
-	color: #ffffff;
-	text-align: center;
-	text-shadow-fast: 2px 1px #000000bf;
-}
-
-.WinPanelRow__Title--Bold
-{
-	                    
-}
-
-.WinPanelRow__Body
-{
-	width: 100%;
-	background-color: #00000060;
-	padding: 5px;
-}
-
-.WinPanelRow__Body--FlowDown
-{
-	flow-children: down;
-}
-
-
-                                                                               
-                                                                               
-                                                                               
-
-.WinPanelTeam
-{
-	width: 100%;
-	height: 100%;
-	visibility: collapse;
-}
-
-.WinPanelRoot--CTWin .WinPanelTeam,
-.WinPanelRoot--TWin .WinPanelTeam,
-.WinPanelRoot--Draw .WinPanelTeam
-{
+	opacity: 0 ;
 	visibility: visible;
 }
 
-                                                                               
-                                                                               
-                                                                               
+.hud-team-ct .WinPanelRoot--CTWin .WinPanelRow__BG__Glitch,
+.hud-team-ct .WinPanelRoot--CTWin .WinPanelRow__BG__Dots,
+.hud-team-t .WinPanelRoot--TWin .WinPanelRow__BG__Glitch,
+.hud-team-t .WinPanelRoot--TWin .WinPanelRow__BG__Dots
+{
+	wash-color: positiveColor;
+}
+.hud-team-ct .WinPanelRoot--TWin .WinPanelRow__BG__Glitch,
+.hud-team-ct .WinPanelRoot--TWin .WinPanelRow__BG__Dots,
+.hud-team-t .WinPanelRoot--CTWin .WinPanelRow__BG__Glitch,
+.hud-team-t .WinPanelRoot--CTWin .WinPanelRow__BG__Dots
+{
+	wash-color: negativeColor;
+}
 
-.TeamBG
+.WinPanelRoot--Draw .WinPanelRow__BG__Glitch,.WinPanelRoot--Draw .WinPanelRow__BG__Dots
+{
+	wash-color: rgb(172, 172, 172);
+}
+
+.WinPanelRow__BG
 {
 	width: 100%;
-	height: 100%;
 }
 
-.TeamBG__hrTop { 
-	width: 100%;
-	height: 1px;
-	vertical-align: top;
-	z-index: 5;
-}
-
-.TeamBG__hrMid { 
-	width: 100%;
-	height: 1px;
-	y: 80px;
-	z-index: 5;
-}
-
-.TeamBG__hrBot { 
-	width: 100%;
-	height: 1px;
-	vertical-align: bottom;
-	z-index: 5;
-}
-
-.TeamBG__Border
+.WinPanelRow__BG__Container
 {
 	width: 100%;
-	height: 100%;
-	padding: 3px;
 }
 
-.TeamBG__MainBG
+.WinPanelRow__BG__AnimBg
 {
-	width: 100%;
-	height: 100%;
-	z-index: 4;
-}
-
-.TeamBG__TitleBG
-{
-	width: 100%;
-	height: 39px;
-	y: 4px;
-	                                                                                                                                                                                                                         
-}
-
-.TeamBG__DefaultLogo
-{
-	width: 88px;
-	height: 88px;
-	horizontal-align: center;
-	vertical-align: top;
-	margin-top: -82px;
-	opacity: 1;
-	background-size: contain;
 	background-repeat: no-repeat;
-	visibility: visible;
-	z-index: 10;
+	horizontal-align: center;
+	width: 35%;
+	height: 100%;
+	background-size: 100% 100%;
+	background-position: 50% 50%;
+	brightness: .3;
+	opacity: .6;
 }
 
-.WinPanelRoot--ShowTeamLogo .TeamBG__DefaultLogo
+.HudSpecAnimBG.hidden
 {
 	visibility: collapse;
 }
 
-.TeamBG__TeamLogo
-{
-	width: 94px;
-	height: 94px;
-	horizontal-align: center;
-	vertical-align: top;
-	margin-top: -84px;
-	opacity: 1;
-	background-size: contain;
-	background-repeat: no-repeat;
-	z-index: 10;
-	visibility: collapse;
-    img-shadow: 0px 0px 1px 1.5 #000000AA;
-}
-
-.WinPanelRoot--ShowTeamLogo .TeamBG__TeamLogo
-{
-	visibility: visible;
-}
-
-                        
-
-.WinPanelRoot--CTWin .TeamBG__hrTop
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #000000cc ) , color-stop(0.50, #000000ff), color-stop( 0.80, #000000cc ), to( #00000000 ) );
-}
-
-
-.WinPanelRoot--CTWin .TeamBG__hrBot
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #000000cc ) , color-stop(0.50, #000000ff), color-stop( 0.80, #000000cc ), to( #00000000 ) );
-}
-
-.WinPanelRoot--CTWin .TeamBG__Border
-{
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #5A7182 ), to( #1F2A31 ) );
-}
-
-.WinPanelRoot--CTWin .TeamBG__MainBG
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #0c101300 ), color-stop( 0.20, #18202599 ) , color-stop(0.50, #182025e6), color-stop( 0.80, #18202599 ), to( #18202500 ) );
-}
-
-.WinPanelRoot--CTWin .TeamBG__DefaultLogo
-{
-	background-image: url( "file://{images}/icons/ct_logo.svg" );
-	horizontal-align: center;
-}
-
-.WinPanelRoot--CTWin .TeamFG__Title
-{
-	color: color-CT;
-}
-
-                       
-
-.WinPanelRoot--TWin .TeamBG__hrTop
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #5A4C2F00 ), color-stop( 0.20, #5A4C2F00 ) , color-stop(0.5, #5A4C2F45), color-stop( 0.80, #5A4C2F00 ), to( #5A4C2F00 ) );
-}
-
-.WinPanelRoot--TWin .TeamBG__hrBot
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #000000cc ) , color-stop(0.50, #000000ff), color-stop( 0.80, #000000cc ), to( #00000000 ) );
-}
-
-.WinPanelRoot--TWin .TeamBG__MainBG
-{
-	                            
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #261A0900 ), color-stop( 0.20, #2d231599 ) , color-stop(0.50, #2d2315e6), color-stop( 0.80, #2d231599 ), to( #261A0900 ) );
-}
-
-.WinPanelRoot--TWin .TeamBG__DefaultLogo
-{
-	background-image: url( "file://{images}/icons/t_logo.svg" );
-	horizontal-align: center;
-}
-
-.WinPanelRoot--TWin .TeamFG__Title
-{
-	color: color-T;
-}
-
-
-                      
-
-.WinPanelRoot--Draw .TeamBG__Border
-{
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #5A7182 ), to( #1F2A31 ) );
-}
-
-.WinPanelRoot--Draw .TeamBG__MainBG
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #00000099 ) , color-stop(0.50, #000000e6), color-stop( 0.80, #00000099 ), to( #00000000 ) );
-}
-
-.WinPanelRoot--SurvivalVictory.WinPanelRoot--Draw .TeamBG__MainBG,
-.WinPanelRoot--SurvivalDeath.WinPanelRoot--Draw .TeamBG__MainBG
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #56492200 ), color-stop( 0.20, #56492299 ) , color-stop(0.50, #564922e6), color-stop( 0.80, #56492299 ), to( #56492200 ) );
-}
-
-.WinPanelRoot--Draw .TeamBG__DefaultLogo
-{
-	visibility: collapse;
-}
-
-                                                                               
-                                                                               
-                                                                               
-
-.TeamFG
+.WinPanelRow__BG__Dots
 {
 	width: 100%;
 	height: 100%;
+	background-image: url("file://{images}/backgrounds/bluedots_large.png");
+	background-size: 45% auto;
+	background-img-opacity: .2;
 }
 
-.TeamFG__Title
+.WinPanel__Result
+{
+	horizontal-align: center;
+	vertical-align: center;
+	flow-children: none;
+	width: 100%;
+	height:fill-parent-flow(1);
+	border-top: 0px solid rgb(255, 255, 255);
+	border-bottom: 0px solid rgb(255, 255, 255);
+}
+
+.WinPanel__Result__TeamIcon
+{
+	margin-right: 8px;
+	width: height-percentage( 100% );
+	height: 48px;
+	visibility: collapse;
+}
+
+.HUD--localplayer--spectator .WinPanel__Result__TeamIcon
+{
+	visibility: visible;
+}
+
+.WinPanel__Result__Title
 {
 	width: 100%;
-	vertical-align: top;
+	height: 44px;
+	margin: 4px 0px;
+	vertical-align: center;
+	horizontal-align: center;
 	font-weight: bold;
-	font-size: 26px;
-    color: #dadada;
-	letter-spacing: 0.5px;
+	font-size: 38px;
+	color: rgb(255, 255, 255);
+	letter-spacing: 1px;
 	text-align: center;
-	y: 6px;
+	-s2-mix-blend-mode: additive;
 }
 
-.WinPanelRoot--SurvivalVictory .TeamFG__Title,
-.WinPanelRoot--SurvivalDeath .TeamFG__Title
+.WinPanel__Result__Title--Faded
 {
-	font-size: 46px;
-	color: #ffffff;
+	font-size: 75px;
+	opacity: .3;
+	height: 100%;
+	transform: translateY(-5px) scale3d(.9, 1, 1);
+	transition-property: opacity, transform;
+	transition-duration: 8s;
+	transition-timing-function: ease-in;
 }
 
-.TeamFG__Surrender
+.WinPanelRoot--ShowAnim .WinPanel__Result__Title
 {
-	y: 34px;
-	width: 100%;
+	letter-spacing: 14px;
+}
 
+.WinPanelRoot--ShowAnim .WinPanel__Result__Title--Faded
+{
+	transform: translateY(-5px) scale3d(1.2, 1, 1);
+	opacity: 0;
+	transition-property: opacity, transform;
+	transition-duration: 8s;
+	transition-timing-function: ease-in-out;
+}
+
+.hud-team-t .WinPanelRoot--ShowAnim.WinPanelRoot--CTWin .WinPanel__Result,
+.hud-team-ct .WinPanelRoot--ShowAnim.WinPanelRoot--TWin .WinPanel__Result
+{
+	border-top: 2px solid negativeColor;
+	border-bottom: 2px solid negativeColor;
+}
+
+.hud-team-ct .WinPanelRoot--ShowAnim.WinPanelRoot--CTWin .WinPanel__Result,
+.hud-team-t .WinPanelRoot--ShowAnim.WinPanelRoot--TWin .WinPanel__Result
+{
+	border-top: 2px solid positiveColor;
+	border-bottom: 2px solid positiveColor;
+}
+
+.hud-team-ct .WinPanelRoot--TWin .WinPanel__Result__Title,
+.hud-team-t .WinPanelRoot--CTWin .WinPanel__Result__Title
+{
+	color: negativeColor;
+}
+
+.hud-team-ct .WinPanelRoot--CTWin .WinPanel__Result__Title,
+.hud-team-t .WinPanelRoot--TWin .WinPanel__Result__Title
+{
+	color: positiveColor;
+}
+
+.WinPanel__Result__Title__Surrender
+{
 	font-size: 16px;
-    color: white;
+	font-weight: medium;
+	color: rgb(14, 14, 14);
 	letter-spacing: 0px;
 	text-align: center;
-
+	width: fit-children;
 	vertical-align: top;
+	horizontal-align: center;
+	padding: 4px 8px;
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 0.445);
+	
+	transform: translateY(-10px);
+	visibility: collapse;
+	background-color: hud-blur-bg-color;
 }
 
+.WinPanelRoot--Surrender
+{
+	visibility: visible;
+}
 
-                                                                               
-                                                                               
-                                                                               
+.WinPanelRow--funfacts
+{
+	horizontal-align: center;
+	vertical-align: bottom;
+	height: 24px;
+	width: 100%;
+}
+
+.WinPanelRow--funfacts__text
+{
+	max-width: 100%;
+	font-size: 14px;
+	font-weight: normal;
+	color: #ffffff;
+	horizontal-align: center;
+	text-align: center;
+	text-overflow: shrink;
+	padding: 4px 12px;
+}
 
 .WinPanelGunGame
 {
 	width: 100%;
 	height: 100%;
-
+	background-color: red;
 	visibility: collapse;
+	z-index: 5;
 }
 
 .WinPanelRoot--GunGame .WinPanelGunGame
@@ -484,16 +384,10 @@ CSGOHudWinPanel Label
 	visibility: visible;
 }
 
-
-                                                                               
-                                                                                  
-                                                                               
-
 .GunGameBG
 {
 	width: 100%;
 	height: 100%;
-
 	opacity: 0.98;
 }
 
@@ -517,14 +411,8 @@ CSGOHudWinPanel Label
 	width: 100%;
 	height: 39px;
 	y: 4px;
-
 	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #000000cc ) , color-stop(0.50, #000000ff), color-stop( 0.80, #000000cc ), to( #00000000 ) );
 }
-
-
-                                                                               
-                                                                               
-                                                                               
 
 .GunGameFG
 {
@@ -538,33 +426,58 @@ CSGOHudWinPanel Label
 	vertical-align: top;
 	font-weight: bold;
 	font-size: 30px;
-    color: #a7a7a7;
+	color: #a7a7a7;
 	letter-spacing: 0.5px;
 	text-align: center;
-	y: 6px;
 }
-
-
-                                                                               
-                                                                               
-                                                                               
 
 .MVP_content
 {
-	vertical-align: bottom;
+	width: 0px;
+	height: 60px;
 	horizontal-align: center;
-	visibility: visible;
-	margin-bottom: 6px;
-}	
+	vertical-align: middle;
+	
+	background-color: rgba(0, 0, 0, 0.75);
+	margin-top: 10px;
+	opacity-mask: url("file://{images}/masks/fade-both-right-left2.png");
+	opacity: 0;
+	transition-delay: 1s;
+	transition-property: width, transform, opacity;
+	transition-duration: .1s, .3s, .3s;
+	transition-timing-function: ease-in-out;
+	margin-bottom: 4px;
+}
 
+.WinPanelRoot--ShowAnim .MVP_content
+{
+	width: 920px;
+	opacity: 1;
+	transition-delay: .25s, 0s, 0s;
+	transition-property: width, transform, opacity;
+	transition-duration: .25s;
+	transition-timing-function: ease-in-out;
+}
 
 .MVP
 {
-	flow-children: right;
-	width: fit-children;
+	flow-children: down;
+	width: 100%;
 	horizontal-align: center;
 	vertical-align: middle;
-	                                                                                                                                                                                       
+	margin: 0px 24px;
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: .3s;
+	transition-timing-function: ease-in-out;
+}
+
+.WinPanelRoot--ShowAnim .MVP
+{
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: .1s;
+	transition-timing-function: ease-in-out;
 }
 
 .MVP--Hidden
@@ -572,21 +485,11 @@ CSGOHudWinPanel Label
 	visibility: collapse;
 }
 
-              
- 
-	               
-	                    
-   
 
 .MVP__Layout--Hidden
 {
 	visibility: collapse;
 }
-
-.MVP__Layout--Left
-{
-}
-
 
 .MVP__Layout--Right
 {
@@ -596,9 +499,9 @@ CSGOHudWinPanel Label
 .MVP__Winner
 {
 	width: fit-children;
-	                                  
 	flow-children: right;
-	                       
+	horizontal-align: center;
+	margin: 12px 0px;
 }
 
 .MVP__WinnerStar
@@ -608,27 +511,15 @@ CSGOHudWinPanel Label
 	margin: 0px 2px 3px 0px;
 }
 
-.WinPanelRoot--SurvivalVictory .MVP__WinnerStar,
-.WinPanelRoot--SurvivalDeath .MVP__WinnerStar,
-.WinPanelRoot--GunGame .MVP__WinnerStar
-{
-	visibility: collapse;
-}
-
 .MVP__WinnerName
 {
 	vertical-align: middle;
-	padding-left: 2px;
 	font-size: 18px;
-	font-weight: normal;
+	height: 20px;
+	text-overflow: ellipsis;
+	font-weight: medium;
 	color: #ffffff;
-}
-
-.WinPanelRoot--SurvivalVictory .MVP__WinnerName,
-.WinPanelRoot--SurvivalDeath .MVP__WinnerName
-{
-	font-size: 34px;
-	color: #ffffff;
+	width: fit-children;
 }
 
 .WinPanelRoot--GunGame .MVP__WinnerName
@@ -636,19 +527,47 @@ CSGOHudWinPanel Label
 	color: #ffffff;
 }
 
+.WinPanelRow__BG__AnimBg
+{
+	opacity-mask: url("file://{images}/masks/top-bottom-fade.png");
+}
+
+.WinPanelRow__BG__AnimBg--anim
+{
+	animation-name: BackgroundScroll;
+	animation-duration: 4s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+}
+
+@keyframes 'BackgroundScroll'
+{
+	0%
+	{
+		transform: translatey( -40% );
+	}
+	
+	100%
+	{
+		transform: translatey( 0% );
+	}
+	
+}
+
 .MVP__Avatar
 {
-	width: 32px;
-	height: 32px;
-	                          
+	width: 40px;
+	height: 40px;
 	vertical-align: center;
 	margin-right: 8px;
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #6d6d6d ), to( #464646) );
+	box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px 0px ;
 }
 
-.MVP__Avatar .AvatarImage
+.MVP__Winner_Icons
 {
-	padding: 2px;
+	vertical-align: center;
+	overflow: noclip;
 }
 
 .MVP__Avatar--ExtraMargin
@@ -657,32 +576,55 @@ CSGOHudWinPanel Label
 	margin-right: 10px;
 }
 
-  
-                                    
- 
-	                  
- 
-  
-
 .MVP__AvatarText
 {
 	vertical-align: center;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	color: #999999;
-}
-
-.MVP__MusicKit
-{
-	flow-children: right;
-	width: fit-children;
-	                                  
-	vertical-align: middle;
 }
 
 .WinPanelRoot--SurvivalVictory .MVP__MusicKit,
 .WinPanelRoot--SurvivalDeath .MVP__MusicKit,
 .MVP__MusicKit--Hidden
+{
+	visibility: collapse;
+}
+
+.MVP__MusicKitIcon
+{
+	width: 38px;
+	height: 38px;
+	vertical-align: bottom;
+	transform: translatey( 10px) translateX(12px);
+	visibility: visible;
+}
+
+.MVP__MusicKit--show .MVP__MusicKit,.MVP__MusicKit--show .MVP__MusicKitIcon
+{
+	visibility: visible;
+}
+
+.MVP__MusicKitText
+{
+	font-size: 14px;
+	color: #ffffff;
+	vertical-align: middle;
+	font-weight: bold;
+	max-width: 300px;
+	white-space: nowrap;
+	text-overflow: shrink;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+
+.MVP__MusicKitName
+{
+	font-weight: normal;
+	text-overflow: ellipsis;
+}
+
+.MVP__MusicKitText--Hidden
 {
 	visibility: collapse;
 }
@@ -727,279 +669,24 @@ CSGOHudWinPanel Label
 	}
 }
 
-.MVP__MusicKitIcon
-{
-	width: fit-children;
-	height: 30px;
-	vertical-align: middle;
-	margin-left: 15px;
-}
-
-.MVP__MusicKitText
-{
-	font-size: 18px;
-	color: #ffffff;
-	vertical-align: middle;
-	text-overflow: shrink;
-	padding-left: 4px;
-}
-
-.MVP__MusicKitName
-{
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	max-width: 400px;
-}
-
-.MVP__MusicKitInfoText
-{
-	visibility: collapse;
-	width: fit-children;
-	font-size: 18px;
-	color: #ffffff;
-	vertical-align: middle;
-}
-
-.MVP__MusicKitText--Bold
-{
-	                    
-}
-
-.MVP__MusicKitText--Hidden
-{
-	visibility: collapse;
-}
-
-.MVP__MusicKitText--AnimFadeOut
-{
-	opacity: 0.0;
-	
-	animation-name: MusicKitFadeOutAnim;
-	animation-duration: musicKitAnimDuration;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
-	width: fit-children;
-}
-
-.MVP__MusicKitText--AnimFadeIn
-{
-	opacity: 1.0;
-
-	animation-name: MusicKitFadeInAnim;
-	animation-duration: musicKitAnimDuration;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
-}
-
-@keyframes 'MusicKitFadeOutAnim'
-{
-	0%
-	{
-		opacity: 1.0; 
-	}
-
-	68%
-	{
-		opacity: 1.0; 
-	}
-
-	86%
-	{
-		opacity: 0.0; 
-	}
-
-	100%
-	{
-		opacity: 0.0; 
-	}
-}
-
-@keyframes 'MusicKitFadeInAnim'
-{
-	0%
-	{
-		opacity: 0.0; 
-	}
-
-	86%
-	{
-		opacity: 0.0; 
-	}
-
-	100%
-	{
-		opacity: 1.0; 
-	}
-}
-
 .MVP__GunGameAvatars
 {
 	flow-children: right;
 	vertical-align: center;
 	margin-left: 10px;
-}
-
-.MVP__GunGameAvatars--Hidden
-{
 	visibility: collapse;
 }
 
-.MVP__GunGameAvatars--ScrollAnim
-{
-	opacity: 1.0;
-	
-	animation-name: AvatarScrollAnim;
-	animation-duration: 1.0s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
-}
-
-@keyframes 'AvatarScrollAnim'
-{
-	0%
-	{
-		opacity: 0.0; 
-		transform: translateX( -200px );
-	}
-
-	50%
-	{
-		opacity: 0.0; 
-		transform: translateX( -200px );
-	}
-
-	100%
-	{
-		opacity: 1.0; 
-		transform: translateX( 0px );
-	}
-}
-
-
-                                                                               
-                                                                               
-                                                                               
-
-.Medals
-{
-	horizontal-align: center;
-	flow-children: right;
-}
-
-.Medals__Icon
-{
-	height: 56px;
-	margin-right: 10px;
-}
-
-.Medals__Icon--Hidden
-{
-	visibility: collapse;
-}
-
-.Medals__Icon--Anim
-{
-	opacity: 1.0;
-	
-	animation-name: MedalsIconAnim;
-	animation-duration: 0.8s;
-	animation-delay: 0.1s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;
-}
-
-@keyframes 'MedalsIconAnim'
-{
-	0%
-	{
-		opacity: 0.0;
-		brightness: 1.0;
-	}
-
-	33%
-	{
-		opacity: 1.0;
-		brightness: 1.0;
-	}
-
-	66%
-	{
-		opacity: 1.0;
-		brightness: 4.0;
-	}
-
-	100%
-	{
-		opacity: 1.0;
-		brightness: 1.0;
-	}
-}
-
-                                                                               
-                                                                               
-                                                                               
-
-.MedalStats
-{
-	width: 100%;
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #00000099 ) , color-stop(0.50, #000000e6), color-stop( 0.80, #00000099 ), to( #00000000 ) );
-	padding: 5px;
-	flow-children: right;
-}
-
-.MedalStats__Icon
-{
-	height: 30px;
-	margin-right: 20px;
-}
-
-.MedalStats__Text
-{
-	font-size: 20px;
-	font-weight: normal;
-	color: white;
-}
-
-
-                                                                               
-                                                                               
-                                                                               
-
-.RankUp 
-{
-	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.20, #00000099 ) , color-stop(0.50, #000000e6), color-stop( 0.80, #00000099 ), to( #00000000 ) );
-	padding: 15px 5px 15px 40px;
-}
-
-.RankUp__Text
-{
-	font-size: 22px;
-	font-weight: normal;
-	visibility: collapse;
-}
-
-.RankUp__Text--Bold
-{
-	font-weight: bold;
-}
-
-.RankUp__Text--Show,
-.RankUp--SingleRank .RankUp__Text--SingleRank,
-.RankUp--Coin .RankUp__Text--Coin,
-.RankUp--MultiRank .RankUp__Text--MultiRank
+.MVP__GunGameAvatars.MVP__GunGameAvatars--show
 {
 	visibility: visible;
 }
-
-
-                                                                               
-                                                                               
-                                                                               
 
 .GunGameExtra
 {
 	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000 ), color-stop( 0.30, #00000080 ) , color-stop(0.50, #000000a6), color-stop( 0.70, #00000080 ), to( #00000000 ) );
 	padding: 5px;
+	visibility: collapse;
 }
 
 .GunGameExtra__Center
@@ -1011,12 +698,12 @@ CSGOHudWinPanel Label
 .GunGameExtra__Text
 {
 	font-size: 18px;
-	font-weight: normal;	
+	font-weight: normal;
 }
 
 .GunGameExtra__Text--Bold
 {
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .GunGameExtra__Icon
@@ -1025,10 +712,6 @@ CSGOHudWinPanel Label
 	padding: 5px;
 }
 
-                                                                               
-                                                                              
-                                                                               
-
 .survival-winner-container
 {
 	visibility: collapse;
@@ -1036,8 +719,7 @@ CSGOHudWinPanel Label
 	width: 100%;
 }
 
-.WinPanelRoot--SurvivalVictory .survival-winner-container,
-.WinPanelRoot--SurvivalDeath .survival-winner-container
+.WinPanelRoot--SurvivalVictory .survival-winner-container,.WinPanelRoot--SurvivalDeath .survival-winner-container
 {
 	visibility: visible;
 }
@@ -1050,17 +732,16 @@ CSGOHudWinPanel Label
 	vertical-align: center;
 	transform-origin: 50% 50%;
 	background-color: rgba(0, 0, 0, 0.95);
-	opacity-mask: url( "file://{images}/masks/survival-eom.png" );
+	opacity-mask: url("file://{images}/masks/survival-eom.png");
 }
 
 .survival-winner__movie
 {
-    width: 500px;
+	width: 500px;
 	height: 500px;
 	horizontal-align: center;
 	vertical-align: center;
 	opacity: 1;
-
 	transition-delay: 1.25s;
 	transition-property: opacity;
 	transition-duration: .25s;
@@ -1072,52 +753,43 @@ CSGOHudWinPanel Label
 	opacity: 0;
 }
 
-#id-survival-border-1,
-#id-survival-border-2,
-#id-survival-border-3,
-#id-survival-border-4
+#id-survival-border-1,#id-survival-border-2,#id-survival-border-3,#id-survival-border-4
 {
 	visibility: collapse;
 }
 
 .survival-winner--placement-1 #id-survival-border-1
-{ 
+{
 	visibility: visible;
 }
 
 .survival-winner--placement-2 #id-survival-border-2
-{ 
+{
 	visibility: visible;
 }
 
 .survival-winner--placement-3 #id-survival-border-3
-{ 
+{
 	visibility: visible;
 }
 
 .survival-winner--placement-4 #id-survival-border-4
-{ 
-	visibility: visible;
-}
-
-.WinPanelRoot--SurvivalDeath .survival-winner__movie
 {
-	                                  
+	visibility: visible;
 }
 
 .survival-winner__ring
 {
-    width: 400px;
+	width: 400px;
 	height: 400px;
 	horizontal-align: center;
 	vertical-align: center;
 	transform: scale3d( 1, 1, 1 );
 	border-radius: 50%;
 	border: 3px solid white;
-	blur: fastgaussian( 2, 2, 6 );
-	-s2-mix-blend-mode: screen; 
+	blur: gaussian( 2, 2, 6 );
+	-s2-mix-blend-mode: screen;
 	opacity: 0;
-
 }
 
 .survival-winner__ring--flash
@@ -1137,18 +809,19 @@ CSGOHudWinPanel Label
 		transform: scale3d( 1, 1, 1 );
 		opacity: 0;
 	}
-
+	
 	1%
 	{
 		transform: scale3d( 1, 1, 1 );
 		opacity: 1;
 	}
-
+	
 	100%
 	{
 		transform: scale3d( 1.8, 1.8, 1.8 );
 		opacity: 0;
 	}
+	
 }
 
 .survival-winner__data
@@ -1183,8 +856,7 @@ CSGOHudWinPanel Label
 	height: 32px;
 }
 
-.survival-winner--placement-1 .survival-winner__text-large,
-.survival-winner--placement-1 .survival-winner__text-small
+.survival-winner--placement-1 .survival-winner__text-large,.survival-winner--placement-1 .survival-winner__text-small
 {
 	color:#f5f3ba;
 }
@@ -1194,8 +866,7 @@ CSGOHudWinPanel Label
 	text-shadow: 0px 0px 6px 0.25 #bdbb8f;
 }
 
-.survival-winner--placement-2 .survival-winner__text-large,
-.survival-winner--placement-2 .survival-winner__text-small
+.survival-winner--placement-2 .survival-winner__text-large,.survival-winner--placement-2 .survival-winner__text-small
 {
 	color:#c4c1b5;
 }
@@ -1205,8 +876,7 @@ CSGOHudWinPanel Label
 	text-shadow: 0px 0px 6px 0.25 #8d8c83;
 }
 
-.survival-winner--placement-3 .survival-winner__text-large,
-.survival-winner--placement-3 .survival-winner__text-small
+.survival-winner--placement-3 .survival-winner__text-large,.survival-winner--placement-3 .survival-winner__text-small
 {
 	color:#ab836e;
 }
@@ -1216,8 +886,7 @@ CSGOHudWinPanel Label
 	text-shadow: 0px 0px 6px 0.25 #816352;
 }
 
-.survival-winner--placement-4 .survival-winner__text-large,
-.survival-winner--placement-4 .survival-winner__text-small
+.survival-winner--placement-4 .survival-winner__text-large,.survival-winner--placement-4 .survival-winner__text-small
 {
 	color:#b12b2b;
 }
@@ -1232,7 +901,7 @@ CSGOHudWinPanel Label
 	width: 154px;
 	height: 154px;
 	horizontal-align: center;
-	opacity-mask: url( "file://{images}/masks/hex.png" );
+	opacity-mask: url("file://{images}/masks/hex.png");
 }
 
 .survival-winner--placement-1 .survival-winner__avatar-bg
@@ -1240,8 +909,7 @@ CSGOHudWinPanel Label
 	width: 158px;
 	height: 158px;
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #f5f3ba ), to( #afad6b) );
-
-	opacity-mask: url( "file://{images}/masks/hex.png" );
+	opacity-mask: url("file://{images}/masks/hex.png");
 }
 
 .survival-winner--placement-2 .survival-winner__avatar-bg
@@ -1249,8 +917,7 @@ CSGOHudWinPanel Label
 	width: 158px;
 	height: 158px;
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #afada2 ), to( #757570) );
-
-	opacity-mask: url( "file://{images}/masks/hex.png" );
+	opacity-mask: url("file://{images}/masks/hex.png");
 }
 
 .survival-winner--placement-3 .survival-winner__avatar-bg
@@ -1258,8 +925,7 @@ CSGOHudWinPanel Label
 	width: 158px;
 	height: 158px;
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #ab836e ), to( #856452) );
-
-	opacity-mask: url( "file://{images}/masks/hex.png" );
+	opacity-mask: url("file://{images}/masks/hex.png");
 }
 
 .survival-winner--placement-4 .survival-winner__avatar-bg
@@ -1267,18 +933,16 @@ CSGOHudWinPanel Label
 	width: 158px;
 	height: 158px;
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #da3d3d ), to( #741717) );
-
-	opacity-mask: url( "file://{images}/masks/hex.png" );
+	opacity-mask: url("file://{images}/masks/hex.png");
 }
 
 #id-survival-avatar-container
 {
 	opacity: 0;
-
 	transition-property: opacity;
 	transition-delay: .80s;
 	transition-duration: 0.1s;
-    transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
 }
 
 #id-survival-avatar-container.reveal
@@ -1293,7 +957,6 @@ CSGOHudWinPanel Label
 	animation-delay: 0s, 5s;
 	animation-timing-function: ease-in;
 	animation-iteration-count: 1;
-
 	animation-fill-mode: both;
 }
 
@@ -1307,22 +970,23 @@ CSGOHudWinPanel Label
 	
 	80%
 	{
-		transform: scale3d( 1, 1, 1 ); 
+		transform: scale3d( 1, 1, 1 );
 		opacity: 1;
 		brightness: 1;
 	}
-
+	
 	90%
 	{
 		transform: scale3d( 1.015, 1.015, 1.015 );
 		brightness: 50;
 	}
-
+	
 	100%
 	{
 		transform: scale3d( 1, 1, 1 );
 		brightness: 1.0;
 	}
+	
 }
 
 .survival-winner--shrink
@@ -1345,4 +1009,11 @@ CSGOHudWinPanel Label
 	{
 		transform: scale3d( .5, .5, .5 ) translatey( -300px );
 	}
+	
+}
+
+
+.HiddenStaff
+{
+	visibility: collapse;
 }

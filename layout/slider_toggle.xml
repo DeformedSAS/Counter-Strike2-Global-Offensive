@@ -5,7 +5,7 @@
 		<include src="file://{resources}/styles/slider_toggle.css" />
 	</styles>
 	<Panel>
-		<ToggleButton id="id-slider-btn" html="true" class="btn-toggle-slider" text="{s:slide_toggle_text}">
+		<ToggleButton id="id-slider-btn" html="true" class="btn-toggle-slider" text="#advertising_for_gamemode">
 			<Panel class="btn-toggle-slider__pill">
 				<Panel class="btn-toggle-slider__slider" />
 			</Panel>

@@ -1,13 +1,10 @@
-                                                                               
-                                                                               
-                                                                               
+                                                                    
 .match-status-reconnect
 {
 	width: fit-children;
 	visibility: visible;
 	flow-children: right;
 	margin-right: 64px;
-	margin-top: 64px;
 	horizontal-align: right;
 	height: 96px;
 	z-index: 0;

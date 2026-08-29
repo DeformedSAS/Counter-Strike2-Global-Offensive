@@ -338,7 +338,6 @@ Label.eom-chars__layout__position--3rd
     animation-direction: normal;
     animation-fill-mode: forwards;
     visibility: visible;
-    /* Removed space in rotateZ(0deg) */
     transform: translateX(-105px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, 0px, 0px);
     opacity: 1;
     sound: "UIPanorama.EOM.CardReveal";
@@ -348,20 +347,17 @@ Label.eom-chars__layout__position--3rd
 {
     0%
     {
-        /* Removed space in rotateZ(-7deg) */
         transform: translateX(-105px) scale3d(1, 1, 1) rotateX(-40deg) rotateY(10deg) rotateZ(-7deg) translate3d(0px, 40px, 400px);
     }
     
     98%
     {
-        /* Removed space in rotateZ(0deg) */
         transform: translateX(-105px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, 0px, 0px);
         brightness: 2;
     }
     
     100%
     {
-        /* Removed space in rotateZ(0deg) */
         transform: translateX(-105px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, 0px, 0px);
     }
 }

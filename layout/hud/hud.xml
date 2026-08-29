@@ -11,9 +11,9 @@
 
     <CSGOHud hittest="false">
         
-        <CSGOHudBlurTarget id="HudBlurSecondary" blurrects="HudVote MapDraft HudHintText HudProgressBar HudAlerts RoundImpactScoreMain" class="HudBlur" hittest="false" hittestchildren="false">
+        <CSGOBlurTarget id="HudBlurSecondary" blurrects="HudVote MapDraft HudHintText HudProgressBar HudAlerts RoundImpactScoreMain" class="HudBlur" hittest="false" hittestchildren="false">
             <CSGOBackbufferImagePanel class="full-width full-height" />
-        </CSGOHudBlurTarget>
+        </CSGOBlurTarget>
 
         <Panel id="HudInWorld" hittest="false" hittestchildren="false">
             <CSGOHudDamageIndicator id="HudDamageIndicator"/>
@@ -82,9 +82,9 @@
 
         <CSGOHudFreezePanel id="HudFreezePanel" hittest="false" hittestchildren="false" />
 
-        <CSGOHudBlurTarget id="HudBlur" blurrects="Scoreboard MapOverview BuyMenu sliding-panel--TERRORIST sliding-panel--CT" class="HudBlur" hittest="false" hittestchildren="false">
+        <CSGOBlurTarget id="HudBlur" blurrects="Scoreboard MapOverview sliding-panel--TERRORIST sliding-panel--CT" class="HudBlur" hittest="false" hittestchildren="false">
             <CSGOBackbufferImagePanel class="full-width full-height" />
-        </CSGOHudBlurTarget>
+        </CSGOBlurTarget>
 
         <CSGOHudSpectator id="HudSpectator" />
         <CSGOHudDemoPlayback id="HudDemoPlayback" />
@@ -98,6 +98,7 @@
         <CSGORetakeLoadout id="RetakeLoadout"/>
 
         <CSGOBuyMenu id="BuyMenu" />
+		<Image id="TeamLogo" class="Hidden" visible="false" />
         <CCSGOQuickBuyRadial id="QuickBuyPistols" buy_menu="pistols" />
         <CCSGOQuickBuyRadial id="QuickBuyHeavyWeapons" buy_menu="heavyweapons" />
         <CCSGOQuickBuyRadial id="QuickBuySMGs" buy_menu="smgs" />
@@ -112,7 +113,7 @@
         <CSGOEndOfMatch id="EndOfMatch" />
         <CSGOTeamSelectMenu id="TeamSelectMenu"/>
         <CSGOSurvivalSpawnSelect id="SurvivalSpawnSelect"/>
-        <Frame id="Versus" src="file://{resources}/layout/versus.xml"/>
+        <Frame id="Versus" class="full-width full-height" src="file://{resources}/layout/versus.xml"/>
         
         <CSGOHudChat id="HudChat"/>
         <CSGOHudVote id="HudVote"/>

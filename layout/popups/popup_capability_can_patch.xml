@@ -1,0 +1,39 @@
+<!-- xml reconstructed by Source 2 Viewer 19.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/csgostyles.css" />
+		<include src="file://{resources}/styles/popups/popups_shared.css" />
+		<include src="file://{resources}/styles/mainmenu.css" />
+		<include src="file://{resources}/styles/popups/popup_inventory_inspect.css" />
+		<include src="file://{resources}/styles/popups/popup_capability_can_sticker.css" />
+		<include src="file://{resources}/styles/popups/popup_capability_shared.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/common/iteminfo.js" />
+		<include src="file://{resources}/scripts/generated/items_event_current_generated_store.js" />
+		<include src="file://{resources}/scripts/inspect.js" />
+		<include src="file://{resources}/scripts/popups/popup_inspect_shared.js" />
+		<include src="file://{resources}/scripts/common/hold_button.js" />
+		<include src="file://{resources}/scripts/popups/popup_inspect_async-bar.js" />
+		<include src="file://{resources}/scripts/popups/popup_inspect_action-bar.js" />
+		<include src="file://{resources}/scripts/popups/popup_inspect_purchase-bar.js" />
+		<include src="file://{resources}/scripts/popups/popup_capability_can_patch.js" />
+		<include src="file://{resources}/scripts/popups/popup_capability_can_keychain.js" />
+		<include src="file://{resources}/scripts/popups/popup_capability_can_sticker.js" />
+	</scripts>
+	<PopupCustomLayout class="PopupPanel Capability Hidden" useglobalcontext="true" popupbackground="blur" popupfullscreenopaque="true" oncancel="CapabilityCanApplyAction.ClosePopUp();" onload="CapabilityCanApplyAction.Init();">
+		<Panel id="CanStickerSpinner" class="Spinner vertical-center horizontal-center" />
+		<Panel class="mainmenu-content__container mainmenu-content__container--inspect" hittest="true">
+			<Panel class="full-width full-height">
+				<Panel id="CanStickerItemModelParent" class="popup-inspect-modelpanel">
+					<Frame id="CanApplyItemModel" class="" src="file://{resources}/layout/inspect.xml" />
+				</Panel>
+				<Panel class="popup-inspect-border" />
+				<Frame id="PopUpCanApplyHeader" class="hidden" src="file://{resources}/layout/popups/popup_can_apply_header.xml" />
+				<Frame id="PopUpCanApplyPickSlot" class="hidden" src="file://{resources}/layout/popups/popup_can_apply_pick_slot.xml" />
+				<Frame id="PopUpInspectAsyncBar" class="hidden" src="file://{resources}/layout/popups/popup_inspect_async-bar.xml" />
+			</Panel>
+		</Panel>
+		<Panel id="CanStickerSpinner" class="popup-capability__spinner Spinner hidden" />
+	</PopupCustomLayout>
+</root>

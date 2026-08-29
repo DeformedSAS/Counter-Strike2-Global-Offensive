@@ -15,6 +15,7 @@ var friendsList = (function() {
 		                               
 
 		var btnLobbiesTabListFilters = $( '#JsFriendsList-lobbies-toolbar-button-' + _m_sLobbiesTabListFiltersString );
+		AdvertisingToggle.OnFilterPressed(_m_sLobbiesTabListFiltersString);
 		if ( btnLobbiesTabListFilters )
 		{	                                                                         
 			btnLobbiesTabListFilters.checked = true;
@@ -34,7 +35,15 @@ var friendsList = (function() {
 		_UpdateBroadcastIcon();
 	};
 
-    function _UpdateBroadcastIcon() {
+    var _UpdateBroadcastIcon = function()
+    {
+        var adSetting = AdvertisingToggle.GetAdvertisingSetting();
+        _ActiveFilterOnTab( adSetting );
+        
+        $.GetContextPanel().FindChildInLayoutFile( 'id-friendslist-section-broadcast-icon' ).SetHasClass(
+            'advertising-active',
+            adSetting !== ""
+        );
     }
 
 	var _UpdateAntiAddiction = function()
@@ -97,20 +106,21 @@ var friendsList = (function() {
         }
         _UpdateHeightOpenSection();
     }                                                     
-	var _OnSectionPressed = function( sectionId )
-	{
-		if ( !sectionId )
-		{
-			return;
-		}
-
-		if ( m_activeSection !== sectionId )
-		{
-			m_activeSection = sectionId;
-		}
-
-		_UpdateSection( sectionId, true );
-	}
+    function _OnSectionPressed(sectionId) {
+        if (!sectionId) {
+            return;
+        }
+        if (m_activeSection !== sectionId) {
+            m_activeSection = sectionId;
+            if (sectionId === 'id-friendslist-section-recent') {
+                TeammatesAPI.Refresh();
+            }
+            if (sectionId === 'id-friendslist-section-broadcast') {
+                _RefreshLobbyListings();
+            }
+        }
+        _UpdateSection(sectionId, false);
+    }
 
 	var _UpdateAllSections = function()
 	{
@@ -130,32 +140,61 @@ var friendsList = (function() {
 
 		var funcGetXuid;
 
-		if ( sectionId === 'id-friendslist-section-friends' || bUpdateAll )
-		{
-			funcGetXuid = _GetXuidByIndex;
-			_UpdateSectionContent( {
-				id: 'id-friendslist-section-friends',
-				count: _GetFriendsCount(),
-				xml: 'friendtile',
-				xuid_func: funcGetXuid,
-				no_data_String: '#FriendsList_nodata_friends'
-			} );
-		}
-		
-		if ( sectionId === 'id-friendslist-section-invite' || bUpdateAll )
-		{
-			funcGetXuid = _GetRequestsXuidByIndex;
-			_UpdateSectionContent( {
-				id: 'id-friendslist-section-invite',
-				count: _GetRequestsCount(),
-				alerts_count: _GetRequestsAlertCount(),
-				xml: 'friendtile',
-				xuid_func: funcGetXuid,
-				no_data_String: '#FriendsList_nodata_requests',
-				hide_if_empty: true
-			});
-		}
-	}
+        if ( sectionId === 'id-friendslist-section-friends' || bUpdateAll )
+        {
+            funcGetXuid = _GetXuidByIndex;
+            _UpdateSectionContent( {
+                id: 'id-friendslist-section-friends',
+                count: _GetFriendsCount(),
+                xml: 'friendtile',
+                xuid_func: funcGetXuid,
+                no_data_String: '#FriendsList_nodata_friends'
+            } );
+        }
+        
+        if ( sectionId === 'id-friendslist-section-recent' || bUpdateAll )
+        {
+            funcGetXuid = _GetRecentXuidByIndex;
+            _UpdateSectionContent( {
+                id: 'id-friendslist-section-recent',
+                count: _GetRecentsCount(),
+                xml: 'friendtile',
+                xuid_func: funcGetXuid,
+                type: 'recent',
+                no_data_String: '#FriendsList_nodata_recents',
+                show_loading_bar_only: _ShowRecentsLoadingBar(),
+                loading_bar_id: 'JsFriendsListRecentsLoadingBar'
+            } );
+        }
+        
+        if ( sectionId === 'id-friendslist-section-invite' || bUpdateAll )
+        {
+            funcGetXuid = _GetRequestsXuidByIndex;
+            _UpdateSectionContent( {
+                id: 'id-friendslist-section-invite',
+                count: _GetRequestsCount(),
+                alerts_count: _GetRequestsAlertCount(),
+                xml: 'friendtile',
+                xuid_func: funcGetXuid,
+                no_data_String: '#FriendsList_nodata_requests',
+                hide_if_empty: true
+            });
+        }
+        
+        if ( sectionId === 'id-friendslist-section-broadcast' || bUpdateAll )
+        {
+            _UpdateLobbiesLoadingBar();
+            funcGetXuid = _GetLobbyXuidByIndex;
+            
+            _UpdateSectionContent( {
+                id: 'id-friendslist-section-broadcast',
+                count: _GetLobbiesCount(),
+                xml: 'friend_advertise_tile',
+                xuid_func: funcGetXuid,
+                no_data_String: '#FriendsList_nodata_advertising'
+            } );
+        }
+    }
 
 	var _UpdateSectionContent = function( oSettings )
 	{
@@ -409,13 +448,16 @@ var friendsList = (function() {
 		_UpdateSection( m_activeSection, true );
 	}
                                                                       
-	var _SetLobbiesTabListFilters = function( sFilterString )
-	{
-		_m_sLobbiesTabListFiltersString = sFilterString;
+    var _SetLobbiesTabListFilters = function( sFilterString )
+    {
+        _m_sLobbiesTabListFiltersString = sFilterString;
+        AdvertisingToggle.OnFilterPressed( sFilterString );
 
-		_RefreshLobbyListings();
-		_RefreshRecentFriendsListings();
-	};
+        var adSetting = AdvertisingToggle.GetAdvertisingSetting();
+        _ActiveFilterOnTab( adSetting );
+
+        _RefreshLobbyListings();
+    };
 
 	var _ActiveFilterOnTab = function( adSetting )
 	{
@@ -428,12 +470,14 @@ var friendsList = (function() {
 		
 	};
 
-	var _RefreshLobbyListings = function ()
-	{
-		_m_tabs[ 1 ].elList.ScrollToTop();
-		PartyBrowserAPI.SetSearchFilter( _m_sLobbiesTabListFiltersString );
-		PartyBrowserAPI.Refresh();
-	};
+    var _RefreshLobbyListings = function ()
+    {
+        m_Sections.FindChildInLayoutFile( 'id-friendslist-section-broadcast' ).FindChildInLayoutFile( 'id-friendslist-section-list-contents' ).ScrollToTop();
+        GameInterfaceAPI.SetSettingString( 'ui_nearbylobbies_filter', _m_sLobbiesTabListFiltersString );
+        PartyBrowserAPI.SetSearchFilter( _m_sLobbiesTabListFiltersString, "" );
+        PartyBrowserAPI.Refresh();
+    };
+
 
                                                                                
                                                                                
@@ -542,7 +586,6 @@ var friendsList = (function() {
 
 	var _GetLobbiesCount = function()
 	{
-		                                                                  
 		var count = PartyBrowserAPI.GetResultsCount();
 
 		if( count )

@@ -310,25 +310,6 @@ var ContextmenuPlayerCard;
                 $.DispatchEvent('ContextMenuEvent', '');
             },
         },
-        {
-            name: 'kick_player',
-            icon: 'ban_global',
-            AvailableForItem: (id) => {
-              if (LobbyAPI.IsSessionActive() && LobbyAPI.BIsHost()) {
-              let party = LobbyAPI.GetSessionSettings().members;
-              for (let i = 0; i < party.numPlayers; i++) {
-                  if (id === party['machine' + i].player0.xuid && !_IsSelf(id)) {
-                      return true;
-                  }
-              }
-          }
-           return false;
-        },
-        OnSelected: (id) => {
-        LobbyAPI.KickPlayer(id);
-        $.DispatchEvent('ContextMenuEvent', '');
-    },
-}
     ];
     function _HasMusicKit(id) {
         return (InventoryAPI.GetMusicIDForPlayer(id) > 1);

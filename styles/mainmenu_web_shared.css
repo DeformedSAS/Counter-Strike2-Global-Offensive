@@ -1,0 +1,7 @@
+.mainmenu-news-content__container
+{
+	padding-right: 64px;
+    transition-property: opacity, transform;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}

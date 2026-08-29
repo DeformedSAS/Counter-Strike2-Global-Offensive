@@ -118,7 +118,7 @@
 
                         <Panel id="id-store-home-section-nightmode2" class="store-home-section">
                             <Panel class="store-home-popular__info">
-                                <Label class="store-home-section__title stratum-regular-condensed fontSize-xxl" text="#store_nav_section_coupon_nightmode2" />
+                                <Label class="store-home-section__title stratum-regular-condensed fontSize-xxl" html="true" text="#store_nav_section_coupon_nightmode2" />
                             </Panel>
                             <Panel id="id-store-nightmode2-items" class="store-home-popular__items" />
                         </Panel>

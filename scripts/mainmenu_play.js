@@ -16,6 +16,7 @@ var PlayMenu;
     let m_gameModeConfigs = {};
     let m_arrGameModeRadios = [];
     let GetMGDetails;
+	var _m_cP = $.GetContextPanel();
     let GetGameType;
     const m_bPerfectWorld = (MyPersonaAPI.GetLauncherType() === 'perfectworld');
     let m_activeMapGroupSelectionPanelID = null;
@@ -77,6 +78,27 @@ function StartSearch() {
         let stage = _GetTournamentStage();
         LobbyAPI.StartMatchmaking(MyPersonaAPI.GetMyOfficialTournamentName(), MyPersonaAPI.GetMyOfficialTeamName(), _GetTournamentOpponent(), stage);
     }
+}
+
+function _GoBtnParticle()
+{
+    var elModel = $.GetContextPanel().FindChildTraverse( 'GoBtnParticle' );
+    if ( !elModel )
+        return;
+
+    elModel.style.visibility = 'visible';
+
+    elModel.SetCameraPosition( -30.10, 0.00, 0.00 );
+    elModel.SetCameraAngles( 0.00, 0.00, 0.00 );
+
+    elModel.AddParticleSystem( 'nuke_sparks1_core', '', false );
+
+    $.Schedule( 1.0, function() {
+        if ( elModel ) 
+        {
+            elModel.style.visibility = 'collapse';
+        }
+    });
 }
 
     function _Init() {

@@ -92,11 +92,24 @@ var HudWinPanel = (function () {
             elAvatarContainer.style.backgroundSize = '100% 100%';
         }
     }
+	
+	function _SetMVPFlairImage(xuid) {
+        const flairDefIdx = FriendsListAPI.GetFriendDisplayItemDefFeatured(xuid);
+        const flairItemId = InventoryAPI.GetFauxItemIDFromDefAndPaintIndex(flairDefIdx, 0);
+        const imagePath = InventoryAPI.GetItemInventoryImage(flairItemId);
+        const elBgImage = $.GetContextPanel().FindChildInLayoutFile('MedalBackground');
+        elBgImage.style.backgroundImage = (imagePath) ? 'url("file://{images_econ}' + imagePath + '_large.png")' : 'none';
+        elBgImage.style.backgroundPosition = '50% 50%';
+        elBgImage.style.backgroundSize = 'cover';
+        elBgImage.style.backgroundRepeat = 'no-repeat';
+        elBgImage.TriggerClass('WinPanelRow__BG__AnimBg--anim');
+    }
 
     function _ShowMVP() {
         var elMVPPanel = $.GetContextPanel().FindChildTraverse('RISMVPPanel');
         if (!_m_haveMVP) return;
         elMVPPanel.visible = true;
+		_SetMVPFlairImage(xuid);
         elMVPPanel.RemoveClass('prereveal');
     }
 

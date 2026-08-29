@@ -29,10 +29,35 @@ DelayLoadPanel.Offscreen
 {
 	width: 100%;
 	height: 100%;
-	background-image: url( "file://{resources}/videos/acknowledge.webm" );
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-position: 13% 50%;
+    background-color: black;
+	vertical-align: center;
+	horizontal-align: center;
+	-s2-mix-blend-mode: normal;
+	blur: fastgaussian( 4, 4, 4 );
+}
+
+.popup-acknowledge-gradient-bg {
+    background-color: #000000;
+	blur: fastgaussian( 4, 4, 4 );
+
+    animation-name: acknowledge-gradient;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 'acknowledge-gradient' {
+    0% {
+        background-color: gradient(linear, 0% 0%, 100% 100%, from(#000000), color-stop(0.25, #111111), color-stop(0.5, #222222), color-stop(0.75, #111111), to(#000000));
+    }
+
+    50% {
+        background-color: gradient(linear, 0% 0%, 100% 100%, from(#222222), color-stop(0.25, #111111), color-stop(0.5, #000000), color-stop(0.75, #111111), to(#222222));
+    }
+
+    100% {
+        background-color: gradient(linear, 0% 0%, 100% 100%, from(#000000), color-stop(0.25, #111111), color-stop(0.5, #222222), color-stop(0.75, #111111), to(#000000));
+    }
 }
 
 .operation.popup-acknowledge__bg

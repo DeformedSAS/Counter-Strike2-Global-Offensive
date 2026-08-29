@@ -15,8 +15,8 @@
 
 	<snippets>
 		<snippet name="Item">
-			<Panel class="popup-acknowledge__item">
-				<Panel id="AcknowledgeMovie" class="popup-acknowledge__bg"/>
+			<Panel class="popup-acknowledge__item">	
+				<ItemPreviewPanel id="AcknowledgeMovie" class="popup-acknowledge__bg" manifest="resource/ui/econ/ItemModelPanelCharWeaponInspect.res" hittest="false" item="" mouse_rotate="false"/>
 				<Panel id="AcknowledgeBar" class="popup__rarity-bar" />
 
 				<ItemPreviewPanel id="AcknowledgeItemModel"

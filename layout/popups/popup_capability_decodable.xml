@@ -12,6 +12,7 @@
 	<scripts>
 		<include src="file://{resources}/scripts/common/formattext.js" />
 		<include src="file://{resources}/scripts/common/iteminfo.js" />
+		<include src="file://{resources}/scripts/common/hold_button.js" />
 		<include src="file://{resources}/scripts/itemtile.js" />
 		<include src="file://{resources}/scripts/popups/popup_capability_decodable.js" />
 	</scripts>
@@ -109,7 +110,7 @@
 		<Panel class="mainmenu-content__container mainmenu-content__container--inspect" hittest="true" >
 			<Panel id="PopUpInspectFullScreenHostContainer" class="full-width full-height">
                 <CSGOBlurTarget blurrects="DecodableLootlistContainer" class="full-height full-width popup-decodable-blur-target" force-no-composition-layer="false">
-				<Movie class="inspect_bg_movie" id="DecodableBGMovie" src="" sound="none" controls="none" repeat="true" hittest="false" />
+				<Movie class="inspect_bg_movie" id="DecodableBGMovie" src="" sound="none" controls="none" repeat="true" hittest="false" force-no-composition-layer="false" />
 				<Frame id="PopUpInspectModelOrImage" hitest="false" src="file://{resources}/layout/popups/popup_inspect_model-image.xml" />
 				</CSGOBlurTarget>
                 <Panel class="popup-inspect-border" hittest="false" />

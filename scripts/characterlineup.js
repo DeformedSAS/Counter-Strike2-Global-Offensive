@@ -11,7 +11,6 @@ var CharacterLineUp = ( function()
 		if ( !elCLU || !elCLU.Data() )
 			return;
 
-		elCLU.Data().m_characterShowDelay = oSettings[ 'characterShowDelay' ];
 		elCLU.Data().m_displayCommendButton = oSettings[ 'displayCommendButton' ];
 		elCLU.Data().m_overrideCharacterSpacing = oSettings[ 'overrideCharacterSpacing' ];
 
@@ -301,7 +300,6 @@ var CharacterLineUp = ( function()
 
 			$.Schedule( timeline, _ShowCharacter.bind( undefined, elCLU, label ) );
 
-			timeline += elCLU.Data().m_characterShowDelay;
 		} );
 
 		return timeline;

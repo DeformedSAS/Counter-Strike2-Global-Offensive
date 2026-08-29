@@ -278,7 +278,6 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 	z-index: 1;
 	overflow: noclip;
 	y: 15px;
-	margin-right: 100px;
 }
 #JsMainmenu_Vanity.hidden
 {
@@ -293,12 +292,7 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 
 .hidden_info
 {
-    z-index: 2;
-    overflow: noclip;
-	opacity: 0;
-    transition-property: opacity;
-    transition-duration: .25s;
-    transition-timing-function: ease-in-out;
+  visibility: collapse;
 }
 
 .mainmenu-vanity__settings
@@ -331,7 +325,6 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 #MainMenuVanityInfo
 {
     z-index: 2;
-    overflow: noclip;
     transition-property: opacity;
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
@@ -464,9 +457,12 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 
 .mainmenu-top-navbar-container
 {
-    height: 64px;
-    width: 100%;
-    z-index: 2;
+	height: 64px;
+	width: 100%;
+	/*background-image: url("file://{resources}/videos/top_nav.webm"); */
+	/*background-img-opacity: .11;*/
+	background-size: 100% 66px;
+    background-position: center;
 }
 
 .mainmenu-top-navbar
@@ -653,6 +649,16 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 .mainmenu-top-navbar__radio-iconbtn:disabled:hover
 {
     background-color: rgba(255, 255, 255, 0);
+}
+
+#VacNet
+{
+    visibility: visible;
+}
+
+.show-vacnet-link #VacNet
+{
+    visibility: visible;
 }
 
 .mainmenu-top-navbar__alerts

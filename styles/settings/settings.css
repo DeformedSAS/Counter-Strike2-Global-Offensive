@@ -145,7 +145,6 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 .VideoSettingsMenuTabContent
 {
     height: fill-parent-flow( 1 );
-    blur: gaussian( 0, 0, 0 );
     flow-children: down;
     min-width: 450px;
     margin-right: 72px;
@@ -425,6 +424,8 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
     border-radius: 3px;
 }
 
+/* credits go to zool for this ui element */
+
 .CreditsTitle
 {
 	font-size: 30px;
@@ -490,6 +491,8 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 	background-color: white;
 	margin-bottom: 4px;
 }
+
+/* end zool credits ui element */
 
 .settings-music-row {
     width: 100%;

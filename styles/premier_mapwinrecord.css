@@ -1,5 +1,4 @@
-.mapwinrecord-root
-{
+.mapwinrecord-root {
     padding: 12px;
     padding-bottom: 0px;
 }
@@ -25,10 +24,19 @@
     height: 60px;
 }
 
-.mapwinrecord__graph .mwr-map Label
-{
-    font-size: 20px;
-    width: 100%;
-    text-align:center;
-    font-family: Stratum2 Condensed, Arial;
+.spider-grid-edge {
+    background-color: rgba(255, 255, 255, 0.08);
+    height: 1px;
+    transform-origin: 0% 0%;
+}
+
+.spider-grid-spoke {
+    background-color: rgba(255, 255, 255, 0.08);
+    height: 1px;
+    transform-origin: 0% 0%;
+}
+
+.spider-poly-edge {
+    height: 2px;
+    transform-origin: 0% 0%;
 }

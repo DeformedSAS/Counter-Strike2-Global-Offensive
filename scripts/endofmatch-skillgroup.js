@@ -5,9 +5,9 @@ var EOM_Skillgroup = (function () {
     var _m_pauseBeforeEnd = 1.0;
     var _m_cP = $.GetContextPanel();
 
-    const DEBUG_SKILLGROUP = false; // rankup debug
-    const DEBUG_PREMIER = false;     // premier debug
-    const DEBUG_RANKDOWN = false;  // rankdown debug, both premier and regular skillgroup.
+    const DEBUG_SKILLGROUP = false; // standard skillgroup debug
+    const DEBUG_PREMIER = false;    // premier debug
+    const DEBUG_RANKDOWN = false;   // rankdown debug (works for both standard skillgroup and premier)
 
     _m_cP.Data().m_retries = 0;
 
@@ -35,22 +35,35 @@ var EOM_Skillgroup = (function () {
 
         if ( DEBUG_SKILLGROUP )
         {
-            const oldrank = _r( 2, 17 );
+            var oldrank, newrank;
+
+            if ( DEBUG_RANKDOWN )
+            {
+                oldrank = _r( 2, 18 );
+                newrank = oldrank - 1;
+            }
+            else
+            {
+                oldrank = _r( 1, 17 );
+                newrank = oldrank + 1;
+            }
 
             oSkillgroupData = {
                 "old_rank": oldrank,
-                "new_rank": DEBUG_RANKDOWN ? (oldrank - 1) : (oldrank + 1),                                
-                "num_wins": _r( 10, 1000 )
+                "new_rank": newrank,                                
+                "num_wins": _r( 10, 1000 ),
+                "rank_type": "competitive",
+                "rank_change": newrank - oldrank
             };
         }
         else if ( DEBUG_PREMIER )
         {
-            var oldrating = _r( 4000, 40000 );
-            var ratingchange = _r( 200, 700 );
+            var oldrating = _r( 4000, 30000 );
+            var ratingchange = _r( 200, 550 );
 
             oSkillgroupData = {
                 "old_rank": oldrating,
-                "new_rank": DEBUG_RANKDOWN ? (oldrating - ratingchange) : (oldrating + ratingchange),
+                "new_rank": DEBUG_RANKDOWN ? Math.max(1000, oldrating - ratingchange) : (oldrating + ratingchange),
                 "num_wins": _r( 10, 1000 ),
                 "rank_change": DEBUG_RANKDOWN ? -ratingchange : ratingchange,
                 "rank_type": "Premier"
@@ -66,17 +79,24 @@ var EOM_Skillgroup = (function () {
             mode = oSkillgroupData["rank_type"];
         }
 
-        var rating_change = oSkillgroupData["rank_change"] || 0;
-        var rating_mismatch = (newRank - oldRank != rating_change) && oldRank != 0;
-        
-        if (rating_mismatch) {
-            oldRank = 0;
+        if ( DEBUG_SKILLGROUP ) {
+            mode = 'competitive';
+        } else if ( DEBUG_PREMIER ) {
+            mode = 'Premier';
         }
 
-        var currentRank = oldRank < newRank ? newRank : oldRank;
+        var rating_change = oSkillgroupData["rank_change"] || 0;
+        var rating_mismatch = false;
+
+        if ( !DEBUG_SKILLGROUP && !DEBUG_PREMIER ) {
+            rating_mismatch = (newRank - oldRank != rating_change) && oldRank != 0;
+            if (rating_mismatch) {
+                oldRank = 0;
+            }
+        }
 
         var oData = {
-            currentRank: newRank,
+            currentRank: oldRank,
             compWins: compWins,
             oldRank: oldRank,
             oldRanklInfo: '',
@@ -92,29 +112,23 @@ var EOM_Skillgroup = (function () {
             model: ''
         };
 
-        var winsNeededForRank = SessionUtil.GetNumWinsNeededForRank( oData.mode );
+        var winsNeededForRank = ( DEBUG_SKILLGROUP || DEBUG_PREMIER ) ? 0 : SessionUtil.GetNumWinsNeededForRank( oData.mode );
 
-        if ( DEBUG_SKILLGROUP )
+        if ( DEBUG_SKILLGROUP || DEBUG_PREMIER )
         {
-            winsNeededForRank = 0;
-            mode = 'competitive';
-
+            _m_cP.SetDialogVariable( 'eom_mode', 'Competitive' );
         }
-		
-        else if ( DEBUG_PREMIER )
+        else
         {
-            winsNeededForRank = 0;
-            oData.mode = 'Premier';
+            _m_cP.SetDialogVariable( 'eom_mode', MockAdapter.GetGameModeName( true ) );
         }
 
-        _m_cP.SetDialogVariable( 'eom_mode', MockAdapter.GetGameModeName( true ) );
-
-        if ( oData.mode === 'survival' && currentRank < 1 )
+        if ( oData.mode === 'survival' && oldRank < 1 )
         {                                                                   
             oData.oldRanklInfo = $.Localize( '#eom-skillgroup-needed-dzgames', _m_cP );
             oData.oldImage = 'file://{images}/icons/skillgroups/dangerzone0.svg';
         }
-        else if ( currentRank < 1 && compWins >= winsNeededForRank )
+        else if ( oldRank < 1 && compWins >= winsNeededForRank )
         {   
             if (oData.mode === 'Premier') {
                 oData.oldRanklInfo = $.Localize( '#eom-skillgroup-expired', _m_cP );
@@ -124,7 +138,7 @@ var EOM_Skillgroup = (function () {
                 oData.oldImage = 'file://{images}/icons/skillgroups/'+modePrefix+'_expired.svg';
             }
         }
-        else if ( currentRank < 1 )
+        else if ( oldRank < 1 )
         {
             var matchesNeeded = winsNeededForRank - compWins;
             _m_cP.SetDialogVariableInt( 'num_matches', matchesNeeded );
@@ -136,7 +150,7 @@ var EOM_Skillgroup = (function () {
                 oData.oldImage = 'file://{images}/icons/skillgroups/'+modePrefix+'0.svg';
             }
         }
-        else if ( currentRank >= 1 )
+        else if ( oldRank >= 1 )
         {
             if ( oData.mode === 'Premier' )
             {
@@ -150,7 +164,7 @@ var EOM_Skillgroup = (function () {
             {
                 var modePrefix = ( oData.mode === 'scrimcomp2v2' ) ? 'wingman' : ( ( oData.mode === 'survival' ) ? 'dangerzone' : 'skillgroup' );
                 
-                oData.oldImage = 'file://{images}/icons/skillgroups/'+modePrefix + oldRank + '.svg';
+                oData.oldImage = 'file://{images}/icons/skillgroups/' + modePrefix + oldRank + '.svg';
                 oData.oldRanklInfo = $.Localize( ( oData.mode === 'survival' ) ? '#skillgroup_' + oldRank + 'dangerzone' : '#RankName_' + oldRank );
                 oData.oldRankDesc = $.Localize( '#eom-skillgroup-name', _m_cP );
 
@@ -181,7 +195,6 @@ var EOM_Skillgroup = (function () {
 
         var elPremierBg = _m_cP.FindChildInLayoutFile('id-eom-skillgroup-premier-bg');
         if (elPremierBg) elPremierBg.SetHasClass('hide', oData.mode !== 'Premier');
-
 
         var elStandardEmblem = _m_cP.FindChildInLayoutFile('id-eom-skillgroup-emblem');
         if (elStandardEmblem) elStandardEmblem.SetHasClass('hide', oData.mode === 'Premier');
@@ -236,12 +249,18 @@ var EOM_Skillgroup = (function () {
             SpeedLinesAnim(winLossStyle);
             RatingEmblemAnim(oData, options, winLossStyle);
         } else {
-            _m_cP.FindChildInLayoutFile( 'id-eom-skillgroup-emblem--new__image' ).SetImage( oData.newImage );
+            var elNewImage = _m_cP.FindChildInLayoutFile( 'id-eom-skillgroup-emblem--new__image' );
+            if ( elNewImage ) {
+                elNewImage.SetImage( oData.newImage );
+            }
             
             var elEmblem = _m_cP.FindChildInLayoutFile( 'id-eom-skillgroup-emblem' );
-            elEmblem.RemoveClass( "uprank-anim" );
-            elEmblem.AddClass( "uprank-anim" );
             
+            if ( elEmblem ) {
+                elEmblem.RemoveClass( "uprank-anim" );
+                elEmblem.AddClass( "uprank-anim" );
+            }
+
             _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current__label" ).text = oData.newRanklInfo;
 
             if ( bIsRankDown ) 
@@ -260,22 +279,26 @@ var EOM_Skillgroup = (function () {
     {
         var winString = ( oData.compWins === 1 ) ? '#eom-skillgroup-win' : '#eom-skillgroup-wins';
         var elDesc = _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current_wins_desc" );
-        elDesc.text = $.Localize( winString, _m_cP );
+        if (elDesc) elDesc.text = $.Localize( winString, _m_cP );
 
-        _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current_wins" ).text = oData.compWins;
-        _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current__label" ).text = oData.oldRanklInfo;
+        var elWins = _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current_wins" );
+        if (elWins) elWins.text = oData.compWins;
+
+        var elLabel = _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current__label" );
+        if (elLabel) elLabel.text = oData.oldRanklInfo;
 
         var elRankDesc = _m_cP.FindChildInLayoutFile( "id-eom-skillgroup__current__title" );
-        
-        if ( oData.oldRankDesc )
+        if ( elRankDesc && oData.oldRankDesc )
         {
             elRankDesc.RemoveClass( 'hidden' );
             elRankDesc.text = oData.oldRankDesc;
         }
 
         var elImage = _m_cP.FindChildInLayoutFile( "id-eom-skillgroup-emblem--current__image" );
-        elImage.RemoveClass( 'hidden' );
-        elImage.SetImage( oData.oldImage );
+        if (elImage) {
+            elImage.RemoveClass( 'hidden' );
+            elImage.SetImage( oData.oldImage );
+        }
     }
 
     function GetEmblemStyleOverride(new_rating) {

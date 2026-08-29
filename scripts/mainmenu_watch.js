@@ -211,7 +211,7 @@ var mainmenu_watch = ( function()
 					elModel.SetCameraAngles( 0.00, 0.00, 0.00 );
 					elModel.SetParticleSystemOffsetPosition( 0.0, 0.0, 0.0 );
 
-					elModel.AddParticleSystem( 'ui_panel_liveambient', '', true );
+					elModel.AddParticleSystem( 'ui_panel_liveambient', '', false );
 					  			                      
 				}
 

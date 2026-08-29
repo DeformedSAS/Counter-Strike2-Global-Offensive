@@ -3335,6 +3335,11 @@ EdgeScrollBar.Vertical #MaxButton
 	box-shadow: none;
 }
 
+.navbar-btn__notification.overwatch
+{
+	background-color: blueColor;
+}
+
 .navbar-btn__notification.hidden
 {
 	opacity: 0;

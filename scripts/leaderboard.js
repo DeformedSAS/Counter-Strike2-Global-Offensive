@@ -14,9 +14,6 @@ const regionToRegionName = {
 };
 var Leaderboard;
 (function (Leaderboard) {
-    function _msg(msg) {
-        $.Msg("[Leaderboard] "+msg);
-    }
     let m_bEventsRegistered = false;
     let m_myXuid = MyPersonaAPI.GetXuid();
     let m_lbType;
@@ -27,7 +24,6 @@ var Leaderboard;
     let m_NameLockEventHandler;
     let m_leaderboardName = '';
     function RegisterEventHandlers() {
-        _msg('RegisterEventHandlers');
         if (!m_bEventsRegistered) {
             //m_LeaderboardsDirtyEventHandler = $.RegisterForUnhandledEvent('PanoramaComponent_Leaderboards_Dirty', OnLeaderboardDirty);
             m_LeaderboardsStateChangeEventHandler = $.RegisterForUnhandledEvent('PanoramaComponent_Leaderboards_StateChange', OnLeaderboardStateChange);
@@ -43,7 +39,6 @@ var Leaderboard;
     }
     Leaderboard.RegisterEventHandlers = RegisterEventHandlers;
     function UnregisterEventHandlers() {
-        _msg('UnregisterEventHandlers');
         if (m_bEventsRegistered) {
             if (m_lbType === 'party') {
             }
@@ -54,7 +49,6 @@ var Leaderboard;
     }
     Leaderboard.UnregisterEventHandlers = UnregisterEventHandlers;
 function _Init() {
-    _msg('init');
     m_lbType = $.GetContextPanel().GetAttributeString('lbtype', '');
     RegisterEventHandlers();
     _SetTitle();
@@ -212,7 +206,7 @@ function _FindLocalPlayerInRegion(region) {
         else if (m_lbType === 'party') {
             //m_leaderboardName = LeaderboardsAPI.GetCurrentSeasonPremierLeaderboard() + '.party';
         }
-        _msg(m_leaderboardName);
+
         return m_leaderboardName;
     }
 function _UpdateNameLockButton() {
@@ -281,10 +275,8 @@ function _UpdateGoToMeButton() {
 
 
     function UpdateLeaderboardList() {
-        _msg('-------------- UpdateLeaderboardList ' + m_leaderboardName);
         _UpdateGoToMeButton();
         let status = LeaderboardsAPI.GetState(m_leaderboardName);
-        _msg(status + '');
         let elStatus = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-loading');
         let elData = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-nodata');
         let elLeaderboardList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-list');
@@ -293,7 +285,6 @@ function _UpdateGoToMeButton() {
             elData.SetHasClass('hidden', true);
             elLeaderboardList.SetHasClass('hidden', true);
             LeaderboardsAPI.Refresh(m_leaderboardName);
-            _msg('leaderboard status: requested');
         }
         else if ("loading" == status) {
             elStatus.SetHasClass('hidden', false);
@@ -315,99 +306,129 @@ function _UpdateGoToMeButton() {
             }
             if (1 <= LeaderboardsAPI.HowManyMinutesAgoCached(m_leaderboardName)) {
                 LeaderboardsAPI.Refresh(m_leaderboardName);
-                _msg('leaderboard status: requested');
             }
         }
     }
     Leaderboard.UpdateLeaderboardList = UpdateLeaderboardList;
-    function _AddPlayer(elEntry, oPlayer, index) {
-        elEntry.SetDialogVariable('player-rank', '');
-        elEntry.SetDialogVariable('player-name', '');
-        elEntry.SetDialogVariable('player-wins', '');
-        elEntry.SetDialogVariable('player-winrate', '');
-        elEntry.SetDialogVariable('player-percentile', '');
-        elEntry.SetHasClass('no-hover', oPlayer === null);
-        elEntry.SetHasClass('background', index % 2 === 0);
-        let elAvatar = elEntry.FindChildInLayoutFile('leaderboard-entry-avatar');
-        elAvatar.visible = false;
-        if (oPlayer) {
-            function _AddOpenPlayerCardAction(elPanel, xuid) {
-                function openCard() {
-                    if (xuid && (xuid !== 0)) {
-                        $.DispatchEvent('SidebarContextMenuActive', true);
-                        let contextMenuPanel = UiToolkitAPI.ShowCustomLayoutContextMenuParametersDismissEvent('', '', 'file://{resources}/layout/context_menus/context_menu_playercard.xml', 'xuid=' + xuid, () => $.DispatchEvent('SidebarContextMenuActive', false));
-                        contextMenuPanel.AddClass("ContextMenu_NoArrow");
-                    }
+function _AddPlayer(elEntry, oPlayer, index) {
+    elEntry.SetDialogVariable('player-rank', '');
+    elEntry.SetDialogVariable('player-name', '');
+    elEntry.SetDialogVariable('player-wins', '');
+    elEntry.SetDialogVariable('player-winrate', '');
+    elEntry.SetDialogVariable('player-percentile', '');
+    elEntry.SetHasClass('no-hover', oPlayer === null);
+    elEntry.SetHasClass('background', index % 2 === 0);
+    let elAvatar = elEntry.FindChildInLayoutFile('leaderboard-entry-avatar');
+    elAvatar.visible = false;
+    
+    if (oPlayer) {
+        function _AddOpenPlayerCardAction(elPanel, xuid) {
+            function openCard() {
+                if (xuid && (xuid !== 0)) {
+                    $.DispatchEvent('SidebarContextMenuActive', true);
+                    let contextMenuPanel = UiToolkitAPI.ShowCustomLayoutContextMenuParametersDismissEvent(
+                        '', 
+                        '', 
+                        'file://{resources}/layout/context_menus/context_menu_playercard.xml', 
+                        'xuid=' + xuid, 
+                        () => $.DispatchEvent('SidebarContextMenuActive', false)
+                    );
+                    contextMenuPanel.AddClass("ContextMenu_NoArrow");
                 }
-                elPanel.SetPanelEvent("onactivate", openCard);
-                elPanel.SetPanelEvent("oncontextmenu", openCard);
             }
-            elEntry.enabled = true;
-            if (m_lbType === 'party' && oPlayer.XUID) {
-                elAvatar.steamid = oPlayer.XUID;
-                elAvatar.visible = true;
-                // _SetHonorIcon(elEntry, oPlayer.XUID);
-            }
-            else {
-                elAvatar.visible = false;
-            }
-            let elRatingEmblem = elEntry.FindChildTraverse('jsRatingEmblem');
-            if (m_lbType === 'party') {
-                const teamColorIdx = PartyListAPI.GetPartyMemberSetting(oPlayer.XUID, 'game/teamcolor');
-                const teamColorRgb = TeamColor.GetTeamColor(Number(teamColorIdx));
-                elAvatar.style.border = '2px solid rgb(' + teamColorRgb + ')';
-            }
-            _AddOpenPlayerCardAction(elEntry, oPlayer.XUID);
-            let options;
-            if (m_lbType === 'party') {
-                options =
-                    {
-                        root_panel: elRatingEmblem,
-                        rating_type: 'Premier',
-                        do_fx: true,
-                        leaderboard_details: oPlayer,
-                        full_details: false,
-                        local_player: oPlayer.XUID === MyPersonaAPI.GetXuid()
-                    };
-            }
-            else {
-                options =
-                    {
-                        root_panel: elRatingEmblem,
-                        rating_type: 'Premier',
-                        do_fx: true,
-                        leaderboard_details: oPlayer,
-                        full_details: false,
-                        local_player: oPlayer.XUID === MyPersonaAPI.GetXuid()
-                    };
-            }
-            RatingEmblem.SetXuid(options);
-            elEntry.SetDialogVariable('player-name', oPlayer.displayName || FriendsListAPI.GetFriendName(oPlayer.XUID));
-            elEntry.Data().allowNameUpdates = !oPlayer.hasOwnProperty('displayName');
-            elEntry.SetDialogVariable('player-wins', oPlayer.hasOwnProperty('matchesWon') ? String(oPlayer.matchesWon) : '-');
-            let bHasRank = oPlayer.hasOwnProperty('rank') && oPlayer.rank > 0;
-            elEntry.SetDialogVariableInt('player-rank', bHasRank ? oPlayer.rank : 0);
-            elEntry.FindChildTraverse('jsPlayerRank').text = bHasRank ? $.Localize('{d:player-rank}', elEntry) : '-';
-            let canShowWinRate = oPlayer.hasOwnProperty('matchesWon') && oPlayer.hasOwnProperty('matchesTied') && oPlayer.hasOwnProperty('matchesLost');
-            if (canShowWinRate) {
-                let matchesPlayed = (oPlayer.matchesWon ? oPlayer.matchesWon : 0) +
-                    (oPlayer.matchesTied ? oPlayer.matchesTied : 0) +
-                    (oPlayer.matchesLost ? oPlayer.matchesLost : 0);
-                let winRate = matchesPlayed === 0 ? 0 : oPlayer.matchesWon * 100.00 / matchesPlayed;
-                elEntry.SetDialogVariable('player-winrate', winRate.toFixed(2) + '%');
-            }
-            else {
-                elEntry.SetDialogVariable('player-winrate', '-');
-            }
-            elEntry.SetDialogVariable('player-percentile', (oPlayer.hasOwnProperty('pct') && oPlayer.pct && oPlayer.pct > 0) ? oPlayer.pct.toFixed(0) + '%' : '-');
-            elEntry.SetDialogVariable('player-region', (oPlayer.hasOwnProperty('region')) ? $.Localize('#leaderboard_region_abbr_' + regionToRegionName[oPlayer.region]) : '-');
+            elPanel.SetPanelEvent("onactivate", openCard);
+            elPanel.SetPanelEvent("oncontextmenu", openCard);
         }
-        return elEntry;
+
+        elEntry.enabled = true;
+        
+        if (m_lbType === 'party' && oPlayer.XUID) {
+            elAvatar.steamid = oPlayer.XUID;
+            elAvatar.visible = true;
+            // _SetHonorIcon(elEntry, oPlayer.XUID);
+        } else {
+            elAvatar.visible = false;
+        }
+
+        let elRatingEmblem = elEntry.FindChildTraverse('jsRatingEmblem');
+        
+        if (m_lbType === 'party') {
+            const teamColorIdx = PartyListAPI.GetPartyMemberSetting(oPlayer.XUID, 'game/teamcolor');
+            
+            const defaultTeamColors = {
+                0: '255, 255, 255', 
+                1: '100, 150, 255', 
+                2: '0, 255, 128',   
+                3: '255, 255, 0',   
+                4: '255, 128, 0',   
+                5: '255, 0, 128'    
+            };
+
+            let teamColorRgb = '255, 255, 255';
+            if (typeof TeamColor !== 'undefined' && TeamColor.GetTeamColor) {
+                teamColorRgb = TeamColor.GetTeamColor(Number(teamColorIdx));
+            } else if (defaultTeamColors[teamColorIdx]) {
+                teamColorRgb = defaultTeamColors[teamColorIdx];
+            }
+
+            elAvatar.style.border = '2px solid rgb(' + teamColorRgb + ')';
+        }
+
+        _AddOpenPlayerCardAction(elEntry, oPlayer.XUID);
+
+        let options;
+        if (m_lbType === 'party') {
+            options = {
+                root_panel: elRatingEmblem,
+                rating_type: 'Premier',
+                do_fx: true,
+                leaderboard_details: oPlayer,
+                full_details: false,
+                local_player: oPlayer.XUID === MyPersonaAPI.GetXuid()
+            };
+        } else {
+            options = {
+                root_panel: elRatingEmblem,
+                rating_type: 'Premier',
+                do_fx: true,
+                leaderboard_details: oPlayer,
+                full_details: false,
+                local_player: oPlayer.XUID === MyPersonaAPI.GetXuid()
+            };
+        }
+
+        if (typeof RatingEmblem !== 'undefined' && RatingEmblem.SetXuid) {
+            RatingEmblem.SetXuid(options);
+        }
+
+        elEntry.SetDialogVariable('player-name', oPlayer.displayName || FriendsListAPI.GetFriendName(oPlayer.XUID));
+        elEntry.Data().allowNameUpdates = !oPlayer.hasOwnProperty('displayName');
+        elEntry.SetDialogVariable('player-wins', oPlayer.hasOwnProperty('matchesWon') ? String(oPlayer.matchesWon) : '-');
+        
+        let bHasRank = oPlayer.hasOwnProperty('rank') && oPlayer.rank > 0;
+        elEntry.SetDialogVariableInt('player-rank', bHasRank ? oPlayer.rank : 0);
+        elEntry.FindChildTraverse('jsPlayerRank').text = bHasRank ? $.Localize('{d:player-rank}', elEntry) : '-';
+        
+        let canShowWinRate = oPlayer.hasOwnProperty('matchesWon') && oPlayer.hasOwnProperty('matchesTied') && oPlayer.hasOwnProperty('matchesLost');
+        if (canShowWinRate) {
+            let matchesPlayed = (oPlayer.matchesWon ? oPlayer.matchesWon : 0) +
+                (oPlayer.matchesTied ? oPlayer.matchesTied : 0) +
+                (oPlayer.matchesLost ? oPlayer.matchesLost : 0);
+            let winRate = matchesPlayed === 0 ? 0 : oPlayer.matchesWon * 100.00 / matchesPlayed;
+            elEntry.SetDialogVariable('player-winrate', winRate.toFixed(2) + '%');
+        } else {
+            elEntry.SetDialogVariable('player-winrate', '-');
+        }
+
+        elEntry.SetDialogVariable('player-percentile', (oPlayer.hasOwnProperty('pct') && oPlayer.pct && oPlayer.pct > 0) ? oPlayer.pct.toFixed(0) + '%' : '-');
+        elEntry.SetDialogVariable('player-region', (oPlayer.hasOwnProperty('region')) ? $.Localize('#leaderboard_region_abbr_' + regionToRegionName[oPlayer.region]) : '-');
     }
+    
+    return elEntry;
+}
     function _UpdatePartyList() {
         if (m_lbType !== 'party')
             return;
-        _msg("im here");
         let elStatus = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-loading');
         let elData = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-nodata');
         let elLeaderboardList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-list');
@@ -422,54 +443,43 @@ function _UpdateGoToMeButton() {
         // }
         let elList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-entries');
         if (!elList) {
-            $.Msg("[leaderboard.js] Missing panel: id-leaderboard-entries");
             return;
         }
         elList.RemoveAndDeleteChildren();
-        if (LobbyAPI.IsSessionActive()) {
-            _msg("im here 2");
-            function GetPartyLBRow(idx) {
-                let xuid = PartyListAPI.GetXuidByIndex(idx);
-                let oPlayer = {
-                    XUID: xuid,
-                    displayName: PartyListAPI.GetFriendName(xuid),
-                    rank: 15,
-                    matchesWon: 42,
-                    matchesTied: 5,
-                    matchesLost: 13,
-                    pct: 85.5,
-                    region: 1,
-                    rankWindowStats: {}
-                };
-                let partyScore = PartyListAPI.GetFriendCompetitiveRank(xuid);
-                let partyWins = PartyListAPI.GetFriendCompetitiveWins(xuid);
-                if (partyScore || partyWins) {
-                    oPlayer.score = PartyListAPI.GetFriendCompetitiveRank(xuid);
-                    oPlayer.matchesWon = PartyListAPI.GetFriendCompetitiveWins(xuid);
-                    _msg('PartyList player ' + xuid + ' score=' + oPlayer.score + ' wins=' + oPlayer.matchesWon + ' data={' + JSON.stringify(oPlayer) + '}');
-                }
-                return oPlayer;
-            }
-            _msg("players: "+PartyListAPI.GetCount());
-            for (let i = 0; i < PartyListAPI.GetCount(); i++) {
-                $.Msg(i);
-                let oPlayer = GetPartyLBRow(i);
-            
-                var reusePanel = $.CreatePanel("Button", elList, oPlayer ? oPlayer.XUID : '');
-                reusePanel.BLoadLayoutSnippet("leaderboard-entry");
-            
-                _AddPlayer(reusePanel, oPlayer, i);
-            }
-        }
+if (LobbyAPI.IsSessionActive()) {
+    function GetPartyLBRow(idx) {
+        let xuid = PartyListAPI.GetXuidByIndex(idx);
+        
+        let partyScore = PartyListAPI.GetFriendCompetitiveRank(xuid);
+        let partyWins = PartyListAPI.GetFriendCompetitiveWins(xuid);
+
+        let oPlayer = {
+            XUID: xuid,
+            displayName: PartyListAPI.GetFriendName(xuid),
+            score: partyScore || 0,
+            matchesWon: partyWins || 0,
+            rankWindowStats: {}
+        };
+
+        return oPlayer;
+    }
+
+    for (let i = 0; i < PartyListAPI.GetCount(); i++) {
+        let oPlayer = GetPartyLBRow(i);
+
+        var reusePanel = $.CreatePanel("Button", elList, oPlayer ? oPlayer.XUID : '');
+        reusePanel.BLoadLayoutSnippet("leaderboard-entry");
+
+        _AddPlayer(reusePanel, oPlayer, i);
+    }
+       }
     }
     function OnLeaderboardDirty(type) {
-        _msg('OnLeaderboardDirty');
         if (m_leaderboardName && m_leaderboardName === type) {
             LeaderboardsAPI.Refresh(m_leaderboardName);
         }
     }
     function ReadyForDisplay() {
-        _msg("ReadyForDisplay");
         RegisterEventHandlers();
         if (m_leaderboardName) {
             LeaderboardsAPI.Refresh(m_leaderboardName);
@@ -477,7 +487,6 @@ function _UpdateGoToMeButton() {
     }
     Leaderboard.ReadyForDisplay = ReadyForDisplay;
     function UnReadyForDisplay() {
-        _msg("UnReadyForDisplay");
         UnregisterEventHandlers();
     }
     Leaderboard.UnReadyForDisplay = UnReadyForDisplay;
@@ -501,7 +510,6 @@ function _UpdateGoToMeButton() {
     }
     function _FillOutEntries() {
         let nPlayers = LeaderboardsAPI.GetCount(m_leaderboardName);
-        _msg(nPlayers + ' accounts found.');
         const elList = $.GetContextPanel().FindChildInLayoutFile('id-leaderboard-entries');
         elList.SetLoadListItemFunction((parent, nPanelIdx, reusePanel) => {
             let oPlayer = LeaderboardsAPI.GetEntryDetailsObjectByIndex(m_leaderboardName, nPanelIdx);
@@ -517,8 +525,6 @@ function _UpdateGoToMeButton() {
         $.DispatchEvent('ScrollToDelayLoadListItem', elList, 0, 'topleft', true);
     }
     function OnLeaderboardStateChange(type) {
-        _msg('OnLeaderboardStateChange');
-        _msg('leaderboard status: received');
         if (m_leaderboardName === type) {
             if (m_lbType === 'party') {
                 _UpdatePartyList();

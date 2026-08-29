@@ -289,7 +289,8 @@
 {
     visibility: collapse;
     font-size: 16px;
-    font-family: Stratum2 TF, "Arial Unicode MS";
+    font-family: Stratum2, "Arial Unicode MS";
+	font-weight: medium;
     width: 100%;
     color: White;
     padding-left: 8px;
