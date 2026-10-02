@@ -96,7 +96,7 @@ var AcknowledgeItems = ( function()
 		_ShowGiftPanel( elItemTile, item.id );
 		_ShowSetPanel( elItemTile, item.id );
 		_ItemCount( elItemTile, index, numItems );
-		_GoBtnParticle( elItemTile, item.id );
+		_GoBtnParticle( elItemTile );
 		ResizeForVerticalItem(elItemTile, item.id);
 
 		                 
@@ -106,20 +106,19 @@ var AcknowledgeItems = ( function()
 		               
 	};
 	
-	function _GoBtnParticle()
+    function _GoBtnParticle( elItemTile )
     {
-    var elModel = $.GetContextPanel().FindChildTraverse( 'AcknowledgeMovie' );
+    var elModel = elItemTile.FindChildInLayoutFile( 'AcknowledgeMovie' );
     if ( !elModel )
         return;
 
     elModel.style.visibility = 'visible';
-	
-	elModel.AddClass('popup-acknowledge-gradient-bg');
+    elModel.AddClass( 'popup-acknowledge-gradient-bg' );
 
     elModel.SetCameraPosition( -30.10, 0.00, 0.00 );
     elModel.SetCameraAngles( 0.00, 0.00, 0.00 );
     elModel.AddParticleSystem( 'nuke_sparks1_core', '', true );
-    }
+    }  
 
 	var _WashColorBackGroundMovie = function( elParticle, rarityColor )
 	{

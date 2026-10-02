@@ -558,7 +558,7 @@ var OperationStoreInspect = ( function()
 
 	var OnActivateConfirmReward = function()
 	{
-		MissionsAPI.ActionRedeemOperationGoods( 10, _m_rewardIndex );
+		MissionsAPI.ActionRedeemOperationGoods( _m_nSeasonAccess, _m_rewardIndex );
 		_m_cp.FindChildInLayoutFile( 'id-op-inspect-shop-get-confirm-btn_label' ).enabled = false;
 		_m_cp.FindChildInLayoutFile( 'id-op-inspect-shop-get-confirm-btn_cancel' ).enabled = false;
 		_StartRevealAnim();

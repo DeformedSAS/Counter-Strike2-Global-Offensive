@@ -86,6 +86,13 @@ var ContextmenuPlayerCard;
                 $.DispatchEvent('ContextMenuEvent', '');
             },
         },
+		{
+            name: 'changeclantag',
+            icon: 'clantag',
+            AvailableForItem: (id) => !GameStateAPI.IsLocalPlayerPlayingMatch() && _IsSelf(id) && MyPersonaAPI.GetLauncherType() !== "perfectworld",
+            OnSelected: null,
+            xml: 'file://{resources}/layout/change_clantag_playercard_button.xml',
+        },
         {
             name: 'kick_from_lobby',
             icon: 'friendignore',

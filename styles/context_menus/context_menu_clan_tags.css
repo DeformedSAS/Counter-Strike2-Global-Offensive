@@ -1,0 +1,84 @@
+
+
+.ContextMenuBodyRow #Contents
+{
+	background-color: rgb(63, 63, 63);
+	height: fit-children;
+}
+
+#context-menu-title
+{
+	font-size: 24px;
+	font-family: ST2MDCOND, "Arial Unicode MS";
+	horizontal-align: center;
+	vertical-align: center;
+	margin: 4px;
+	margin-bottom: 6px;
+}
+
+#id-scrolling-tag-container
+{
+	border-top: 1px solid gray;
+	max-height: 300px;
+	overflow: scroll;
+	flow-children: down;
+}
+
+.clantag-item
+{
+	flow-children: right;
+	width: 300px;
+	border-bottom: 1px solid rgba(100,100,100, 1);
+}
+
+.clantag-item.last-child
+{
+	border-bottom: 1px solid rgba(100,100,100, 0);
+}
+
+.clantag-item.current-clantag
+{
+	brightness: 1;
+	border-left: 2px solid white;
+}
+
+.clantag-item.current-clantag:disabled Label
+{
+	color: gray;
+}
+
+.clantag-text-button
+{
+	horizontal-align: center;
+	padding: 4px 0px;
+}
+
+.ContextMenuItem Label.clan-name__label
+{
+	width:fit-children;
+	width: 60%;
+	horizontal-align: right;
+	font-size: 16px;
+	font-family: ST2RGCOND;
+}
+
+.ContextMenuItem Label.clan-tag__label
+{
+	max-height: 100%;
+	text-overflow:shrink;
+	width: 40%;
+	font-size: 18px;
+	font-family: ST2MDCOND, "Arial Unicode MS";
+	color: white;
+}
+
+.ContextMenuItem Label.clantag-text-button__label
+{
+	width: 100%;
+	horizontal-align: center;
+	text-align: center;
+	font-size: 16px;
+	font-family: ST2RGCOND, "Arial Unicode MS";
+	color: rgb(180, 180, 180);
+}
+

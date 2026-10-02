@@ -824,10 +824,10 @@ CSGOHudWeaponSelection Label,CSGOWeaponSelectionView Label
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
-.weapon-selection-item--bomb .weapon-selection-item-icon-main
+
+.c4_blyat_pulse_anim
 {
-    wash-color: #f3e78b;
-	animation-name: bomb-pulse;
+    animation-name: bomb-pulse;
     animation-delay: 0s;
     animation-duration:2s;
     animation-timing-function: linear;

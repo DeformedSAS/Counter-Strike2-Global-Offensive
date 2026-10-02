@@ -90,7 +90,7 @@ var ItemTile = ( function()
 
 	var _UpdatePopUpCapabilityList = function()
 	{
-		InventoryPanel.UpdateItemListCallback();
+		//InventoryPanel.UpdateItemListCallback(); causes js error. otherwise does absolutely nothing, nonexistent code.
 	}
 
 	var _SetImage = function( id )
@@ -269,7 +269,13 @@ var ItemTile = ( function()
 				$.DispatchEvent( 'UpdateSelectItemForCapabilityPopup', capabilityInfo.capability, id,
 					$.GetContextPanel().BHasClass( 'capability_multistatus_selected' )
 					);
-				                                                                               
+			}
+			else if ( capabilityInfo.capability === 'delete' )
+			{
+				$.GetContextPanel().ToggleClass( 'capability_multistatus_selected' );
+				$.DispatchEvent( 'UpdateSelectItemForCapabilityPopup', capabilityInfo.capability, id,
+					$.GetContextPanel().BHasClass( 'capability_multistatus_selected' )
+					);
 			}
 			else if ( capabilityInfo.capability === 'casketstore' )
 			{
@@ -299,7 +305,7 @@ var ItemTile = ( function()
 		contextMenuPanel.AddClass( "ContextMenu_NoArrow" );
 	};
 
-	var _OnActivateInspectButtonFropmTile = function()
+	var _OnActivateInspectButtonFromTile = function()
 	{
 		var id = $.GetContextPanel().GetAttributeString( 'itemid', '0' );
 		var capabilityInfo = _GetPopUpCapability();
@@ -515,7 +521,7 @@ var ItemTile = ( function()
 		ShowTooltip						: _ShowTooltip,
 		HideTooltip						: _HideTooltip,
 		Ondblclick						: _Ondblclick,
-		OnActivateInspectButtonFropmTile: _OnActivateInspectButtonFropmTile
+		OnActivateInspectButtonFromTile: _OnActivateInspectButtonFromTile
 	};
 } )();
 

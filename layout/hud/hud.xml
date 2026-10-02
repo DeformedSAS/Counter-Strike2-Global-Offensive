@@ -11,7 +11,7 @@
 
     <CSGOHud hittest="false">
         
-        <CSGOBlurTarget id="HudBlurSecondary" blurrects="HudVote MapDraft HudHintText HudProgressBar HudAlerts RoundImpactScoreMain" class="HudBlur" hittest="false" hittestchildren="false">
+        <CSGOBlurTarget id="HudBlurSecondary" blurrects="MapDraft HudHintText HudProgressBar HudAlerts RoundImpactScoreMain" class="HudBlur" hittest="false" hittestchildren="false">
             <CSGOBackbufferImagePanel class="full-width full-height" />
         </CSGOBlurTarget>
 
@@ -19,6 +19,7 @@
             <CSGOHudDamageIndicator id="HudDamageIndicator"/>
             <CSGOHudReticle id="HudReticle"/>
         </Panel>
+		<Panel id="HudBottomGradient" hittest="false" />
         <Frame id="MapDraft" class="full-width full-height" src="file://{resources}/layout/mapdraft.xml"/>
         <CCSGOTabletPanoLayer id="TabletPanoLayer" offscreen-composition-layer="true" />
         <CSGOSurvivalBuyMenu id="SurvivalBuyMenu"/>
@@ -82,7 +83,7 @@
 
         <CSGOHudFreezePanel id="HudFreezePanel" hittest="false" hittestchildren="false" />
 
-        <CSGOBlurTarget id="HudBlur" blurrects="Scoreboard MapOverview sliding-panel--TERRORIST sliding-panel--CT" class="HudBlur" hittest="false" hittestchildren="false">
+        <CSGOBlurTarget id="HudBlur" blurrects="Scoreboard EndOfMatch BuyMenu HudVote MapOverview sliding-panel--TERRORIST sliding-panel--CT" class="HudBlur" hittest="false" hittestchildren="false">
             <CSGOBackbufferImagePanel class="full-width full-height" />
         </CSGOBlurTarget>
 
@@ -125,3 +126,6 @@
 
     </CSGOHud>
 </root>
+
+<!-- complete hot garbage hud. it works atleast.. someone please end my suffering with this garbage and reverse valves cs2 hud.. -->
+<!-- this needs way more fixing than it should just because its complete garbage. -->

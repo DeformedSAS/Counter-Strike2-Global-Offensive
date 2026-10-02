@@ -805,7 +805,7 @@
                         </Panel>
                         <Panel class="left-right-flow">
                             <Label class="fontSize-m fontWeight-Bold" text="Examples : " />
-                            <Button class="SoundBtn" id="SoundTest" onactivate="$.DispatchEvent( &apos;PlaySoundEffect&apos;, &apos;UIPanorama.popup_accept_match_found&apos;, $(&apos;#SoundTest&apos;) )">
+                            <Button class="SoundBtn" id="SoundTest" onactivate="$.DispatchEvent( &apos;PlaySoundEffect&apos;, &apos;PanoramaUI.Lobby.Error&apos;, $(&apos;#SoundTest&apos;) )">
                                 <Label text="Test" />
                             </Button>
                         </Panel>

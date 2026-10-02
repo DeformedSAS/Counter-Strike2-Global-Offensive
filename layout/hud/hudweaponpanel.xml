@@ -1,15 +1,20 @@
 <root>
-	<styles>
-		<include src="file://{resources}/styles/csgostyles.css" />
-		<include src="file://{resources}/styles/hud/hudweaponpanel.css" />
-	</styles>
-	
-	<scripts>
-		<include src="file://{resources}/scripts/mock_adapter.js" />
-    	<include src="file://{resources}/scripts/hud/hudcolor.js" />
-  	</scripts>
+    <styles>
+        <include src="file://{resources}/styles/csgostyles.css" />
+        <include src="file://{resources}/styles/hud/hudweaponpanel.css" />
+    </styles>
+    
+    <scripts>
+        <include src="file://{resources}/scripts/mock_adapter.js" />
+        <include src="file://{resources}/scripts/hud/hudcolor.js" />
+    </scripts>
 
 <CSGOHudWeaponPanel>
+    <!-- moved the shitty ass hardcoded defuse panel way above everything so that it doesn't fuck others and itself -->
+    <Panel class="DefusePanel">
+        <Image id="DefuseIcon" class="DefusePanel__Icon cl-hud-wash-color hidden" src="file://{images}/icons/equipment/defuser.svg" scaling="stretch-to-fit-preserve-aspect" />
+    </Panel>
+
     <Panel class="center_indicator" scaling="stretch-to-fit-preserve-aspect">
         <Panel class="Kills cl-hud-wash-color">
             <Panel>
@@ -59,12 +64,9 @@
         </Panel>
     </Panel>
 
-    <Panel>
-        <Image id="DefuseIcon" class="WeaponPanelTop__Icon WeaponPanelTop__Icon--Defuse cl-hud-wash-color hidden" src="file://{images}/icons/equipment/defuser.svg" scaling="stretch-to-fit-preserve-aspect" />
-    </Panel>
-
     <Panel class="WeaponPanel" hittest="false">
-        <Panel class="WeaponPanelTop" />
+        <Panel class="WeaponPanelTop">
+        </Panel>
         <Panel id="WeaponPanelBottom">
             <Panel id="WeaponPanelBottomBG">
                 <Panel id="WeaponPanelBottomBGGradient" />
@@ -73,7 +75,7 @@
             <Panel id="WeaponPanelBottomContent">
                 <CCSGOSteamInputAction actionset="GameControls" action="firingmodetoggle" separatortext="I" controllernumber="1"/> 
                 <Panel class="table_ammo" />             
-                </Panel>
+            </Panel>
         </Panel>
     </Panel>
 </CSGOHudWeaponPanel>

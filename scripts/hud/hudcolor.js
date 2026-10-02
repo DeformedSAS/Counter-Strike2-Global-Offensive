@@ -50,3 +50,5 @@ function _UpdateHUD()
     HUDTeamColor.Init();	
     $.RegisterForUnhandledEvent( "PlayerTeamChanged", HUDTeamColor.UpdateHUD );
 })();
+
+// TODO: make the killbar images display during demos.

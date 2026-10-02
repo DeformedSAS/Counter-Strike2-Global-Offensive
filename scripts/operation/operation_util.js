@@ -20,25 +20,134 @@ var OperationUtil = ( function () {
 	var m_aCoinDefIndexes = [4759, 4760, 4761, 4762];
 	var m_aStarDefIndexes = [4763, 4764, 4765]
 	var m_passStoreId = 4758;
+	var m_sLastOperationDiagnostic = '';
+
+	var _ReadOperationBridge = function()
+	{
+		var packed = InventoryAPI.GetSecondsUntilNextMission();
+		var packedTier = InventoryAPI.GetMissionBacklog();
+		var magic = 536870912;
+		if ( packed === undefined || packed === null || packed < magic || packed >= 1073741824
+			|| packedTier === undefined || packedTier === null || packedTier < magic || packedTier >= 1073741824 )
+			return null;
+
+		return {
+			present: Math.floor( packed / 268435456 ) % 2 === 1,
+			premium: Math.floor( packed / 134217728 ) % 2 === 1,
+			card: ( Math.floor( packed / 4194304 ) % 32 ) - 1,
+			tier: packedTier % 1024,
+			backlog: Math.floor( packedTier / 1024 ) % 32,
+			nextMinutes: Math.floor( packedTier / 32768 ) % 16384,
+			stars: packed % 4194304
+		};
+	};
+
+	var _GetMissionBacklog = function()
+	{
+		var backlog = InventoryAPI.GetMissionBacklog();
+		return backlog >= 536870912 && backlog < 1073741824
+			? Math.floor( backlog / 1024 ) % 32
+			: backlog;
+	};
+
+	var _GetSecondsUntilNextMission = function()
+	{
+		var backlog = InventoryAPI.GetMissionBacklog();
+		if ( backlog >= 536870912 && backlog < 1073741824 )
+			return ( Math.floor( backlog / 32768 ) % 16384 ) * 60;
+
+		return InventoryAPI.GetSecondsUntilNextMission();
+	};
 
 	var _ValidateOperationInfo = function( nSeasonAccess )
 	{
-		m_nSeasonAccess = 10;
-		m_nCoinRank = 1;
+		                                               
+		                               
+		                                                                          
+		m_nSeasonAccess = nSeasonAccess;
+		
+		if ( nSeasonAccess < 0 || nSeasonAccess === null || nSeasonAccess === undefined )
+			return false;
+		
+		m_nSeasonAccess = nSeasonAccess;
+		                                                 
 
-		m_bPrime = true;
-		m_nRewardsCount = 0;
-		m_nRedeemableGoodsCount = 16;
+		m_nCoinRank = MyPersonaAPI.GetMyMedalRankByType( ( m_nSeasonAccess + 1 ) + "Operation$OperationCoin" );
+		                                           
+
+		m_bPrime = PartyListAPI.GetFriendPrimeEligible( MyPersonaAPI.GetXuid() );
+		m_nRewardsCount = MissionsAPI.GetSeasonalOperationTrackRewardsCount( m_nSeasonAccess );
+		m_nRedeemableGoodsCount = MissionsAPI.GetSeasonalOperationRedeemableGoodsCount( m_nSeasonAccess );
 		m_nLoopingRewardsCount = MissionsAPI.GetSeasonalOperationLoopingRewardsCount( m_nSeasonAccess );
-		m_numMissionsRewardThresholds = "7,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,75,79,83";
+		m_numMissionsRewardThresholds = MissionsAPI.GetSeasonalOperationXpRewardsThresholds( m_nSeasonAccess );
 
-		m_numMissionsCompleted = 0;
-		m_numTierUnlocked = 0;
-		m_bPremiumUser = false;
-		m_nActiveCardIndex = -1;
-		m_numRedeemableBalance = 9999;
+		                                                                                                                         
+		var idxOperation = InventoryAPI.GetCacheTypeElementIndexByKey( 'SeasonalOperations', m_nSeasonAccess );
+		var bCacheOperationValid = idxOperation != undefined && idxOperation != null
+			&& InventoryAPI.GetCacheTypeElementFieldByIndex( 'SeasonalOperations', idxOperation, 'season_value' ) == m_nSeasonAccess;
+		var bridge = _ReadOperationBridge();
+		if ( bCacheOperationValid )
+		{	                                                         
+			m_numMissionsCompleted = InventoryAPI.GetCacheTypeElementFieldByIndex( 'SeasonalOperations', idxOperation, 'missions_completed' );
+			m_numTierUnlocked = InventoryAPI.GetCacheTypeElementFieldByIndex( 'SeasonalOperations', idxOperation, 'tier_unlocked' );
+			if ( m_nRedeemableGoodsCount && m_nRedeemableGoodsCount > 0 )
+			{
+				var spt = InventoryAPI.GetCacheTypeElementFieldByIndex( 'SeasonalOperations', idxOperation, 'season_pass_time' );
+				m_bPremiumUser = ( spt && ( spt > 0 ) ) ? true : false;
+			}
+			else
+			{
+				var spt = InventoryAPI.GetCacheTypeElementFieldByIndex( 'SeasonalOperations', idxOperation, 'premium_tiers' );
+				m_bPremiumUser = ( spt && ( spt >= 1 ) ) ? true : false;
+			}
+			m_nActiveCardIndex = MissionsAPI.GetSeasonalOperationMissionCardActiveIdx( m_nSeasonAccess );
+			m_numRedeemableBalance = InventoryAPI.GetCacheTypeElementFieldByIndex( 'SeasonalOperations', idxOperation, 'redeemable_balance' );
+		}
+		else if ( bridge && bridge.present )
+		{
+			// The final legacy client can discard retired SO classes while accepting the
+			// rest of ClientWelcome. Read the same authoritative values from the DLL bridge
+			// so pass activation, the card panel, and the star shop remain usable.
+			m_numMissionsCompleted = 0;
+			m_numTierUnlocked = bridge.tier;
+			m_bPremiumUser = bridge.premium;
+			m_nActiveCardIndex = bridge.card;
+			m_numRedeemableBalance = bridge.stars;
+			if ( m_nCoinRank === -1 || m_nCoinRank === undefined || m_nCoinRank === null )
+				m_nCoinRank = 0;
+		}
+		else
+		{
+			                                             
+
+			m_numMissionsCompleted = 0;
+			m_numTierUnlocked = 0;
+			m_bPremiumUser = false;
+			m_nActiveCardIndex = -1;
+			m_numRedeemableBalance = 0;
+		}
+
+		var diagnostic = 'season=' + m_nSeasonAccess + ' cache=' + bCacheOperationValid
+			+ ' idx=' + idxOperation + ' bridge=' + ( bridge ? JSON.stringify( bridge ) : 'none' )
+			+ ' pass=' + InventoryAPI.GetActiveSeasonPassItemId()
+			+ ' coin=' + InventoryAPI.GetActiveSeasonCoinItemId()
+			+ ' rank=' + m_nCoinRank;
+		if ( diagnostic !== m_sLastOperationDiagnostic )
+		{
+			m_sLastOperationDiagnostic = diagnostic;
+		}
 
 		_AddLoopingRewardsToDisplay();
+
+		                                                 
+		                                                            
+		                                                          
+		                                                            
+		                                                  
+		                                         
+		                                 
+		                                                  
+		                                                                  
 
 		return true;
 	};
@@ -57,11 +166,37 @@ var OperationUtil = ( function () {
 		}
 	};
 
+	var _GetObjValue= function( bHasStoreItems, rewardIndex, item )
+	{
+		                     
+		var data;
+		
+		if( bHasStoreItems )
+		{
+			data = MissionsAPI.GetSeasonalOperationRedeemableGoodsSchema( m_nSeasonAccess, rewardIndex, item.value );
+		}
+		else
+		{
+			data = MissionsAPI.GetSeasonalOperationTrackRewardSchema( m_nSeasonAccess, rewardIndex, item.value );
+		}
+
+		                                                                                          
+		if( item.value === 'ui_order')
+		{
+			return data ? data : '';
+		}
+		else{
+			return data;
+		}
+	};
+
 	var _GetContainerTypeForReward = function( oRewardData )
 	{
 		var rewardId = oRewardData.itempremium.ids[ 0 ];
 		
 		var toolsKey = InventoryAPI.GetRawDefinitionKey( rewardId, "inv_container_and_tools" ); 
+
+		                                  
 
 		if( ( toolsKey === "weapon_case" ) )
 		{
@@ -88,135 +223,48 @@ var OperationUtil = ( function () {
 
 	var _GetRewardsData = function()
 	{
+		                                    
 		if ( !m_nSeasonAccess || m_nSeasonAccess === -1 )
 		{
 			return;
 		}
+		var bHasStoreItems = _HasStoreItems();
+		var nRewardsCount  = bHasStoreItems ? m_nRedeemableGoodsCount : m_nRewardsCount;
+		                                                              
 
-		var _rewards = [
-			{
-				points: 2,
-				uiOrder: 2,
-				RewardItemsNames: 'crate_community_35',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 2,
-				uiOrder: 2,
-				RewardItemsNames: 'crate_community_34',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 2,
-				uiOrder: 2,
-				RewardItemsNames: 'crate_community_33',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 2,
-				uiOrder: 2,
-				RewardItemsNames: 'selfopeningitem_set_graphic_design',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 1,
-				uiOrder: 2,
-				RewardItemsNames: 'selfopeningitem_set_overpass_2024',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 1,
-				uiOrder: 2,
-				RewardItemsNames: 'selfopeningitem_set_realism_camo',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-
-			{
-				points: 1,
-				uiOrder: 1,
-				RewardItemsNames: 'selfopeningitem_set_train_2025_uncommon_standalone',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 1,
-				uiOrder: 1,
-				RewardItemsNames: 'selfopeningitem_set_train_2025_rare_standalone',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 1,
-				uiOrder: 2,
-				RewardItemsNames: 'selfopeningitem_set_train_2025_legendary_standalone',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 1,
-				uiOrder: 3,
-				RewardItemsNames: 'selfopeningitem_set_train_2025_mythical_standalone',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 1,
-				uiOrder: 3,
-				RewardItemsNames: 'selfopeningitem_set_train_2025_ancient_standalone',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-
-			{
-				points: 25,
-				uiOrder: 1,
-				RewardItemsNames: 'character_operator_dossier_op11_ancient1',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 25,
-				uiOrder: 1,
-				RewardItemsNames: 'character_operator_dossier_op11_ancient2',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 10,
-				uiOrder: 1,
-				RewardItemsNames: 'character_operator_dossier_op11_legendary',
-				RewardItemGroups: '',
-				lootlist: '' 
-			},
-			{
-				points: 7,
-				uiOrder: 1,
-				RewardItemsNames: 'character_operator_dossier_op11_mythical',
-				RewardItemGroups: '',
-				lootlist: ''
-			},
-			{
-				points: 5,
-				uiOrder: 1,
-				RewardItemsNames: 'character_operator_dossier_op11_rare',
-				RewardItemGroups: '',
-				lootlist: ''
-			}
-		]
+		var aRewardDataFields = [
+			{ objHandle:'points', value: 'points'},
+			{ objHandle:'flags', value: 'flags'},
+			{ objHandle:'uiOrder', value: 'ui_order'},
+			{ objHandle:'imagePath', value: 'ui_image'},
+			{ objHandle:'imagePathInspect', value: 'ui_image_inspect'},
+			{ objHandle:'imagePathThumbnail', value: 'ui_image_thumbnail'},
+			{ objHandle:'RewardItemsNames', value: 'item_name'},
+			{ objHandle:'RewardItemGroups', value: 'item_name_groups'},
+			{ objHandle:'FreeRewardItemsNames', value: 'item_name_free'},
+			{ objHandle:'useAsCallout', value: 'callout'},
+			{ objHandle:'isGap', value: 'none'},
+			{ objHandle:'lootlist', value: []},
+			{ containerType:'' }
+		];
 
 		var _allRewardsData = [];
 
-		for ( var i = 0; i < _rewards.length; i++ )
+		for ( var i = 0; i < nRewardsCount; i++ )
 		{
-			var _rewardData = _rewards[i];
+			var _rewardData = {};
 			_rewardData.idx = i;
+			aRewardDataFields.forEach(function( item, index ) 
+			{
+				                                              
+				_rewardData[item.objHandle] = _GetObjValue( bHasStoreItems, i, item );
+			});
 
+			                                                                                                                                  
+			                                                                                                                 
+			                                                                             
+			                                                                                                           
+			                                              
 			var rewardTypes = [
 				{ type: 'premium', names: _rewardData.RewardItemsNames },
 				{ type: 'free', names: _rewardData.FreeRewardItemsNames }
@@ -281,271 +329,6 @@ var OperationUtil = ( function () {
 			_rewardData.containerType = _GetContainerTypeForReward( _rewardData );
 
 			_allRewardsData.push( _rewardData );
-		}
-
-		return _allRewardsData;
-	};
-
-	var _GetRewardsDataForOPMain = function()
-	{
-		                                    
-		if ( !m_nSeasonAccess || m_nSeasonAccess === -1 )
-		{
-			return;
-		}
-
-		var _rewards = [
-			{
-				uiOrder: 3,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: '',
-				imagePathThumbnail: '',
-				imagePathInspect: '',
-				RewardItemsNames: 'CommunitySeasonNine2019 Coin 1',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 3,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: 'operations/op9/op9_graffiti_pack_02',
-				imagePathThumbnail: 'operations/op9/op9_graffiti_pack_02_thumbnail',
-				imagePathInspect: 'operations/op9/op9_graffiti_pack_02_inspect',
-				RewardItemsNames: 'selfopeningitem_crate_spray_std2_1',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 3,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: '',
-				imagePathThumbnail: 'operations/op9/op9_sticker_pack_01_thumbnail',
-				imagePathInspect: '',
-				RewardItemsNames: 'crate_sticker_pack_shattered_web',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 2,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: '',
-				imagePathThumbnail: '',
-				imagePathInspect: '',
-				RewardItemsNames: 'crate_community_23',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 3,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: 'operations/op9/op9_graffiti_pack_01',
-				imagePathThumbnail: 'operations/op9/op9_graffiti_pack_01_thumbnail',
-				imagePathInspect: 'operations/op9/op9_graffiti_pack_01_inspect',
-				RewardItemsNames: 'selfopeningitem_crate_spray_std2_2',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 2,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: '',
-				imagePathThumbnail: '',
-				imagePathInspect: '',
-				RewardItemsNames: 'selfopeningitem_set_norse',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 2,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: '',
-				imagePathThumbnail: '',
-				imagePathInspect: '',
-				RewardItemsNames: 'selfopeningitem_set_canals',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 2,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: '',
-				imagePathThumbnail: '',
-				imagePathInspect: '',
-				RewardItemsNames: 'selfopeningitem_set_stmarc',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 1,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: 'operations/op9/char_pack_op09_rare',
-				imagePathThumbnail: 'operations/op9/char_pack_thumbnail_op09_rare',
-				imagePathInspect: '',
-				RewardItemsNames: 'character_operator_dossier_op09_rare',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 1,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: 'operations/op9/char_pack_op09_mythical',
-				imagePathThumbnail: 'operations/op9/char_pack_thumbnail_op09_mythical',
-				imagePathInspect: '',
-				RewardItemsNames: 'character_operator_dossier_op09_mythical',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 1,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: 'operations/op9/char_pack_op09_legendary',
-				imagePathThumbnail: 'operations/op9/char_pack_thumbnail_op09_legendary',
-				imagePathInspect: '',
-				RewardItemsNames: 'character_operator_dossier_op09_legendary',
-				lootlist: ''
-			},
-			{
-				empty: true
-			},
-			{
-				empty: true
-			},
-			{
-				uiOrder: 1,
-				useAsCallout: '',
-				isGap: '',
-				isUnlocked: '',
-				imagePath: 'operations/op9/char_pack_op09_ancient',
-				imagePathThumbnail: 'operations/op9/char_pack_thumbnail_op09_ancient',
-				imagePathInspect: '',
-				RewardItemsNames: 'character_operator_dossier_op09_ancient',
-				lootlist: ''
-			},
-		]
-		
-		var _allRewardsData = [];
-		for ( var i = 0; i < _rewards.length; i++ )
-		{
-			var _rewardsData = _rewards[i];
-
-			if(_rewards[i].empty == true) {
-				_rewardsData = {
-					uiOrder: '',
-					useAsCallout: '',
-					isGap: 'none',
-					isUnlocked: '',
-					imagePath: '',
-					imagePathThumbnail: '',
-					imagePathInspect: '',
-					RewardItemsNames: '',
-					lootlist: ''
-				}
-			}
-
-			_rewardsData.idx = i;
-
-			var rewardTypes = [
-				{ type: 'premium', names: _rewardsData.RewardItemsNames },
-				{ type: 'free', names: '' }
-			];
-		
-			rewardTypes.forEach( rType =>
-			{
-				var items = { type: rType.type, ids: [] };
-				var nameList = rType.names.split( ',' );
-				nameList.forEach( reward =>
-				{
-					if ( reward )
-					{
-						var itemidForReward;
-						if ( reward.startsWith( 'lootlist:' ) )
-						{                                               
-							itemidForReward = InventoryAPI.GetLootListItemIdByIndex( reward, 0 );
-						} else
-						{	                                                  
-							var nDefinitionIndex = InventoryAPI.GetItemDefinitionIndexFromDefinitionName( reward );
-							itemidForReward = InventoryAPI.GetFauxItemIDFromDefAndPaintIndex( nDefinitionIndex, 0 );
-						}
-						items.ids.push( itemidForReward );
-					}
-				} );
-					
-				_rewardsData[ 'item' + rType.type ] = items;
-			} );
-			
-			_allRewardsData.push( _rewardsData );
 		}
 
 		return _allRewardsData;
@@ -821,7 +604,7 @@ var OperationUtil = ( function () {
 
 	function _OpenPopupCustomLayoutOperationHub ( rewardIdxToSetWhenOpen )
 	{
-		var nActiveSeason = 11;
+		var nActiveSeason = GameTypesAPI.GetActiveSeasionIndexValue();
 		if ( nActiveSeason < 0 )
 			return;
 
@@ -843,7 +626,7 @@ var OperationUtil = ( function () {
 	{
 		$.DispatchEvent( 'ContextMenuEvent', '' );
 
-		var nActiveSeason = 11;
+		var nActiveSeason = GameTypesAPI.GetActiveSeasionIndexValue();
 		if ( nActiveSeason < 0 )
 			nActiveSeason = _IfOperationEndedGetExtendedSeasonWithRedeemableBalance();
 
@@ -929,7 +712,7 @@ var OperationUtil = ( function () {
 		$.DispatchEvent( 'PlaySoundEffect', 'tab_mainmenu_inventory', 'MOUSE' );
 
 		                                                
-		var nActiveSeason = 11;
+		var nActiveSeason = GameTypesAPI.GetActiveSeasionIndexValue();
 		if ( nActiveSeason < 0 )
 		{
 			_IfOperationEndedGetExtendedSeasonWithRedeemableBalance( true );
@@ -1120,21 +903,20 @@ var OperationUtil = ( function () {
 
 	var _GetOperationInfo = function()
 	{
-		return JSON.parse('{"nSeasonAccess":10,"nTierUnlocked":0,"nRewardsCount":0,"bShopIsFreeForAll":false,"nRedeemableGoodsCount":16,"nRedeemableBalance":9999,"nMissionsCompleted":0,"nMissionsRewardThresholds":"7,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,75,79,83","bPremiumUser":true,"nCoinRank":1,"nActiveCardIndex":-1,"bPrime":true}');
-		// return {
-		// 	nSeasonAccess: m_nSeasonAccess,
-		// 	nTierUnlocked: m_numTierUnlocked,
-		// 	nRewardsCount: m_nRewardsCount,
-		// 	bShopIsFreeForAll: false,
-		// 	nRedeemableGoodsCount: m_nRedeemableGoodsCount,
-		// 	nRedeemableBalance : m_numRedeemableBalance,
-		// 	nMissionsCompleted: m_numMissionsCompleted,
-		// 	nMissionsRewardThresholds: m_numMissionsRewardThresholds,
-		// 	bPremiumUser: m_bPremiumUser,
-		// 	nCoinRank: m_nCoinRank,
-		// 	nActiveCardIndex: m_nActiveCardIndex,
-		// 	bPrime: m_bPrime
-		// };
+		return {
+			nSeasonAccess: m_nSeasonAccess,
+			nTierUnlocked: m_numTierUnlocked,
+			nRewardsCount: m_nRewardsCount,
+			bShopIsFreeForAll: false,
+			nRedeemableGoodsCount: m_nRedeemableGoodsCount,
+			nRedeemableBalance : m_numRedeemableBalance,
+			nMissionsCompleted: m_numMissionsCompleted,
+			nMissionsRewardThresholds: m_numMissionsRewardThresholds,
+			bPremiumUser: m_bPremiumUser,
+			nCoinRank: m_nCoinRank,
+			nActiveCardIndex: m_nActiveCardIndex,
+			bPrime: m_bPrime
+		};
 	};
 
 	return {
@@ -1142,7 +924,6 @@ var OperationUtil = ( function () {
 		ValidateCoinAndSeasonIndex: _ValidateCoinAndSeasonIndex,
 		GetOperationInfo: _GetOperationInfo,
 		GetRewardsData: _GetRewardsData,
-		GetRewardsDataOPMain: _GetRewardsDataForOPMain,
 		GetLootListForReward: _GetLootListForReward,
 		OpenPopupCustomLayoutOperationHub: _OpenPopupCustomLayoutOperationHub,
 		OpenPopupCustomLayoutOperationStore: _OpenPopupCustomLayoutOperationStore,
@@ -1160,6 +941,8 @@ var OperationUtil = ( function () {
 		SetLocalizationStringAndVarsForMission: _SetLocalizationStringAndVarsForMission,
 		GetMissionDetails: _GetMissionDetails,
 		GetMissionCardEarnedPoints: _GetMissionCardEarnedPoints,
+		GetMissionBacklog: _GetMissionBacklog,
+		GetSecondsUntilNextMission: _GetSecondsUntilNextMission,
 	};
 
 })();

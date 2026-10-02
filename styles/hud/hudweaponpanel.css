@@ -14,7 +14,7 @@
 
 CSGOHudWeaponPanel
 {
-
+ overflow: noclip;
 }
 
 CSGOHudWeaponPanel Label
@@ -36,11 +36,8 @@ CSGOHudWeaponPanel Label
 .WeaponPanel
 {
 	opacity: 1.0;
-	transform: translatey( 0px );
+	transform: translatex( -50px );
 
-	transition-property:  opacity, transform;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
 	margin-bottom: 16px;
 	padding-right: 32px;
 }
@@ -101,8 +98,7 @@ CSGOHudWeaponPanel Label
 .WeaponPanelTop__Icon--Defuse
 {
 	
-	horizontal-align: center;
-	margin-left: 650px;
+	horizontal-align: right;
 	margin-top: 40px;
 	height: 60px;
 }
@@ -111,10 +107,41 @@ CSGOHudWeaponPanel Label
 	visibility: visible;
 }
 
+/* defuse kit bullshit */
+#DefusePanel,
+.DefusePanel
+{
+    horizontal-align: center;
+    vertical-align: bottom;
+    
+    width: 100%;
+    height: 100%;
+	x: 65px;
+	y: 10px;
+    z-index: 1000;
+	overflow: noclip;
+}
 
-                                                                               
-                                                                               
-                                                                               
+#DefuseIcon,
+.DefusePanel__Icon
+{
+    width: 38px;
+    height: 38px;
+    horizontal-align: right;
+    vertical-align: center;
+}
+
+#DefuseIcon.hidden,
+.DefusePanel__Icon.hidden
+{
+    visibility: collapse;
+}
+
+#DefuseIcon.WeaponPanelTop__Icon--Show,
+.DefusePanel__Icon.WeaponPanelTop__Icon--Show
+{
+    visibility: visible;
+}
 
 #WeaponPanelBottomBG
 {
@@ -161,7 +188,6 @@ CSGOHudWeaponPanel Label
 {
 	width: 502px;
 	height: 62px;
-	margin-right: 548px;
 	margin-top: 36px;
 
 }                                          
@@ -456,6 +482,7 @@ CSGOHudWeaponPanel Label
 .Ammo--Hidden
 {
 	opacity: 0;
+	overflow: noclip;
 	animation-name: weapon--change2;
     animation-duration: 0.1s;
     animation-timing-function: ease-in-out;

@@ -312,3 +312,5 @@ var RatingEmblem;
     };
 
 })(RatingEmblem || (RatingEmblem = {}));
+
+// TODO: fix a bug where the elo rating numbers don't have the proper class after the ui updates.

@@ -105,14 +105,14 @@
 
 .popup-inspect-modelpanel--char
 {
-	width: 1200px;
+	width: 1100px;
     height: 100%;
 	vertical-align: bottom;
 }
 
 .popup-inspect-modelpanel--char2
 {
-	width: 1200px;
+	width: 1100px;
     height: 100%;
 	vertical-align: bottom;
 	horizontal-align: center;
@@ -135,7 +135,7 @@
     opacity: 0;
     width: 1px;
     visibility: visible;
-    transition-property: opacity, transform;
+    transition-property: opacity;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
 }
@@ -152,7 +152,7 @@
 {
     opacity: 0;
     transform: translateY( 100% );
-    transition-property: opacity, transform;
+    transition-property: opacity;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
 }

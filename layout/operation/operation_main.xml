@@ -15,7 +15,7 @@
 		<include src="file://{resources}/scripts/common/iteminfo.js"/>
 		<include src="file://{resources}/scripts/common/formattext.js"/>
 		<include src="file://{resources}/scripts/common/flip_panel_anim.js" />
-		<include src="file://{resources}/scripts/operation/operation_util.js" />
+		<include src="file://{resources}/scripts/operation/operation_util_mock.js" />
 		<include src="file://{resources}/scripts/operation/operation_main.js"/>
 		                                                                             
 		                                                                           

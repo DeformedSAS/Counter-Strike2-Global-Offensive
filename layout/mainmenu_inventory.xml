@@ -11,6 +11,7 @@
 		<include src="file://{resources}/scripts/common/iteminfo.js" />
 		<include src="file://{resources}/scripts/popups/popup_acknowledge_item.js" />
 		<include src="file://{resources}/scripts/mainmenu_inventory.js" />
+		<include src="file://{resources}/scripts/notification/notification_equip.js" />
 	</scripts>
     <snippets>
         <snippet name="InvSortDropdownSnippet">
@@ -62,6 +63,9 @@
                 <Button id="InvLoadoutBtn" class="">
                     <Label text="#inv_nav_loadout" />
                 </Button>
+				<Button id="InvDeleteBtn" class="">
+					<Label text="#inv_context_delete" />
+				</Button>
                 <Button id="InvCraftingBtn" class="">
                     <Label text="#inv_nav_tradeup" />
                 </Button>
@@ -82,7 +86,7 @@
                     <Button id="CapabilityPopupMultiStatusBtn" class="PopupButton Positive" onactivate="InventoryPanel.ProceedForMultiStatusCapabilityPopup();">
                         <Label text="#SFUI_Crafting_Exchange" />
                     </Button>
-                    <Label class="inv-popup-title__text inv-popup-rightextra-label" text="#CSGO_Recipe_Count_Items_Selected:f" id="CapMultiStatusCounterLabel" html="true" />
+                    <Label class="inv-popup-title__text inv-popup-rightextra-label" text="#CSGO_Recipe_Count_Items_Selected" id="CapMultiStatusCounterLabel" html="true" />
                 </Panel>
             </Panel>
         </snippet>

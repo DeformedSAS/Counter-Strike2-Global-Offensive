@@ -1,5 +1,4 @@
 'use strict';
-$.DispatchEvent('PlayMainMenuMusic', false, true);
 var EndOfMatch = (function () {
     var _m_cP = $("#EndOfMatch");
     if (!_m_cP) _m_cP = $("#PanelToTest");
@@ -11,7 +10,6 @@ var EndOfMatch = (function () {
     $.RegisterEventHandler("EndOfMatch_Show", _m_cP, _Start);
     $.RegisterForUnhandledEvent("EndOfMatch_Shutdown", _Shutdown);
     $.RegisterForUnhandledEvent("OnMouseEnableBinding", _ToggleBetweenScoreboardAndCharacters);
-    $.DispatchEvent("PlayMainMenuMusic", false, true);
 
     _m_cP.Data()._m_arrPanelObjects = [];
     _m_cP.Data()._m_currentPanelIndex = -1;

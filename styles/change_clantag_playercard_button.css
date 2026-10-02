@@ -1,0 +1,69 @@
+
+
+#id-tooltip-changeclantag
+{
+	flow-children: down;
+}
+
+#id-clantag-pending-img
+{
+	visibility: collapse;
+}
+
+.show-spinner #id-clantag-pending-img
+{
+	visibility: visible;
+}
+
+#id-clantag-img
+{
+	visibility: visible;
+}
+
+.show-spinner #id-clantag-img
+{
+	visibility: collapse;
+}
+
+#id-clantag-pending-img
+{
+	background-image: url("file://{images}/icons/ui/loading.svg");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: contain;
+	animation-name: SpinnerRotate;
+	animation-duration: 1.25s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	horizontal-align:center;
+	vertical-align:center;
+}
+
+@keyframes 'SpinnerRotate'
+{
+	0%
+	{
+		transform: scaleX( 1 );
+		clip:radial(50% 50%, 0deg, 360deg);
+	}
+	
+	49%
+	{
+		transform: scaleX( 1 );
+		clip:radial(50% 50%, 0deg, 0deg);
+	}
+	
+	50%
+	{
+		transform: scaleX( -1 );
+		clip:radial(50% 50%, 0deg, 0deg);
+	}
+	
+	100%
+	{
+		transform: scaleX( -1 );
+		clip:radial(50% 50%, 0deg, 360deg);
+	}
+	
+}
+

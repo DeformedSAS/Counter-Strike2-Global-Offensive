@@ -205,9 +205,11 @@ CSGOSettingsSlider#DatacenterPingThresholdSlider
 
 .SettingsSectionTitleLabel
 {
-    font-size: 18px;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.25);
+    font-size: 28px;
+    color: rgba(222, 222, 222, 0.4);
+    font-family: Stratum2, "Arial Unicode MS";
+    font-weight: Black;
+    font-style: italic;
 }
 
 .SettingsSection__seperator

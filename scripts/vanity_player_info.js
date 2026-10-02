@@ -157,30 +157,41 @@ var VanityPlayerInfo;
         newPanel.RemoveClass('no-valid-xp');
     }
     
-    function _SetSkillGroup(newPanel, xuid) {
-        let rating_type, wins;
+function _SetSkillGroup(newPanel, xuid) {
+    let rating_type, wins;
 
-        if ((xuid === MyPersonaAPI.GetXuid()) && !PartyListAPI.IsPartySessionActive()) {
-            rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
-            wins = MyPersonaAPI.GetPipRankWins(rating_type);
-        } else {
-            rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
-            wins = PartyListAPI.GetFriendCompetitiveWins(xuid);
-        }
+    if ((xuid === MyPersonaAPI.GetXuid()) && !PartyListAPI.IsPartySessionActive()) {
+        rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
+        wins = MyPersonaAPI.GetPipRankWins(rating_type);
+    } else {
+        rating_type = PartyListAPI.GetFriendCompetitiveRankType(xuid);
+        wins = PartyListAPI.GetFriendCompetitiveWins(xuid);
+    }
 
-        var skillGroup = PartyListAPI.GetFriendCompetitiveRank(xuid, rating_type);
-        var winsNeededForRank = SessionUtil.GetNumWinsNeededForRank(rating_type);
-        var elRank = newPanel.FindChildInLayoutFile('vanity-skillgroup-frame'); 
+    var skillGroup = PartyListAPI.GetFriendCompetitiveRank(xuid, rating_type);
+    var winsNeededForRank = SessionUtil.GetNumWinsNeededForRank(rating_type);
+    var elRank = newPanel.FindChildInLayoutFile('vanity-skillgroup-frame'); 
 
-        if (wins < winsNeededForRank || (wins >= winsNeededForRank && skillGroup < 1) || !FriendsListAPI.GetFriendPrimeEligible(xuid)) {
-            elRank.visible = false;
-            return;
-        }
+    if (!FriendsListAPI.GetFriendPrimeEligible(xuid)) {
+        elRank.visible = false;
+        return;
+    }
 
-        var imageName = (rating_type !== 'Competitive') ? rating_type : 'skillgroup';
+    var imageName = (rating_type !== 'Competitive') ? rating_type : 'skillgroup';
+
+    if (wins >= winsNeededForRank && skillGroup < 1) {
+        elRank.SetImage('file://{images}/icons/skillgroups/' + imageName + '_expired.svg');
+        elRank.visible = true;
+    } 
+    else if (wins < winsNeededForRank) {
+        elRank.SetImage('file://{images}/icons/skillgroups/' + imageName + '_none.svg');
+        elRank.visible = true;
+    } 
+    else {
         elRank.SetImage('file://{images}/icons/skillgroups/' + imageName + skillGroup + '.svg');
         elRank.visible = true;
     }
+}
 
     function _SetHonorIcon(elPanel, xuid) {
         const honorIconOptions = {

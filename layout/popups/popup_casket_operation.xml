@@ -20,7 +20,7 @@
 					useglobalcontext="true">
 				<Panel id="ItemTileBg" class="item-tile__bg"/>
 				<ItemImage class="item-tile__image" id="ItemImage" scaling="stretch-to-fit-preserve-aspect"/>
-				<Label html="true" id="JsItemName" class="item-tile__name"/>
+				<Label html="true" id="JsItemName" class="item-tile__name" style="padding-top: 10px;"/>
 				<Panel class="item-tile__rarity" id="JsRarity"/>
 			</Panel>
 		</snippet>

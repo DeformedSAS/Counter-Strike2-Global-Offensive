@@ -401,12 +401,12 @@ Label.Orange
 
 .SoundOnEnterHover:hover
 {
-    sound: "UIPanorama.buymenu_mouseover";
+    sound: "PanoramaUI.Lobby.Left";
 }
 
 .SoundOnLeaveHover:hover
 {
-    sound-out: "UIPanorama.buymenu_mouseover";
+    sound-out: "PanoramaUI.Lobby.Chat";
 }
 
 #DialogVarParentPanel

@@ -1,0 +1,31 @@
+<!-- xml reconstructed by Source 2 Viewer 19.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+    <styles>
+        <include src="file://{resources}/styles/csgostyles.css" />
+        <include src="file://{resources}/styles/change_clantag_playercard_button.css" />
+        <include src="file://{resources}/styles/context_menus/context_menu_playercard.css" />
+    </styles>
+
+        <script>
+            (function() {
+                $.OnChangeClanTagPressed = function() {
+                    const elClanTagContextMenu = UiToolkitAPI.ShowCustomLayoutContextMenuParametersDismissEvent(
+                        'id-vanity-contextmenu-clanchange', 
+                        '', 
+                        'file://{resources}/layout/context_menus/context_menu_clan_tags.xml', 
+                        '', 
+                        () => { }
+                    );
+                    elClanTagContextMenu.AddClass("ContextMenu_NoArrow");
+                };
+            })();
+        </script>
+
+    <Panel useglobalcontext="true" class="IconButton" onactivate="$.OnChangeClanTagPressed();">
+        <TooltipPanel id="id-tooltip-changeclantag" tooltip="#tooltip_changeclantag" style="tooltip-position: bottom;">
+            <Image id="id-clantag-img" src="file://{images}/icons/ui/clantag.svg" />
+            <Image id="id-clantag-pending-img" src="file://{images}/icons/ui/loading.svg" />
+            <Label id="id-clantag-label" text="#tooltip_short_changeclantag" />
+        </TooltipPanel>
+    </Panel>
+</root>

@@ -343,7 +343,7 @@ var EOM_Rank = (function () {
 
 		}, 1 );
 
-		function _PlayParticles ()
+		function _PlayParticles () // TODO: figure out why the engine craps itself sometimes because of the particles. and implement a fix that should work..
 		{
 			var elModel = _m_cP.FindChildTraverse( 'RankParticleModel' );
 			if ( !elModel || !elModel.IsValid() )

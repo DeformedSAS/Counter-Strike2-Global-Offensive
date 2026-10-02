@@ -65,7 +65,13 @@ var ItemContextMenu = ( function (){
 					elButton.AddClass( strStyleToAdd );
 				}
 
-				var handler = entry.OnSelected.bind(this, id);
+				                                                                                                           
+				var handler = ( displayName === 'delete' ) 
+					? function( itemId ) {
+						$.DispatchEvent( 'ContextMenuEvent', '' );
+						$.DispatchEvent( 'ShowSelectItemForCapabilityPopup', 'delete', itemId, '' );
+					}.bind( this, id )
+					: entry.OnSelected.bind( this, id );
 
 				elButton.SetPanelEvent( 'onactivate', function( event_handler ) 
 				{

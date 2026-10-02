@@ -2,6 +2,7 @@
 
 var m_strOperation = '';
 var m_CasketOperationTimeoutScheduledHandle = null;
+var m_DeleteOperationScheduledHandle = null;
 var m_strShowSelectItemForCapabilityPopupCapability = '';
 var m_numSubjectItems = 1;
 var m_itemidCasket = '';
@@ -25,12 +26,15 @@ var SetupPopup = function()
 
 	m_strShowSelectItemForCapabilityPopupCapability = $.GetContextPanel().GetAttributeString( "nextcapability", "" );
 
-	                 
 	var itemidsList = $.GetContextPanel().GetAttributeString( "subject_item_id", "" );
 	ConfigurePopupFromItemsList( itemidsList );
 
-	                                                                                                     
 	$.RegisterForUnhandledEvent( 'PanoramaComponent_Inventory_ItemCustomizationNotification', OnItemCustomizationNotification );
+
+	if ( m_strOperation === 'delete' )
+	{
+		$.RegisterForUnhandledEvent( 'PanoramaComponent_MyPersona_InventoryUpdated', OnDeleteItemUpdated );
+	}
 };
 
 var ConfigurePopupFromItemsList = function( itemidsList )
@@ -46,7 +50,6 @@ var ConfigurePopupFromItemsList = function( itemidsList )
 	m_itemidSubject = itemid;
 
 	if ( !InventoryAPI.GetItemRarityColor( m_itemidSubject ) ) {
-		                                                     
 		PanelTimedOut();
 		return;
 	}
@@ -55,67 +58,62 @@ var ConfigurePopupFromItemsList = function( itemidsList )
 	elItem.SetAttributeString( 'itemid', itemid );
 	elItem.BLoadLayoutSnippet( "LootListItem" );
 
-	                                 
 	elItem.FindChildInLayoutFile( 'ItemImage' ).itemid = itemid;
 	elItem.FindChildInLayoutFile( 'JsRarity' ).style.backgroundColor = ItemInfo.GetRarityColor( itemid );
 	ItemInfo.GetFormattedName( itemid ).SetOnLabel( elItem.FindChildInLayoutFile( 'JsItemName' ) );
 
-                             
-    var spinnerVisible = $.GetContextPanel().GetAttributeInt( "spinner", 0 );
-    $( "#Spinner" ).SetHasClass( "SpinnerVisible", spinnerVisible );
-    
+	var spinnerVisible = $.GetContextPanel().GetAttributeInt( "spinner", 0 );
+	$( "#Spinner" ).SetHasClass( "SpinnerVisible", spinnerVisible );
+	
 	m_CasketOperationTimeoutScheduledHandle = $.Schedule( 10, PanelTimedOut );
 	var schOperation = 0.75;
 	if ( m_strOperation === 'loadcontents' ) {
 		schOperation = 0.5;
 	} else if ( ( m_strOperation === 'add' ) && m_strShowSelectItemForCapabilityPopupCapability ) {
 		schOperation = 0.25;
+	} else if ( m_strOperation === 'delete' ) {
+		schOperation = 0.5;
 	} else if ( _BIsBatchMode() ) {
 		schOperation = 0.2;
 	}
-	          
-	                                                                           
-	              	                                                          
-	 
-		                                
-		                  
-			                       
-	 
-	          
-	$.Schedule( schOperation, LaunchOperation );
+	
+	if ( m_strOperation === 'delete' ) {
+		if ( m_DeleteOperationScheduledHandle !== null ) {
+			$.CancelScheduled( m_DeleteOperationScheduledHandle );
+			m_DeleteOperationScheduledHandle = null;
+		}
+		m_DeleteOperationScheduledHandle = $.Schedule( schOperation, LaunchOperation );
+	} else {
+		$.Schedule( schOperation, LaunchOperation );
+	}
 };
 
 var PanelTimedOut = function()
 {
-                                                     
-    m_CasketOperationTimeoutScheduledHandle = null;
-    $.DispatchEvent( 'UIPopupButtonClicked', '' );
+	m_CasketOperationTimeoutScheduledHandle = null;
+	$.DispatchEvent( 'UIPopupButtonClicked', '' );
 
-    UiToolkitAPI.ShowGenericPopupOk(
-        $.Localize( '#SFUI_SteamConnectionErrorTitle' ),
-        $.Localize( '#SFUI_Steam_Error_LinkUnexpected' ),
-        '',
-        function()
-        {
-        },
-        function()
-        {
-        }
-    );
+	UiToolkitAPI.ShowGenericPopupOk(
+		$.Localize( '#SFUI_SteamConnectionErrorTitle' ),
+		$.Localize( '#SFUI_Steam_Error_LinkUnexpected' ),
+		'',
+		function() {},
+		function() {}
+	);
 };
 
-var _CancelCasketOperationTimeoutScheduledHandle  = function()
+var _CancelCasketOperationTimeoutScheduledHandle = function()
 {
-    if ( m_CasketOperationTimeoutScheduledHandle )
-    {
-        $.CancelScheduled( m_CasketOperationTimeoutScheduledHandle );
-        m_CasketOperationTimeoutScheduledHandle = null;
-    }
+	if ( m_CasketOperationTimeoutScheduledHandle !== null )
+	{
+		$.CancelScheduled( m_CasketOperationTimeoutScheduledHandle );
+		m_CasketOperationTimeoutScheduledHandle = null;
+	}
 };
 
 var _ClosePopUp = function()
 {
-    $.DispatchEvent( 'UIPopupButtonClicked', '' );
+	$.DispatchEvent( 'UIPopupButtonClicked', '' );
 };
 
 var _TeardownPreviousInventoryCapabilitiesPopup = function()
@@ -128,35 +126,49 @@ var _TeardownPreviousInventoryCapabilitiesPopup = function()
 
 function OnRequestCancelBatch()
 {
-	                                                                                                                                         
 	m_arrSubjectItemsRemaining = [];
 }
 
-function OnItemCustomizationNotification ( numericType, type, itemid )
+function OnDeleteItemUpdated()
 {
 	_CancelCasketOperationTimeoutScheduledHandle();
 
-	  
-	                        
-	  
+	if ( m_DeleteOperationScheduledHandle !== null ) {
+		$.CancelScheduled( m_DeleteOperationScheduledHandle );
+		m_DeleteOperationScheduledHandle = null;
+	}
+
+	if ( m_arrSubjectItemsRemaining.length > 0 ) {
+		var strItemIDs = m_arrSubjectItemsRemaining.join( "," );
+		ConfigurePopupFromItemsList( strItemIDs );
+	} else {
+		_ClosePopUp();
+	}
+}
+
+function OnItemCustomizationNotification( numericType, type, itemid )
+{
+	_CancelCasketOperationTimeoutScheduledHandle();
+
+	if ( m_strOperation === 'delete' ) {
+		return;
+	}
+
 	switch ( type )
 	{
 	case 'casket_added':
 	case 'casket_removed':
 		if ( _BIsBatchMode() ) {
-			if ( m_arrSubjectItemsRemaining.length > 0 ) {                               
+			if ( m_arrSubjectItemsRemaining.length > 0 ) {
 				var strItemIDs = m_arrSubjectItemsRemaining.join( "," );
 				ConfigurePopupFromItemsList( strItemIDs );
-			} else {                                  
+			} else {
 				_ClosePopUp();
 			}
 			return;
 		}
 	}
 
-	  
-	                         
-	  
 	_ClosePopUp();
 
 	switch ( type )
@@ -167,53 +179,42 @@ function OnItemCustomizationNotification ( numericType, type, itemid )
 			$.Localize( '#popup_casket_title_error_' + type ),
 			$.Localize( '#popup_casket_message_error_' + type ),
 			'',
-			function()
-			{
-			},
-			function()
-			{
-			}
+			function() {},
+			function() {}
 		);
 		break;
 	case 'casket_added':
-		                        
-		if ( m_strShowSelectItemForCapabilityPopupCapability ) {                                    
+		if ( m_strShowSelectItemForCapabilityPopupCapability ) {
 			_TeardownPreviousInventoryCapabilitiesPopup();
 			$.DispatchEvent( "ShowSelectItemForCapabilityPopup", m_strShowSelectItemForCapabilityPopupCapability, itemid, '' );
 		}
-		else  {                                                            
+		else {
 			$.DispatchEvent( "PromptShowSelectItemForCapabilityPopup",
 				'#popup_casket_title_prompt_bulkstore', '#popup_casket_message_prompt_bulkstore',
 				'casketstore', itemid, '' );
 		}
 		break;
 	case 'casket_removed':
-		                                                                                       
 		_TeardownPreviousInventoryCapabilitiesPopup();
 		if ( InventoryAPI.GetItemAttributeValue( itemid, 'items count' ) ) {
 			$.DispatchEvent( "ShowSelectItemForCapabilityPopup", m_strShowSelectItemForCapabilityPopupCapability, itemid, '' );
 		}
 		break;
 	case 'casket_contents':
-		                              
 		$.DispatchEvent( "ShowSelectItemForCapabilityPopup", m_strShowSelectItemForCapabilityPopupCapability, itemid, '' );
 		break;
 	default:
-		             
-		                                                                                                 
 		break;
 	}
-};
-
-                                 
-    
-   	                                               
-   	              
-     
+}
 
 function LaunchOperation()
 {
-	                                                                                                                   
+	if ( m_strOperation === 'delete' ) {
+		m_DeleteOperationScheduledHandle = null;
+		InventoryAPI.DeleteItem( m_itemidSubject );
+		return;
+	}
 
 	var nOpRequestNumber = 0;
 	switch ( m_strOperation )
@@ -223,4 +224,3 @@ function LaunchOperation()
 	}
 	InventoryAPI.PerformItemCasketTransaction( nOpRequestNumber, m_itemidCasket, m_itemidSubject );
 }
-

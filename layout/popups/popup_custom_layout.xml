@@ -1,0 +1,22 @@
+<!-- xml reconstructed by Source 2 Viewer 19.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/gamestyles.css" />
+		<include src="file://{resources}/styles/popups/popups_shared.css" />
+		<include src="file://{resources}/styles/popups/popup_custom_layout.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/popups/popup_custom_layout.js" />
+	</scripts>
+	<PopupCustomLayout class="PopupPanel Hidden" popupbackground="dim" onload="PopupCustomLayout.Init()" useglobalcontext="true">
+		<Label class="PopupTitle stratum-medium-condensed" text="{s:title}" />
+		<Label class="PopupMessage stratum-medium" text="{s:message}" />
+		<Image id="popupimage" />
+		<Panel id="Spinner" class="Spinner" />
+		<ProgressBar id="ProgressBar" />
+		<Panel class="PopupButtonRow">
+			<TextButton class="PopupButton" text="OK" onactivate="OnOKPressed()" />
+			<TextButton class="PopupButton" text="Cancel" onactivate="UIPopupButtonClicked()" />
+		</Panel>
+	</PopupCustomLayout>
+</root>

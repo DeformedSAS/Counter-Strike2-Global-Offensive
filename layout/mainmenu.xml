@@ -88,7 +88,7 @@
     </snippets>
     <CSGOMainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" useglobalcontext="true" oncancel="MainMenu.OnEscapeKeyPressed();">
 	<Panel id="IntroPanel" class="IntroBackground" hittest="false">
-     <Movie id="IntroVideo" class="IntroVideoStyle" src="file://{resources}/videos/intro_govno.webm" hittest="false" controls="none" repeat="false" autoplay="false" />   
+     <Movie id="IntroVideo" class="IntroVideoStyle" src="file://{resources}/videos/intro.webm" scaling="stretch-to-fit-preserve-aspect" hittest="false" controls="none" repeat="false" autoplay="false" />   
       </Panel>
         <Panel id="MainMenuContainerPanel" class="MainMenuContainer">
             <Panel id="NotificationsContainer" class="MainMenuNotification hidden MainMenuModeOnly" onmouseover="MainMenu.ShowNotificationBarTooltip();" onmouseout="UiToolkitAPI.HideTextTooltip();">
@@ -162,14 +162,6 @@
                                 <Panel id="MainMenuSettingsAlert" class="navbar-btn__notification settings-notification">
                                     <Label class="navbar-btn__notification-text" text="{d:num_settings}"/>
                                 </Panel>
-                            </RadioButton>
-                            <RadioButton id="MainMenuNavDiscord"
-                                        class="mainmenu-top-navbar__radio-iconbtn DEVModeONLY"
-                                        group="NavBar"
-                                        onactivate="MainMenu.NavigateToTab('JsDiscord', 'mainmenu_discord');"
-                                        onmouseover="UiToolkitAPI.ShowTextTooltip('MainMenuNavDiscord', 'Discord');"
-                                        onmouseout="UiToolkitAPI.HideTextTooltip();">
-                                <Image class="mainmenu-top-navbar__radio-btn__icon" src="file://{images}/icons/ui/message.svg"/>
 							</RadioButton>
                             <RadioButton id="MainMenuNavYTMusic"
                                         class="mainmenu-top-navbar__radio-iconbtn DEVModeONLY"

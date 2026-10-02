@@ -16,7 +16,7 @@ var SelectMissionCardContextMenu = ( function (){
 		var activeCardIndex = OperationUtil.GetOperationInfo().nActiveCardIndex;
 		var nMissionCards = MissionsAPI.GetSeasonalOperationMissionCardsCount( nSeasonIndex );
 		var elParent = $.GetContextPanel().FindChildInLayoutFile( 'ContextMenuMissionsBody' );
-		var nBacklog =  InventoryAPI.GetMissionBacklog();
+		var nBacklog =  OperationUtil.GetMissionBacklog();
 
 		for( var i = 0; i < nMissionCards; i++ )
 		{
@@ -40,7 +40,7 @@ var SelectMissionCardContextMenu = ( function (){
 			newEntry.SetPanelEvent( 'onactivate',_OnActivate.bind( undefined, i ));
 
 			var elTimer = newEntry.FindChildInLayoutFile( 'id-mission-context-entry-timer' );
-			var seconds = InventoryAPI.GetSecondsUntilNextMission();
+			var seconds = OperationUtil.GetSecondsUntilNextMission();
 
 			if( seconds && seconds > 0 && i === nBacklog )
 			{

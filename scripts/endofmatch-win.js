@@ -103,8 +103,13 @@ var EOM_Win = (function() {
         if (!_m_oMatchEndData || !_m_oScoreData) {
             return false;
         }
-        if (GameStateAPI.GetGameModeInternalName(false) == 'deathmatch')
+
+        var currentMode = GameStateAPI.GetGameModeInternalName(false);
+        var excludedModes = ['deathmatch'];
+
+        if (excludedModes.includes(currentMode)) {
             return false;
+        }
 
         if (DEBUG_VACLIVE || (_m_oMatchEndData.hasOwnProperty('vac_live') && _m_oMatchEndData.vac_live)) {
             _ShowVacLivePanel();
@@ -144,3 +149,6 @@ var EOM_Win = (function() {
 (function() {
     if (EndOfMatch) EndOfMatch.RegisterPanelObject(EOM_Win);
 })();
+
+// TODO: fix some bugs regarding some gamemodes where the winpanel displays when it shouldn't... eg in arms race.. it should never show the winpanel there..
+// too lazy to go fixing this.

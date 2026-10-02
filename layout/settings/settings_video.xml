@@ -25,6 +25,9 @@
 				<RadioButton class="content-navbar__tabs__btn" onactivate="SettingsMenuShared.ScrollToId('SettingsVideoAdvanced')" group="SettingsVideo">
 					<Label class="" text="#settings_video_advanced_section"/>
 				</RadioButton>
+				<RadioButton class="content-navbar__tabs__btn" onactivate="SettingsMenuShared.ShowHudEdgePositions();" group="SettingsVideo">
+					<Label class="" text="#settings_video_hud_edge_positions"/>
+				</RadioButton>
 			</Panel>
 		</Panel>
 <CSGOVideoSettings class="SettingsMenuTabContent vscroll">

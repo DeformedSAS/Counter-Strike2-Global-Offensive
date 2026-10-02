@@ -213,7 +213,7 @@ var EOM_Skillgroup = (function () {
         $.Schedule( 1.0, _RevealNewIcon.bind( undefined, oData, bIsRankDown ) );
     }
     
-    function _PlayParticles ()
+    function _PlayParticles () // TODO: figure out why the engine craps itself sometimes because of the particles. and implement a fix that should work..
     {
         var elModel = _m_cP.FindChildTraverse( 'SkillGroupParticles' );
         if ( !elModel || !elModel.IsValid() )

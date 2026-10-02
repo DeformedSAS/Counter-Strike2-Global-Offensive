@@ -1,0 +1,27 @@
+
+<root>
+	<styles>
+		<include src="file://{resources}/styles/gamestyles.css" />
+		<include src="file://{resources}/styles/context_menus/context_menu_clan_tags.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/context_menus/context_menu_clan_tags.js" />
+	</scripts>
+	<snippets>
+		<snippet name="snippet-clantag-item">
+			<Button class="clantag-item">
+				<Label id="id-clan-tag__label" class="clan-tag__label" text="true" />
+				<Label id="id-clan-name__label" class="clan-name__label" html="true" text="" />
+			</Button>
+		</snippet>
+		<snippet name="snippet-clantag-text-button">
+			<Button class="clantag-item clantag-text-button">
+				<Label id="id-clantag-text-button__label" class="clantag-text-button__label" text="true" />
+			</Button>
+		</snippet>
+	</snippets>
+	<Panel class="ContextMenuItem full-height full-width" globalcontext="true" onload="PlayerCardContextMenuClanTags.Init();">
+		<Label id="context-menu-title" text="#ClanTag_Lister_Title" />
+		<Panel id="id-scrolling-tag-container" />
+	</Panel>
+</root>

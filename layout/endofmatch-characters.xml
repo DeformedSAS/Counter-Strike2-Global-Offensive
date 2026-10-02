@@ -55,7 +55,7 @@
 		<snippet name="snippet-eom-chars__layout--ffa" >
 			<Panel class="eom-chars__layout eom-chars__layout--ffa">
 				<Panel class="character-lineup layout-position-container">
-					<Panel class="eom-chars__layout__position eom-chars__layout__position--2nd">
+					<Panel class="eom-chars__layout__position eom-chars__layout__position--2nd SlowSpin">
 						
 						<Label class="eom-chars__layout__position--2nd glowsilver" text="#EOM_Position_2"/>
 						<Image class="eom-chars__laurel__layout__position--2nd glowsilver" texturewidth='220' textureheight='-1' src="file://{images}/icons/ui/laurel_silver.svg" />

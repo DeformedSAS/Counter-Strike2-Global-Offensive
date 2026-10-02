@@ -312,7 +312,7 @@ var InspectActionBar = ( function (){
 		
 		var inspectCameraPresets =
 		{
-			"AspectRatio4x3": [ 16, 17 ],
+			"AspectRatio4x3": [ 26, 27 ],
 			"AspectRatio16x9": [ 26, 27 ],
 			"AspectRatio21x9": [ 28, 29 ]
 		}

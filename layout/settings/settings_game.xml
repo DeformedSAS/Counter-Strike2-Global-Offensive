@@ -208,19 +208,8 @@
 				</Panel>
 
 				<Panel class ="top-bottom-flow full-width">
-					<Panel class="horizontal-separator"/>
 
 					                 
-					<Panel class="SettingsMenuDropdownContainer">
-						<Label text="#SFUI_Settings_ClanTag_Title" class="half-width"/>
-						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_clanid" id="ClanTagsEnum" >
-							                                                         
-							<Label text="XXXXX"/>
-						</CSGOSettingsEnumDropDown>
-					</Panel>
-					<Panel class="horizontal-separator"/>
-
-					                                    
 					<Panel class="SettingsMenuDropdownContainer">
 						<Label text="#SFUI_Settings_ClanTag_In_Death_Notice" class="half-width"/>
 						<CSGOSettingsEnumDropDown class="PopupButton" convar="cl_show_clan_in_death_notice">
@@ -648,6 +637,15 @@
 					</Panel>
 					<Panel class="horizontal-separator"/>
 
+					<Panel id="XhairRecoil" class="SettingsMenuDropdownContainer">
+						<Label text="#GameUI_CrosshairRecoil" class="half-width" />
+						<CSGOSettingsEnumDropDown class="PopupButton White" convar="cl_crosshair_recoil">
+							<Label text="#GameUI_Yes" value="1" id="crosshairrecoil0" />
+							<Label text="#GameUI_No" value="0" id="crosshairrecoil1" />
+						</CSGOSettingsEnumDropDown>
+					</Panel>
+					<Panel class="horizontal-separator"/>
+
 					                 
 					<Panel id="XhairCenterDot" class="SettingsMenuDropdownContainer">
 						<Label text="#GameUI_CrosshairDot" class="half-width"/>
@@ -834,4 +832,3 @@
 		</Panel>
 	</Panel>
 </root>
-

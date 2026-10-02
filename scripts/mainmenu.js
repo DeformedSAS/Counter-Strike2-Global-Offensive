@@ -229,7 +229,8 @@ var _OnShowMainMenu = function() {
 	_InsureSessionCreated();
     CheckModVersionAsync();
 	BlogAPI.RequestRSSFeed();
-
+    // the -devmode stuff isn't meant for the average person to look at but i don't care.
+	// i mostly use this to actually hide stuff under this launch parameter, such as fxaa and the broken motion blur options in the settings..
     if (GameInterfaceAPI.HasCommandLineParm('-devmode')) {
         devmode = 1;
     } else {
@@ -1055,6 +1056,7 @@ function _UpdateVanityInfoPanel( playerIdx, oSettings )
 
     VanityPlayerInfo.CreateOrUpdateVanityInfoPanel(elVanityInfoPanel, oSettings);
 }
+// i hate this code. it sucks but also works absolutely fine.. and the way to implement the blur behind the panel also sucks..
 
 var _TrackVanityBone = function( elPanel, index )
 {
@@ -1163,6 +1165,9 @@ function _HideVanityPanels()
 var _SetVanityLightingBasedOnBackgroundMovie = function( vanityPanel ) // background lighting, scene angles will be used for each background in the future.
 {
     var backgroundMap = 'anubis'; // fallback to fix js error while in game? 
+	// i have no clue if this even works..
+	// doesn't seem to give out any javascript error in the console..
+	// yes this variable was put in a few months ago. and i don't really remember why.
 
     var elMovie = $.GetContextPanel().FindChildInLayoutFile('MainMenuMovie');
     if (elMovie)
@@ -1664,11 +1669,13 @@ else if ( backgroundMap === 'vertigo' )
 		}
 		
 	};
+	// TODO: implement vanity angles for each background, too lazy to do that now. may change in the future. who knows.
 
 	                                                                           
 	var _OnEquipSlotChanged = function( slot, oldItemID, newItemID ) // not sure what this does but ok.
 	{
 	};
+	// did this even have any function code in the first place? maybe a valve developer can answer..
 
   function _OpenPlayMenu() {
         if (MatchStatsAPI.GetUiExperienceType())
@@ -2125,6 +2132,7 @@ else if ( backgroundMap === 'vertigo' )
     }
       return aAlerts;
     }
+	// hot take: valve uses ai for some panorama stuff. because looking at their accidentally leaked comments, this looks very ai generated. and the ai probably didn't care about the colors of these notification buttons. who knows.
 
     function _UpdateNotificationBar() {
         const aNotifications = _GetNotificationBarData();
@@ -2309,16 +2317,16 @@ var _ShowDevContextMenu = function() {
             'none'
         );
         $.DispatchEvent('PlaySoundEffect', 'tab_mainmenu_inventory', 'MOUSE');
-        elPanel.SetAttributeInt("season_access", 9);
+        elPanel.SetAttributeInt("season_access", 10);
     }
 
     function showWelcomePopup() {
         UiToolkitAPI.ShowCustomLayoutPopupParameters(
             '',
-            'file://{resources}/layout/popups/popup_welcome_launch.xml',
+            'file://{resources}/layout/operation/operation_mainmenu.xml',
             'none'
         );
-        $.DispatchEvent('PlaySoundEffect', 'tab_mainmenu_inventory', 'MOUSE');
+		elPanel.SetAttributeInt("season_access", 10);
     }
 
     var items = [
@@ -2326,7 +2334,7 @@ var _ShowDevContextMenu = function() {
         { label: 'DevUI', jsCallback: _NavigateToTab.bind(undefined, 'JSTests1', 'mainmenu_tests') },
         { label: 'CS360', jsCallback: _NavigateToTab.bind(undefined, 'JSCS360', 'mainmenu_playerstats') },
 
-        { label: 'WelcomePopup', jsCallback: showWelcomePopup.bind(undefined) },
+        { label: 'Operation MainMenu', jsCallback: showWelcomePopup.bind(undefined) },
 
         { label: 'S2 Buymenu', jsCallback: _NavigateToTab.bind(undefined, 'JSBuymenu2', 'buymenu_cs2') },
         { label: 'S1 Buymenu', jsCallback: _NavigateToTab.bind(undefined, 'JSBuymenu', 'buymenu') },
@@ -2334,8 +2342,7 @@ var _ShowDevContextMenu = function() {
         { label: 'OperationMain', jsCallback: showOperation.bind(undefined) },
         { label: 'Enable Vanity Debug', jsCallback: function() {
             $('#MainMenuVanityPlayer0').Children()[0].style.visibility = 'visible';
-        }.bind() },
-        { label: 'OperationStore', jsCallback: OperationUtil.OpenPopupCustomLayoutOperationStore.bind(undefined) }
+        }.bind() }
     ];
 
     UiToolkitAPI.ShowSimpleContextMenu('', 'DevContextMenu', items);
@@ -2589,6 +2596,14 @@ var _UnPauseMainMenuCharacter = function() {
 
 		elVanityContextMenu.AddClass( "ContextMenu_NoArrow" );
 	}
+	function _OnChangeClanTagPressed() {
+        if (!MyPersonaAPI.IsInventoryValid() || !MyPersonaAPI.IsConnectedToGC()) {
+            UiToolkitAPI.ShowGenericPopupOk($.Localize('#SFUI_SteamConnectionErrorTitle'), $.Localize('#SFUI_Steam_Error_LinkUnexpected'), '', () => { });
+            return;
+        }
+        const elClanTagContextMenu = UiToolkitAPI.ShowCustomLayoutContextMenuParametersDismissEvent('id-vanity-contextmenu-clanchange', '', 'file://{resources}/layout/context_menus/context_menu_clan_tags.xml', '', () => { });
+        elClanTagContextMenu.AddClass("ContextMenu_NoArrow");
+    }
 
 
 	return { // return functions, this is primarily used when making new scripts that get executed when OnShowMainMenu function loads. also these information tooltips in the script probably made the script twice as large.. sorry but i had to for dev purposes. - god forgives.
@@ -2659,7 +2674,8 @@ var _UnPauseMainMenuCharacter = function() {
 		UpdateUnlockCompAlert				: _UpdateUnlockCompAlert,
 		PlayerActivityVoice                 : _PlayerActivityVoice,
 		OnGcHelloReceived                   : _OnGcHelloReceived,
-		OnReviewInfoRecieved                : _OnReviewInfoRecieved
+		OnReviewInfoRecieved                : _OnReviewInfoRecieved,
+		OnChangeClanTagPressed              : _OnChangeClanTagPressed
 	};
 })();
 
@@ -2725,7 +2741,7 @@ var _UnPauseMainMenuCharacter = function() {
 	MainMenu.MinimizeSidebar();
 	MainMenu.InitVanity();
 	MainMenu.MinimizeSidebar();
-	MainMenu.InitFriendsList();
+	MainMenu.InitFriendsList();;
 
 
 	                                                                                  
@@ -2736,3 +2752,5 @@ var _UnPauseMainMenuCharacter = function() {
 // btw, valves code is junk. the ui blur for example is so fucking badly implemented lmao.. not even properly tested.. if it ain't broke, don't fix it moment.
 
 // d3gk: Yeah, good code looks nothing like this. All things should be checked at every point is that serious of a game as CS is. This excludes the vast majority of bugs!
+
+// TODO: implement search particles for the stupid ass sidebar. that hopefully won't crash the game randomly.. HOPEFULLY! otherwise another mdma overdose session.

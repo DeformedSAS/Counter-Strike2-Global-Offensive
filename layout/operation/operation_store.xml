@@ -7,6 +7,9 @@
 		<include src="file://{resources}/styles/operation/operation_shared.css" />
 		<include src="file://{resources}/styles/operation/operation_main.css" />
 		<include src="file://{resources}/styles/operation/operation_store.css" />
+		                                                                                     
+		                                                                            
+		                                                                        
 	</styles>
 
 	<scripts>
@@ -16,8 +19,14 @@
 		<include src="file://{resources}/scripts/common/tint_spray_icon.js" />
 		<include src="file://{resources}/scripts/operation/operation_util.js"/>
 		<include src="file://{resources}/scripts/operation/operation_store.js"/>
+		                                                                                
+		                                                                             
+		                                                                           
+		                                                                                   
 		<include src="file://{resources}/scripts/common/characteranims.js" />
+		                                                                                     
 	</scripts>
+
 
 	<snippets>
 
@@ -69,6 +78,7 @@
 			<Panel class="op-store-item-tile-container">
 				<Button id="id-op-store-item-tile-btn" class="op-store-item-tile">
 					<Panel class="full-width z-index-2">
+						                                                                                                                                                                            
 						<Label id="id-op-store-item-tile-name" class="op-store-item-tile__title stratum-font fontWeight-Medium" text="Name of Item"/>
 					</Panel>
 					<Panel class="full-width full-height">
@@ -103,11 +113,24 @@
 		<CSGOBlurTarget id="id-op-main-bg" class="op-main-bg" blurrects="id-store-progress" >
 			<Panel class="op-main-movie" hittest="false"/>
 		</CSGOBlurTarget>
-
+		                                          
 		<Panel class="op-main-container" hittest="false" >
 			<Panel id="id-store-progress" class="op-store-progress" >
 				<Panel class="op-store-progress__top" >
 					<Image class="vertical-center" src="file://{images}/operations/op11/logo.png" scaling="stretch-to-fit-preserve-aspect" texturewidth="24" textureheight="-1"/>
+					<Panel id="id-op-store-progress-pass-upsell" class="op-store-progress__pass-upsell">
+						<Label  id="id-store-pass-upsell-desc" class="op-store-progress__pass-upsell__desc stratum-font fontSize-l" text="#op_stars_max_upsell" />
+						<TextButton id="id-store-pass-upsell-text-btn" class="op-store-progress__pass-upsell__text-btn" text="#op_pass_upsell" />
+					</Panel>
+					<Panel id="id-op-store-pass-missions-progress" class="op-store-progress__missions">
+						<Label id="id-store-pass-missions-progress-title" class="stratum-font OpTintTextYellow fontWeight-Medium fontSize-l horizontal-align-right" text="#op_stars_earned_missions" />
+						<Label class="stratum-font fontcolor-white horizontal-align-right" text="#op_stars_earned_missions_desc"/>
+					</Panel>
+				</Panel>
+				<Panel class="op-store-progress__bar-section" >
+					<Panel class="vertical-center full-width" >
+						<Panel id="id-op-store-progress-bar" class="op-store-progress__bar" />
+					</Panel>
 				</Panel>
 			</Panel>
 			<Panel class="op-store-shop-title-section">
@@ -123,11 +146,36 @@
 							<Image class="op-store-shop-balance__icon" src="file://{images}/icons/ui/icon_star_multi.svg" scaling="stretch-to-fit-preserve-aspect" texturewidth="22" textureheight="-1"/>
 						</Panel>
 					</Panel>
+					<TextButton id="id-op-store-get-more-points-btn" class="op-store-progress__pass-upsell__text-btn medium-font" text="#op_stars_upsell" />
 				</Panel>
 			</Panel>
 			<Panel id="id-op-store-reward-rows" class="op-store-reward-rows-container">
+
+
+				                                        
+					                                                                                                         
+					                                                                                                       
+					                                                                                
+					                                                                                
+				        
+				                                   
+					                                                                                                 
+					                                                                                
+					                                                                                
+				        
+				                                   
+					                                                                                                 
+					                                                                                
+					                                                                                
+				        
+				                                   
+					                                                                                                 
+					                                                                                
+					                                                                                
+				            
 			</Panel>
-			<Button class="PopupButton horizontal-align-right right-margin-32" >
+			<Button id=""
+				class="PopupButton horizontal-align-right right-margin-32" >
 				<Label text="#SFUI_Back" html="true" onactivate="$.DispatchEvent( 'UIPopupButtonClicked', '' );"/>
 			</Button>
 		</Panel>

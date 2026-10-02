@@ -3,37 +3,6 @@
 var SettingsMenuGameSettings = ( function() {
 
 
-   var _InitSteamClanTagsPanel = function () {   
-        var clanTagDropdown = $('#ClanTagsEnum');
-        clanTagDropdown.RemoveAllOptions();
-
-                                       
-        var id = 'clantagoption_none';
-        var optionLabel = $.CreatePanel('Label', clanTagDropdown, id);
-        optionLabel.text = $.Localize("#SFUI_Settings_ClanTag_None");
-        optionLabel.SetAttributeString('value', 0 );
-        clanTagDropdown.AddOption(optionLabel);
-
-        var nNumClans = MyPersonaAPI.GetMyClanCount();
-        for (var i = 0; i < nNumClans; i++)
-        {
-                                                               
-            var clanID = MyPersonaAPI.GetMyClanIdByIndex(i);
-            var clanTag = MyPersonaAPI.GetMyClanTagByIdCensored(clanID);
-
-                                                                      
-            var clanIDForCvar = MyPersonaAPI.GetMyClanId32BitByIndex(i);
-
-            id = 'clantagoption' + i.toString();
-            optionLabel = $.CreatePanel( 'Label', clanTagDropdown, id, { text: '{s:clanTag}' } );
-            optionLabel.SetDialogVariable( 'clanTag', clanTag );
-            optionLabel.SetAttributeString('value', clanIDForCvar.toString() );
-            clanTagDropdown.AddOption(optionLabel);
-        }
-
-        clanTagDropdown.RefreshDisplay();
-    };
-
 	var _OnCrosshairStyleChange = function()
 	{
 		                                            
@@ -64,7 +33,6 @@ var SettingsMenuGameSettings = ( function() {
 }
 
     return {
-        InitSteamClanTagsPanel : _InitSteamClanTagsPanel,
         OnCrosshairStyleChange : _OnCrosshairStyleChange
     };
 
@@ -73,7 +41,6 @@ var SettingsMenuGameSettings = ( function() {
               
 (function ()
 {
-	SettingsMenuGameSettings.InitSteamClanTagsPanel();
 	SettingsMenuGameSettings.OnCrosshairStyleChange();
 	SettingsMenuShared.ChangeBackground( 0 );
 

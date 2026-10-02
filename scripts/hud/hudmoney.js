@@ -36,3 +36,5 @@ var MoneyPanel;
     _Init();
 
 })(MoneyPanel || (MoneyPanel = {}));
+
+// TODO: fix money in demos, so that it doesn't always display 3$.

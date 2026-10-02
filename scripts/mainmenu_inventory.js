@@ -778,19 +778,12 @@ var InventoryPanel = ( function (){
 
 		if ( !_m_elInventoryMain.updatePlayerEquipSlotChangedHandler )
 		{
-			_m_elInventoryMain.updatePlayerEquipSlotChangedHandler = $.RegisterForUnhandledEvent( 'PanoramaComponent_Inventory_PlayerEquipSlotChanged', InventoryPanel.ShowNotification );
+			_m_elInventoryMain.updatePlayerEquipSlotChangedHandler = $.RegisterForUnhandledEvent( 'PanoramaComponent_Inventory_PlayerEquipSlotChanged', _ShowNotification );
 		}
 		
 		if ( !_m_InventoryUpdatedHandler )
 		{
 			_m_InventoryUpdatedHandler = $.RegisterForUnhandledEvent( 'PanoramaComponent_MyPersona_InventoryUpdated', _InventoryUpdated );
-		}
-
-		                                           	
-		var vanityPanel = $( '#JsMainmenu_Vanity' );
-		if ( vanityPanel && UiToolkitAPI.IsPanoramaInECOMode() )
-		{
-			vanityPanel.Pause( false );
 		}
 	};
 
@@ -923,6 +916,7 @@ var InventoryPanel = ( function (){
 		if( !elList )
 			elList =  $.CreatePanel('InventoryItemList', _m_elSelectItemForCapabilityPopup, 'ItemListForCapability' );
 
+		elList.SetHasClass( 'inv-multi-select-allow', capability === "casketstore" || capability === "casketretrieve" || capability === "delete" );
 		var capabilityFilter= capability + ':' + id;
 
 		_UpdateActiveItemList(
@@ -941,7 +935,7 @@ var InventoryPanel = ( function (){
 	{
 		var elActionBar = _m_elSelectItemForCapabilityPopup.FindChildInLayoutFile( 'CapabilityPopupActionBar' );
 		
-		if ( capability === "casketstore" || capability === "casketretrieve" )
+		if ( capability === "casketstore" || capability === "casketretrieve" || capability === "delete" )
 		{
 			elList.SetAttributeInt( "capability_multistatus_selected", 1 );
 
@@ -953,6 +947,9 @@ var InventoryPanel = ( function (){
 				);
 				elActionBar.BLoadLayoutSnippet( 'CapabilityActionBar' );
 			}
+
+			elActionBar.FindChildInLayoutFile( 'CapabilityPopupMultiStatusBtn' ).SetHasClass('Positive', capability !== "delete");
+			elActionBar.FindChildInLayoutFile( 'CapabilityPopupMultiStatusBtn' ).SetHasClass('Negative', capability === "delete");
 			
 			elList.SetHasClass( 'inv-item-list-fill-height-flow', true );
 			_UpdateMultiSelectDisplay( elActionBar.FindChildInLayoutFile( 'CapabilityPopupMultiStatus' ) );
@@ -1000,14 +997,20 @@ var InventoryPanel = ( function (){
 		{
 			szPrefixString = '#inv_select_casketstore';
 		}
+		else if ( capability === 'delete' ) 
+		{
+			szPrefixString = '#inv_context_delete';
+		}
 		elPrefixString.text = szPrefixString;
 
 		                                             
 		var elImage = _m_elSelectItemForCapabilityPopup.FindChildInLayoutFile('CapItemImage');
 		elImage.itemid = id;
+		elImage.SetHasClass('hidden', capability === 'delete');
 
 		var elLabel = _m_elSelectItemForCapabilityPopup.FindChildInLayoutFile('CapItemName');
 		elLabel.text = ItemInfo.GetName(id);
+		elLabel.SetHasClass('hidden', capability === 'delete');
 	};
 
 	var _UpdateSelectItemForCapabilityPopup = function ( capability, itemid, bSelected )
@@ -1081,6 +1084,17 @@ var InventoryPanel = ( function (){
 				'&nextcapability=batch' +
 				'&spinner=1' +
 				'&casket_item_id=' + _SelectedCapabilityInfo.initialItemId +
+				'&subject_item_id=' + strItemIDs
+			);
+			break;
+        case 'delete':
+			var strItemIDs = arrItemIDs.join( "," );
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'', 
+				'file://{resources}/layout/popups/popup_casket_operation.xml',
+				'op=delete' +
+				'&nextcapability=batch' +
+				'&spinner=1' +
 				'&subject_item_id=' + strItemIDs
 			);
 			break;
@@ -1179,13 +1193,18 @@ var InventoryPanel = ( function (){
         let elNotification = $.CreatePanel('Panel', elParent, 'InvNotificationEquip');
         elNotification.BLoadLayout('file://{resources}/layout/notification/notification_equip.xml', false, false);
     }
-    function _ShowNotification(team, slot, oldItemId, newItemId, bNew) {
-        if (!bNew || _m_isCapabliltyPopupOpen || $.GetContextPanel().BHasClass(_m_HiddenContentClassname)) {
-            return;
-        }
-        let elNotification = $.GetContextPanel().FindChildInLayoutFile('InvNotificationEquip');
-        EquipNotification.ShowEquipNotification(elNotification, slot, newItemId);
-    }
+	var _ShowNotification = function( slotInt, slotString, prevEquippedItemId, newEquippedItemId )
+	{
+		                                                                                                                                                             
+		
+		if ( _m_isCapabliltyPopupOpen )
+		{
+			return;
+		}	
+		
+		var elNotification = $.GetContextPanel().FindChildInLayoutFile( 'InvNotificationEquip' );
+		EquipNotification.ShowEquipNotification( elNotification, slotString, newEquippedItemId );
+	};
 
 	return {
 		Init: _Init,
@@ -1239,5 +1258,4 @@ var InventoryPanel = ( function (){
 	                                                                                     
 	$.RegisterForUnhandledEvent( 'PanoramaComponent_Inventory_CraftIngredientAdded', function() { InventoryPanel.NavigateToTab( 'tradeup' ) } );
 	$.RegisterForUnhandledEvent( 'ShowTradeUpPanel', InventoryPanel.GotoTradeUpPanel );
-	
 })();

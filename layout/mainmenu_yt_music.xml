@@ -17,6 +17,7 @@
                   focusonhover="true" 
                   mousetracking="true" 
                   popuplinks="false" 
+                  allowtransparency="true"
                   url="https://music.youtube.com" />
         </Panel>
     </Panel>

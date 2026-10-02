@@ -2,11 +2,10 @@
 
 .hudpassiveitems
 {
-    height: 43px;
+    height: 53px;
 	vertical-align: bottom;
-	margin-left: 24px;
 	flow-children: right;
-	visibility: collapse;
+	y: -40px;
 }
 
 .hudpassiveitem
@@ -14,7 +13,7 @@
 	vertical-align: center;
 	wash-color: defaultColor;
 	margin: 0px 8px;
-	margin-left: 15px;
+	margin-left: 10px;
 	margin-right: 10px;
 	visibility: collapse;
 	opacity: 0;
@@ -27,6 +26,6 @@
 
 .hudpassiveitems-visible
 {
-	visibility: collapse;
+	visibility: visible;
 	opacity: 1;
 }

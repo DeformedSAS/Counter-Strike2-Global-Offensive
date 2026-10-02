@@ -97,19 +97,41 @@ CSGOHud,
 	flow-children: down;
 }
 
+#HudBottomGradient
+{
+    background-color: gradient( linear, 0% 100%, 0% 50%, from( rgba(0,0,0,0.8) ), to( rgba(0,0,0,0) ) );
+    width: 100%;
+    height: 600px;
+    vertical-align:bottom;
+    opacity: 1;
+}
+
 #HudHealthArmorPanel
 {
-	margin-right: 650px;
-	margin-bottom: 25px;
+	y:-20px;
+	x: -320px;
     horizontal-align: center;
     vertical-align: bottom;                                                                                                                                   
 }
 
 #HudLowerLeft
 {
+	transition-property: transform;
+    transition-duration: .1s;
+    transition-timing-function: ease-out;
     horizontal-align: left;
     vertical-align: bottom;
                                                                                                                                          
+}
+
+.DemoControllerFull #HudBottomCenter,.DemoControllerFull #HudLowerLeft,.DemoControllerFull #HudBottomRight
+{
+    transform: translateY(-86px);
+}
+
+.DemoControllerMinimal #HudBottomCenter,.DemoControllerMinimal #HudLowerLeft,.DemoControllerMinimal #HudBottomRight
+{
+    transform: translateY(-50px);
 }
 
 #HudTimerPanel Label
@@ -151,23 +173,15 @@ CSGOHud,
 	position: 0px 460px 0px; 
 }
 
-#HudBottomRight
-{
-	padding-left: 550px;
-	horizontal-align: center;
-	vertical-align: bottom;
-    flow-children: down;
-    height:100%;
-    width:100%;
-	padding-bottom: 5px;
-}
-#HudBottomRightSelection
+#HudBottomRight /* removing the fucking padding fixed the fucking scaling issues.. seriously? */
 {
 	horizontal-align: right;
 	vertical-align: bottom;
+	x: 60px;
     flow-children: down;
     height:100%;
     width:100%;
+	margin-bottom: 5px;
 }
 
 #HudWeaponPanel
@@ -180,6 +194,15 @@ CSGOHud,
 {
 	horizontal-align: right;
 	vertical-align: bottom;
+}
+
+#HudBottomRightSelection
+{
+	horizontal-align: right;
+	vertical-align: bottom;
+    flow-children: down;
+    height:100%;
+    width:100%;
 }
 
 #HudInWorld,

@@ -2633,3 +2633,5 @@ $.OnGameModeFlagsBtnClicked = function (resumeMatchmakingHandle = '') {
         $.RegisterForUnhandledEvent('PanoramaComponent_PartyBrowser_PrivateQueuesUpdate', _OnPrivateQueuesUpdate);
     }
 })(PlayMenu || (PlayMenu = {}));
+
+// TODO: figure out why the workshop button doesn't show up when it can't find any subscribed maps. can't be assed at the moment.

@@ -58,7 +58,7 @@ var OperationMainMenu = ( function()
 
 		if ( !_m_nSeasonIndex )
 		{
-			_m_nSeasonIndex = 10;
+			_m_nSeasonIndex = GameTypesAPI.GetActiveSeasionIndexValue();
 			                                                                                              
 		}
 
@@ -246,18 +246,32 @@ var OperationMainMenu = ( function()
 
 		_UpdateXpDisplay( oStatus );
 
-		var cardIndex = oStatus.nActiveCardIndex ? oStatus.nActiveCardIndex : 0;
+		var cardIndex = ( oStatus.nActiveCardIndex !== undefined && oStatus.nActiveCardIndex !== null && oStatus.nActiveCardIndex >= 0 )
+			? oStatus.nActiveCardIndex : 0;
 		_UpdateSelectedMissionCard( cardIndex );
 		_SetUpCardUnlockDisplay( oStatus );
 	};
 
 	var _UpdateSelectedMissionCard = function( cardIndex )
 	{
+		if ( cardIndex === undefined || cardIndex === null || cardIndex < 0 )
+		{
+			cardIndex = 0;
+		}
 		var jsoCardDetails = MissionsAPI.GetSeasonalOperationMissionCardDetails( _m_nSeasonIndex, Number( cardIndex ));
+		if ( !jsoCardDetails && cardIndex !== 0 )
+		{
+			cardIndex = 0;
+			jsoCardDetails = MissionsAPI.GetSeasonalOperationMissionCardDetails( _m_nSeasonIndex, 0 );
+		}
 		var elLabel = $.GetContextPanel().FindChildInLayoutFile( 'id-missions-selected-card-name' );
 
 		var nWeek = cardIndex + 1;
-		elLabel.text = $.Localize( "#op_mainmenu_mission_week_prefix") + " " + nWeek + ": " + $.Localize( jsoCardDetails.name );
+		var cardName = ( jsoCardDetails && jsoCardDetails.name ) ? $.Localize( jsoCardDetails.name ) : "";
+		if ( elLabel )
+		{
+			elLabel.text = $.Localize( "#op_mainmenu_mission_week_prefix") + " " + nWeek + ": " + cardName;
+		}
 
 		_UpdateMissionCard( cardIndex );
 	};
@@ -330,7 +344,7 @@ var OperationMainMenu = ( function()
 	var _SetUpCardUnlockDisplay = function( oStatus )
 	{
 		var elPanel = _m_cp.FindChildInLayoutFile( 'id-op-mainmenu-mission-unlock' );
-		var numMissionBacklog = InventoryAPI.GetMissionBacklog();
+		var numMissionBacklog = OperationUtil.GetMissionBacklog();
 		var bShouldShow = oStatus.nActiveCardIndex < numMissionBacklog - 1;
 
 		elPanel.SetHasClass( 'hide', !bShouldShow );
