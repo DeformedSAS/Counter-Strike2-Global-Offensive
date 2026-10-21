@@ -410,6 +410,8 @@ CSGOAvatarImage.SteamAvatar .AvatarImage
 .voice-disabled-indicator-label
 {
     font-size: 12px;
+	font-family: Stratum2;
+	font-weight: bold;
     color: white;
 }
 

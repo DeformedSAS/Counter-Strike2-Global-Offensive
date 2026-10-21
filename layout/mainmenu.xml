@@ -106,7 +106,7 @@
                         <Panel class="mainmenu-vanity__vignette--bottom" hittest="false" />
                     </CSGOBlurTarget>
                     <Frame id="JsLeftColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_left_column.xml" />
-					<Frame id="Scoreboard" class="scoreboard PauseMenuModeOnly" src="file://{resources}/layout/scoreboard.xml" />
+					<CSGOScoreboard id="Scoreboard" class="scoreboard PauseMenuModeOnly" />
                     <Frame id="JsRightColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_right_column.xml" />
 					<Panel id="MainMenuVanityInfo" class="full-width full-height MainMenuModeOnly" hittest="false" />
                     <Panel id="JsActiveMissionPanel" class="mainmenu_active-mission-container PauseMenuModeOnly" />

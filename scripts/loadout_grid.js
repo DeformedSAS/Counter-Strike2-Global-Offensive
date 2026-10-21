@@ -28,6 +28,7 @@ var LoadoutGrid = ( function() {
     ];
 
     const m_aActiveUsedColumns = [
+	    'id-loadout-column0',
         'id-loadout-column1',
         'id-loadout-column2',
         'id-loadout-column3',

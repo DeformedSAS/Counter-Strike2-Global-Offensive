@@ -15,22 +15,22 @@ var PopupAcceptMatch = ( function(){
 	var m_elTimer = $.GetContextPanel().FindChildInLayoutFile ( 'AcceptMatchCountdown' );
 	var m_jsTimerUpdateHandle = false;
 
-	var AcceptMatchMusic = function(type) {
+    var AcceptMatchMusic = function(type) {
         var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
         var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
         var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
-        musicName = musicName.replace(/^#musickit_/, '');
+        musicName = musicName.replace(/^#musickit_/i, '');
 
         if (type === 'loading' && GameStateAPI.GetCSGOGameUIStateName() === 'CSGO_GAME_UI_STATE_MAINMENU') {
             $.DispatchEvent('PlayMainMenuMusic', true, true); 
-			_StopMenuMusic();
+            _StopMenuMusic();
             InventoryAPI.PlayItemPreviewMusic(itemId, 'startround_01.mp3');
             InventoryAPI.StopItemPreviewMusic();
             $.Schedule(0.01, function() {
                 $.DispatchEvent('PlaySoundEffect', 'Music.StartRound.' + musicName, 'MOUSE');
             });
         }
-    };          
+    };        
 	                    
 	          
 	

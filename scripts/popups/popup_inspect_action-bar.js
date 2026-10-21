@@ -420,42 +420,46 @@ var _NavigateModelPanel = function ( type )
         }
     };
 
-var _InspectPlayMusic = function(type) {
-    if (!m_previewingMusic)
-        return;
-
-    var itemId = m_itemId;
-    var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
-    var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
-    musicName = musicName.replace(/^#musickit_/, '');
-
-    if (type === 'mvp') {
-        if (m_schfnMusicMvpPreviewEnd)
+    var _InspectPlayMusic = function(type) {
+        if (!m_previewingMusic)
             return;
 
-        InventoryAPI.StopItemPreviewMusic();
+        var itemId = m_itemId;
+        var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
+        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
+        musicName = musicName.replace(/^#musickit_/i, '');
 
-        $.Schedule(0.01, function() {
-            $.DispatchEvent('PlaySoundEffect', 'Music.MVPAnthem.' + musicName, 'MOUSE');
-        });
+        if (type === 'mvp') {
+            if (m_schfnMusicMvpPreviewEnd)
+                return;
 
+            $.DispatchEvent('PlayMainMenuMusic', false, true);
+            InventoryAPI.StopItemPreviewMusic();
 
-        m_schfnMusicMvpPreviewEnd = $.Schedule(6.8, function() {
-            m_schfnMusicMvpPreviewEnd = null;
+            $.Schedule(0.01, function() {
+                $.DispatchEvent('PlaySoundEffect', 'Music.MVPAnthem.' + musicName, 'MOUSE');
+            });
+
+            m_schfnMusicMvpPreviewEnd = $.Schedule(6.8, function() {
+                m_schfnMusicMvpPreviewEnd = null;
+                InventoryAPI.StopItemPreviewMusic();
+                
+                $.DispatchEvent('PlayMainMenuMusic', true, true);
+                $.Schedule(0.1, function() {
+                    $.DispatchEvent('PlayMainMenuMusic', true, false); 
+                });
+            });
+
+        } else if (type === 'schfn') {
+            if (m_schfnMusicMvpPreviewEnd) {
+                $.CancelScheduled(m_schfnMusicMvpPreviewEnd);
+                m_schfnMusicMvpPreviewEnd = null;
+            }
+
             InventoryAPI.StopItemPreviewMusic();
             InventoryAPI.PlayItemPreviewMusic(itemId);
-        });
-
-    } else if (type === 'schfn') {
-        if (m_schfnMusicMvpPreviewEnd) {
-            $.CancelScheduled(m_schfnMusicMvpPreviewEnd);
-            m_schfnMusicMvpPreviewEnd = null;
         }
-
-        InventoryAPI.StopItemPreviewMusic();
-        InventoryAPI.PlayItemPreviewMusic(itemId);
-    }
-};
+    };
 
 	var _ShowContextMenu = function ()
 	{

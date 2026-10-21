@@ -141,7 +141,7 @@ var LoadingScreen = ( function() {
         for (let n = 0; n < MAX_SLIDES; n++) {
             _CreateSlide(n);
         }
-        _CheckForMatchStart();
+        //_CheckForMatchStart();
     }
 
     function _StartSlideShow() {
@@ -327,7 +327,7 @@ var LoadingScreen = ( function() {
         var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
         var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
         var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId);
-        musicName = musicName.replace(/^#musickit_/, '');
+        musicName = musicName.replace(/^#musickit_/i, '');
 
         if (type == 'loading' && GameStateAPI.GetCSGOGameUIStateName() == 'CSGO_GAME_UI_STATE_LOADINGSCREEN') {
             InventoryAPI.PlayItemPreviewMusic(itemId, 'startround_01.mp3');

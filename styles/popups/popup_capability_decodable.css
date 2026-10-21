@@ -121,6 +121,12 @@
     margin-right: 8px;
 }
 
+.popup-inspect-modelpanel_darken_blur
+{
+    blur: fastgaussian( 4, 4, 3);
+    brightness: .4;
+}
+
 .popup-decodable-lootlist-multi-reward
 {
     horizontal-align: center;
@@ -251,7 +257,7 @@
     vertical-align: center;
     margin: 0px 10px;
     brightness: .5;
-    blur: fastgaussian( 3, 3, 1 );
+    blur: gaussian( 3, 3, 1 );
 }
 
 .popup-decodable-scroll-item.magnified
@@ -260,7 +266,7 @@
     height: width-percentage( 75% );
     margin: 0px 10px;
     brightness: 1;
-    blur: fastgaussian( 0, 0, 0 );
+    blur: gaussian( 0, 0, 0 );
     border: 1px solid rgb(68, 68, 68);
     border-radius: 2px;
 }

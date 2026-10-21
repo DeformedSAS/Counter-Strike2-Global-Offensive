@@ -914,31 +914,36 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 		_LobbyPlayerUpdated();
 	};
 
-	var _InitVanity = function()
-	{
-		if ( !MyPersonaAPI.IsInventoryValid() ) {
-			return;
-		}
-		if ( _m_bVanityAnimationAlreadyStarted ) {
-			return;
-		}
+    var _InitVanity = function()
+    {
+        if ( !MyPersonaAPI.IsInventoryValid() ) {
+            return;
+        }
+        if ( _m_bVanityAnimationAlreadyStarted ) {
+            return;
+        }
 
-		m_latestVanityData = {};
-		_LobbyPlayerUpdated();
-	};
+        m_latestVanityData = {};
+        _LobbyPlayerUpdated();
+    };
 
-	function _LobbyPlayerUpdated()
-	{
-		_HideVanityPanels();
+    function _LobbyPlayerUpdated()
+    {
+        _HideVanityPanels();
 
-		let partySize = PartyListAPI.GetCount();
-		let a_currentVanityData = {};
+       // _ShowDebugLobbyModels();
+        //return;
+		
+		//uncomment the function and return above to display all 5 models at once.
 
-		_VanityDebugMsg('Party size: '+partySize);
+        let partySize = PartyListAPI.GetCount();
+        let a_currentVanityData = {};
 
-		let oSettings = ItemInfo.GetOrUpdateVanityCharacterSettings();
+        _VanityDebugMsg('Party size: '+partySize);
 
-		const localVanityData = [
+        let oSettings = ItemInfo.GetOrUpdateVanityCharacterSettings();
+
+        const localVanityData = [
             oSettings.team,
             oSettings.charItemId,
             oSettings.glovesItemId,
@@ -946,75 +951,118 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
             oSettings.weaponItemId
         ].join(',');
 
-		if(!PartyListAPI.IsPartySessionActive()) {
-			if(!$('#MainMenuVanityPlayer0')) //nonoonon
-				return;
+        if(!PartyListAPI.IsPartySessionActive()) {
+            if(!$('#MainMenuVanityPlayer0')) //nonoonon
+                return;
 
-			oSettings.vanityData = localVanityData;
-			oSettings.xuid = MyPersonaAPI.GetXuid();
-			oSettings.playerIdx = 0;
-			oSettings.isLocalPlayer = true;
+            oSettings.vanityData = localVanityData;
+            oSettings.xuid = MyPersonaAPI.GetXuid();
+            oSettings.playerIdx = 0;
+            oSettings.isLocalPlayer = true;
 
-			const bIsVanityUpdated = m_latestVanityData[0] ? oSettings.vanityData != m_latestVanityData[0] : true;
-			_VanityDebugMsg(bIsVanityUpdated);
+            const bIsVanityUpdated = m_latestVanityData[0] ? oSettings.vanityData != m_latestVanityData[0] : true;
+            _VanityDebugMsg(bIsVanityUpdated);
 
-			a_currentVanityData[0] = _CreateVanitySettings(oSettings);
-			m_latestVanityData[0] = oSettings.vanityData;
+            a_currentVanityData[0] = _CreateVanitySettings(oSettings);
+            m_latestVanityData[0] = oSettings.vanityData;
 
-			if(bIsVanityUpdated)
-				_UpdateOrCreateVanityPanel( 0, a_currentVanityData[0] );
+            if(bIsVanityUpdated)
+                _UpdateOrCreateVanityPanel( 0, a_currentVanityData[0] );
 
-			_UpdateVanityInfoPanel( 0, a_currentVanityData[0] );
-		}
+            _UpdateVanityInfoPanel( 0, a_currentVanityData[0] );
+        }
 
-		for (let i = 0; i < 5; i++) {
-			if(i >= partySize) continue;
-			const xuid = PartyListAPI.GetXuidByIndex( i );
-			const bIsSelf = xuid == MyPersonaAPI.GetXuid();
+        for (let i = 0; i < 5; i++) {
+            if(i >= partySize) continue;
+            const xuid = PartyListAPI.GetXuidByIndex( i );
+            const bIsSelf = xuid == MyPersonaAPI.GetXuid();
 
-			oSettings.vanityData = bIsSelf ? localVanityData : PartyListAPI.GetPartyMemberVanity( xuid );
-			oSettings.xuid = xuid;
-			oSettings.playerIdx = i;
-			oSettings.isLocalPlayer = bIsSelf;
+            oSettings.vanityData = bIsSelf ? localVanityData : PartyListAPI.GetPartyMemberVanity( xuid );
+            oSettings.xuid = xuid;
+            oSettings.playerIdx = i;
+            oSettings.isLocalPlayer = bIsSelf;
 
-			// need be sure, maybe m_latestVanityData[i] not initialized
-			const bIsVanityUpdated = m_latestVanityData[i] ? oSettings.vanityData != m_latestVanityData[i] : true;
-			_VanityDebugMsg(bIsVanityUpdated);
-		
-			a_currentVanityData[i] = _CreateVanitySettings(oSettings);
-			m_latestVanityData[i] = oSettings.vanityData;
+            // need be sure, maybe m_latestVanityData[i] not initialized
+            const bIsVanityUpdated = m_latestVanityData[i] ? oSettings.vanityData != m_latestVanityData[i] : true;
+            _VanityDebugMsg(bIsVanityUpdated);
+        
+            a_currentVanityData[i] = _CreateVanitySettings(oSettings);
+            m_latestVanityData[i] = oSettings.vanityData;
 
-			if(bIsSelf && bIsVanityUpdated)
-				_ApplyVanitySettingsToLobbyMetadata(oSettings);
+            if(bIsSelf && bIsVanityUpdated)
+                _ApplyVanitySettingsToLobbyMetadata(oSettings);
 
-			if(bIsVanityUpdated)
-				_UpdateOrCreateVanityPanel( i, a_currentVanityData[i] );
+            if(bIsVanityUpdated)
+                _UpdateOrCreateVanityPanel( i, a_currentVanityData[i] );
 
-			_UpdateVanityInfoPanel( i, a_currentVanityData[i] );
-		}
-	};
+            _UpdateVanityInfoPanel( i, a_currentVanityData[i] );
+        }
+    };
 
-	function _UpdateOrCreateVanityPanel( playerIdx, oSettings ) {
-		if(!oSettings) {
-			return;
-		}
-		let vanityPanel = $('#MainMenuVanityPlayer'+playerIdx);
-		if(!vanityPanel) {
-			return;
-		}
+    function _ShowDebugLobbyModels() {
+        //DEVONLY{
+        // force vanity for five players
+        const maxAgents = (typeof _m_maxMainMenuDisplayAgents !== 'undefined') ? _m_maxMainMenuDisplayAgents : 5;
+        for (let i = 0; i < maxAgents; i++) {
+            let oSettings = ItemInfo.GetOrUpdateVanityCharacterSettings();
+            oSettings = Object.assign({}, oSettings);
+            oSettings.playeridx = i;
+            oSettings.playerIdx = i;
+            $.Msg('[p.mainmenu] oSettings: ' + i);
+            $.Msg('[p.mainmenu] oSettings: ' + oSettings.playeridx);
+            oSettings.xuid = MyPersonaAPI.GetXuid();
+            oSettings.isLocalPlayer = false;
 
-		oSettings.activity = 'ACT_CSGO_UIPLAYER_WALKUP';
-		oSettings.arrModifiers.push( 'vanity' );
-		oSettings.panel = vanityPanel;
-		vanityPanel.SetSceneAngles( 0, 0, 0, false );
+            oSettings.vanityData = [
+                oSettings.team,
+                oSettings.charItemId,
+                oSettings.glovesItemId,
+                oSettings.loadoutSlot,
+                oSettings.weaponItemId
+            ].join(',');
 
-		CharacterAnims.PlayAnimsOnPanel( oSettings );
-		_SetVanityLightingBasedOnBackgroundMovie( vanityPanel );
-		
-		if ( oSettings.panel.BHasClass( 'vanity-hidden' ) ) {
-			oSettings.panel.RemoveClass( 'vanity-hidden' );
-		}
-	}
+            let formattedSettings = _CreateVanitySettings(oSettings);
+
+            _UpdateOrCreateVanityPanel(i, formattedSettings);
+            _UpdateVanityInfoPanel(i, formattedSettings);
+        }
+        //}DEVONLY
+    }
+
+    function _UpdateOrCreateVanityPanel( playerIdx, oSettings ) {
+        if(!oSettings) {
+            return;
+        }
+        let vanityPanel = $('#MainMenuVanityPlayer'+playerIdx);
+        if(!vanityPanel) {
+            return;
+        }
+
+        oSettings.activity = 'ACT_CSGO_UIPLAYER_WALKUP';
+        
+        if (!Array.isArray(oSettings.arrModifiers)) {
+            oSettings.arrModifiers = [];
+        } else {
+            oSettings.arrModifiers = oSettings.arrModifiers.slice();
+        }
+
+        if (oSettings.arrModifiers.indexOf('vanity') === -1) {
+            oSettings.arrModifiers.push( 'vanity' );
+        }
+
+        oSettings.panel = vanityPanel;
+        vanityPanel.SetSceneAngles( 0, 0, 0, false );
+
+        CharacterAnims.PlayAnimsOnPanel( oSettings );
+        _SetVanityLightingBasedOnBackgroundMovie( vanityPanel );
+        
+        if ( oSettings.panel.BHasClass( 'vanity-hidden' ) ) {
+            oSettings.panel.RemoveClass( 'vanity-hidden' );
+        }
+        if ( oSettings.panel.BHasClass( 'hidden' ) ) {
+            oSettings.panel.RemoveClass( 'hidden' );
+        }
+    }
 
 function _UpdateVanityInfoPanel( playerIdx, oSettings )
 {
@@ -1110,24 +1158,24 @@ var _TrackVanityBone = function( elPanel, index )
     });
 };
 
-	function _CreateVanitySettings( oSettings )
-	{
-		const data = oSettings.vanityData.split(',');
-		oSettings.team = data[0];
-		oSettings.charItemId = data[1];
-		oSettings.glovesItemId = data[2];
-		oSettings.loadoutSlot = data[3];
-		oSettings.weaponItemId = data[4];
-		return oSettings;
-	}
+    function _CreateVanitySettings( oSettings )
+    {
+        const data = oSettings.vanityData.split(',');
+        oSettings.team = data[0];
+        oSettings.charItemId = data[1];
+        oSettings.glovesItemId = data[2];
+        oSettings.loadoutSlot = data[3];
+        oSettings.weaponItemId = data[4];
+        return oSettings;
+    }
 
-	var _ApplyVanitySettingsToLobbyMetadata = function( oSettings )
-	{
-		PartyListAPI.SetLocalPlayerVanityPresence( oSettings.team,
-			oSettings.charItemId, oSettings.glovesItemId,
-			oSettings.loadoutSlot, oSettings.weaponItemId );
-	};
-	
+    var _ApplyVanitySettingsToLobbyMetadata = function( oSettings )
+    {
+        PartyListAPI.SetLocalPlayerVanityPresence( oSettings.team,
+            oSettings.charItemId, oSettings.glovesItemId,
+            oSettings.loadoutSlot, oSettings.weaponItemId );
+    };
+    
 function _HideVanityPanels()
 {
     let partySize = PartyListAPI.IsPartySessionActive() ? PartyListAPI.GetCount() : 1;
@@ -1157,10 +1205,10 @@ function _HideVanityPanels()
     }
 }
 
-	function _VanityDebugMsg( msg ) {
-		return;
-		$.Msg('[VANITY DEBUG] '+msg);
-	}
+    function _VanityDebugMsg( msg ) {
+        return;
+        $.Msg('[VANITY DEBUG] '+msg);
+    }
 	
 var _SetVanityLightingBasedOnBackgroundMovie = function( vanityPanel ) // background lighting, scene angles will be used for each background in the future.
 {

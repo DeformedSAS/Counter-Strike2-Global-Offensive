@@ -9,11 +9,12 @@
     height: 100%;
     horizontal-align:center;
     vertical-align:center;
+    background-image: url("file://{images}/backgrounds/inspect.svg");
     background-repeat: no-repeat;
     background-size: auto 101%;
     background-position: 50% 50%;
     background-img-opacity: 0.2;
-    transition-property: opacity;
+    transition-property: opacity, transform;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
 }
@@ -21,6 +22,17 @@
 .popup-xray-container .popup-inspect-modelpanel,.popup-in-xray .popup-inspect-modelpanel
 {
     background-image: none;
+}
+
+.popup-inspect-modelpanel_darken
+{
+    brightness: .25;
+}
+
+.popup-inspect-modelpanel_darken_blur
+{
+    blur: fastgaussian( 4, 4, 3);
+    brightness: .4;
 }
 
 .inspect_bg_movie {
@@ -66,23 +78,16 @@
 	overflow: clip;
 }
 
-.popup-inspect-modelpanel_darken
-{
-    brightness: .25;
-}
-
-.popup-inspect-modelpanel_darken_blur
-{
-    blur: fastgaussian( 4, 4, 3);
-    brightness: .4;
-}
-
 .popup-inspect-image
 {
     width: height-percentage( 130% );
     height: 450px;
     horizontal-align: center;
     vertical-align: middle;
+    transform: translateY( 0% );
+    transition-property: transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
 }
 
 #id-character-button-container
@@ -101,13 +106,20 @@
 
 .popup-inspect-image.y-offset
 {
+    transform: translateY( -10% );
+    transition-property: transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
 }
 
 .popup-inspect-modelpanel--char
 {
-	width: 1100px;
-    height: 100%;
-	vertical-align: bottom;
+    width: 1080px;
+    height: 93%;
+    vertical-align: bottom;
+    transition-property: opacity, transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
 }
 
 .popup-inspect-modelpanel--char2
@@ -116,6 +128,9 @@
     height: 100%;
 	vertical-align: bottom;
 	horizontal-align: center;
+	transition-property: opacity, transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
 }
 
 .popup-char-model-controls
@@ -135,7 +150,7 @@
     opacity: 0;
     width: 1px;
     visibility: visible;
-    transition-property: opacity;
+    transition-property: opacity, transform;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
 }
@@ -152,7 +167,7 @@
 {
     opacity: 0;
     transform: translateY( 100% );
-    transition-property: opacity;
+    transition-property: opacity, transform;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
 }

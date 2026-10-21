@@ -631,7 +631,7 @@ var ItemInfo = ( function() {
 			return "";
 	}
 	function _GetDefaultDefeat(id) {
-        const itemSchemaDef = BuildItemSchemaDef(id);
+        const itemSchemaDef = BuildItemSchemaDefJSON(id);
         if (itemSchemaDef["default_defeat"])
             return itemSchemaDef["default_defeat"];
         else
@@ -786,7 +786,7 @@ var ItemInfo = ( function() {
 		GetItemIdForItemEquippedInLoadoutSlot: _GetItemIdForItemEquippedInLoadoutSlot,           
 		IsLoadoutSlotSubPositionAWeapon	: _IsLoadoutSlotSubPositionAWeapon,
 		GetDefaultCheer					: _GetDefaultCheer,
-		GetDefaultDefeat				: _GetDefaultDefeat,
+		//GetDefaultDefeat				: _GetDefaultDefeat,
 		GetVoPrefix						: _GetVoPrefix,
 		IsPreviewable					: _IsPreviewable,
 		FindAnyUserOwnedCharacterItemID : _FindAnyUserOwnedCharacterItemID,

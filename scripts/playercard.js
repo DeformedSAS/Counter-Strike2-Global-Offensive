@@ -153,7 +153,7 @@ var playerCard = ( function (){
         elBgImage.style.backgroundPosition = '50% 50%';
         elBgImage.style.backgroundSize = 'auto 165%';
         elBgImage.style.backgroundRepeat = 'no-repeat';
-        elBgImage.style.blur = 'gaussian(2,2,1)';
+        elBgImage.style.blur = 'fastgaussian(1,1,1)';
         elBgImage.AddClass('player-card-bg-anim');
 	};
 

@@ -51,7 +51,7 @@ var MusicPreview = (function () {
             return;
         }
 
-        musicName = musicName.replace(/^#musickit_/, '');
+        musicName = musicName.replace(/^#musickit_/i, ''); // without the i, the music kits past nightmode will not play anything in panorama, blame dave.
 
         var eventMap = {
             menu: "Music.EndOfMatch." + musicName,

@@ -13,7 +13,7 @@ CSGOMainMenu,#MainMenuInput,#MainMenuCore,#MainMenuForeground,#MainMenuBackgroun
 
 #MainMenuCore,#MainMenuBackground
 {
-    blur: fastgaussian( 4, 4, 4 );
+    blur: fastgaussian( 5, 5, 5 );
 }
 
 #MainMenuVanityParent
@@ -57,7 +57,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuCore
 
 CSGOMainMenu.PopupBackgroundBlur #MainMenuInput
 {
-    blur: fastgaussian( 4, 4, 4);
+    blur: fastgaussian( 5, 5, 5);
 }
 
 CSGOMainMenu.PopupBackgroundBlur #MainMenuInput.HiddenByPopup
@@ -67,7 +67,7 @@ CSGOMainMenu.PopupBackgroundBlur #MainMenuInput.HiddenByPopup
 
 CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 {
-    blur: fastgaussian( 4, 4, 2);
+    blur: fastgaussian( 5, 5, 3);
 }
 
 #MainMenuVanityOverlay
@@ -459,8 +459,8 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
 {
 	height: 64px;
 	width: 100%;
-	/*background-image: url("file://{resources}/videos/top_nav.webm"); */
-	/*background-img-opacity: .11;*/
+	background-image: url("file://{resources}/videos/top_nav.webm");
+	background-img-opacity: .11;
 	background-size: 100% 66px;
     background-position: center;
 }

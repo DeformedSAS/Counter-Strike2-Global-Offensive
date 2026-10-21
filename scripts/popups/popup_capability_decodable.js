@@ -496,19 +496,21 @@ var CapabilityDecodable = ( function()
 		$.Schedule( delay, _ShowScroll.bind( undefined, elCase ) );
 	};
 
-	var _ShowScroll = function( elCase )
+    var _ShowScroll = function( elCase ) // not really sure what i did.. but i fixed the lack of blur while opening cases/capsules etc.
 	{
 		var elScroll = $.GetContextPanel().FindChildInLayoutFile( 'DecodableItemsScroll' );
 		if ( !elScroll || !elScroll.IsValid() ) return;
 		
 		elScroll.RemoveClass( 'hidden' );
-		if ( elCase && elCase.IsValid() ) {
-			elCase.AddClass( 'popup-inspect-modelpanel_darken_blur' );
+
+		var elBgMovie = $.GetContextPanel().FindChildInLayoutFile( 'DecodableBGMovie' );
+		if ( elBgMovie && elBgMovie.IsValid() ) {
+			elBgMovie.AddClass( 'popup-inspect-modelpanel_darken_blur' );
 		}
 		
 		_FillScrollsWithItems( m_scrollListsPanelIds );
 		$.Schedule( 0.1, _PlayScrollAnim.bind( undefined, m_scrollListsPanelIds ) );
-	};
+	}; // TODO: blur images and models while the cases are scrolling.
 
 	var _PlayScrollAnim = function( scrolllists )
 	{

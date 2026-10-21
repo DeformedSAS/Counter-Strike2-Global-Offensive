@@ -1,10 +1,4 @@
 "use strict";
-/// <reference path="csgo.d.ts" />
-/// <reference path="common/tint_spray_icon.ts" />
-/// <reference path="common/store_items.ts" />
-/// <reference path="common/formattext.ts" />
-/// <reference path="common/iteminfo.ts" />
-/// <reference path="rankup_redemption_store.ts" />
 var ItemTileStore;
 (function (ItemTileStore) {
     function Init(elPanel, oItemData) {
@@ -85,7 +79,7 @@ var ItemTileStore;
             return;
         }
         let reduction = StoreAPI.GetStoreItemPercentReduction(oItemData.id);
-        let isMarketItem = IsMarketItem(oItemData);
+        let isMarketItem = false;
         elPanel.FindChildInLayoutFile('id-itemtile-store-price').SetHasClass('is-marketlink', isMarketItem);
         elPanel.FindChildInLayoutFile('id-itemtile-store-price').SetHasClass('has-reduction', reduction !== '' && reduction !== undefined && !isMarketItem);
         elPanel.SetDialogVariable('reduction', reduction);
@@ -144,10 +138,7 @@ var ItemTileStore;
         if (oItemData.isDropItem || oItemData.isDisabled) {
             return;
         }
-        else if (IsMarketItem(oItemData)) {
-            elPanel.SetPanelEvent('onactivate', OpenOverlayToMarket.bind(undefined, oItemData.id));
-        }
-        else if (oItemData.hasOwnProperty('linkedid')) {
+        if (oItemData.hasOwnProperty('linkedid')) {
             let OpenContextMenu = function (itemId, linkedid, isNotReleased, warning) {
                 var contextMenuPanel = UiToolkitAPI.ShowCustomLayoutContextMenuParameters('', '', 'file://{resources}/layout/context_menus/context_menu_store_linked_items.xml', 'itemids=' + itemId + ',' + linkedid +
                     '&' + 'is-not-released=' + isNotReleased +

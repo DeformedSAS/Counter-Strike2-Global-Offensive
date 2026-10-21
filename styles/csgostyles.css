@@ -1,11 +1,10 @@
-
-
 @define ct-color: rgb(150, 200, 250);
 @define t-color: #eabe54;
 @define ct-color-alpha: rgba( 1, 29, 54, 0.5 );
 @define t-color-alpha: rgba( 51, 41, 1, 0.5 );
 @define ct-color-alpha75: rgba( 1, 29, 54, 0.75 );
 @define t-color-alpha75: rgba( 51, 41, 1, 0.75 );
+@define hudWorldBlur: gaussian(2,2,2);
 @define steamOnlineColor: #80a438;
 @define blueColor: #3281AC;
 @define blueColorDark: #0D354A;
@@ -23,7 +22,6 @@
 @define contextMenuBackground: rgba(38, 38, 38, 1);
 @define backgroundDotsSize: 360px 360px;
 @define btnBorderRadius: 3px;
-@define hud-blur-bg-color: rgba(0, 0, 0, 0.8);
 @define backgroundGradient: gradient( linear, 75% 100%, 0% 0%, from( #14202b ), to( #1e2d3d ) );
 @define textBlueGradient: gradient( linear, 0% 100%, 0% 0%, from( blueColor ), to( blueColorDark ) );
 @define baseText: #ccccccff;
@@ -35,6 +33,7 @@
 @define friendstilewidth: 320px;
 @define ContextMenuFadoutTime: 0.2s;
 @define hud-outline-shadow: 0px 0px 3px 2 #00000080;
+@define hud-blur-bg-color: #000000a0;
 @define contextmenu_zindex: 10000100;
 @define submenu_zindex: 10000100;
 @define mousepanningcursorsize: 99px;
@@ -57,6 +56,16 @@
 @define color-rarity-immortal: #e4ae39;
 @define color-rarity-strange: #CF6A32;
 @define color-rarity-unusual: #ffd700;
+@define color-rarity-alpha-default: #6a615633;
+@define color-rarity-alpha-common: #b0c3d933;
+@define color-rarity-alpha-uncommon: #5e98d933;
+@define color-rarity-alpha-rare: #4b69ff33;
+@define color-rarity-alpha-mythical: #8847ff33;
+@define color-rarity-alpha-legendary: #d32ce633;
+@define color-rarity-alpha-ancient: #eb4b4b33;
+@define color-rarity-alpha-immortal: #e4ae3933;
+@define color-rarity-alpha-strange: #CF6A3233;
+@define color-rarity-alpha-unusual: #ffd70033;
 @define color-rarity-0: color-rarity-default;
 @define color-rarity-1: color-rarity-common;
 @define color-rarity-2: color-rarity-uncommon;
@@ -96,9 +105,14 @@
 @define debug2: 1px solid green;
 @define debug3: 1px solid yellow;
 @define debug4: 1px solid blue;
-@define new-item-gradient: gradient( linear, 0% 0%, 100% 0%, from( rgb(85, 150, 224) ), to( blueColor) );
 @define alert-width: 300px;
 @define spec-width: 460px;
+@define xpshop-green: #46C786;
+@define xpshop-green-dark: #12693e;
+@define new-item-gradient: gradient( linear, 0% 0%, 100% 0%, from( rgb(85, 150, 224) ), to( blueColor) );
+@define groups-text-color-major-24: rgb(48, 31, 6);
+@define groups-text-color-major-25: rgb(224, 190, 231);
+@define text-shadow-major-24: 0px 0px 8px 0.5 #8f530f73;
 Label,TextEntry
 {
 	font-family: notosans, 'Arial Unicode MS';

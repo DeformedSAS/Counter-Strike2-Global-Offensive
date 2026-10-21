@@ -483,7 +483,7 @@ var EOM_Characters = (function() {
     function EndOfMatch_Music(type) {
         var itemId = LoadoutAPI.GetItemID('noteam', 'musickit');
         var musicId = InventoryAPI.GetItemAttributeValue(itemId, 'music id');
-        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId).replace(/^#musickit_/, '');
+        var musicName = InventoryAPI.GetMusicNameFromMusicID(musicId).replace(/^#musickit_/i, '');
 
         if (type === 'loading' && GameStateAPI.GetCSGOGameUIStateName() === 'CSGO_GAME_UI_STATE_INGAME') {
             InventoryAPI.PlayItemPreviewMusic(itemId, 'endofmatch.mp3');
