@@ -225,7 +225,7 @@ var _OnShowMainMenu = function() {
     _FetchTournamentData();
     _ShowFloatingPanels();
     _RightColumnLoad();
-    _PlayMenuSong();
+    _PlayMenuSong(); //comment this to force the panoramic effect.
 	_InsureSessionCreated();
     CheckModVersionAsync();
 	BlogAPI.RequestRSSFeed();
@@ -417,6 +417,7 @@ function CheckModVersionAsync() {
         _CancelNotificationSchedule();
         UiToolkitAPI.CloseAllVisiblePopups();
         _StopFetchingTournamentData();
+		_HideVanityPanels();
     }
 
 	var _OnShowPauseMenu = function() // does the pause menu magic tricks
@@ -545,15 +546,19 @@ function CheckModVersionAsync() {
 		
 		return true;
 	}
- 	var _NavigateToTab = function( tab, XmlName ) // navigatetotab, the shit that does the magic trick of you being able to open the play menu, inventory, settigns etc
+var _NavigateToTab = function( tab, XmlName ) // navigatetotab, the shit that does the magic trick of you being able to open the play menu, inventory, settigns etc
 	{
 		if ( !_BCheckTabCanBeOpenedRightNow( tab ) )
 		{
 			 $('#MainMenuNavBarHome').checked = true;
-			return;	                                                                               
+			return;                                                                               
 		}
-		$.DispatchEvent('PlayMainMenuMusic', true, false );                               
-                    
+        
+        //if ( !$.GetContextPanel().BHasClass( 'MainMenuRootPanel--PauseMenuMode' ) )
+        //{
+        //    $.DispatchEvent('PlayMainMenuMusic', true, false );                               
+        //}
+              // uncomment above to play panoramic shit
 		if( !$.GetContextPanel().FindChildInLayoutFile( tab ) )
 		{
 			var newPanel = $.CreatePanel('Panel', _m_elContentPanel, tab );
@@ -774,10 +779,15 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 	//	elPanel.BLoadLayout( WatchNoticeXML, false, false );
 	//}
 
-	function OnHomeButtonPressed()
+    function OnHomeButtonPressed()
 	{
 		$.DispatchEvent( 'HideContentPanel' );
         $('#MainMenuNavBarHome').checked = true;
+
+        //if ( !$.GetContextPanel().BHasClass( 'MainMenuRootPanel--PauseMenuMode' ) )
+        //{
+        //    $.DispatchEvent('PlayMainMenuMusic', true, true); 
+        //} //uncomment to play music with panoramic effects..
 	}
 
 	function _OnQuitButtonPressed()
@@ -834,29 +844,24 @@ function _OnHideContentPanel() { // hides the content panel, shows left and righ
 	};
 	
     function _ShowFloatingPanels() {
-    $.FindChildInContext('#JsLeftColumn').SetHasClass('hidden', false);
-    $.FindChildInContext('#JsRightColumn').SetHasClass('hidden', false);
-    //$.FindChildInContext('#MainMenuVanityInfo').SetHasClass('hidden', false);
-
-    for (let i = 0; i < MAX_PLAYERS; i++) {
-        let vanityPanel = $.FindChildInContext("#id-player-vanity-info-" + i);
-        if (vanityPanel) {
-            vanityPanel.SetHasClass('hidden_info', false);
+       $.FindChildInContext('#JsLeftColumn').SetHasClass('hidden', false);
+       $.FindChildInContext('#JsRightColumn').SetHasClass('hidden', false);
+    
+       let vanityContainer = $.FindChildInContext('#MainMenuVanityInfo');
+           if (vanityContainer) {
+               vanityContainer.SetHasClass('hidden', false);
         }
-      }
     }
+
     function _HideFloatingPanels() {
-    $.FindChildInContext('#JsLeftColumn').SetHasClass('hidden', true);
-    $.FindChildInContext('#JsRightColumn').SetHasClass('hidden', true);
-    //$.FindChildInContext('#MainMenuVanityInfo').SetHasClass('hidden', true);
-	
-    for (let i = 0; i < MAX_PLAYERS; i++) {
-        let vanityPanel = $.FindChildInContext("#id-player-vanity-info-" + i);
-        if (vanityPanel) {
-            vanityPanel.SetHasClass('hidden_info', true);
+       $.FindChildInContext('#JsLeftColumn').SetHasClass('hidden', true);
+       $.FindChildInContext('#JsRightColumn').SetHasClass('hidden', true);
+    
+       let vanityContainer = $.FindChildInContext('#MainMenuVanityInfo');
+           if (vanityContainer) {
+               vanityContainer.SetHasClass('hidden', true);
         }
-      }
-    }   
+    }
 	
     function _RightColumnLoad() // because for some reason, _ShowFloatingPanels cannot for the love of god load the frame id from mainmenu.xml, it's being loaded by this script which is hooked up to _OnShowMainMenu. i really have no clue why it's doing that.
     {
@@ -1075,9 +1080,28 @@ function _UpdateVanityInfoPanel( playerIdx, oSettings )
     const vanityInfoPanelId = "id-player-vanity-info-" + playerIdx;
     let elVanityInfoPanel = vanityPanel.FindChildInLayoutFile(vanityInfoPanelId);
 
+    let hasOldLayoutParm = false;
+    try {
+        if (typeof GameInterfaceAPI !== 'undefined' && typeof GameInterfaceAPI.HasCommandLineParm === 'function') {
+            hasOldLayoutParm = GameInterfaceAPI.HasCommandLineParm('-oldvanity');
+        }
+    } catch (e) {
+        hasOldLayoutParm = false;
+    }
+
+    const layoutFile = hasOldLayoutParm 
+        ? 'file://{resources}/layout/vanity_player_info_old.xml' 
+        : 'file://{resources}/layout/vanity_player_info.xml';
+
+    if (elVanityInfoPanel && elVanityInfoPanel.currentLayoutFile !== layoutFile) {
+        elVanityInfoPanel.DeleteAsync(0);
+        elVanityInfoPanel = null;
+    }
+
     if (!elVanityInfoPanel) {
         elVanityInfoPanel = $.CreatePanel('Button', vanityPanel, vanityInfoPanelId);
-        elVanityInfoPanel.BLoadLayout('file://{resources}/layout/vanity_player_info.xml', false, false);
+        elVanityInfoPanel.currentLayoutFile = layoutFile; // track which layout is loaded in depending on the launch parameter.
+        elVanityInfoPanel.BLoadLayout(layoutFile, false, false);
         elVanityInfoPanel.AddClass('vanity-info-loc-' + playerIdx);
 
         _VanityDebugMsg('Creating panel '+vanityInfoPanelId);
@@ -1089,14 +1113,18 @@ function _UpdateVanityInfoPanel( playerIdx, oSettings )
             elVanityInfoPanel.AddClass('hidden_info');
         }
 
-        let elBackground = $('#MainMenuBackground');
-        if (elBackground) {
-            elBackground.AddBlurPanel(elVanityInfoPanel.FindChildInLayoutFile('vanity-info-container'));
+        // if the old panel is loaded, it skips the blurring.
+		// if the new panel is loaded, it doesn't skip the blurring.
+        if (!hasOldLayoutParm) {
+            let elBackground = $('#MainMenuBackground');
+            if (elBackground) {
+                elBackground.AddBlurPanel(elVanityInfoPanel.FindChildInLayoutFile('vanity-info-container'));
+            }
         }
     }
 
     if ( oSettings ) {
-        let isCTHeavy = ( oSettings.team === 'ct' ) && 
+        let isCTHeavy = ( oSettings.team === 'ct' ) &&                        
                         ( oSettings.loadoutSlot === 'heavy3' || oSettings.loadoutSlot === 'heavy4' );
 
         elVanityInfoPanel.isCTHeavyWeapon = isCTHeavy;
@@ -2785,7 +2813,7 @@ var _UnPauseMainMenuCharacter = function() {
 	$.RegisterForUnhandledEvent( "MainMenuGoToCharacterLoadout", MainMenu.GoToCharacterLoadout );
 	$.RegisterForUnhandledEvent( "PanoramaComponent_Lobby_PlayerRemoved", MainMenu.LobbyPlayerUpdated );
 	//$.RegisterForUnhandledEvent('VacNet_OnReviewerInfoReceived', MainMenu.OnReviewInfoRecieved);
-	
+	// no vacnet for you. button is revealed at all times anyways..
 	MainMenu.MinimizeSidebar();
 	MainMenu.InitVanity();
 	MainMenu.MinimizeSidebar();

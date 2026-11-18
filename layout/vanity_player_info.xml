@@ -13,6 +13,7 @@
         
         <Panel class="left-right-flow horizontal-center bottom-margin">
 		<Frame id="jsHonorIcon" src="file://{resources}/layout/honor_icon.xml" />
+		    <Label id="JsPlayerClanTag" class="stratum-regular-condensed fontSize-ml fontcolor-white vanity-info-clantag" text="" />
             <Label id="JsPlayerName" class="stratum-medium-condensed fontSize-ml fontcolor-white vanity-info-name" text="{s:player_name}" />
         </Panel>
 

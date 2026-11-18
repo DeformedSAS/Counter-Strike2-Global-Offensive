@@ -1,4 +1,4 @@
-'use-strict';
+'use strict';
 
 var InpsectPurchaseBar = ( function()
 {
@@ -10,26 +10,20 @@ var InpsectPurchaseBar = ( function()
 	var m_allowXrayPurchase = false;
 	var m_bOverridePurchaseMultiple = false;
 	var m_blurOperationPanel = false;
+	var m_previewingMusic = false;
+	var m_schfnMusicMvpPreviewEnd = null;
+	var m_activePreviewItemId = '';
 
 	var _Init = function( elPanel, itemId, funcGetSettingCallback )
 	{
 		m_storeItemid = funcGetSettingCallback( "storeitemid", "" );
-		m_bOverridePurchaseMultiple = ( funcGetSettingCallback( "overridepurchasemultiple", "" ) === '1' ) ? true : false;
+		m_bOverridePurchaseMultiple = ( funcGetSettingCallback( "overridepurchasemultiple", "" === '1' ) ) ? true : false;
 		m_blurOperationPanel = ( $.GetContextPanel().GetAttributeString( 'bluroperationpanel', 'false' ) === 'true' ) ? true : false;
 		
-		                                                     
-		                                          
 		m_itemid = !m_storeItemid ? itemId : m_storeItemid;
 
-		                              
 		var bFauxItemIdForPurchase = InventoryAPI.IsFauxItemID( m_itemid );
 		var priceOriginal = bFauxItemIdForPurchase ? ItemInfo.GetStoreOriginalPrice( m_itemid, 1 ) : '';
-
-		                                                          
-		                                                                                                                      
-		                                                           
-		                                                                                                                                                                                                    
-		                                                                                   
 
 		if ( !priceOriginal ||
 			( funcGetSettingCallback( 'inspectonly', 'false' ) === 'true' ) ||
@@ -46,11 +40,60 @@ var InpsectPurchaseBar = ( function()
 		m_showToolUpsell = (funcGetSettingCallback( "toolid", '' )) === '' ? true : false;
 		elPanel.RemoveClass( 'hidden' );	
 
-		_SetPurchaseImage( elPanel, itemId );
+		var targetId = m_storeItemid ? m_storeItemid : m_itemid;
+		m_activePreviewItemId = GetDisplayItemId( targetId );
+
+		_SetPurchaseImage( elPanel, m_activePreviewItemId );
 		_SetDialogVariables( elPanel, m_itemid );
 		_UpdateDecString( elPanel );
 		_SetUpPurchaseBtn( elPanel );
 		_UpdatePurchasePrice();
+
+		var slot = ItemInfo.GetSlot( m_activePreviewItemId );
+		var elMusicBtn = elPanel.FindChildInLayoutFile( 'InspectPlayMvpBtn' );
+
+		if ( elMusicBtn )
+		{
+			if ( slot == "musickit" )
+			{
+				InventoryAPI.PlayItemPreviewMusic( m_activePreviewItemId );
+				m_previewingMusic = true;
+
+				elMusicBtn.SetHasClass( 'hidden', ( InventoryAPI.GetItemRarity( m_activePreviewItemId ) <= 0 ) );
+				elMusicBtn.visible = true;
+				elMusicBtn.SetPanelEvent( 'onactivate', function() {
+					_InspectPlayMusic( 'mvp' );
+				} );
+			}
+			else
+			{
+				elMusicBtn.AddClass( 'hidden' );
+				elMusicBtn.visible = false;
+			}
+		}
+	};
+
+	var _InspectPlayMusic = function ( type )
+	{
+		if ( !m_previewingMusic )
+			return;
+
+		if ( type === 'mvp' )
+		{
+			if ( m_schfnMusicMvpPreviewEnd )
+				return;                                                                      
+
+			InventoryAPI.StopItemPreviewMusic();
+			InventoryAPI.PlayItemPreviewMusic( m_activePreviewItemId, 'roundmvpanthem_01.mp3' );
+
+			m_schfnMusicMvpPreviewEnd = $.Schedule( 6.8, InpsectPurchaseBar.InspectPlayMusic.bind( null, 'schfn' ) );
+		}
+		else if ( type === 'schfn' )
+		{
+			m_schfnMusicMvpPreviewEnd = null;
+			InventoryAPI.StopItemPreviewMusic();
+			InventoryAPI.PlayItemPreviewMusic( m_activePreviewItemId );
+		}
 	};
 
 	var _SetDialogVariables = function( elPanel, itemId )
@@ -61,9 +104,23 @@ var InpsectPurchaseBar = ( function()
 	var _SetPurchaseImage = function( elPanel, itemId )
 	{
 		var elImage = elPanel.FindChildInLayoutFile( 'PurchaseItemImage' );
+		if ( !elImage )
+			return;
+
 		elImage.itemid = itemId;
 		elImage.SetHasClass( 'popup-capability-faded', m_isXrayMode && !m_allowXrayPurchase );
 	};
+
+	function GetDisplayItemId( itemId ) 
+	{
+		if ( !itemId || !InventoryAPI.IsValidItemID( itemId ) )
+			return itemId;
+
+		if ( InventoryAPI.GetItemTypeFromEnum( itemId ) === 'coupon' )
+			return InventoryAPI.GetLootListItemIdByIndex( itemId, 0 );
+	
+		return itemId;
+	}
 
 	var _UpdateDecString = function ( elPanel )
 	{
@@ -112,11 +169,6 @@ var InpsectPurchaseBar = ( function()
 	{
 		if ( m_bOverridePurchaseMultiple )
 			return true;                                             
-
-		                                                               
-		                                    
-		                                                              
-		   	                                                                     
 
 		var attValue = InventoryAPI.GetItemAttributeValue( m_itemid, 'season access' );
 		if ( attValue )
@@ -168,7 +220,6 @@ var InpsectPurchaseBar = ( function()
 		var itemDefitionNameString = ItemInfo.GetItemDefinitionName( m_itemid );
 		var purchaseList = [];
 
-		                                                                                          
 		for ( var i = 0; i < qty; i++ )
 		{
 			purchaseList.push( m_itemid );
@@ -192,9 +243,23 @@ var InpsectPurchaseBar = ( function()
 		}
 	};
 
-	var _ClosePopup = function()
+    var _ClosePopup = function()
 	{
 		InventoryAPI.StopItemPreviewMusic();
+
+		if ( m_previewingMusic )
+		{
+			InventoryAPI.StopItemPreviewMusic();
+			m_previewingMusic = false;
+
+			if ( m_schfnMusicMvpPreviewEnd )
+			{
+				$.CancelScheduled( m_schfnMusicMvpPreviewEnd );
+				m_schfnMusicMvpPreviewEnd = null;
+			}
+			
+			$.DispatchEvent( 'PlayMainMenuMusic', true, false );
+		}
 
 		if( m_blurOperationPanel )
 		{
@@ -210,6 +275,7 @@ var InpsectPurchaseBar = ( function()
 		Init: _Init,
 		OnDropdownUpdate: _OnDropdownUpdate,
 		ClosePopup :_ClosePopup,
+		InspectPlayMusic: _InspectPlayMusic
 	};
 } )();
 

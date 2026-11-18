@@ -70,9 +70,9 @@ var ConfigurePopupFromItemsList = function( itemidsList )
 	if ( m_strOperation === 'loadcontents' ) {
 		schOperation = 0.5;
 	} else if ( ( m_strOperation === 'add' ) && m_strShowSelectItemForCapabilityPopupCapability ) {
-		schOperation = 0.25;
+		schOperation = 0.2;
 	} else if ( m_strOperation === 'delete' ) {
-		schOperation = 0.5;
+		schOperation = 0.2;
 	} else if ( _BIsBatchMode() ) {
 		schOperation = 0.2;
 	}

@@ -108,7 +108,7 @@ var MainMenuStore;
         if (_m_activePanelId !== panelId) {
             if (panelId === 'id-store-page-home') {
                 UpdateItemsInHomeSection('coupon', 'id-store-popular-items', 6);
-				UpdateItemsInHomeSection('nightmode2', 'id-store-nightmode2-items', 6, 'url("file://{images}/backgrounds/store_home_coupon_nightmode2.png")');
+				UpdateItemsInHomeSection('nightmode2', 'id-store-nightmode2-items', 6, 'url("file://{images}/backgrounds/store_home_coupon_monstercat.png")');
             } else {
                 MakePageFromStoreData(keyType);
             }

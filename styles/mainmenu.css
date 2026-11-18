@@ -290,9 +290,17 @@ CSGOMainMenu.PopupBackgroundBlur.pet-event-blur #MainMenuInput
     transition-timing-function: ease-in-out;
 }
 
-.hidden_info
+.MainMenuVanityInfo
 {
-  visibility: collapse;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}
+
+.MainMenuVanityInfo--hidden
+{
+    opacity: 0;
 }
 
 .mainmenu-vanity__settings

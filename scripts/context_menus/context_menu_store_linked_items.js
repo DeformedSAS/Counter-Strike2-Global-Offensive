@@ -1,67 +1,33 @@
-'use strict';
-
-var StoreLinkedItems = ( function()
-{
-
-	function _Init ()
-	{
-		var itemId = $.GetContextPanel().GetAttributeString( "itemids", "" );
-		var extrapopupfullscreenstyle = $.GetContextPanel().GetAttributeString( "extrapopupfullscreenstyle", "" );
-		var isDisabled = $.GetContextPanel().GetAttributeString( "disablepurchase", "" ) !== "true" ? false : true;
-		var aItemIds = itemId.split(',');
-
-		var usetinynames = $.GetContextPanel().GetAttributeString( "usetinynames", "" );
-
-		                              
-		var elItem = null;
-
-		for( var i = 0; i < aItemIds.length; i++ )
-		{
-			var elItem = $.GetContextPanel().FindChildInLayoutFile( aItemIds[ i ] );
-
-			if( !elItem )
-			{
-				elItem = $.CreatePanel( 'Button', $.GetContextPanel().FindChildInLayoutFile( 'id-store-linked-items-images' ), aItemIds[ i ] );
-				
-				elItem.Data().oData = {
-					id: aItemIds[ i ],
-					isMarketItem: false,
-					extrapopupfullscreenstyle: extrapopupfullscreenstyle,
-					isDisabled: isDisabled
-				}
-
-				if ( usetinynames )
-				{
-					elItem.Data().oData.usetinynames = usetinynames;
-				}
-
-				elItem.BLoadLayout( "file://{resources}/layout/mainmenu_store_tile.xml", false, false );
-			}
-		}
-
-		_ShowWarningText();
-	}
-
-	function _ShowWarningText ()
-	{
-		var warningText = $.GetContextPanel().GetAttributeString( "warningtext", "" );
-		if ( warningText )
-		{
-			$.GetContextPanel().SetHasClass( 'hidewarning', false );
-			$.GetContextPanel().FindChildInLayoutFile( 'id-store-linked-items-warning' ).text = $.Localize( warningText );
-		}
-		else
-		{
-			$.GetContextPanel().SetHasClass( 'hidewarning', true );
-		}
-	}
-
-	return {
-		Init: _Init,
-	}
-})();
-
-(function()
-{
-
-})();
+"use strict";
+/// <reference path="../itemtile_store.ts" />
+var StoreLinkedItems;
+(function (StoreLinkedItems) {
+    function Init() {
+        const itemId = $.GetContextPanel().GetAttributeString("itemids", "");
+        const isNotReleased = $.GetContextPanel().GetAttributeString("is-not-released", "") === "true";
+        const aItemIds = itemId.split(',');
+        let elItem = null;
+        for (let i = 0; i < aItemIds.length; i++) {
+            elItem = $.CreatePanel("Button", $.GetContextPanel().FindChildInLayoutFile('id-store-linked-items-images'), aItemIds[i]);
+            elItem.BLoadLayout('file://{resources}/layout/itemtile_store.xml', false, false);
+            let oItemData = {
+                id: aItemIds[i],
+                isNotReleased: isNotReleased,
+                isDisabled: isNotReleased
+            };
+            ItemTileStore.Init(elItem, oItemData);
+        }
+        ShowWarningText();
+    }
+    StoreLinkedItems.Init = Init;
+    function ShowWarningText() {
+        let warningText = $.GetContextPanel().GetAttributeString("linkedWarning", "");
+        if (warningText) {
+            $.GetContextPanel().SetHasClass('hidewarning', false);
+            $.GetContextPanel().SetDialogVariable('warning', $.Localize(warningText));
+        }
+        else {
+            $.GetContextPanel().SetHasClass('hidewarning', true);
+        }
+    }
+})(StoreLinkedItems || (StoreLinkedItems = {}));

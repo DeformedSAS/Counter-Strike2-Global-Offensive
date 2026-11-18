@@ -32,6 +32,21 @@
         var isCTWin = HasClassInAncestry(cP, 'WinPanelRoot--CTWin');
         var isTWin = HasClassInAncestry(cP, 'WinPanelRoot--TWin');
 
+        if (!isLocalCT && !isLocalT) {
+            var inEyeXuid = "";
+            if (typeof GameStateAPI !== 'undefined' && GameStateAPI.GetLocalOrInEyePlayerXuid) {
+                inEyeXuid = GameStateAPI.GetLocalOrInEyePlayerXuid();
+            }
+            if (inEyeXuid && inEyeXuid !== "0" && typeof MatchStatsAPI !== 'undefined' && MatchStatsAPI.GetPlayerTeam) {
+                var team = MatchStatsAPI.GetPlayerTeam(inEyeXuid);
+                if (team === "CT" || team === 3) {
+                    isLocalCT = true;
+                } else if (team === "T" || team === 2) {
+                    isLocalT = true;
+                }
+            }
+        }
+
         // updates win/loss titles
         var titleText = "";
         if ((isLocalCT && isCTWin) || (isLocalT && isTWin)) {
@@ -69,7 +84,25 @@
         if (mvpXuid && mvpXuid !== "0") {
             _SetMVPFlairImage(mvpXuid);
         }
-		
+
+        // this should hide the music kit in the winpanel if the mvp doesn't have one, it follows if the text itself is hidden.
+        var elMusicKit = cP.FindChildInLayoutFile('MVPMusicKit');
+        var elMusicKitIcon = cP.FindChildInLayoutFile('MVPMusicKitIcon');
+        var elMusicKitName = cP.FindChildInLayoutFile('MVPMusicKitName');
+
+        if (elMusicKitIcon && elMusicKitIcon.IsValid()) {
+            var hasMusicKitText = elMusicKitName && elMusicKitName.IsValid() && elMusicKitName.text && elMusicKitName.text.trim() !== "";
+            var isMusicKitPanelVisible = elMusicKit && elMusicKit.IsValid() && elMusicKit.visible && elMusicKit.style.visibility !== 'collapse';
+
+            if (!hasMusicKitText || !isMusicKitPanelVisible) {
+                elMusicKitIcon.style.visibility = 'collapse';
+            } else {
+                elMusicKitIcon.style.visibility = 'visible';
+            }
+        }
+
+        _UpdateFunfactVisibility(cP);
+        
         $.Schedule(0.15, LoopTitleCheck);
     }
     
@@ -84,6 +117,14 @@
 
         var safeXuid = String(xuid);
         
+        // if the bot is the mvp, hide the badge from the previous mvp.
+        if (typeof GameStateAPI !== 'undefined' && typeof GameStateAPI.IsFakePlayer === 'function') {
+            if (GameStateAPI.IsFakePlayer(safeXuid)) {
+                elBgImage.style.backgroundImage = 'none';
+                return;
+            }
+        }
+        
         // safe guards to prevent crashing because of flair
         if (typeof FriendsListAPI === 'undefined' || typeof InventoryAPI === 'undefined') {
             elBgImage.style.backgroundImage = 'none';
@@ -94,7 +135,6 @@
         try {
             flairDefIdx = FriendsListAPI.GetFriendDisplayItemDefFeatured( safeXuid );
         } catch(e) {
-            // handle server disconnect
             flairDefIdx = 0;
         }
 
@@ -116,13 +156,44 @@
             elBgImage.style.backgroundPosition = '50% 50%';
             elBgImage.style.backgroundSize = 'cover';
             elBgImage.style.backgroundRepeat = 'no-repeat';
-            elBgImage.AddClass('WinPanelRow__BG__AnimBg--anim');
+            elBgImage.TriggerClass('WinPanelRow__BG__AnimBg--anim');
         } else {
             elBgImage.style.backgroundImage = 'none';
         }
     }
 
+    var _isWinPanelVisible = false;
+
+    function _OnWinPanelShow() {
+        _isWinPanelVisible = false; 
+        $.Schedule(1.2, function() {
+            var cP = $.GetContextPanel();
+            if (!cP || !cP.IsValid()) return;
+
+            if (!cP.BHasClass('WinPanelRoot--ForceHide') && !cP.BHasClass('endofmatch')) {
+                _isWinPanelVisible = true;
+                var elFunfact = cP.FindChildInLayoutFile('Funfact');
+                if (elFunfact && elFunfact.IsValid()) {
+                    elFunfact.RemoveClass('hidden');
+                    elFunfact.style.visibility = 'visible';
+                }
+            }
+        });
+    }
+
+    function _UpdateFunfactVisibility(cP) {
+        var elFunfact = cP.FindChildInLayoutFile('Funfact');
+        if (!elFunfact || !elFunfact.IsValid()) return;
+
+        var isForceHidden = cP.BHasClass('WinPanelRoot--ForceHide') || cP.BHasClass('endofmatch');
+
+        if (isForceHidden || !_isWinPanelVisible) {
+            elFunfact.AddClass('hidden');
+            elFunfact.style.visibility = 'collapse';
+        }
+    }
+
+    $.RegisterForUnhandledEvent('HudWinPanelShowEvent', _OnWinPanelShow);
+
     LoopTitleCheck();
 })();
-
-// there are multiple safe points to prevent crashing, as i'm not sure what really caused the crashing when disconnecting from a server or bot match.

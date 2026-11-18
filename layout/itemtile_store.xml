@@ -21,16 +21,20 @@
                     <Label id="id-itemtile-store-new" class="itemtile-store__new hidden" text="#Store_Price_New" />
                     <Label id="id-itemtile-store-not-released" class="itemtile-store__not-released hidden" text="#Store_Not_Released" />
                 </Panel>
-                <Label class="stratum-black-italic itemtile-store__reward-unknown" text="?" />
+                <Label class="stratum-black itemtile-store__reward-unknown" text="?" />
                 <Button id="id-itemtile-store-inspect-btn" class="itemtile-store__inspect" onactivate="">
                     <Image texturewidth="26" textureheight="26" src="file://{images}/icons/ui/zoom_in.svg" />
                 </Button>
                 <Panel class="itemtile-store__select">
                     <Image class="horizontal-center vertical-center" texturewidth="20" textureheight="20" src="file://{images}/icons/ui/check.svg" />
                 </Panel>
+                <Panel class="itemtile-store__select itemtile-store__select--second">
+                    <Image class="horizontal-center vertical-center" texturewidth="20" textureheight="20" src="file://{images}/icons/ui/check.svg" />
+                </Panel>
             </Panel>
             <Label id="id-itemtile-store-name" class="itemtile-store__name stratum-font" text="{s:item-name}" />
             <Label id="id-itemtile-store-case" class="itemtile-store__case-hint stratum-font" text="#rankup_redemption_case_warning" />
+            <Label id="id-itemtile-store-claim-cost" class="itemtile-store__claim-cost-hint stratum-font" text="#rankup_redemption_claim_cost_warning" html="true" />
             <Panel class="itemtile-store__bottomrow">
                 <Panel id="id-itemtile-store-price" class="itemtile-store__price-container">
                     <Panel class="itemtile-store__price-reduction-container">
@@ -49,7 +53,8 @@
         <Panel id="id-itemtile-store-claimed" class="itemtile-store__claimed hidden">
             <Image class="itemtile-store__claimed__left" textureheight="24" texturewidth="-1" src="file://{images}/masks/directive_badge_end.svg" />
             <Panel class="itemtile-store__claimed__center">
-                <Label class="stratum-black-condensed fontSize-m horizontal-center text-align-center" text="#rankup_redemption_store_claimed" />
+                <Label class="stratum-black-condensed fontSize-m horizontal-center text-align-center itemtile-store__claimed__text_claimed" text="#rankup_redemption_store_claimed" />
+                <Label class="stratum-black-condensed fontSize-m horizontal-center text-align-center itemtile-store__claimed__text_expired" text="#rankup_redemption_store_expired" />
             </Panel>
             <Image class="itemtile-store__claimed__right" textureheight="24" texturewidth="-1" src="file://{images}/masks/directive_badge_end.svg" />
         </Panel>

@@ -10,6 +10,7 @@
 	<scripts>
         <include src="file://{resources}/scripts/common/iteminfo.js" />
         <include src="file://{resources}/scripts/popups/popup_inspect_purchase-bar.js" />
+		<include src="file://{resources}/scripts/popups/popup_inspect_shared.js" />
 	</scripts>
 
 	<Panel class="popup-capability__button-row" useglobalcontext="true">
@@ -44,11 +45,13 @@
 				<Label text="19" id="19" value="19"/>
 				<Label text="20" id="20" value="20"/>
 			</DropDown>
-			<Label id='PurchaseSalePrice' class="popup-capability__sale-price" text="$X.XX"/>
-			<Label id="PurchaseItemPercent" class="store-sale-tag__text right-margin fontSize-l" text=""/>
-			<Label id="PurchaseItemName" html="true" class="popup-capability__purchase__text stratum-font" text="XXX XXXXXXX"/>
-			<ItemImage id="PurchaseItemImage" class="popup-capability__purchase__image" scaling="stretch-to-fit-x-preserve-aspect"/>
-
+			<Label id="PurchaseSalePrice" class="popup-capability__sale-price" text="" />
+			<Label id="PurchaseItemPercent" class="store-sale-tag__text right-margin fontSize-l" text="" />
+			<Label id="PurchaseItemName" html="true" class="popup-capability__purchase__text stratum-font" text="" />
+			<Button id="InspectPlayMvpBtn" class="IconButton hidden" onmouseover="UiToolkitAPI.ShowTextTooltip( 'InspectPlayMvpBtn', '#tooltip_inspect_play_mvp_anthem' );" onmouseout="UiToolkitAPI.HideTextTooltip();">
+			<Image class="" src="file://{images}/icons/ui/unmuted.svg" />
+			</Button>
+			<ItemImage id="PurchaseItemImage" class="popup-capability__purchase__image" scaling="stretch-to-fit-x-preserve-aspect" />
 		</Panel>
 	</Panel>
 </root>

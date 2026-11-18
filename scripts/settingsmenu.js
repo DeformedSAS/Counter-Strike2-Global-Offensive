@@ -1,8 +1,5 @@
-"use strict";
+'use strict';
 
-                                                                                                    
-          
-                                                                                                    
 var SettingsMenu = ( function () {
 
 	var activeTab;
@@ -44,38 +41,32 @@ var SettingsMenu = ( function () {
 
     var _NavigateToTab = function( tabID ) 
     {
-		
         var parentPanel = $('#SettingsMenuContent');
 
-                                               
-                                    
         if (!parentPanel.FindChildInLayoutFile(tabID)) 
         {
             _InitTab(tabID);
         }
 
-                                                                                  
-                                
         if( activeTab !==  tabID )
         {
-                                             
+            // fucks the previews so that they stop playing properly after changing tabs.
+            if ( activeTab === 'AudioSettings' && typeof MusicPreview !== 'undefined' )
+            {
+                MusicPreview.Stop();
+            }
+
             if( activeTab )
             {
                 var panelToHide = $.GetContextPanel().FindChildInLayoutFile( activeTab );
                 panelToHide.RemoveClass( 'Active' ); 
-                                                   
             }
             
-                               
             var prevTab = activeTab;
             activeTab = tabID;
             var activePanel = $.GetContextPanel().FindChildInLayoutFile( tabID );
             activePanel.AddClass( 'Active' );
 
-                                          
-
-                                                                                     
-                                                
             {
                 activePanel.visible = true;
                 activePanel.SetReadyForDisplay( true );   
@@ -83,9 +74,6 @@ var SettingsMenu = ( function () {
 
             SettingsMenuShared.NewTabOpened( activeTab );
 
-			  
-			  
-			  
             var controllerSettingsStr = 'ControllerSettings';
             if (tabID == controllerSettingsStr) 
             {
@@ -96,9 +84,6 @@ var SettingsMenu = ( function () {
 
     var _AccountPrivacySettingsChanged = function()
     {
-                                                                                        
-                                                                                           
-                                                                                           
         var gameSettingPanel = $.GetContextPanel().FindChildInLayoutFile ( "GameSettings" );
         if ( gameSettingPanel != null )
         {
@@ -112,22 +97,23 @@ var SettingsMenu = ( function () {
 
 	var _OnSettingsMenuShown = function ()
 	{
-		                                                                             
-		                                                                                   
-		                                               
 		SettingsMenuShared.NewTabOpened( activeTab );
 	}
 
 	var _OnSettingsMenuHidden = function ()
 	{
-	                                   
-	GameInterfaceAPI.ConsoleCommand( "host_writeconfig" );
-	InventoryAPI.StopItemPreviewMusic();
+        GameInterfaceAPI.ConsoleCommand( "host_writeconfig" );
+        
+        if ( typeof MusicPreview !== 'undefined' )
+        {
+            MusicPreview.Stop();
+        }
+        InventoryAPI.StopItemPreviewMusic();
+		// completely kills the music previews after the settings menu hides.
 	}
 
 	var _NavigateToSetting = function ( tab, id )
 	{
-		                                                  
 		$.DispatchEvent( "Activated", $( "#" + tabInfo[ tab ].radioid ), "mouse" );
 		SettingsMenuShared.ScrollToId( id );                     
 	}
@@ -143,21 +129,16 @@ var SettingsMenu = ( function () {
         var parentPanel = $('#SettingsMenuContent');
 
         var newPanel = $.CreatePanel('Panel', parentPanel, tabID);
-                                                         
 
         let XmlName = tabInfo[ tabID ].xml;
         newPanel.BLoadLayout('file://{resources}/layout/settings/' + XmlName + '.xml', false, false );
             
-                                                                                    
-                                                               
         newPanel.OnPropertyTransitionEndEvent = function ( panelName, propertyName )
         {   
             if( newPanel.id === panelName && propertyName === 'opacity')
             {
-                                                         
                 if( newPanel.visible === true && newPanel.BIsTransparent() )
                 {
-                                                                   
                     newPanel.visible = false;
                     newPanel.SetReadyForDisplay( false );
                     return true;
@@ -169,12 +150,10 @@ var SettingsMenu = ( function () {
 
         $.RegisterEventHandler( 'PropertyTransitionEnd', newPanel, newPanel.OnPropertyTransitionEndEvent );
   
-                                                                                                            
         newPanel.visible = false;
     }
 	var _Init = function( )
 	{
-		                                                             
 		for (let tab in tabInfo) {
 			if ( tab !== "Promoted" && tab !== "Search" )
                 _InitTab(tab);
@@ -190,13 +169,10 @@ var SettingsMenu = ( function () {
 		AccountPrivacySettingsChanged   : _AccountPrivacySettingsChanged,
 		OnSettingsMenuShown             : _OnSettingsMenuShown,
 		OnSettingsMenuHidden            : _OnSettingsMenuHidden
-};
+    };
 
 } )() ;
 
-                                                                                                    
-                                           
-                                                                                                    
 (function ()
 {
 	SettingsMenu.Init();
@@ -224,4 +200,3 @@ var SettingsMenu = ( function () {
 	$.RegisterForUnhandledEvent( 'SettingsMenu_NavigateToSettingPanel',  SettingsMenu.NavigateToSettingPanel );
 	
 })();
-

@@ -88,9 +88,9 @@ var EOM_Characters = (function() {
                     m_bNoGimmeAccolades = false;
                     break;
                 }
-            case "competitive":
-            case "casual":
-            case "cooperative":
+            //case "competitive":
+            //case "casual":
+            //case "cooperative":
             case "teamdm":
             default:
                 {
@@ -102,7 +102,7 @@ var EOM_Characters = (function() {
                         arrPlayerList = arrPlayerList.filter(function(player) { return player['xuid'] !== _m_localPlayer['xuid']; });
                         arrPlayerList.splice(0, 0, _m_localPlayer);
                     }
-                    break;
+                    break; // ig this is required for the player to appear in the middle on dm..
                 }
         }
 
@@ -444,6 +444,7 @@ var EOM_Characters = (function() {
             case "scrimcomp2v2":
                 arrPlayerList.sort(_SortByTeamFn);
                 break;
+            /* 
             case "competitive":
                 if (_m_localPlayer && _m_localPlayer.hasOwnProperty('xuid') &&
                     (arrPlayerList.filter(function(p) { return p.xuid === _m_localPlayer.xuid; }).length > 0)) {
@@ -452,6 +453,7 @@ var EOM_Characters = (function() {
                     arrPlayerList.splice(midpoint, 0, _m_localPlayer);
                 }
                 break;
+            */
             default:
                 break;
         }

@@ -86,6 +86,22 @@
     brightness: 1.1;
 }
 
+@keyframes 'loading-screen--unblur-animation'
+{
+    0%
+    {
+        brightness: 1.0;
+        blur: gaussian( 5, 5, 3 );
+    }
+    
+    100%
+    {
+        brightness: 1.25;
+        blur: gaussian( 0, 0, 0 );
+    }
+    
+}
+
 .loading-screen-hint__text
 {
 	font-size: 18px;
@@ -151,22 +167,21 @@
  }
 
 
- .loading-screen-content__info{
-
-  flow-children: down;
-  width: 100%;
-  height: fit-children;
-  horizontal-align: right;
-  vertical-align: top;
-  padding: 0px 0px;
-  margin-bottom: 24px;
-  opacity: 1;
-  visibility: visible;
-
-  transition-property: opacity;
-  transition-duration: .25s;
-  transition-timing-function: ease-in-out;
- }
+.loading-screen-content__info
+{
+    flow-children: down;
+    width: 100%;
+    height: fit-children;
+    horizontal-align: right;
+    vertical-align: top;
+    padding: 0px 0px;
+    margin-bottom: 24px;
+    opacity: 1;
+    visibility: visible;
+    transition-property: opacity;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}
 
 
 
@@ -362,18 +377,19 @@
     margin-bottom: 16px;
 }
  
- .loading-screen-fade--dark{
+.loading-screen-fade--dark
+{
+    width: 100%;
+    height: 100%;
+    background-color: gradient(radial, 50% 50%, 0px 0px, 100% 100%, from( #00000000 ), color-stop( 0.4, #00000000), color-stop( 0.65, #000000DD), to( #000000FF ) );
+}
 
-  width: 100%;
-  height: 100%;
- }
-
-
- .loading-screen-fade--teams{
-
-  width: 100%;
-  height: 100%;
- }
+.loading-screen-fade--teams
+{
+    width: 100%;
+    height: 100%;
+    background-color: gradient(radial, 50% 50%, 0px 0px, 100% 100%, from( #00000099 ), color-stop( 0.4, #000000DD), color-stop( 0.65, #000000FF), to( #000000FF ) );
+}
 
 .loading-screen-slide
 {
@@ -446,33 +462,33 @@
     
 }
 
-  .loading-screen--closing{
+.loading-screen--closing
+{
+    animation-name: loading-screen--closing-animation;
+    animation-duration: 2.8s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
 
-  animation-name: loading-screen--closing-animation;
-  animation-duration: 0.25s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
-     animation-fill-mode: forwards;
-  }
-
-
-
- @keyframes 'loading-screen--closing-animation'{
-
-  0%{
-
-         opacity: 1.0;
-  }
-  70%{
-
-         opacity: 1.0;
-  }
-
-  100%{
-
-         opacity: 0.0;
-  }
- }
+@keyframes 'loading-screen--closing-animation'
+{
+    0%
+    {
+        opacity: 1.0;
+    }
+    
+    70%
+    {
+        opacity: 1.0;
+    }
+    
+    100%
+    {
+        opacity: 0.0;
+    }
+    
+}
 
 
  #ProgressBarSecondary{

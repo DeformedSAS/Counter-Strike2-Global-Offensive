@@ -597,7 +597,7 @@ CSGOHudWinPanel Label
 	height: 38px;
 	vertical-align: bottom;
 	transform: translatey( 10px) translateX(12px);
-	visibility: visible;
+	overflow:noclip;
 }
 
 .MVP__MusicKit--show .MVP__MusicKit,.MVP__MusicKit--show .MVP__MusicKitIcon

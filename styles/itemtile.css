@@ -304,6 +304,18 @@
     transition-timing-function: ease-in-out;
 }
 
+.inv-multi-select-allow .item-tile.capability_multistatus_hover #ItemTileBg
+{
+    visibility: visible;
+    opacity: 1;
+    border: 5px solid rgb(0, 132, 255);
+}
+
+.inv-multi-select-allow .item-tile.capability_multistatus_hover ItemImage
+{
+    transform: scale3d( 0.85, 0.85, 1);
+}
+
 .item-tile.capability_multistatus_selected .item-tile__bg,.item-tile.capability_multistatus_selected .item-tile__image
 {
     brightness: .2;
@@ -339,6 +351,16 @@
     text-align: center;
     box-shadow: #00000025 0px 0px 2px 2px ;
     visibility:visible;
+}
+
+.item-tile__onmarket
+{
+    height: 16px;
+    width: 16px;
+    transform: scaleX(-1);
+    vertical-align: center;
+    margin-right: 1px;
+    wash-color: baseText;
 }
 
 .item-tile__original-owner
@@ -583,4 +605,3 @@
     horizontal-align: center;
     margin-top: 15px;
 }
-

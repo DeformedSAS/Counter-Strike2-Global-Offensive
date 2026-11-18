@@ -1,251 +1,262 @@
-'use strict';
+"use strict"
 
-var PopupLeaderboards = ( function()
-{
-	var m_type = '';
-	var m_myXuid = MyPersonaAPI.GetXuid();
+var PopupLeaderboards = (function () {
+  var m_type = ""
+  var m_myXuid = MyPersonaAPI.GetXuid()
 
-	var _Init = function()
-	{
-		var type = $.GetContextPanel().GetAttributeString( 'type', '' );
+  var _Init = function () {
+    var type = $.GetContextPanel().GetAttributeString("type", "")
 
-		if ( type === '' )
-		{
-			return;
-		}
+    if (type === "") {
+      return
+    }
 
-		var aTypes = type.split( ',' );
+    var aTypes = type.split(",")
 
-		_SetTitle( aTypes[ 0 ] );
-		_SetPointsTitle();
-		_MakeTabs( aTypes );
-		_ShowGlobalRank();
+    _SetTitle(aTypes[0])
+    _SetPointsTitle()
+    _MakeTabs(aTypes)
+    _ShowGlobalRank()
 
-		$( '#id-popup-leaderboard-refresh-button' ).SetPanelEvent(
-			'onactivate',
-			function( lbType ) { LeaderboardsAPI.Refresh( lbType ); }.bind( undefined, type )
-		);
-	};
+    $("#id-popup-leaderboard-refresh-button").SetPanelEvent(
+      "onactivate",
+      function (lbType) {
+        LeaderboardsAPI.Refresh(lbType)
+      }.bind(undefined, type)
+    )
+  }
 
-	var _SetTitle = function( type )
-	{
-		var titleOverride = $.GetContextPanel().GetAttributeString( 'titleoverride', '' );
-		var title = titleOverride !== '' ? titleOverride : '#CSGO_' + type;
-		$.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-title' ).text = $.Localize( title );
-	};
+  var _SetTitle = function (type) {
+    var titleOverride = $.GetContextPanel().GetAttributeString(
+      "titleoverride",
+      ""
+    )
+    var title = titleOverride !== "" ? titleOverride : "#CSGO_" + type
+    $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-title"
+    ).text = $.Localize(title)
+  }
 
-	var _SetPointsTitle = function()
-	{
-		var strPointsTitle = $.GetContextPanel().GetAttributeString( 'points-title', '' );
-		if ( strPointsTitle !== '' )
-		{
-			$.GetContextPanel().FindChildInLayoutFile( 'id-list-column-header-points' ).text = $.Localize( strPointsTitle );
-		}
-	};
+  var _SetPointsTitle = function () {
+    var strPointsTitle = $.GetContextPanel().GetAttributeString(
+      "points-title",
+      ""
+    )
+    if (strPointsTitle !== "") {
+      $.GetContextPanel().FindChildInLayoutFile(
+        "id-list-column-header-points"
+      ).text = $.Localize(strPointsTitle)
+    }
+  }
 
-	var _MakeTabs = function( aTypes )
-	{
-		if ( aTypes.length <= 1 )
-		{
-			m_type = aTypes[ 0 ];
-			_UpdateLeaderboard( aTypes[ 0 ] );
-			return;
-		}
+  var _MakeTabs = function (aTypes) {
+    if (aTypes.length <= 1) {
+      m_type = aTypes[0]
+      _UpdateLeaderboard(aTypes[0])
+      return
+    }
 
-		var elNavBar = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-navbar' );
-		elNavBar.RemoveClass( 'hidden' );
+    var elNavBar = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-navbar"
+    )
+    elNavBar.RemoveClass("hidden")
 
-		var elTabs = elNavBar.FindChild( 'id-popup-leaderboard-tabs' );
+    var elTabs = elNavBar.FindChild("id-popup-leaderboard-tabs")
 
-		for ( var i = 0; i < aTypes.length; i++ )
-		{
-			var elTab = $.CreatePanel( "RadioButton", elTabs, aTypes[ i ] );
-			elTab.BLoadLayoutSnippet( "leaderboard-tab" );
-			elTab.SetPanelEvent(
-				'onactivate',
-				_UpdateLeaderboard.bind( undefined, aTypes[ i ] )
-			);
+    for (var i = 0; i < aTypes.length; i++) {
+      var elTab = $.CreatePanel("RadioButton", elTabs, aTypes[i])
+      elTab.BLoadLayoutSnippet("leaderboard-tab")
+      elTab.SetPanelEvent(
+        "onactivate",
+        _UpdateLeaderboard.bind(undefined, aTypes[i])
+      )
 
-			elTab.FindChildInLayoutFile( 'leaderboard-tab-label' ).text = $.Localize( '#CSGO_' + aTypes[ i ] + '_tab' );
-		}
-		
-		$.DispatchEvent( "Activated", elTabs.Children()[ 0 ], "mouse" );
-	};
+      elTab.FindChildInLayoutFile("leaderboard-tab-label").text = $.Localize(
+        "#CSGO_" + aTypes[i] + "_tab"
+      )
+    }
 
-	var _ShowGlobalRank = function()
-	{
-		var showRank = $.GetContextPanel().GetAttributeString( 'showglobaloverride', 'true' );
-		$.GetContextPanel().SetHasClass( 'hide-global-rank', showRank === 'false' );
-	};
+    $.DispatchEvent("Activated", elTabs.Children()[0], "mouse")
+  }
 
-	var _UpdateLeaderboard = function( type )
-	{
-		                                
-		m_type = type;
+  var _ShowGlobalRank = function () {
+    var showRank = $.GetContextPanel().GetAttributeString(
+      "showglobaloverride",
+      "true"
+    )
+    $.GetContextPanel().SetHasClass("hide-global-rank", showRank === "false")
+  }
 
-		var status = LeaderboardsAPI.GetState( type );
-		                                         
+  var _UpdateLeaderboard = function (type) {
+    m_type = type
 
-		var elStatus = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-loading' );
-		var elData = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-nodata' );
-		var elLeaderboardList = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-list' );
+    var status = LeaderboardsAPI.GetState(type)
 
-		if ( "none" == status )
-		{
-			elStatus.SetHasClass( 'hidden', false );
-			elData.SetHasClass( 'hidden', true );
-			elLeaderboardList.SetHasClass( 'hidden', true );
-			LeaderboardsAPI.Refresh( type );
-		}
-	
-		if ( "loading" == status )
-		{
-			elStatus.SetHasClass( 'hidden', false );
-			elData.SetHasClass( 'hidden', true );
-			elLeaderboardList.SetHasClass( 'hidden', true );
-		}
-	
-		if ( "ready" == status )
-		{
-			var count = LeaderboardsAPI.GetCount( type );
-			
-			if ( count === 0 )
-			{
-				elData.SetHasClass( 'hidden', false );
-				elStatus.SetHasClass( 'hidden', true );
-				elLeaderboardList.SetHasClass( 'hidden', true );
-			}
-			else
-			{
-				elLeaderboardList.SetHasClass( 'hidden', false );
-				elStatus.SetHasClass( 'hidden', true );
-				elData.SetHasClass( 'hidden', true );
+    var elStatus = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-loading"
+    )
+    var elData = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-nodata"
+    )
+    var elLeaderboardList = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-list"
+    )
 
-				_FillOutEntries( type, count );
-			}
-			
-			if ( 1 <= LeaderboardsAPI.HowManyMinutesAgoCached( type ) )
-			{
-				LeaderboardsAPI.Refresh( type );
-			}
-		}
-	};
+    if ("none" == status) {
+      elStatus.SetHasClass("hidden", false)
+      elData.SetHasClass("hidden", true)
+      elLeaderboardList.SetHasClass("hidden", true)
+      LeaderboardsAPI.Refresh(type)
+    }
 
-	var _FillOutEntries = function( type, count )
-	{
-		var elParent = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-entries' );
-		elParent.RemoveAndDeleteChildren();
+    if ("loading" == status) {
+      elStatus.SetHasClass("hidden", false)
+      elData.SetHasClass("hidden", true)
+      elLeaderboardList.SetHasClass("hidden", true)
+    }
 
-		function _AddOpenPlayerCardAction( elAvatar, xuid ) {
-			var openCard = function ( xuid ) {
-				                                                                                             
-				$.DispatchEvent( 'SidebarContextMenuActive', true );
-	
-				if ( xuid !== 0 )
-				{
-					var contextMenuPanel = UiToolkitAPI.ShowCustomLayoutContextMenuParametersDismissEvent(
-						'',
-						'',
-						'file://{resources}/layout/context_menus/context_menu_playercard.xml',
-						'xuid=' + xuid,
-						function () {
-							$.DispatchEvent( 'SidebarContextMenuActive', false );
-						}
-					);
-					contextMenuPanel.AddClass( "ContextMenu_NoArrow" );
-				}
-			};
-	
-			elAvatar.SetPanelEvent( "onactivate", openCard.bind( undefined, xuid ) );
-			elAvatar.SetPanelEvent( "oncontextmenu", openCard.bind( undefined, xuid ) );
-		}
+    if ("ready" == status) {
+      var count = LeaderboardsAPI.GetCount(type)
 
-		var strThousandsSeparator = $.Localize( '#csgo_thousands_separator' );
-		for ( var i = 0; i < count; i++ )
-		{
-			var xuid = LeaderboardsAPI.GetEntryXuidByIndex( type, i );
-			var score = LeaderboardsAPI.GetEntryScoreByIndex( type, i );
-			var rank = LeaderboardsAPI.GetEntryGlobalPctByIndex( type, i );
+      if (count === 0) {
+        elData.SetHasClass("hidden", false)
+        elStatus.SetHasClass("hidden", true)
+        elLeaderboardList.SetHasClass("hidden", true)
+      } else {
+        elLeaderboardList.SetHasClass("hidden", false)
+        elStatus.SetHasClass("hidden", true)
+        elData.SetHasClass("hidden", true)
 
-			                                                                                            
-			                                                                     
-			score = score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, strThousandsSeparator);
+        _FillOutEntries(type, count)
+      }
 
-			var elEntry = $.CreatePanel( "Panel", elParent, xuid );
-			elEntry.BLoadLayoutSnippet( "leaderboard-entry" );
+      if (1 <= LeaderboardsAPI.HowManyMinutesAgoCached(type)) {
+        LeaderboardsAPI.Refresh(type)
+      }
+    }
+  }
 
-			elEntry.FindChildInLayoutFile( 'popup-leaderboard-entry-avatar' ).steamid = xuid;
-			_AddOpenPlayerCardAction( elEntry, xuid );
+  var _FillOutEntries = function (type, count) {
+    var elParent = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-entries"
+    )
+    elParent.RemoveAndDeleteChildren()
 
-			elEntry.FindChildInLayoutFile( 'popup-leaderboard-entry-name' ).text = FriendsListAPI.GetFriendName( xuid );
-			elEntry.FindChildInLayoutFile( 'popup-leaderboard-entry-points' ).text = score;
-			elEntry.FindChildInLayoutFile( 'popup-leaderboard-entry-rank' ).text = rank + '%';
-			elEntry.FindChildInLayoutFile( 'popup-leaderboard-entry-position' ).text = i + 1;
+    function _AddOpenPlayerCardAction(elAvatar, xuid) {
+      var openCard = function (xuid) {
+        $.DispatchEvent("SidebarContextMenuActive", true)
 
-			var children = elEntry.FindChildrenWithClassTraverse( 'popup-leaderboard__list__column' );
-			
-			if ( i % 2 === 0 )
-			{
-				children.forEach(element => {
-					element.AddClass( 'background' );
-				});
-			}
-		}
+        if (xuid !== 0) {
+          var contextMenuPanel =
+            UiToolkitAPI.ShowCustomLayoutContextMenuParametersDismissEvent(
+              "",
+              "",
+              "file://{resources}/layout/context_menus/context_menu_playercard.xml",
+              "xuid=" + xuid,
+              function () {
+                $.DispatchEvent("SidebarContextMenuActive", false)
+              }
+            )
+          contextMenuPanel.AddClass("ContextMenu_NoArrow")
+        }
+      }
 
-		_HighightMySelf();
-	};
+      elAvatar.SetPanelEvent("onactivate", openCard.bind(undefined, xuid))
+      elAvatar.SetPanelEvent("oncontextmenu", openCard.bind(undefined, xuid))
+    }
 
-	var _HighightMySelf = function()
-	{
-		var elParent = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-entries' );
-		var elEntry = elParent.FindChildInLayoutFile( m_myXuid );
+    var strThousandsSeparator = $.Localize("#csgo_thousands_separator")
+    for (var i = 0; i < count; i++) {
+      var xuid = LeaderboardsAPI.GetEntryXuidByIndex(type, i)
+      var score = LeaderboardsAPI.GetEntryScoreByIndex(type, i)
+      var rank = LeaderboardsAPI.GetEntryGlobalPctByIndex(type, i)
 
-		if ( elEntry )
-		{
-			elEntry.AddClass( 'local-player' );
-			elEntry.ScrollParentToMakePanelFit( 1, false );
-		}
-	};
+      score = score
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, strThousandsSeparator)
 
-	var _RefreshLeaderBoard = function( type )
-	{
-		if ( m_type === type )
-		{
-			_UpdateLeaderboard( type );
-			return;
-		}
-	};
+      var elEntry = $.CreatePanel("Panel", elParent, xuid)
+      elEntry.BLoadLayoutSnippet("leaderboard-entry")
 
-	var _UpdateName = function( xuid )
-	{
-		var elParent = $.GetContextPanel().FindChildInLayoutFile( 'id-popup-leaderboard-entries' );
-		var elEntry = elParent.FindChildInLayoutFile( xuid );
+      elEntry.FindChildInLayoutFile("popup-leaderboard-entry-avatar").steamid =
+        xuid
+      _AddOpenPlayerCardAction(elEntry, xuid)
 
-		if ( elEntry )
-		{
-			elEntry.FindChildInLayoutFile( 'popup-leaderboard-entry-name' ).text = FriendsListAPI.GetFriendName( xuid );
-		}
-	};
+      elEntry.FindChildInLayoutFile("popup-leaderboard-entry-name").text =
+        FriendsListAPI.GetFriendName(xuid)
+      elEntry.FindChildInLayoutFile("popup-leaderboard-entry-points").text =
+        score
+      elEntry.FindChildInLayoutFile("popup-leaderboard-entry-rank").text =
+        rank + "%"
+      elEntry.FindChildInLayoutFile("popup-leaderboard-entry-position").text =
+        i + 1
 
-	var _Close = function()
-	{
-		                   
-		$.DispatchEvent( 'UIPopupButtonClicked', '' );
-	};
+      var children = elEntry.FindChildrenWithClassTraverse(
+        "popup-leaderboard__list__column"
+      )
 
-	return {
-		Init: _Init,
-		RefreshLeaderBoard: _RefreshLeaderBoard,
-		UpdateName: _UpdateName,
-		Close: _Close
-	};
+      if (i % 2 === 0) {
+        children.forEach((element) => {
+          element.AddClass("background")
+        })
+      }
+    }
 
-})();
+    _HighightMySelf()
+  }
 
-(function(){
+  var _HighightMySelf = function () {
+    var elParent = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-entries"
+    )
+    var elEntry = elParent.FindChildInLayoutFile(m_myXuid)
 
-	$.RegisterForUnhandledEvent( 'PanoramaComponent_Leaderboards_StateChange', PopupLeaderboards.RefreshLeaderBoard );
-	$.RegisterForUnhandledEvent( 'PanoramaComponent_FriendsList_NameChanged', PopupLeaderboards.UpdateName );
-	                                                                                                                             
-	PopupLeaderboards.Init();
-})();
+    if (elEntry) {
+      elEntry.AddClass("local-player")
+      elEntry.ScrollParentToMakePanelFit(1, false)
+    }
+  }
+
+  var _RefreshLeaderBoard = function (type) {
+    if (m_type === type) {
+      _UpdateLeaderboard(type)
+      return
+    }
+  }
+
+  var _UpdateName = function (xuid) {
+    var elParent = $.GetContextPanel().FindChildInLayoutFile(
+      "id-popup-leaderboard-entries"
+    )
+    var elEntry = elParent.FindChildInLayoutFile(xuid)
+
+    if (elEntry) {
+      elEntry.FindChildInLayoutFile("popup-leaderboard-entry-name").text =
+        FriendsListAPI.GetFriendName(xuid)
+    }
+  }
+
+  var _Close = function () {
+    $.DispatchEvent("UIPopupButtonClicked", "")
+  }
+
+  return {
+    Init: _Init,
+    RefreshLeaderBoard: _RefreshLeaderBoard,
+    UpdateName: _UpdateName,
+    Close: _Close
+  }
+})()
+
+;(function () {
+  $.RegisterForUnhandledEvent(
+    "PanoramaComponent_Leaderboards_StateChange",
+    PopupLeaderboards.RefreshLeaderBoard
+  )
+  $.RegisterForUnhandledEvent(
+    "PanoramaComponent_FriendsList_NameChanged",
+    PopupLeaderboards.UpdateName
+  )
+
+  PopupLeaderboards.Init()
+})()

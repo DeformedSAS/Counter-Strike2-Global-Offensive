@@ -77,24 +77,25 @@
                 </Panel>
             </Panel>
         </snippet>
-        <snippet name="MapSelectionContainer_official_survival">
-            <Panel class="map-selection-list-coop hidden">
-                <Panel class="play-menu-mapandlbs-container">
-                    <Panel id="MapTile" class="coop-map-tile" />
-                    <Panel id="FriendLeaderboards" />
-                </Panel>
-                <Panel class="play-menu-svl-auto-squad-toggle-container">
-                    <Panel id="PlayMenuMapRotationTimer" class="play-menu-map-rotation-timer hidden">
-                        <Image class="right-padding" texturewidth="-1" textureheight="20" src="file://{resources}/images/icons/ui/clock.svg" />
-                        <Label class="play-menu-map-rotation-timer-label" html="true" text="#rotating_map_timer" />
-                    </Panel>
-                    <ToggleButton id="SurvivalAutoSquadToggle" class="PopupButton">
-                        <Image class="" texturewidth="-1" textureheight="28" src="file://{resources}/images/icons/ui/lobby.svg" />
-                        <Label id="SurvivalAutoSquadToggleLabel" text="#SFUI_DANGERZONE_AUTO_FILL" html="true" />
-                    </ToggleButton>
-                </Panel>
-            </Panel>
-        </snippet>
+		<snippet name="MapSelectionContainer_official_survival" >
+			<Panel class="map-selection-list-rush hidden">
+				<Panel class="play-menu-mapandlbs-container">
+					<Panel id="MapTile" class="coop-map-tile">
+					</Panel>
+					<Panel id="FriendLeaderboards"/>
+				</Panel>
+				<Panel class="play-menu-svl-auto-squad-toggle-container">
+					<Panel id="PlayMenuMapRotationTimer" class="play-menu-map-rotation-timer hidden">
+						<Image class="right-padding" texturewidth="-1" textureheight="20" src="file://{images}/icons/ui/clock.svg" />
+						<Label class="play-menu-map-rotation-timer-label" html="true" text="#rotating_map_timer"/>
+					</Panel>
+					<ToggleButton id="SurvivalAutoSquadToggle" class="PopupButton">
+						<Image class="" texturewidth="-1" textureheight="28" src="file://{images}/icons/ui/lobby.svg" />
+						<Label id="SurvivalAutoSquadToggleLabel" text="#SFUI_DANGERZONE_AUTO_FILL" html="true"/>
+					</ToggleButton>
+				</Panel>
+			</Panel>
+		</snippet>
         <snippet name="MapSelectionContainer_premier">
             <Panel class="map-selection-list-premier hidden">
                 <Panel class="left-right-flow no-lock" style="height: fill-parent-flow( 1.0 ); width: 100%;">

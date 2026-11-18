@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var MusicPreview = (function () {
 
@@ -6,7 +6,7 @@ var MusicPreview = (function () {
     var m_currentEvent = ""; 
 
     function _StopMenuMusic() {
-        $.DispatchEvent('PlayMainMenuMusic', false, true);
+        $.DispatchEvent('PlayMainMenuMusic', false, false);
     }
 
     function _PlayMenuSong() {
@@ -19,6 +19,7 @@ var MusicPreview = (function () {
             m_schfnMusicMvpPreviewEnd = null;
         }
         InventoryAPI.StopItemPreviewMusic();
+        $.DispatchEvent('PlayMainMenuMusic', true, true);
         m_currentEvent = "";
     }
 
@@ -73,7 +74,7 @@ var MusicPreview = (function () {
 
         m_currentEvent = eventName;
 
-        $.DispatchEvent('PlayMainMenuMusic', true, true); 
+        $.DispatchEvent('PlayMainMenuMusic', true, false); 
         _StopMenuMusic();
         InventoryAPI.PlayItemPreviewMusic(itemId, 'startround_01.mp3');
         InventoryAPI.StopItemPreviewMusic();
@@ -84,13 +85,13 @@ var MusicPreview = (function () {
             }
         });
 
-        m_schfnMusicMvpPreviewEnd = $.Schedule(4.5, function() {
+        m_schfnMusicMvpPreviewEnd = $.Schedule(6.8, function() {
             m_schfnMusicMvpPreviewEnd = null;
             m_currentEvent = ""; 
             
             InventoryAPI.StopItemPreviewMusic();
 
-            $.DispatchEvent('PlayMainMenuMusic', true, true);
+            $.DispatchEvent('PlayMainMenuMusic', true, true); // if set to true, false. it never stops playing the preview. if set to true, true. it will go nuts for a bit if the timescale is changed.. volvo how do i fix this.. dave please answer..
             $.Schedule(0.1, function () {
                 _PlayMenuSong();
             });

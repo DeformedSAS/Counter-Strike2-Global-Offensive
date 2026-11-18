@@ -108,7 +108,7 @@
                     <Frame id="JsLeftColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_left_column.xml" />
 					<CSGOScoreboard id="Scoreboard" class="scoreboard PauseMenuModeOnly" />
                     <Frame id="JsRightColumn" hittest="false" class="MainMenuModeOnly" src="file://{resources}/layout/mainmenu_right_column.xml" />
-					<Panel id="MainMenuVanityInfo" class="full-width full-height MainMenuModeOnly" hittest="false" />
+					<Panel id="MainMenuVanityInfo" class="full-width full-height MainMenuVanityInfo MainMenuModeOnly" hittest="false" />
                     <Panel id="JsActiveMissionPanel" class="mainmenu_active-mission-container PauseMenuModeOnly" />
                     <Panel id="JsMainMenuContent" class="mainmenu-content mainmenu-content--offscreen" hittest="true">
                         <Panel class="mainmenu-content__blur">

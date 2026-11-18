@@ -1229,7 +1229,8 @@ function _GoBtnParticle()
     function _GetPanelTypeForMapGroupTile(gameMode, singleSkirmishMapGroup) {
         const bIsCompetitive = gameMode === 'competitive';
         const bIsWingman = gameMode === 'scrimcomp2v2';
-        return (((bIsCompetitive || bIsWingman) && _IsValveOfficialServer(m_serverSetting)) ? "ToggleButton" : "RadioButton");
+		const bIsSkirmish = gameMode === 'skirmish';
+        return (((bIsCompetitive || bIsWingman || bIsSkirmish) && _IsValveOfficialServer(m_serverSetting)) ? "ToggleButton" : "RadioButton");
     }
     function _UpdateOrCreateMapGroupTile(mapGroupName, container, elTilePanel, newTileID, numTiles) {
         const mg = GetMGDetails(mapGroupName);
@@ -1453,6 +1454,7 @@ function _UpdateRatingEmblem(p, mapGroupName) {
             elFriendLeaderboards.SetAttributeString("titleoverride", strTitleOverride);
         elFriendLeaderboards.BLoadLayout('file://{resources}/layout/popups/popup_leaderboards.xml', true, false);
         elFriendLeaderboards.AddClass('leaderboard_embedded');
+		elFriendLeaderboards.AddClass("play_menu_survival")
         elFriendLeaderboards.RemoveClass('Hidden');
     }
     function _LoadLeaderboardsLayoutForContainer(container) {

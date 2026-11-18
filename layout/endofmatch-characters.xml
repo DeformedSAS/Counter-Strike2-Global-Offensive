@@ -55,19 +55,18 @@
 		<snippet name="snippet-eom-chars__layout--ffa" >
 			<Panel class="eom-chars__layout eom-chars__layout--ffa">
 				<Panel class="character-lineup layout-position-container">
-					<Panel class="eom-chars__layout__position eom-chars__layout__position--2nd SlowSpin">
-						
-						<Label class="eom-chars__layout__position--2nd glowsilver" text="#EOM_Position_2"/>
-						<Image class="eom-chars__laurel__layout__position--2nd glowsilver" texturewidth='220' textureheight='-1' src="file://{images}/icons/ui/laurel_silver.svg" />
-						<Panel class="eom-chars__layout--ffa__glowsilver" />
-
-					</Panel>
 					<Panel class="eom-chars__layout__position eom-chars__layout__position--1st SlowSpin">
 						
-						<Label class="eom-chars__layout__position--1st" text="#EOM_Position_1"/>					
-						<Image class="eom-chars__laurel__layout__position--1st" texturewidth='280' textureheight='-1' src="file://{images}/icons/ui/laurel_gold.svg" />
+						<Label class="eom-chars__layout__position--1st " text="#EOM_Position_1"/>
+						<Image class="eom-chars__laurel__layout__position--1st " texturewidth='280' textureheight='-1' src="file://{images}/icons/ui/laurel_gold.svg" />
+						<Panel class="eom-chars__layout--ffa__glowsilver" />
 						<Image class="glowgoldbg"  src="file://{images}/ui_textures/glow.png" />
-						                                 
+
+					</Panel>
+					<Panel class="eom-chars__layout__position eom-chars__layout__position--2nd SlowSpin">
+						
+						<Label class="eom-chars__layout__position--2nd glowsilver" text="#EOM_Position_2"/>					
+						<Image class="eom-chars__laurel__layout__position--2nd glowsilver" texturewidth='220' textureheight='-1' src="file://{images}/icons/ui/laurel_silver.svg" />
 						
 					</Panel>
 					<Panel class="eom-chars__layout__position eom-chars__layout__position--3rd">

@@ -13,9 +13,6 @@
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
 }
-.mainmenu-content__container VerticalScrollBar {
-	margin-right: 0px;
-}
 
 .store-dynamic-lister.Active
 {
@@ -58,7 +55,7 @@
 {
     width: 100%;
     height: 100%;
-    blur: fastgaussian( 4, 4, 2 );
+    blur: fastgaussian( 5, 5, 3 );
     background-image: url("file://{images}/backgrounds/weekly_rewards.png");
     background-size: cover;
     background-position: 50% 50%;
@@ -137,7 +134,7 @@
 
 .store-home-prime-section .store-home-prime-section_base
 {
-    blur: gaussian( 6, 6, 3);
+    blur: fastgaussian( 3, 3, 2);
     wash-color: rgba(8, 8, 51, 0.534);
     height: 100%;
     width: 100%;
@@ -235,7 +232,6 @@
 .store-home-section .store-home-popular__btn Label
 {
     margin-right: 6px;
-	font-family: Stratum2;
     font-weight: normal;
     font-size: 22px;
 }
@@ -257,6 +253,11 @@
     height: 100%;
 }
 
+.store-home-section.store-home-section--no-items .store-home-popular__items,.store-home-section.store-home-section--no-items .store-home-popular__btn
+{
+    visibility: collapse;
+}
+
 .store-home-wallet
 {
     vertical-align: center;
@@ -274,4 +275,67 @@
 .store-home-wallet.hidden
 {
     visibility: collapse;
+}
+
+.store-home-major-stickers
+{
+    vertical-align: center;
+    horizontal-align: right;
+    flow-children: down;
+    margin-right: 200px;
+    ui-scale: 100%;
+    transform-origin: 50% 50%;
+    transition-property: brightness, ui-scale;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}
+
+.store-home-major-stickers .store-home-major-stickers__images ItemImage
+{
+    height: 198px;
+    img-shadow: 0px 0px 16px 6 black;
+    padding: 16px;
+}
+
+.store-home-major-stickers .store-home-major-stickers__images ItemImage#id-sticker-0
+{
+    transform: rotateZ(18deg);
+}
+
+.store-home-major-stickers .store-home-major-stickers__images ItemImage#id-sticker-1
+{
+    margin-left: 100px;
+    transform: rotateZ(15deg);
+}
+
+.store-home-major-stickers .store-home-major-stickers__images ItemImage#id-sticker-2
+{
+    margin-left: 200px;
+    transform: rotateZ(-25deg) translateX( 0px);
+}
+
+.store-home-major-stickers .store-home-major-stickers__images ItemImage#id-sticker-3
+{
+    margin-left: 300px;
+    transform: rotateZ(-5deg) translateX( 0px);
+}
+
+.store-home-major-stickers .store-home-major-stickers__images ItemImage#id-sticker-4
+{
+    margin-left: 400px;
+    transform: rotateZ( 5deg) translateX( 0px);
+}
+
+.store-home-major-stickers Label
+{
+    horizontal-align: center;
+    text-align: center;
+    font-family: Stratum2 Bold Condensed, "Arial Unicode MS";
+    font-size: 20px;
+}
+
+.store-home-major-stickers:hover
+{
+    brightness: 1.5;
+    ui-scale:105%;
 }

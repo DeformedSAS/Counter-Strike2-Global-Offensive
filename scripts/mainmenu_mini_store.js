@@ -32,7 +32,7 @@ var MainMenuMiniStore;
     }
     function _MakeStoreItemTiles(aItemsList) {
         let elParent = $.GetContextPanel().FindChildInLayoutFile('id-mini-store-carousel');
-        const numItemsToShow = 5;
+        const numItemsToShow = 8;
         for (let i = 0; i < numItemsToShow; i++) {
             let oItemData = aItemsList[i];
             oItemData.isDisplayedInMainMenu = true;

@@ -126,7 +126,7 @@
 									<Label id="MVPWinnerName" class="MVP__WinnerName" text="{s:mvp_name_and_reason}" />
 									<Panel id="MVPMusicKit" class="MVP__MusicKit">
 										<Label id="MVPMusicKitName" class="MVP__MusicKitText MVP__MusicKitName" text="{s:winpanel-musickit-name}" />
-										<Label id="MVPMusicKitStatTrak" class="MVP__MusicKitText MVP__MusicKitText--Bold" text="{s:winpanel-musickit-stattrack}" />
+										<Label id="MVPMusicKitStatTrak" class="MVP__MusicKitText MVP__MusicKitText--Bold" text="#SFUI_WinPanel_Playing_MVP_MusicKit_StatTrak" />
 									</Panel>
 								</Panel>
 							</Panel>

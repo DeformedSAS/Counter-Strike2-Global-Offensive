@@ -2746,15 +2746,15 @@ EdgeScrollBar.Vertical #MaxButton
 
 .store-panel__carousel-container .PaginationArrow
 {
-	width: 24px;
-	height: 24px;
-	background-size:24px auto;
+    width: 24px;
+    height: 24px;
+    background-size:24px auto;
 }
 
 .PaginationArrow.Right
 {
-	transform: rotateZ( -90deg );
-	horizontal-align: right;
+    transform: rotateZ( -90deg );
+    horizontal-align: right;
 }
 
 .playercard-flair-carousel-container .PaginationArrow,.playercard-skillgroup-carousel-container .PaginationArrow
@@ -2784,29 +2784,40 @@ EdgeScrollBar.Vertical #MaxButton
 	border-radius: 50%;
 }
 
-.mini-store-container .PaginationArrow
+.mini-store-container .PaginationArrow,.mainmenu-major-tile .PaginationArrow
 {
 	background-image: url("file://{images}/icons/ui/arrowhead.svg");
-	background-repeat: no-repeat;
-	background-size: 12px 12px;
-	width: 12px;
-	height: 12px;
-	vertical-align: middle;
-	margin-left: 48px;
-	transform: rotateZ( -90deg );
-	border-radius: 0px;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-left: 30px;
+    transform: rotateZ( -90deg );
+    border-radius: 0px;
 }
 
-.mini-store-container .PaginationArrow:disabled
+.mini-store-container .PaginationArrow:disabled,.mainmenu-major-tile .PaginationArrow:disabled
 {
-	wash-color: rgb(0, 0, 0);
-	opacity: .5;
+    wash-color: rgb(0, 0, 0);
+    opacity: .5;
 }
 
-.mini-store-container .PaginationArrow.Right
+
+.mini-store-container .PaginationArrow.Right,.mainmenu-major-tile .PaginationArrow.Right
 {
-	margin-right: 54px;
-	transform: rotateZ( 90deg );
+    margin-right: 34px;
+    transform: rotateZ( 90deg );
+}
+
+.mini-store-container.mainmenu-major-tile .PaginationArrow,.mainmenu-major-tile.mainmenu-major-tile .PaginationArrow
+{
+    margin-left: 10px;
+}
+
+.mini-store-container.mainmenu-major-tile .PaginationArrow.Right,.mainmenu-major-tile.mainmenu-major-tile .PaginationArrow.Right
+{
+    margin-right: 14px;
 }
 
 @keyframes 'OpacityPulse'
@@ -3389,21 +3400,22 @@ EdgeScrollBar.Vertical #MaxButton
 
 .store-sale-tag__text
 {
-	font-size: 14px;
-	font-weight: bold;
-	color: White;
-	text-align: center;
-	padding: 3px;
-	vertical-align: center;
-	margin-left: 8px;
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #3a863d ), to( #2d682f ) );
+    font-size: 14px;
+    font-weight: bold;
+    color: White;
+    text-align: center;
+    padding: 3px;
+    vertical-align: center;
+    margin-left: 8px;
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #3a863d ), to( #2d682f ) );
 }
 
 .store-panel__carousel__item-linked__sale .store-sale-tag__text
 {
-	font-size: 12px;
-	padding: 1.5px;
+    font-size: 12px;
+    padding: 1.5px;
 }
+
 
 .world-region-label
 {

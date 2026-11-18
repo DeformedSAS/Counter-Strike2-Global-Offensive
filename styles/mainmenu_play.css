@@ -351,6 +351,19 @@
     transition-duration: .25s;
     transition-timing-function: ease-in-out;
 }
+
+.map-selection-list-rush
+{
+    width: 100%;
+    height: fit-children;
+    flow-children: down;
+    opacity: 1;
+    visibility: visible;
+    horizontal-align: center;
+    transition-property: opacity, transform;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}
 .map-selection-list-directchallenge
 {
     width: 100%;

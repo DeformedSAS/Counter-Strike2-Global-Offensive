@@ -586,27 +586,26 @@ var InventoryPanel = ( function (){
 		}
 	};
 	
-	var _ClosePopups = function ()
-	{
-		if ( _m_elInventoryMain.updatePlayerEquipSlotChangedHandler )
-		{
-			$.UnregisterForUnhandledEvent( 'PanoramaComponent_Inventory_PlayerEquipSlotChanged', _m_elInventoryMain.updatePlayerEquipSlotChangedHandler );
-			_m_elInventoryMain.updatePlayerEquipSlotChangedHandler = null;
-		}
+    var _ClosePopups = function ()
+    {
+        if ( _m_elInventoryMain.updatePlayerEquipSlotChangedHandler )
+        {
+            $.UnregisterForUnhandledEvent( 'PanoramaComponent_Inventory_PlayerEquipSlotChanged', _m_elInventoryMain.updatePlayerEquipSlotChangedHandler );
+            _m_elInventoryMain.updatePlayerEquipSlotChangedHandler = null;
+        }
 
-		if ( _m_InventoryUpdatedHandler )
-		{
-			$.UnregisterForUnhandledEvent( 'PanoramaComponent_MyPersona_InventoryUpdated', _m_InventoryUpdatedHandler );
-			_m_InventoryUpdatedHandler = null;
-		}
-
-		if ( !_m_elSelectItemForCapabilityPopup.BHasClass( _m_HiddenContentClassname ) )
-		{
-			_CloseSelectItemForCapabilityPopup();
-			return true;
-		}
-		return false;
-	}
+        if ( _m_InventoryUpdatedHandler )
+        {
+            $.UnregisterForUnhandledEvent( 'PanoramaComponent_MyPersona_InventoryUpdated', _m_InventoryUpdatedHandler );
+            _m_InventoryUpdatedHandler = null;
+        }
+        if ( _SelectedCapabilityInfo.popupVisible )
+        {
+            _CloseSelectItemForCapabilityPopup();
+            return true;
+        }
+        return false;
+    };
 
 	                                                                                                    
 	          
@@ -869,45 +868,59 @@ var InventoryPanel = ( function (){
 		);
 	};
 
-	var _ShowSelectItemForCapabilityPopup = function( capability, itemid, itemid2 )
-	{
-		                                                                  
-		$.DispatchEvent( 'PlaySoundEffect', 'tab_mainmenu_inventory', 'MOUSE' );
+    //both of these functions are utterfly fucking retarded. and nobody should use this.
+    var _ShowSelectItemForCapabilityPopup = function( capability, itemid, itemid2 )
+    {
+        $.DispatchEvent( 'PlaySoundEffect', 'tab_mainmenu_inventory', 'MOUSE' );
 
-		_m_elSelectItemForCapabilityPopup.RemoveClass( _m_HiddenContentClassname );
-		_m_elSelectItemForCapabilityPopup.SetFocus();
+        _SelectedCapabilityInfo.capability = capability || '';
+        _SelectedCapabilityInfo.initialItemId = itemid || '';
+        _SelectedCapabilityInfo.secondaryItemId = itemid2 || '';
+        _SelectedCapabilityInfo.multiselectItemIds = {};
+        _SelectedCapabilityInfo.multiselectItemIdsArray = [];
+        _SelectedCapabilityInfo.popupVisible = true;
 
-		_HideInventoryMainListers();
-		_m_elInventoryNavBar.SetHasClass( 'collapse', true );
+        // pass these params so that it actually does something properly..  last time i didn't do this and that's why it didn't really work at all..
+        UiToolkitAPI.ShowCustomLayoutPopupParameters(
+            'SelectItemForCapabilityPopup',
+            'file://{resources}/layout/popups/popup_select_item_for_capability.xml',
+            'capability=' + capability + '&itemid=' + itemid + '&secondaryItemid=' + (itemid2 || '')
+        );
+    };
+    
+    var _CloseSelectItemForCapabilityPopup = function ()
+    {
+        $.DispatchEvent( 'PlaySoundEffect', 'inventory_inspect_close', 'MOUSE' );
+        _m_elInventoryNavBar.SetHasClass( 'collapse', false );
 
-		_SelectedCapabilityInfo.capability = capability;
-		_SelectedCapabilityInfo.initialItemId = itemid;
-		_SelectedCapabilityInfo.secondaryItemId = itemid2;
-		_SelectedCapabilityInfo.multiselectItemIds = {};
-		_SelectedCapabilityInfo.multiselectItemIdsArray = [];
-		_SelectedCapabilityInfo.popupVisible = true;
+        // this here is to completely remove any data.. so that it doesn't break the code.
+        _SelectedCapabilityInfo.capability = '';
+        _SelectedCapabilityInfo.initialItemId = '';
+        _SelectedCapabilityInfo.secondaryItemId = '';
+        _SelectedCapabilityInfo.multiselectItemIds = {};
+        _SelectedCapabilityInfo.multiselectItemIdsArray = [];
+        _SelectedCapabilityInfo.popupVisible = false;
 
-		_UpdatePopup( itemid, capability );
-	};
-	
-	var _CloseSelectItemForCapabilityPopup = function ()
-	{
-		                                      
-		$.DispatchEvent( 'PlaySoundEffect', 'inventory_inspect_close', 'MOUSE' );
-		_m_elInventoryNavBar.SetHasClass( 'collapse', false );
+        // and then force clearing this fixes the broken item clicking in the main inventory panel...
+        var activePanel = _m_elInventoryMain.FindChildInLayoutFile( _m_activeCategory );
+        var activeList = _GetActiveCategoryLister( activePanel );
+        if ( activeList && activeList.IsValid() )
+        {
+            if ( typeof activeList.ClearSelection === 'function' )
+            {
+                activeList.ClearSelection();
+            }
+            activeList.SetHasClass( 'inv-multi-select-allow', false );
+            activeList.SetAttributeInt( "capability_multistatus_selected", 0 );
+            
+            $.DispatchEvent( 'SetInventoryFilter', activeList, _m_activeCategory, _GetSelectedSubCategory( activePanel ), 'any', _GetSelectedSort( activePanel ), '', '' );
+        }
 
-		if( _m_elSelectItemForCapabilityPopup.BHasClass( _m_HiddenContentClassname ))
-		{
-			return;
-		}
-		
-		_m_elSelectItemForCapabilityPopup.AddClass( _m_HiddenContentClassname );
-		_m_elInventoryMain.SetFocus();
-
-		_SelectedCapabilityInfo.popupVisible = false;
-		_ShowInventoryMainListers();
-		return true;
-	};
+        _ShowInventoryMainListers();
+        _InventoryUpdated();
+        return true;
+    };
+	//ask shashlik if he can make this better.
 
 	var _UpdatePopup = function ( id, capability )
 	{

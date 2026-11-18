@@ -146,7 +146,11 @@ CSGOHudFreezePanel Label
     box-shadow: none;
     vertical-align: bottom;
     margin: 0px;
-    visibility: collapse;
+}
+
+.FreezePanel__Avatar--Hidden
+{
+	visibility: collapse;
 }
 
 .FreezePanel__AvatarHealthBar .ProgressBarLeft

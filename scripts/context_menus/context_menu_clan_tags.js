@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 /// <reference path="../csgo.d.ts" />
 /// <reference path="../popups/popup_custom_layout.ts" />
 var PlayerCardContextMenuClanTags;
@@ -52,6 +52,13 @@ var PlayerCardContextMenuClanTags;
             const url = 'https://' + SteamOverlayAPI.GetSteamCommunityURL() + '/profiles/' + myXuid + '/groups/';
             SteamOverlayAPI.OpenUrlInOverlayOrExternalBrowser(url);
             $.DispatchEvent('ContextMenuEvent', '');
+        });
+
+        $.Schedule(0.0, function() {
+            const contextPanel = $.GetContextPanel();
+            if (contextPanel && contextPanel.IsValid()) {
+                contextPanel.SetFocus();
+            }
         });
     }
     PlayerCardContextMenuClanTags.Init = Init;
