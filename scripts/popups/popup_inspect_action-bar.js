@@ -42,6 +42,7 @@ var InspectActionBar = ( function (){
 		_SetUpItemCertificate( elPanel, itemId );
 		_SetupEquipItemBtns( elPanel, itemId );
 		_ShowButtonsForWeaponInspect( elPanel, itemId );
+		_ShowButtonsForWeaponViewInspect( elPanel, itemId );
 		_ShowButtonsForCharacterInspect( elPanel, itemId );
 		_SetCloseBtnAction( elPanel );
 		_SetUpMarketLink( elPanel, itemId );
@@ -267,6 +268,38 @@ var InspectActionBar = ( function (){
 				_SetDropdown( elPanel, list, id );
 		}
 	};
+	
+	var _ShowButtonsForWeaponViewInspect = function ( elPanel, id )
+	{
+		if ( m_showCharSelect === false )
+		{
+			return;
+		}
+		
+		var hasAnims = ItemInfo.IsCharacter( id ) || ItemInfo.IsWeapon( id );
+
+		if ( hasAnims &&
+			!ItemInfo.IsEquippalbleButNotAWeapon( id ) &&
+			!ItemInfo.ItemMatchDefName( id, 'sticker' ) &&
+			!ItemInfo.IsSpraySealed( id ) &&
+			!ItemInfo.ItemDefinitionNameSubstrMatch( id, "tournament_journal_" ) &&
+			!ItemInfo.ItemDefinitionNameSubstrMatch( id, "tournament_pass_" )
+		)
+		{
+			elPanel.FindChildInLayoutFile( 'InspectViewBtn' ).SetHasClass( 'hidden', !hasAnims );
+			elPanel.FindChildInLayoutFile( 'InspectWeaponBtn' ).SetHasClass( 'hidden', !hasAnims );
+
+			var list =	                                                                          
+				CharacterAnims.GetValidCharacterModels( true ).filter(function (entry) {
+					return (ItemInfo.IsItemCt(id) && ( entry.team === 'ct' || entry.team === 'any' )) ||
+						(ItemInfo.IsItemT(id) && ( entry.team === 't'|| entry.team === 'any')) ||
+						ItemInfo.IsItemAnyTeam(id);
+				});
+			
+			if ( list && ( list.length > 0 )  && !elPanel.FindChildInLayoutFile( 'InspectDropdownCharModels' ).Data().selectedId )
+				_SetDropdown( elPanel, list, id );
+		}
+	};
 
 	function _ShowButtonsForCharacterInspect ( elPanel, id )
 	{
@@ -279,7 +312,7 @@ var InspectActionBar = ( function (){
 		
 		var inspectCameraPresets =
 		{
-			"AspectRatio4x3": [ 16, 17 ],
+			"AspectRatio4x3": [ 26, 27 ],
 			"AspectRatio16x9": [ 26, 27 ],
 			"AspectRatio21x9": [ 28, 29 ]
 		}
@@ -368,13 +401,24 @@ var InspectActionBar = ( function (){
 	                                                                                                    
 	                              
 	                                                                                                    
-	var _NavigateModelPanel = function ( type )
-	{ 
-		InspectModelImage.ShowHideItemPanel( m_modelImagePanel, ( type !== 'InspectModelChar' ) );
-		InspectModelImage.ShowHideCharPanel( m_modelImagePanel, ( type === 'InspectModelChar' ));
+var _NavigateModelPanel = function ( type )
+    { 
+        InspectModelImage.ShowHideItemPanel( m_modelImagePanel, ( type === 'InspectModel' ) );
+        
+        InspectModelImage.ShowHideCharPanel( m_modelImagePanel, ( type === 'InspectModelChar' ) );
 
-		$.GetContextPanel().FindChildTraverse( 'InspectCharModelsControls' ).SetHasClass( 'hidden', type !== 'InspectModelChar' );
-	};
+        if ( typeof InspectModelImage.ShowHideViewPanel !== 'undefined' )
+        {
+            var bIsViewTab = ( type === 'InspectModelView' );
+            InspectModelImage.ShowHideViewPanel( m_modelImagePanel, bIsViewTab );
+        }
+
+        var elCharControls = $.GetContextPanel().FindChildTraverse( 'InspectCharModelsControls' );
+        if ( elCharControls )
+        {
+            elCharControls.SetHasClass( 'hidden', type !== 'InspectModelChar' );
+        }
+    };
 
 	var _InspectPlayMusic = function ( type )
 	{
