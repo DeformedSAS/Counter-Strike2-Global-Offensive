@@ -51,7 +51,7 @@ var SettingsMenu = ( function () {
         if( activeTab !==  tabID )
         {
             // fucks the previews so that they stop playing properly after changing tabs.
-            if ( activeTab === 'AudioSettings' && typeof MusicPreview !== 'undefined' )
+            if ( activeTab === 'AudioSettings' && typeof MusicPreview !== 'undefined' && !GameStateAPI.IsLocalPlayerPlayingMatch() ) // added checks if the local player is in a match so that it doesn't start randomly playing the mainmenu music.
             {
                 MusicPreview.Stop();
             }
@@ -100,15 +100,18 @@ var SettingsMenu = ( function () {
 		SettingsMenuShared.NewTabOpened( activeTab );
 	}
 
-	var _OnSettingsMenuHidden = function ()
+    var _OnSettingsMenuHidden = function ()
 	{
         GameInterfaceAPI.ConsoleCommand( "host_writeconfig" );
         
-        if ( typeof MusicPreview !== 'undefined' )
+        if ( !GameStateAPI.IsLocalPlayerPlayingMatch() )
         {
-            MusicPreview.Stop();
+            if ( typeof MusicPreview !== 'undefined' )
+            {
+                MusicPreview.Stop();
+            }
+            InventoryAPI.StopItemPreviewMusic();
         }
-        InventoryAPI.StopItemPreviewMusic();
 		// completely kills the music previews after the settings menu hides.
 	}
 
